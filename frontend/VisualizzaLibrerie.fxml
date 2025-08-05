@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="498.0" prefWidth="498.0" stylesheets="@application.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.visualizzaLibrerieController">
+   <children>
+      <Pane layoutX="14.0" layoutY="26.0" prefHeight="100.0" prefWidth="470.0" style="-fx-background-color: #27ADAD;" styleClass="panelibrerie" stylesheets="@application.css">
+         <children>
+            <HBox layoutX="14.0" layoutY="14.0" prefHeight="30.0" prefWidth="132.0" spacing="20.0">
+               <children>
+                  <ImageView fitHeight="28.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@Home_selected.png" />
+                     </image>
+                  </ImageView>
+                  <Button fx:id="backhome" mnemonicParsing="false" onAction="#backtohome" prefHeight="30.0" prefWidth="63.0" styleClass="transparentbutton" text="Home">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Button>
+               </children>
+            </HBox>
+            <HBox layoutX="14.0" layoutY="56.0" prefHeight="22.0" prefWidth="132.0" spacing="20.0">
+               <children>
+                  <ImageView fitHeight="28.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@search.png" />
+                     </image>
+                  </ImageView>
+                  <Button mnemonicParsing="false" prefHeight="30.0" prefWidth="63.0" styleClass="transparentbutton" text="Search">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Button>
+               </children>
+            </HBox>
+         </children>
+      </Pane>
+      <VBox layoutX="14.0" layoutY="148.0" prefHeight="336.0" prefWidth="470.0" style="-fx-focus-color: transparent;">
+         <children>
+            <Pane prefHeight="49.0" prefWidth="474.0" style="-fx-background-color: #27ADAD;" styleClass="operationlibrary">
+               <children>
+                  <Button fx:id="addButton" layoutX="382.0" layoutY="4.0" mnemonicParsing="false" onAction="#onAdd" prefHeight="27.0" prefWidth="39.0" styleClass="transparentbutton">
+                     <graphic>
+                        <ImageView fitHeight="14.0" fitWidth="14.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@plus-icon-21715.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <Button fx:id="deleteButton" layoutX="421.0" layoutY="2.0" mnemonicParsing="false" onAction="#onRemove" prefHeight="30.0" prefWidth="39.0" styleClass="transparentbutton">
+                     <graphic>
+                        <ImageView fitHeight="21.0" fitWidth="23.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@delete-button-png-delete-button-128.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <HBox alignment="CENTER" layoutX="14.0" layoutY="4.0" prefHeight="26.0" prefWidth="200.0" spacing="10.0">
+                     <children>
+                        <ImageView fitHeight="27.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@bookshelf-icon-png-6.jpg" />
+                           </image>
+                        </ImageView>
+                        <Label fx:id="namelabel" prefHeight="18.0" prefWidth="169.0" />
+                     </children>
+                  </HBox>
+                  <Text fx:id="textlibreries" fill="#050505" layoutX="334.0" layoutY="21.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="RIGHT" visible="false" wrappingWidth="121.336669921875" />
+               </children>
+            </Pane>
+            <ScrollPane fx:id="scrollPane" focusTraversable="false" hbarPolicy="NEVER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="314.0" prefWidth="478.0" styleClass="scrollpane" vbarPolicy="ALWAYS">
+               <content>
+                  <GridPane fx:id="gridpane" prefHeight="16.0" prefWidth="27.0">
+                    <rowConstraints>
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                  </GridPane>
+               </content>
+            </ScrollPane>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

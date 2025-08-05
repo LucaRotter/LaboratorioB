@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane id="sfondoreg" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="498.0" prefWidth="498.0" styleClass="sfondolog" stylesheets="@application.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.LoginController">
+   <children>
+      <Button id="singupbutton" fx:id="singupbutton" layoutX="196.0" layoutY="402.0" mnemonicParsing="false" onAction="#OnRegistration" prefHeight="26.0" prefWidth="105.0" styleClass="logbutton" text="SIng up" />
+      <Hyperlink id="log-link" layoutX="292.0" layoutY="447.0" onAction="#OnlinkLogin" text="Log here" textFill="#1145e1" />
+      <Text layoutX="150.0" layoutY="464.0" smooth="false" strokeType="OUTSIDE" strokeWidth="0.0" text="Have already an account ?" wrappingWidth="142.39998779296866" />
+      <TextField fx:id="nameField" layoutX="88.0" layoutY="131.0" prefHeight="26.0" prefWidth="150.0" promptText="name" />
+      <TextField fx:id="surnameField" layoutX="257.0" layoutY="131.0" promptText="surname" />
+      <TextField id="cfField" fx:id="cfField" layoutX="88.0" layoutY="173.0" onKeyTyped="#syntaxControll" prefHeight="26.0" prefWidth="319.0" promptText="cf" styleClass="borderapproved" />
+      <TextField fx:id="emailField" layoutX="89.0" layoutY="214.0" prefHeight="26.0" prefWidth="319.0" promptText="email" />
+      <TextField id="useridField" fx:id="useridField" layoutX="88.0" layoutY="255.0" onKeyTyped="#syntaxControll" prefHeight="26.0" prefWidth="319.0" promptText="userid" styleClass="borderapproved" />
+      <PasswordField id="passwordField" fx:id="PasswordField" layoutX="88.0" layoutY="298.0" onKeyTyped="#syntaxControll" prefHeight="25.0" prefWidth="319.0" promptText="Password" styleClass="borderapproved" />
+      <PasswordField id="confirmPwField" fx:id="confirmPwField" layoutX="88.0" layoutY="341.0" onKeyTyped="#syntaxControll" prefHeight="25.0" prefWidth="319.0" promptText="Confirm Password" styleClass="borderapproved" />
+      <Label layoutX="153.0" layoutY="39.0" prefHeight="50.0" prefWidth="192.0" text="Create Account" textAlignment="CENTER" textFill="WHITE">
+         <font>
+            <Font name="Dubai Bold" size="28.0" />
+         </font>
+      </Label>
+      <Button fx:id="buttonback" layoutX="26.0" layoutY="20.0" mnemonicParsing="false" onAction="#OnBack" prefHeight="37.0" prefWidth="26.0" style="-fx-background-color: transparent;" styleClass="backrow">
+         <graphic>
+            <ImageView fitHeight="29.0" fitWidth="24.0" opacity="0.4" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../../../../Users/aleks/Downloads/kindpng_6402709.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+   </children>
+</AnchorPane>
