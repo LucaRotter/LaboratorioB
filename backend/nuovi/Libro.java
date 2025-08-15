@@ -19,6 +19,7 @@ public class Libro {
 	private String categoria;
 	private String editore;
 	private String anno;
+    private int id;
 
     //COSTRUTTORI
 	/**
@@ -66,6 +67,10 @@ public class Libro {
     
     public String getAnno() {
         return anno;
+    }
+
+    public int getId() {
+        return id;
     }
 
     // METODI SETTER (?)
