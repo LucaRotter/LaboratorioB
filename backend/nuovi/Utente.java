@@ -62,5 +62,8 @@ public class Utente {
     public int getUserId() {
         return userid;
     }
+    public String getPassword() {
+        return password;
+    }
 
 }

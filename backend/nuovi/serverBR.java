@@ -5,7 +5,7 @@ public interface serverBR extends Remote {
     /* elenco dei metodi che il server deve implementare */
     public int registrazione(Utente user) throws RemoteException;
     public int login(String email, String password) throws RemoteException;
-    public boolean modificaPassword(String email, String password) throws RemoteException;
+    //public boolean modificaPassword(String email, String password) throws RemoteException;
     //public int modificaEmail(String email, String password, String nuovaEmail) throws RemoteException;
     //public int modificaNome(String email, String password, String nuovoNome) throws RemoteException;
     //public int modificaCognome(String email, String password, String nuovoCognome) throws RemoteException;
@@ -15,4 +15,5 @@ public interface serverBR extends Remote {
     public boolean createValutazione(int user_id, Libro libro) throws RemoteException;
     public Libro getLibro(int id) throws RemoteException;
     public List<Valutazione> getValutazione(int id) throws RemoteException;
+    public List<Libro> cercaLibri(String autore, int anno, String titolo) throws RemoteException;
 }
