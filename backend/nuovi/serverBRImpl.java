@@ -41,38 +41,81 @@ public class serverBRImpl extends UnicastRemoteObject implements serverBR {
     }
 
     @Override
-    public Libreria createLibreria(String nome, int id) throws RemoteException {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public Libreria createLibreria(String nome, int user_id, Libreria libreria) throws RemoteException {
+        //inserimento in db
+        int libreria_id = 0; //modifica
+        String query = "INSERT into librerie (user_id, nome, libro_id) VALUES (?, ?, ?)";
+        //libreria = risultato query;
+        return libreria;
     }
 
     @Override
     public Libreria getLibrerie(int id) throws RemoteException {
-        throw new UnsupportedOperationException("Not supported yet.");
+        //select da db
+        String query = "SELECT * FROM librerie WHERE user_id = ?";
+
+        Libreria libreria = null;
+        //libreria = risultato query
+        return libreria;
     }
 
     @Override
-    public boolean consigliaLibro(int user_id, Libro libro) throws RemoteException {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public boolean consigliaLibro(int user_id, int libro_id) throws RemoteException {
+        int count = 0;
+        //count = risultato count per utente e libro
+        String query = "SELECT count(*) FROM consigli WHERE user_id = ? AND libro_id = ?"; //modificare struttura db
+
+        if(count == 3){
+            return false;
+        }
+
+        //query per inserire il libro selezionato
+        return true;
     }
 
     @Override
-    public boolean createValutazione(int user_id, Libro libro) throws RemoteException {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public boolean createValutazione(int user_id, int libro_id, Valutazione val) throws RemoteException {
+        //query per inserimento nel db
+        String query = "INSERT into valutazioni (user_id, libro_id, altre cose) VALUES (?, ?, ?, ?)";
+
+        return true;
     }
 
     @Override
     public Libro getLibro(int id) throws RemoteException {
-        throw new UnsupportedOperationException("Not supported yet.");
+        Libro libro = null;
+        
+        String query = "SELECT * FROM libri WHERE libro_id = ?";
+
+        return libro;
     }
 
     @Override
     public List<Valutazione> getValutazione(int id) throws RemoteException {
-        throw new UnsupportedOperationException("Not supported yet.");
+        String query = "SELECT * FROM valutazioni WHERE libro_id = ?";
+        List<Valutazione> valutazioni = null;
+        //query
+        return valutazioni;
     }
 
     @Override
     public List<Libro> cercaLibri(String autore, int anno, String titolo) throws RemoteException {
-        throw new UnsupportedOperationException("Not supported yet.");
+        
+        String query = "SELECT * FROM libri WHERE ";
+        if(titolo != null){
+            query += "titolo = ?";
+        } else if(anno != 0){
+            query += "autore = ? AND anno = ?";
+        } else {
+            query += "autore = ?";
+        }
+
+        List<Libro> libri = null;
+
+        //query
+
+        return libri;
+
     }
 
     public static void main(String[] args){ 
