@@ -16,10 +16,10 @@ public class Libro {
     // Attributi della classe Libro
     private String titolo;
 	private String autore;
-	private String categoria;
+	private String genere;
 	private String editore;
 	private String anno;
-    private int id;
+    private int id_libro;
 
     //COSTRUTTORI
 	/**
@@ -29,14 +29,14 @@ public class Libro {
 	 * 
 	 * @param titolo il titolo
 	 * @param autore l'autore
-	 * @param categoria la categoria
+	 * @param genere la categoria
 	 * @param editore l'editore
 	 * @param anno l'anno
 	 */
-    public Libro(String titolo, String autore, String categoria, String editore, String anno) {
+    public Libro(String titolo, String autore, String genere, String editore, String anno) {
         this.titolo = titolo;
         this.autore = autore;
-        this.categoria = categoria;
+        this.genere = genere;
         this.editore = editore;
         this.anno = anno;
     }
@@ -57,8 +57,8 @@ public class Libro {
         return autore;
     }
     
-    public String getCategoria() {
-        return categoria;
+    public String getGenere() {
+        return genere;
     }
     
     public String getEditore() {
@@ -70,7 +70,7 @@ public class Libro {
     }
 
     public int getId() {
-        return id;
+        return id_libro;
     }
 
     // METODI SETTER (?)

@@ -12,10 +12,10 @@
 public class Utente {
     // Attributi dell'utente    
     private String nome, cognome;
-	private String codFiscale;
+	private String cf;
 	private String email;
 	private String password;
-	private int userid;
+	private int id_utente;
 
 
     // Costruttore della classe Utente
@@ -27,18 +27,18 @@ public class Utente {
 	 * 
 	 * @param nome il nome
 	 * @param cognome il cognome
-	 * @param codFiscale il codice fiscale
+	 * @param cf il codice fiscale
 	 * @param email la mail
-	 * @param userid lo UserId
+	 * @param id_utente lo UserId
 	 * @param password la password
 	 */
-    public Utente(String nome, String cognome, String codFiscale, String email, String password, int userid) {
+    public Utente(String nome, String cognome, String cf, String email, String password, int id_utente) {
         this.nome = nome;
         this.cognome = cognome;
-        this.codFiscale = codFiscale;
+        this.cf = cf;
         this.email = email;
         this.password = password;
-        this.userid = userid;
+        this.id_utente = id_utente;
     }
 
     //cosrteuttore vuoto
@@ -53,14 +53,14 @@ public class Utente {
     public String getCognome() {
         return cognome;
     }
-    public String getCodFiscale() {
-        return codFiscale;
+    public String getCf() {
+        return cf;
     }
     public String getEmail() {
         return email;
     }
-    public int getUserId() {
-        return userid;
+    public int getId_utente() {
+        return id_utente;
     }
     public String getPassword() {
         return password;

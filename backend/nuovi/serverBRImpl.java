@@ -18,11 +18,11 @@ public class serverBRImpl extends UnicastRemoteObject implements serverBR {
 
     @Override
     public int registrazione(Utente user) throws RemoteException {
-        int id = user.getUserId();
+        int id = user.getId_utente();
         String hashPassword = user.getPassword().hashCode() + ""; // Semplice hash della password
 
         //creazione query e inserimento nel database
-        String query = "INSERT into utenti (nome, cognome, codFiscale, email, password, userid) VALUES (?, ?, ?, ?, ?, ?)";
+        String query = "INSERT into utenti (nome, cognome, cf, email, password, id_utente) VALUES (?, ?, ?, ?, ?, ?)";
 
         // Se la registrazione ha successo, ritorna l'ID dell'utente
         return id;
@@ -33,7 +33,7 @@ public class serverBRImpl extends UnicastRemoteObject implements serverBR {
         String hashPassword = password.hashCode() + ""; // Semplice hash della password
 
         //creazione query e verifica nel database
-        String query = "SELECT userid FROM utenti WHERE email = ? AND password = ?";
+        String query = "SELECT id_utente FROM utenti WHERE email = ? AND password = ?";
         
         int id = -1; // ID dell'utente, -1 se il login fallisce
         //query per l'id
@@ -41,10 +41,10 @@ public class serverBRImpl extends UnicastRemoteObject implements serverBR {
     }
 
     @Override
-    public Libreria createLibreria(String nome, int user_id, Libreria libreria) throws RemoteException {
+    public Libreria createLibreria(String nome, int id_utente, Libreria libreria) throws RemoteException {
         //inserimento in db
         int libreria_id = 0; //modifica
-        String query = "INSERT into librerie (user_id, nome, libro_id) VALUES (?, ?, ?)";
+        String query = "INSERT into librerie (id_utente, nome, id_libro) VALUES (?, ?, ?)";
         //libreria = risultato query;
         return libreria;
     }
@@ -52,7 +52,7 @@ public class serverBRImpl extends UnicastRemoteObject implements serverBR {
     @Override
     public Libreria getLibrerie(int id) throws RemoteException {
         //select da db
-        String query = "SELECT * FROM librerie WHERE user_id = ?";
+        String query = "SELECT * FROM librerie WHERE id_utente = ?";
 
         Libreria libreria = null;
         //libreria = risultato query
@@ -60,10 +60,10 @@ public class serverBRImpl extends UnicastRemoteObject implements serverBR {
     }
 
     @Override
-    public boolean consigliaLibro(int user_id, int libro_id) throws RemoteException {
+    public boolean consigliaLibro(int id_utente, int id_libro) throws RemoteException {
         int count = 0;
         //count = risultato count per utente e libro
-        String query = "SELECT count(*) FROM consigli WHERE user_id = ? AND libro_id = ?"; //modificare struttura db
+        String query = "SELECT count(*) FROM consigli WHERE id_utente = ? AND id_libro = ?"; //modificare struttura db
 
         if(count == 3){
             return false;
@@ -74,25 +74,25 @@ public class serverBRImpl extends UnicastRemoteObject implements serverBR {
     }
 
     @Override
-    public boolean createValutazione(int user_id, int libro_id, Valutazione val) throws RemoteException {
+    public boolean createValutazione(int id_utente, int id_libro, Valutazione val) throws RemoteException {
         //query per inserimento nel db
-        String query = "INSERT into valutazioni (user_id, libro_id, altre cose) VALUES (?, ?, ?, ?)";
+        String query = "INSERT into valutazioni (id_utente, id_libro, altre cose) VALUES (?, ?, ?, ?)";
 
         return true;
     }
 
     @Override
-    public Libro getLibro(int id) throws RemoteException {
+    public Libro getLibro(int id_libro) throws RemoteException {
         Libro libro = null;
         
-        String query = "SELECT * FROM libri WHERE libro_id = ?";
+        String query = "SELECT * FROM libri WHERE id_libro = ?";
 
         return libro;
     }
 
     @Override
-    public List<Valutazione> getValutazione(int id) throws RemoteException {
-        String query = "SELECT * FROM valutazioni WHERE libro_id = ?";
+    public List<Valutazione> getValutazione(int id_libro) throws RemoteException {
+        String query = "SELECT * FROM valutazioni WHERE id_libro = ?";
         List<Valutazione> valutazioni = null;
         //query
         return valutazioni;

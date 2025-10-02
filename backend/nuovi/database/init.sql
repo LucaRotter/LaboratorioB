@@ -1,14 +1,14 @@
 create table Libri (
-    id_libro varchar(255) primary key,
+    id_libro int primary key,
     titolo varchar(255) not null,
     autore varchar(255) not null,
-    anno_pubblicazione int,
+    anno int,
     genere varchar(255),
-    casa_editrice varchar(255)
+    editore varchar(255)
 );
 
 create table Utenti (
-    id_utente varchar(255) primary key,
+    id_utente int primary key,
     nome varchar(255) not null,
     cognome varchar(255) not null,
     email varchar(255) unique not null,
@@ -18,21 +18,21 @@ create table Utenti (
 
 create table Librerie (
     nome varchar(255),
-    id_libro varchar(255) references Libri(id_libro) on delete cascade on update cascade,
-    id_utente varchar(255) references Utenti(id_utente) on delete cascade on update cascade,
+    id_libro int references Libri(id_libro) on delete cascade on update cascade,
+    id_utente int references Utenti(id_utente) on delete cascade on update cascade,
     primary key (nome, id_libro, id_utente)
 );
 
 create table Libri_Consigliati (
-    id_libro varchar(255) references Libri(id_libro) on delete cascade on update cascade,
-    id_utente varchar(255) DEFAULT 'utente_cancellato' references Utenti(id_utente) on delete set default on update cascade,
-    id_libro_consigliato varchar(255) references Libri(id_libro),
+    id_libro int references Libri(id_libro) on delete cascade on update cascade,
+    id_utente int DEFAULT 0 references Utenti(id_utente) on delete set default on update cascade,
+    id_libro_consigliato int references Libri(id_libro),
     primary key (id_libro, id_utente, id_libro_consigliato)
 );
 
 create table Valutazioni_Libri (
-    id_libro varchar(255) references Libri(id_libro) on delete cascade on update cascade,
-    id_utente varchar(255) DEFAULT 'utente_cancellato' references Utenti(id_utente) on delete set default on update cascade,
+    id_libro int references Libri(id_libro) on delete cascade on update cascade,
+    id_utente int DEFAULT 0 references Utenti(id_utente) on delete set default on update cascade,
     primary key (id_libro, id_utente),
     edizione varchar(255) not null,
     voto_edizione int check(voto_edizione >= 1 and voto_edizione <= 5) not null,
