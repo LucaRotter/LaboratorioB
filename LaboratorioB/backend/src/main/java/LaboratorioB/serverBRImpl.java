@@ -1,3 +1,4 @@
+package LaboratorioB;
 import java.net.MalformedURLException;
 import java.rmi.*;
 import java.rmi.server.UnicastRemoteObject;
@@ -13,7 +14,7 @@ public class serverBRImpl extends UnicastRemoteObject implements serverBR {
     // Costruttore
     protected serverBRImpl() throws RemoteException, SQLException {
         super();
-        conn = DriverManager.getConnection("jdbc:postgresql://localhost:3306/bibliorex", "root", "password");
+        conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/labB", "postgres", "RLuca2004");
         System.out.println("Database connected!");
     }
     

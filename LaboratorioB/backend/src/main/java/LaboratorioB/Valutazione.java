@@ -1,3 +1,4 @@
+package LaboratorioB;
 /**
  * Un oggetto della classe <code>ValutazioniLibri</code> rappresenta
  * una valutazione associata ad un libro, composta da 5 parametri

@@ -1,3 +1,4 @@
+package LaboratorioB;
 /**
  * Un ogetto della classe <code>Utente</code> rappresenta
  * un utente che si è registrato inserendo nome, cognome,

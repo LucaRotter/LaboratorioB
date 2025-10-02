@@ -1,3 +1,4 @@
+package LaboratorioB;
 //import java.rmi.*;
 
 /**
