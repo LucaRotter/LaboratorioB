@@ -121,6 +121,15 @@ public class serverBRImpl extends UnicastRemoteObject implements serverBR {
 
     }
 
+    @Override
+    public Utente getUtente(int id) throws RemoteException {
+        Utente user = null;
+        
+        String query = "SELECT * FROM utenti WHERE id_utente = ?";
+
+        return user;
+    }
+
     public static void main(String[] args) { 
         try {
             serverBRImpl server = new serverBRImpl();
