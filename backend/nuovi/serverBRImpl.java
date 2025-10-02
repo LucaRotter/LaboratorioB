@@ -1,17 +1,20 @@
 import java.net.MalformedURLException;
 import java.rmi.*;
 import java.rmi.server.UnicastRemoteObject;
+import java.sql.*;
 import java.util.List;
-//import java.sql.*;
 //import javax.sql.*;
 
 public class serverBRImpl extends UnicastRemoteObject implements serverBR {
     
     private static final long serialVersionUID = 1L;
+    private Connection conn;
 
     // Costruttore
-    protected serverBRImpl() throws RemoteException {
+    protected serverBRImpl() throws RemoteException, SQLException {
         super();
+        conn = DriverManager.getConnection("jdbc:postgresql://localhost:3306/bibliorex", "root", "password");
+        System.out.println("Database connected!");
     }
     
     // Implementazione dei metodi definiti nell'interfaccia serverBR
@@ -60,7 +63,7 @@ public class serverBRImpl extends UnicastRemoteObject implements serverBR {
     }
 
     @Override
-    public boolean consigliaLibro(int id_utente, int id_libro) throws RemoteException {
+    public boolean createConsiglio(int id_utente, int id_libro) throws RemoteException {
         int count = 0;
         //count = risultato count per utente e libro
         String query = "SELECT count(*) FROM consigli WHERE id_utente = ? AND id_libro = ?"; //modificare struttura db
@@ -118,13 +121,13 @@ public class serverBRImpl extends UnicastRemoteObject implements serverBR {
 
     }
 
-    public static void main(String[] args){ 
+    public static void main(String[] args) { 
         try {
             serverBRImpl server = new serverBRImpl();
-                Naming.rebind("rmi://localhost:1099/serverBR", server);
+            Naming.rebind("rmi://localhost:1099/serverBR", server);
             System.out.println("Server BR is running...");
             
-        } catch (RemoteException | MalformedURLException e) {
+        } catch (RemoteException | MalformedURLException | SQLException e) {
             System.err.println("Server exception: " + e.toString());
             e.printStackTrace();
         }
