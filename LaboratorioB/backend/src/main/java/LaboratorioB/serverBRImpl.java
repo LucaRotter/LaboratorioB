@@ -1,10 +1,12 @@
 package LaboratorioB;
 import java.net.MalformedURLException;
-import java.rmi.*;
+import java.rmi.Naming;
+import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
-import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 import java.util.List;
 //import javax.sql.*;
 
@@ -23,12 +25,19 @@ public class serverBRImpl extends UnicastRemoteObject implements serverBR {
     // Implementazione dei metodi definiti nell'interfaccia serverBR
 
     @Override
-    public int registrazione(Utente user) throws RemoteException {
+    public synchronized int registrazione(Utente user) throws RemoteException {
         int id = user.getId_utente();
         String hashPassword = user.getPassword().hashCode() + ""; // Semplice hash della password
 
         //creazione query e inserimento nel database
         String query = "INSERT into utenti (nome, cognome, cf, email, password, id_utente) VALUES (?, ?, ?, ?, ?, ?)";
+        try{
+            //esecuzione query
+            conn.prepareStatement(query);
+        } catch(Exception e){
+            e.printStackTrace();
+            return -1; // Ritorna -1 se la registrazione fallisce
+        }
 
         // Se la registrazione ha successo, ritorna l'ID dell'utente
         return id;
@@ -47,7 +56,7 @@ public class serverBRImpl extends UnicastRemoteObject implements serverBR {
     }
 
     @Override
-    public Libreria createLibreria(String nome, int id_utente, Libreria libreria) throws RemoteException {
+    public synchronized Libreria createLibreria(String nome, int id_utente, Libreria libreria) throws RemoteException {
         //inserimento in db
         int libreria_id = 0; //modifica
         String query = "INSERT into librerie (id_utente, nome, id_libro) VALUES (?, ?, ?)";
@@ -66,7 +75,7 @@ public class serverBRImpl extends UnicastRemoteObject implements serverBR {
     }
 
     @Override
-    public boolean createConsiglio(int id_utente, int id_libro) throws RemoteException {
+    public synchronized boolean createConsiglio(int id_utente, int id_libro) throws RemoteException {
         int count = 0;
         //count = risultato count per utente e libro
         String query = "SELECT count(*) FROM consigli WHERE id_utente = ? AND id_libro = ?"; //modificare struttura db
@@ -80,7 +89,7 @@ public class serverBRImpl extends UnicastRemoteObject implements serverBR {
     }
 
     @Override
-    public boolean createValutazione(int id_utente, int id_libro, Valutazione val) throws RemoteException {
+    public synchronized boolean createValutazione(int id_utente, int id_libro, Valutazione val) throws RemoteException {
         //query per inserimento nel db
         String query = "INSERT into valutazioni (id_utente, id_libro, altre cose) VALUES (?, ?, ?, ?)";
 
