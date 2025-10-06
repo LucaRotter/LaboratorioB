@@ -1,6 +1,7 @@
 LaboratorioB\serverBRImpl.class
 LaboratorioB\Libreria.class
 LaboratorioB\serverBR.class
+LaboratorioB\db\DatabaseManager.class
 LaboratorioB\Utente.class
 LaboratorioB\Valutazione.class
 LaboratorioB\Libro.class
