@@ -17,17 +17,17 @@ public class Valutazione{
 	private int voto_gradevolezza;
 	private int voto_originalita;
 	private double voto_medio;
-	private String note_stile;
-	private String note_edizione;
-	private String note_contenuto;
-	private String note_gradevolezza;
-	private String note_originalita;
+	private String stile;
+	private String edizione;
+	private String contenuto;
+	private String gradevolezza;
+	private String originalita;
 
 	//COSTRUTTORE
 	public Valutazione(int voto_stile, int voto_edizione, int voto_contenuto,
-			int voto_gradevolezza, int voto_originalita, String note_stile,
-			String note_edizione, String note_contenuto, String note_gradevolezza,
-			String note_originalita) {
+			int voto_gradevolezza, int voto_originalita, String stile,
+			String edizione, String contenuto, String gradevolezza,
+			String originalita) {
 		this.voto_stile = voto_stile;
 		this.voto_edizione = voto_edizione;
 		this.voto_contenuto = voto_contenuto;
@@ -35,11 +35,11 @@ public class Valutazione{
 		this.voto_originalita = voto_originalita;
 		this.voto_medio = (voto_stile + voto_edizione + voto_contenuto +
 				voto_gradevolezza + voto_originalita) / 5.0;
-		this.note_stile = note_stile;
-		this.note_edizione = note_edizione;
-		this.note_contenuto = note_contenuto;
-		this.note_gradevolezza = note_gradevolezza;
-		this.note_originalita = note_originalita;
+		this.stile = stile;
+		this.edizione = edizione;
+		this.contenuto = contenuto;
+		this.gradevolezza = gradevolezza;
+		this.originalita = originalita;
 	}
 
 	//METODI GETTER
@@ -62,19 +62,19 @@ public class Valutazione{
 		return voto_medio;
 	}
 	public String getNoteStile() {
-		return note_stile;
+		return stile;
 	}
 	public String getNoteEdizione() {
-		return note_edizione;
+		return edizione;
 	}
 	public String getNoteContenuto() {
-		return note_contenuto;
+		return contenuto;
 	}
 	public String getNoteGradevolezza() {
-		return note_gradevolezza;
+		return gradevolezza;
 	}
 	public String getNoteOriginalita() {
-		return note_originalita;
+		return originalita;
 	}
 
 }
