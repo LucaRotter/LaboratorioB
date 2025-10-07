@@ -33,13 +33,15 @@ public class Libro {
 	 * @param genere la categoria
 	 * @param editore l'editore
 	 * @param anno l'anno
+     * @param id_libro l'id
 	 */
-    public Libro(String titolo, String autore, String genere, String editore, String anno) {
+    public Libro(String titolo, String autore, String genere, String editore, String anno, int id_libro) {
         this.titolo = titolo;
         this.autore = autore;
         this.genere = genere;
         this.editore = editore;
         this.anno = anno;
+        this.id_libro = id_libro;
     }
 
     /**
@@ -50,6 +52,7 @@ public class Libro {
 	}
 
     // METODI GETTER
+    
     public String getTitolo() {
         return titolo;
     }
@@ -73,6 +76,7 @@ public class Libro {
     public int getId() {
         return id_libro;
     }
+
 
     // METODI SETTER (?)
 

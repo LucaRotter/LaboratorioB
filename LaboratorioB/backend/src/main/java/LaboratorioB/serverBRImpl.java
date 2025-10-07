@@ -122,8 +122,8 @@ public class serverBRImpl extends UnicastRemoteObject implements serverBR {
         String query = "SELECT * FROM libri WHERE id_libro = ?";
         try (Connection conn = DatabaseManager.getConnection();
                 PreparedStatement ps = conn.prepareStatement(query)) {
-               // imposta i parametri della query
-            ps.setInt(1, id);
+            // imposta i parametri della query
+            ps.setInt(1, id_libro);
             try (ResultSet rs = ps.executeQuery()) {
                 if (rs.next()) {
                     String titolo = rs.getString("titolo");
@@ -145,25 +145,113 @@ public class serverBRImpl extends UnicastRemoteObject implements serverBR {
     public List<Valutazione> getValutazione(int id_libro) throws RemoteException {
         String query = "SELECT * FROM valutazioni WHERE id_libro = ?";
         List<Valutazione> valutazioni = null;
-        
+        try (Connection conn = DatabaseManager.getConnection();
+                PreparedStatement ps = conn.prepareStatement(query)) {
+            ps.setInt(1, id_libro);
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    int voto_stile = rs.getInt("voto_stile");
+                    int voto_edizione = rs.getInt("voto_edizione");
+                    int voto_contenuto = rs.getInt("voto_contenuto");
+                    int voto_gradevolezza = rs.getInt("voto_gradevole");
+                    int voto_originalita = rs.getInt("voto_originalita");
+                    double voto_medio = rs.getDouble("voto_medio");
+                    String stile = rs.getString("stile");
+                    String edizione = rs.getString("edizione");
+                    String contenuto = rs.getString("contenuto");
+                    String gradevole = rs.getString("gradevole");
+                    String originalita = rs.getString("originalita");
+                    int id_utente = rs.getInt("id_utente");
+                    Valutazione val = new Valutazione(voto_stile, voto_edizione, voto_contenuto,
+                            voto_gradevole, voto_originalita, voto_medio, stile, edizione, contenuto,
+                            gradevole, originalita, id_utente, id_libro);
+                    valutazioni.add(val);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         return valutazioni;
+    }
+    @Override
+    public List<Libro> getConsiglio(int id_libro) throws RemoteException {
+        String query = "SELECT * FROM libri_consigliati WHERE id_libro = ?";
+        List<Libro> consigli = null;  
+        try(Connection conn = DatabaseManager.getConnection();
+                PreparedStatement ps = conn.prepareStatement(query)) {
+            ps.setInt(1, id_libro);
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    int id = rs.getInt("id_libro_consigliato");
+                    Libro libro = getLibro(id);
+                    consigli.add(libro);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return consigli;
+    }
+
+
+    @Override
+    public double getVotoMedio(int id_libro) throws RemoteException {
+        String query = "SELECT AVG(voto_medio) FROM valutazioni WHERE id_libro = ?";
+        double voto_medio = 0.0;
+        try (Connection conn = DatabaseManager.getConnection();
+                PreparedStatement ps = conn.prepareStatement(query)) {
+            ps.setInt(1, id_libro);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    voto_medio = rs.getDouble(1);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return voto_medio;
     }
 
     @Override
-    public List<Libro> cercaLibri(String autore, int anno, String titolo) throws RemoteException {
+    public List<Libro> cercaLibri(String autore, int anno, String titolo, Ricerca scelta) throws RemoteException {
+        Ricerca ricerca;
 
         String query = "SELECT * FROM libri WHERE ";
-        if (titolo != null) {
+        if (scelta == Ricerca.TITOLO) {
             query += "titolo = ?";
-        } else if (anno != 0) {
+        } else if (scelta == Ricerca.ANNO) {
             query += "autore = ? AND anno = ?";
-        } else {
+        } else if (scelta == Ricerca.AUTORE) {
             query += "autore = ?";
-        }
-
+        } else
+            return null;
         List<Libro> libri = null;
-
-        // query
+        try (Connection conn = DatabaseManager.getConnection();
+                PreparedStatement ps = conn.prepareStatement(query)) {
+            if (scelta == Ricerca.TITOLO) {
+                ps.setString(1, titolo);
+            } else if (scelta == Ricerca.ANNO) {
+                ps.setString(1, autore);
+                ps.setInt(2, anno);
+            } else if (scelta == Ricerca.AUTORE) {
+                ps.setString(1, autore);
+            }
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    int id_libro = rs.getInt("id_libro");
+                    String titolo_libro = rs.getString("titolo");
+                    String autore_libro = rs.getString("autore");
+                    String genere_libro = rs.getString("genere");
+                    String editore_libro = rs.getString("editore");
+                    String anno_libro = rs.getString("anno");
+                    Libro libro = new Libro(titolo_libro, autore_libro, genere_libro, editore_libro, anno_libro,
+                            id_libro);
+                    libri.add(libro);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
         return libri;
 

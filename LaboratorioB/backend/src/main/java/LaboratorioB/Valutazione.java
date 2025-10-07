@@ -22,24 +22,28 @@ public class Valutazione{
 	private String contenuto;
 	private String gradevolezza;
 	private String originalita;
+	private int id_utente;
+	private int id_libro;
+
 
 	//COSTRUTTORE
 	public Valutazione(int voto_stile, int voto_edizione, int voto_contenuto,
-			int voto_gradevolezza, int voto_originalita, String stile,
+			int voto_gradevolezza, int voto_originalita, double voto_medio, String stile,
 			String edizione, String contenuto, String gradevolezza,
-			String originalita) {
+			String originalita, int id_utente, int id_libro) {
 		this.voto_stile = voto_stile;
 		this.voto_edizione = voto_edizione;
 		this.voto_contenuto = voto_contenuto;
 		this.voto_gradevolezza = voto_gradevolezza;
 		this.voto_originalita = voto_originalita;
-		this.voto_medio = (voto_stile + voto_edizione + voto_contenuto +
-				voto_gradevolezza + voto_originalita) / 5.0;
+		this.voto_medio = voto_medio;
 		this.stile = stile;
 		this.edizione = edizione;
 		this.contenuto = contenuto;
 		this.gradevolezza = gradevolezza;
 		this.originalita = originalita;
+		this.id_utente = id_utente;
+		this.id_libro = id_libro;
 	}
 
 	//METODI GETTER
@@ -76,5 +80,13 @@ public class Valutazione{
 	public String getNoteOriginalita() {
 		return originalita;
 	}
+
+	public int getIdUtente() {
+		return id_utente;
+	}
+	public int getIdLibro() {
+		return id_libro;
+	}
+
 
 }
