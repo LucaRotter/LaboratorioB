@@ -1,19 +1,19 @@
 package applicationrob;
-
+import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 import java.io.IOException;
-
 import javafx.application.Application;
 
 
 //main class to lunch the application
 
 public class clientBR extends UnicastRemoteObject{
-	public static serverBR BR;
+	// public static serverBR BR;
 
-	protected clientBR()  {
+	protected clientBR()  throws RemoteException{
 		super();
 	}
-
+/* 
 	 public int registrazione(Utente user){
 		 BR.registrazione(user);
 	 }
@@ -73,6 +73,7 @@ public class clientBR extends UnicastRemoteObject{
 	public boolean createValutazione(int user_id, int libro_id, Valutazione val){
 		BR.createValutazione(user_id, libro_id, val);
 	}
+		*/
 	public static void main(String[] args) {
 		/*try {
 			Registry reg = LocateRegistry.getRegistry("");
