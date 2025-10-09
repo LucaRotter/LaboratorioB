@@ -10,6 +10,8 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.sql.*;
+import LaboratorioB.db.DatabaseManager;
 //import javax.sql.*;
 
 public class serverBRImpl extends UnicastRemoteObject implements serverBR {
@@ -164,7 +166,7 @@ public class serverBRImpl extends UnicastRemoteObject implements serverBR {
                     String originalita = rs.getString("originalita");
                     int id_utente = rs.getInt("id_utente");
                     Valutazione val = new Valutazione(voto_stile, voto_edizione, voto_contenuto,
-                            voto_gradevole, voto_originalita, voto_medio, stile, edizione, contenuto,
+                            voto_gradevolezza, voto_originalita, voto_medio, stile, edizione, contenuto,
                             gradevole, originalita, id_utente, id_libro);
                     valutazioni.add(val);
                 }

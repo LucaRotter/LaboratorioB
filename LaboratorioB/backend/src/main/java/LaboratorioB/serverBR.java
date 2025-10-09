@@ -17,7 +17,7 @@ public interface serverBR extends Remote {
     //public int modificaEmail(String email, String password, String nuovaEmail) throws RemoteException;
     //public int modificaNome(String email, String password, String nuovoNome) throws RemoteException;
     //public int modificaCognome(String email, String password, String nuovoCognome) throws RemoteException;
-    public Libreria createLibreria(String nome, int user_id, Libreria libreria) throws RemoteException;
+    public Libreria createLibreria(String nome, int user_id) throws RemoteException;
     public Libreria addLibroLibreria(int id_libro, int id_libreria) throws RemoteException;
     public Libreria removeLibroLibreria(int id_libro, int id_libreria) throws RemoteException;
     public Libreria getLibreria(int id_libreria) throws RemoteException;
