@@ -8,6 +8,7 @@ import java.rmi.server.UnicastRemoteObject;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 //import javax.sql.*;
 
@@ -307,7 +308,7 @@ public class serverBRImpl extends UnicastRemoteObject implements serverBR {
             int rows = ps.executeUpdate();
 
             if (rows > 0) {
-                libreria = getLibrerie(id_libreria);
+                libreria = getLibreria(id_libreria);
             }
 
         } catch (SQLException e) {
@@ -328,7 +329,7 @@ public class serverBRImpl extends UnicastRemoteObject implements serverBR {
             ps.setInt(2, id_libreria);
             int rows = ps.executeUpdate();
             if (rows > 0) {
-                libreria = getLibrerie(id_libreria);
+                libreria = getLibreria(id_libreria);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -337,12 +338,42 @@ public class serverBRImpl extends UnicastRemoteObject implements serverBR {
         return libreria;
     }
 
+    public Libreria getLibreria(int id_libreria) throws RemoteException {
+
+        String query = "SELECT * FROM librerie L JOIN libreria_libri M on L.id_libreria = M.id_libreria WHERE id_libreria = ?";
+        Libreria libreria = null;
+        try (Connection conn = DatabaseManager.getConnection();
+                PreparedStatement ps = conn.prepareStatement(query)) {
+
+            ps.setInt(1, id_libreria);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    int id_utente = rs.getInt("id_utente");
+                    String nome = rs.getString("nome");
+                    List<Libro> libri = new ArrayList<>();
+                    do {
+                        int id_libro = rs.getInt("id_libro");
+                        Libro libro = getLibro(id_libro);
+                        libri.add(libro);
+                    } while (rs.next());  //non penso sia corretto, da rivedere
+                    libreria = new Libreria(id_utente, nome, (ArrayList<Libro>) libri, id_libreria);
+                }
+            } catch (RemoteException e) {}
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return libreria;
+
+    }
+
     @Override
     public List<Libreria> getLibrerie(int id_utente) throws RemoteException {
         // select da db
         String query = "SELECT * FROM librerie WHERE id_utente = ?";
 
-        List<Libreria> libreria = new Arraylist<Libreria>();
+        List<Libreria> libreria = new ArrayList<Libreria>();
         // libreria = risultato query
         return libreria;
     }

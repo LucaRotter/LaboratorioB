@@ -1,20 +1,24 @@
 package LaboratorioB.db;
 
-import com.zaxxer.hikari.HikariConfig;
-import com.zaxxer.hikari.HikariDataSource;
-
 import java.sql.Connection;
 import java.sql.SQLException;
+
+import com.zaxxer.hikari.HikariConfig;
+import com.zaxxer.hikari.HikariDataSource;
 
 public class DatabaseManager {
 
     private static HikariDataSource dataSource;
+    //private static Scanner in = new Scanner(System.in);
 
     static {
         try {
             HikariConfig config = new HikariConfig();
             config.setJdbcUrl("jdbc:postgresql://localhost:5432/labB");
+            System.out.println("Inserisci username e password del database:");
+            //String username = in.nextLine();
             config.setUsername("postgres");
+            //String pwd = in.nextLine();
             config.setPassword("Rluca2004");
             config.setDriverClassName("org.postgresql.Driver");
 
