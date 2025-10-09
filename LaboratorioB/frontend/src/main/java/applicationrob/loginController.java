@@ -18,10 +18,14 @@ public class loginController {
         String email = emailField.getText();
         String pw = pwField.getText();
 
-      /*  if (email.equals() && pw.equals()) {    
-        } else {   
+         if (email.isEmpty() || pw.isEmpty()) {
+            return;
         }
-        */
+
+        if (checkCredentials(email, pw)) {
+             Model.getIstance().getView().changeToHome();
+        } else {}    
+
     }
 
     @FXML
@@ -29,10 +33,19 @@ public class loginController {
     }
 
      @FXML
-    private void onBackPressed() {
+    public void onBackPressed() {
+        Model.getIstance().getView().changeToHome();
     }
     
     private void showAlert(String title, String message) {
        
+    }
+
+
+    public boolean checkCredentials(String email, String password) {
+    //  String check = "SELECT * FROM nomeTab WHERE email = ? AND password = ?";
+
+
+        return false;
     }
 }
