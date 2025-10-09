@@ -17,8 +17,10 @@ public class Libreria{
     
     // Attributi della classe Libreria
     private List<Libro> libreria = new ArrayList<>();
-	private String nomeLibreria;
-	private String nomeUtente;
+	private String nome;
+	private int id_utente;
+	private int id_libreria;
+
 
     //COSTRUTTORI
 	/**
@@ -26,15 +28,17 @@ public class Libreria{
 	 * il primo corrisponde allo Userid, il secondo al nome della
 	 * libreria mentre il terso è l'elenco dei libri
 	 * 
-	 * @param nomeUtente UserId
-	 * @param nomeLibreria nome della libreria
+	 * @param id_utente UserId
+	 * @param nome nome della libreria
 	 * @param libreria elenco di libri
+	 * @param id_libreria id della libreria
 	 */
-	public Libreria(String nomeUtente, String nomeLibreria, ArrayList<Libro> libreria) {
+	public Libreria(int id_utente, String nome, ArrayList<Libro> libreria, int id_libreria) {
 
-		this.nomeUtente = nomeUtente;
-		this.nomeLibreria = nomeLibreria;
+		this.id_utente= id_utente;
+		this.nome = nome;
 		this.libreria = libreria;
+		this.id_libreria = id_libreria;
 
 	}
 	
@@ -49,15 +53,17 @@ public class Libreria{
 
     //metodi getter
     public String getNomeLibreria() {
-        return nomeLibreria;
+        return nome;
     }
-    public String getNomeUtente() {
-        return nomeUtente;
+    public String getIdUtente() {
+        return id_utente;
     }
     public List<Libro> getLibreria() {
         return libreria;
     }
-
+	public int getIdLibreria(){
+		return id_libreria;
+	}
     /**
 	 * permette all'utente di inserire un libro in una
 	 * libreria personale scelta, aggiungendolo 
