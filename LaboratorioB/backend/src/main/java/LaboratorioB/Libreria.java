@@ -55,7 +55,7 @@ public class Libreria{
     public String getNomeLibreria() {
         return nome;
     }
-    public String getIdUtente() {
+    public int getIdUtente() {
         return id_utente;
     }
     public List<Libro> getLibreria() {

@@ -1,0 +1,10 @@
+applicationrob\BookController.class
+applicationrob\SideBarController.class
+applicationrob\DashboardController.class
+applicationrob\loginController.class
+applicationrob\VisLibrerieController.class
+applicationrob\VisLibroController.class
+applicationrob\Main.class
+models\Model.class
+applicationrob\ClientController.class
+views\ViewFactory.class

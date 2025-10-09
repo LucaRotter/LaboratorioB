@@ -10,13 +10,7 @@
   <version>1.0.0-SNAPSHOT</version>
   <name>JavaFX App (Java 21 / JavaFX 22)</name>
 
- <dependencies>
-    <dependency>
-      <groupId>LaboratorioB</groupId>
-      <artifactId>LaboratorioB</artifactId>
-      <version>1.0-SNAPSHOT</version>
-    </dependency>
-
+  <dependencies>
     <dependency>
       <groupId>org.openjfx</groupId>
       <artifactId>javafx-controls</artifactId>

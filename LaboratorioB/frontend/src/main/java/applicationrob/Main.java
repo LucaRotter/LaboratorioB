@@ -13,9 +13,6 @@ public class Main extends Application {
 	public void start(Stage primaryStage)  {
 		
 		Model.getIstance().getView().changeToHome();
-		Libro n = new Libro("ciao", "ciao", "cioa", "String editore", "cioa", 1);
-		System.out.println("n.getTitolo() = " + n.getTitolo());
-		
 
 	}
 	
