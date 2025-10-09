@@ -1,0 +1,44 @@
+.root{
+	-fx-font-size: 14px;
+}
+
+AnchorPane{
+	-fx-background-color: #FFFFFF;
+}
+
+.LoginPane{
+	
+	-fx-background-color: #86DBC5;
+	-fx-background-radius: 5%;
+}
+
+
+.NavigationBtn{
+	
+	-fx-background-color: #FFFFFF;
+	-fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 10, 0, 4, 4);
+	-fx-pref-width:10em;
+	
+}
+
+.NavigationBtn:hover{
+	
+	-fx-cursor:hand ;
+}
+
+.ButtonSection{
+	
+	-fx-padding:0 0  0 1.5em;
+	-fx-spacing: 1.3em;
+	
+}
+
+.NavigationBtn HBox{
+	-fx-spacing: 1em;
+}
+
+
+
+
+
+
