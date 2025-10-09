@@ -16,11 +16,16 @@ create table Utenti (
     cf varchar(16) unique not null
 );
 
-create table Librerie (
-    nome varchar(255),
-    id_libro int references Libri(id_libro) on delete cascade on update cascade,
-    id_utente int references Utenti(id_utente) on delete cascade on update cascade,
-    primary key (nome, id_libro, id_utente)
+CREATE TABLE libreria (
+    id_libreria INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    id_utente INT not null references Utenti(id_utente) on delete cascade on update cascade,
+    nome VARCHAR(100) NOT NULL
+);
+
+CREATE TABLE libreria_libri (
+    id_libreria INT NOT NULL  REFERENCES libreria(id_libreria) on delete cascade on update cascade,
+    id_libro INT NOT NULL REFERENCES libri(id_libro) on delete cascade on update cascade,
+    PRIMARY KEY (id_libreria, id_libro)
 );
 
 create table Libri_Consigliati (

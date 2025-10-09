@@ -8,6 +8,7 @@ import java.rmi.server.UnicastRemoteObject;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 //import javax.sql.*;
 
@@ -173,11 +174,12 @@ public class serverBRImpl extends UnicastRemoteObject implements serverBR {
         }
         return valutazioni;
     }
+
     @Override
     public List<Libro> getConsiglio(int id_libro) throws RemoteException {
         String query = "SELECT * FROM libri_consigliati WHERE id_libro = ?";
-        List<Libro> consigli = null;  
-        try(Connection conn = DatabaseManager.getConnection();
+        List<Libro> consigli = null;
+        try (Connection conn = DatabaseManager.getConnection();
                 PreparedStatement ps = conn.prepareStatement(query)) {
             ps.setInt(1, id_libro);
             try (ResultSet rs = ps.executeQuery()) {
@@ -192,7 +194,6 @@ public class serverBRImpl extends UnicastRemoteObject implements serverBR {
         }
         return consigli;
     }
-
 
     @Override
     public double getVotoMedio(int id_libro) throws RemoteException {
@@ -214,28 +215,31 @@ public class serverBRImpl extends UnicastRemoteObject implements serverBR {
 
     @Override
     public List<Libro> cercaLibri(String autore, int anno, String titolo, Ricerca scelta) throws RemoteException {
-        Ricerca ricerca;
-
+        List<Libro> libri = new ArrayList<>();
         String query = "SELECT * FROM libri WHERE ";
+
         if (scelta == Ricerca.TITOLO) {
-            query += "titolo = ?";
+            query += "titolo LIKE ?";
         } else if (scelta == Ricerca.ANNO) {
             query += "autore = ? AND anno = ?";
         } else if (scelta == Ricerca.AUTORE) {
-            query += "autore = ?";
-        } else
+            query += "autore LIKE ?";
+        } else {
             return null;
-        List<Libro> libri = null;
+        }
+
         try (Connection conn = DatabaseManager.getConnection();
                 PreparedStatement ps = conn.prepareStatement(query)) {
+
             if (scelta == Ricerca.TITOLO) {
-                ps.setString(1, titolo);
+                ps.setString(1, "%" + titolo + "%"); // ricerca sottostringa nel titolo
             } else if (scelta == Ricerca.ANNO) {
                 ps.setString(1, autore);
                 ps.setInt(2, anno);
             } else if (scelta == Ricerca.AUTORE) {
-                ps.setString(1, autore);
+                ps.setString(1, "%" + autore + "%"); // ricerca sottostringa nell'autore
             }
+
             try (ResultSet rs = ps.executeQuery()) {
                 while (rs.next()) {
                     int id_libro = rs.getInt("id_libro");
@@ -244,7 +248,13 @@ public class serverBRImpl extends UnicastRemoteObject implements serverBR {
                     String genere_libro = rs.getString("genere");
                     String editore_libro = rs.getString("editore");
                     String anno_libro = rs.getString("anno");
-                    Libro libro = new Libro(titolo_libro, autore_libro, genere_libro, editore_libro, anno_libro,
+
+                    Libro libro = new Libro(
+                            titolo_libro,
+                            autore_libro,
+                            genere_libro,
+                            editore_libro,
+                            anno_libro,
                             id_libro);
                     libri.add(libro);
                 }
@@ -254,24 +264,116 @@ public class serverBRImpl extends UnicastRemoteObject implements serverBR {
         }
 
         return libri;
-
     }
 
     @Override
-    public synchronized Libreria createLibreria(String nome, int id_utente, Libreria libreria) throws RemoteException {
+    public synchronized Libreria createLibreria(String nome, int id_utente) throws RemoteException {
         // inserimento in db
-        int libreria_id = 0; // modifica
-        String query = "INSERT into librerie (id_utente, nome, id_libro) VALUES (?, ?, ?)";
+
+        String query = "INSERT into librerie(id_utente, nome) VALUES (?, ?)";
+        Libreria libreria = null;
+        try (Connection conn = DatabaseManager.getConnection();
+                PreparedStatement ps = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS)) {
+
+            ps.setInt(1, id_utente);
+            ps.setString(2, nome);
+            int rows = ps.executeUpdate();
+
+            if (rows > 0) {
+                try (ResultSet rs = ps.getGeneratedKeys()) {
+                    if (rs.next()) {
+                        int id = rs.getInt(1);
+                        libreria = new Libreria(id_utente, nome, null, id);
+                    }
+                }
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
         // libreria = risultato query;
         return libreria;
     }
 
     @Override
-    public Libreria getLibrerie(int id) throws RemoteException {
+    public Libreria addLibroLibreria(int id_libro, int id_libreria) throws RemoteException {
+        String query = "INSERT into libri_librerie(id_libro, id_libreria) VALUES (?, ?)";
+        Libreria libreria = null;
+        try (Connection conn = DatabaseManager.getConnection();
+                PreparedStatement ps = conn.prepareStatement(query)) {
+
+            ps.setInt(1, id_libro);
+            ps.setInt(2, id_libreria);
+            int rows = ps.executeUpdate();
+
+            if (rows > 0) {
+                libreria = getLibreria(id_libreria);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return libreria;
+
+    }
+
+    public Libreria removeLibroLibreria(int id_libro, int id_libreria) throws RemoteException
+
+    {
+        String query = "DELETE FROM libri_librerie WHERE id_libro = ? AND id_libreria = ?";
+        Libreria libreria = null;
+        try (Connection conn = DatabaseManager.getConnection();
+                PreparedStatement ps = conn.prepareStatement(query)) {
+            ps.setInt(1, id_libro);
+            ps.setInt(2, id_libreria);
+            int rows = ps.executeUpdate();
+            if (rows > 0) {
+                libreria = getLibreria(id_libreria);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+
+        }
+        return libreria;
+    }
+
+    public Libreria getLibreria(int id_libreria) throws RemoteException {
+
+        String query = "SELECT * FROM librerie L JOIN libreria_libri M on L.id_libreria = M.id_libreria WHERE id_libreria = ?";
+        Libreria libreria = null;
+        try (Connection conn = DatabaseManager.getConnection();
+                PreparedStatement ps = conn.prepareStatement(query)) {
+
+            ps.setInt(1, id_libreria);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    int id_utente = rs.getInt("id_utente");
+                    String nome = rs.getString("nome");
+                    List<Libro> libri = new ArrayList<>();
+                    do {
+                        int id_libro = rs.getInt("id_libro");
+                        Libro libro = getLibro(id_libro);
+                        libri.add(libro);
+                    } while (rs.next());  //non penso sia corretto, da rivedere
+                    libreria = new Libreria(id_utente, nome, (ArrayList<Libro>) libri, id_libreria);
+                }
+            } catch (RemoteException e) {}
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return libreria;
+
+    }
+
+    @Override
+    public List<Libreria> getLibrerie(int id_utente) throws RemoteException {
         // select da db
         String query = "SELECT * FROM librerie WHERE id_utente = ?";
 
-        Libreria libreria = null;
+        List<Libreria> libreria = new ArrayList<Libreria>();
         // libreria = risultato query
         return libreria;
     }
