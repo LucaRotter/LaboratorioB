@@ -6,11 +6,12 @@ import javafx.scene.layout.VBox;
 
 public class loginController {
 
-    @FXML private VBox userBox;
-
-    @FXML private TextField emailField;
-    @FXML private PasswordField pwField;
-
+    @FXML
+    private TextField emailField;
+    @FXML
+    private PasswordField pwField;
+    @FXML
+    private Button backBtn;
 
     @FXML
     private void onUserLogin() {
@@ -27,13 +28,10 @@ public class loginController {
     private void changeToRegister() {
     }
 
-    @FXML
-    private void showUserForm() {
-        userBox.setVisible(true);
+     @FXML
+    private void onBackPressed() {
     }
-
-  
-
+    
     private void showAlert(String title, String message) {
        
     }
