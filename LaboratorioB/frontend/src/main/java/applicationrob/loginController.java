@@ -15,18 +15,19 @@ public class loginController {
 
     @FXML
     private void onUserLogin() {
-        String email = emailField.getText();
-        String pw = pwField.getText();
-        //int id_user;  
-        //if(id == -1) { } else { }
-        }
+
+       /* int id_user = login(emailField.getText(), passwordField.getText());
+          
+        if(id_user == 1) { } else { }
+         */
+        } 
+
     @FXML
     private void changeToRegister() {
     }
 
      @FXML
     public void onBackPressed() {
-       // Model.getIstance().getView().changeToHome();
     }
     
     private void showAlert(String title, String message) {
