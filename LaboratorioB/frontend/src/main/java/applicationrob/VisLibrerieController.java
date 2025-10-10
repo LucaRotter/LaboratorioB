@@ -54,6 +54,9 @@ public class VisLibrerieController {
     
     @FXML
     private Label imgFolder;
+
+    // Libreria libreria;
+    // List<Libreria> librerie;
     
   
     
@@ -73,8 +76,6 @@ public class VisLibrerieController {
     	rearrangeGrid();
     }
     
-
-    
   //Metodo che permetta l'apertura del Modal
     private void showModal() {
         modalOverlay.setVisible(true);
@@ -86,12 +87,17 @@ public class VisLibrerieController {
   //Metodo per inviare dati inseriti nel Modal
     @FXML
     void sendModal(ActionEvent event) {
-        String libName = modalTextField.getText().trim();
+     /*   String libName = modalTextField.getText().trim();
         if (!libName.isEmpty()) {
-            addLibrary(libName);  
-            rearrangeGrid();       
+        Libreria lib = clientBR.BR.getLibreria(libName)   
+        if (lib == null) {  
+        lib = clientBR.BR.createLibreria(libName, "id utente");
+         }
+            rearrangeGrid();        
+        } else {
         }
         modalOverlay.setVisible(false); 
+        */
     }
     
     @FXML
@@ -109,30 +115,28 @@ public class VisLibrerieController {
 // Metodo che cerca le librerie in base alla scritta nel TextField
     @FXML
    void searchLibraries(ActionEvent event) {
-    	 /* String textL = searchBar.getText().trim().toLowerCase();
+    /* 	String textSlib = searchBar.getText().trim().toLowerCase();
     	
         if (textL.isEmpty()) {
-            currentView.setAll(libraries);
+            currentView.setAll(librerie);
         } else {
-            ObservableList<String> filtered = FXCollections.observableArrayList();
-            for (String lib : libraries) {
-                if (lib.toLowerCase().contains(textL)) {
+            ObservableList<Libreria> filtered = FXCollections.observableArrayList();
+            for (Libreria lib : librerie) {
+                if (lib.getNome().toLowerCase().contains(textSlib)) {
                     filtered.add(lib);
                 }
             }
             currentView.setAll(filtered); 
         } 
-
-        rearrangeGrid(currentView); */
+        rearrangeGrid(currentView);   */
     }
     
  // Metodo di controllo per searchLibraries
     @FXML
     void writeText(ActionEvent event) {
-    	 String text = searchBar.getText().trim().toLowerCase();
+    	 String textSlib = searchBar.getText().trim().toLowerCase();
     	    
-    	    if (!text.matches("[a-zA-Z0-9 ]*")) {
-    	        System.out.println("Caratteri non validi");
+    	    if (!textSlib.matches("[a-zA-Z0-9 ]*")) {
     	        return;
     	    }
     	    
@@ -141,7 +145,7 @@ public class VisLibrerieController {
  // Metodo per azionare la modifica/aggiunta librerie 
     @FXML
     void useEdit(ActionEvent event) {	
-    	 /* if (!.isEmpty()) {
+    	 /* if (!librerie.isEmpty()) {
     	
     	editMode = !editMode;
     	
@@ -152,8 +156,7 @@ public class VisLibrerieController {
    
  // Metodo per impostare elementi se non ci sono librerie
     private void updateEmptyState() {
-    	/*   boolean hasLibraries = libraries != null && !libraries.isEmpty();
-
+    	/*   boolean hasLibraries = librerie != null && !librerie.isEmpty();
 
         emptyLbtn.setVisible(!hasLibraries);
         emptyText.setVisible(!hasLibraries);
@@ -166,16 +169,16 @@ public class VisLibrerieController {
         }*/
     }
     
-    public void addLibrary(String libraryName) {
-       // libraries.add(libraryName);
-        //currentView.setAll(libraries);
-       // updateEmptyState(); 
-       // rearrangeGrid(currentView);
-    }
+    //public void addLibrary(Libro libro) {
+      /* librerie.add(libro);
+       currentView.setAll(librerie);
+       updateEmptyState(); 
+       rearrangeGrid(currentView); */
+  //  } 
     
   //Metodo per mostrare tutte le librerie
     private void rearrangeGrid() {
-        //rearrangeGrid(libraries); 
+        //rearrangeGrid(librerie); 
     }
     
     
@@ -224,7 +227,7 @@ public class VisLibrerieController {
             }
         }
         
-    }    
+    }   
 
 }
 

@@ -4,7 +4,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
 
-public class loginController {
+public class LoginController {
 
     @FXML
     private TextField emailField;
@@ -16,7 +16,7 @@ public class loginController {
     @FXML
     private void onUserLogin() {
 
-       /* int id_user = login(emailField.getText(), passwordField.getText());
+       /* int id_user = clientBR.BR.login(emailField.getText(), passwordField.getText());
           
         if(id_user == 1) { } else { }
          */

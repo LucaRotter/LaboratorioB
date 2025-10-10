@@ -2,10 +2,11 @@ applicationrob\BookController.class
 applicationrob\SideBarController.class
 applicationrob\DashboardController.class
 applicationrob\clientBR.class
-applicationrob\loginController.class
+applicationrob\LoginController.class
 applicationrob\VisLibrerieController.class
 applicationrob\VisLibroController.class
 models\Model.class
 applicationrob\ClientController.class
 views\ViewFactory.class
 applicationrob\startApp.class
+applicationrob\RegisterController.class

@@ -1,0 +1,42 @@
+.SearchBar {
+	-fx-background-color: #FFFF;
+	-fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 10, 0, 0, 0);
+}
+
+.SearchBar TextField{
+	-fx-background-color:transparent;
+}
+
+Button {
+	-fx-background-color: #FFFF;
+	
+}
+
+ChoiceBox{
+	-fx-background-color: #FFFF;
+}
+
+.CategoryBtn{
+    -fx-pref-width: 80px;   /* larghezza preferita */
+    -fx-pref-height: 80px;   /* altezza preferita */
+    -fx-min-width: 120px;     /* larghezza minima */
+    -fx-max-width: 200px; 
+}
+
+.CategoryBtn:hover{
+	-fx-border-width: 0 0 2 0;
+	-fx-border-color: #86DBC5;
+}
+
+.ScrollPaneCategory,
+.ScrollPaneCategory HBox{
+	-fx-border-style:none;
+}
+
+.ScrollPaneBooks{
+	-fx-background: #FFFF;
+}
+
+
+
+
