@@ -12,6 +12,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.sql.*;
 import LaboratorioB.db.DatabaseManager;
+import LaboratorioB.common.models.*;
+import LaboratorioB.common.interfacce.serverBR;
 //import javax.sql.*;
 
 public class serverBRImpl extends UnicastRemoteObject implements serverBR {
@@ -408,6 +410,14 @@ public class serverBRImpl extends UnicastRemoteObject implements serverBR {
             serverBRImpl server = new serverBRImpl();
             Naming.rebind("rmi://localhost:1099/serverBR", server);
             System.out.println("Server BR is running...");
+            
+            //questo server solo con l'avvio con Maven
+             try {
+            Thread.sleep(Long.MAX_VALUE);
+        } catch (InterruptedException e) {
+            System.err.println("Server interrupted: " + e.getMessage());
+            e.printStackTrace();
+        }
 
         } catch (RemoteException | MalformedURLException | SQLException e) {
             System.err.println("Server exception: " + e.toString());

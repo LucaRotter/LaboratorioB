@@ -1,0 +1,7 @@
+LaboratorioB\common\models\Valutazione.class
+LaboratorioB\common\models\Ricerca.class
+LaboratorioB\common\interfacce\serverBR.class
+LaboratorioB\common\models\Libro.class
+LaboratorioB\common\models\Libreria.class
+LaboratorioB\common\models\Utente.class
+LaboratorioB\common\models\Consiglio.class

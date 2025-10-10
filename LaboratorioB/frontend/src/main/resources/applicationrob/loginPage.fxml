@@ -9,7 +9,7 @@
 <AnchorPane fx:id="rootPane" prefWidth="1100" prefHeight="700"
             xmlns="http://javafx.com/javafx/22"
             xmlns:fx="http://javafx.com/fxml/1" stylesheets="@loginPage.css"
-            fx:controller="applicationrob.loginController">
+            fx:controller="applicationrob.LoginController">
 
  <Button fx:id="backBtn" text="Back" layoutX="20" layoutY="20" style="-fx-font-size: 14px; -fx-background-color: transparent; -fx-text-fill: #333;" onAction="#onBackPressed">
  <graphic>

@@ -3,6 +3,12 @@ package applicationrob;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
+import LaboratorioB.common.models.*;
+import java.util.*;
+import javafx.scene.control.PasswordField;
+import java.rmi.*;
+import java.rmi.RemoteException;
+    
 
 public class LoginController {
 
@@ -14,12 +20,13 @@ public class LoginController {
     private Button backBtn;
 
     @FXML
-    private void onUserLogin() {
+    private void onUserLogin()throws RemoteException {
 
-       /* int id_user = clientBR.BR.login(emailField.getText(), passwordField.getText());
+        int id_user = clientBR.BR.login(emailField.getText(), pwField.getText());
+
           
         if(id_user == 1) { } else { }
-         */
+         
         } 
 
     @FXML

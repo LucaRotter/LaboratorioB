@@ -13,6 +13,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
+import LaboratorioB.common.models.*;
+import java.util.*;
 
 public class VisLibrerieController {
 
@@ -55,8 +57,8 @@ public class VisLibrerieController {
     @FXML
     private Label imgFolder;
 
-    // Libreria libreria;
-    // List<Libreria> librerie;
+    Libreria libreria;
+    List<Libreria> librerie;
     
   
     
