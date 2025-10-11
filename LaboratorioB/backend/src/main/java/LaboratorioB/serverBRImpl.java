@@ -29,7 +29,6 @@ public class serverBRImpl extends UnicastRemoteObject implements serverBR {
     }
 
     // Implementazione dei metodi definiti nell'interfaccia serverBR
-
     @Override
     public synchronized int registrazione(Utente user) throws RemoteException {
 
@@ -37,8 +36,8 @@ public class serverBRImpl extends UnicastRemoteObject implements serverBR {
 
         // creazione query e inserimento nel database
         String query = "INSERT INTO utenti (nome, cognome, cf, email, password) VALUES (?, ?, ?, ?, ?)";
-        try (Connection conn = DatabaseManager.getConnection();
-                PreparedStatement ps = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS)) {
+        try (Connection conn = DatabaseManager.getConnection(); 
+        PreparedStatement ps = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS)) {
 
             ps.setString(1, user.getNome());
             ps.setString(2, user.getCognome());
@@ -72,8 +71,8 @@ public class serverBRImpl extends UnicastRemoteObject implements serverBR {
         // creazione query e verifica nel database
         String query = "SELECT id_utente FROM utenti WHERE email = ? AND password = ?";
         int id = -1; // valore di default (se login fallisce)
-        try (Connection conn = DatabaseManager.getConnection();
-                PreparedStatement ps = conn.prepareStatement(query)) {
+        try (Connection conn = DatabaseManager.getConnection(); 
+        PreparedStatement ps = conn.prepareStatement(query)) {
 
             // imposta i parametri della query
             ps.setString(1, email);
@@ -97,8 +96,8 @@ public class serverBRImpl extends UnicastRemoteObject implements serverBR {
         Utente user = null;
 
         String query = "SELECT * FROM utenti WHERE id_utente = ?";
-        try (Connection conn = DatabaseManager.getConnection();
-                PreparedStatement ps = conn.prepareStatement(query)) {
+        try (Connection conn = DatabaseManager.getConnection(); 
+        PreparedStatement ps = conn.prepareStatement(query)) {
 
             // imposta i parametri della query
             ps.setInt(1, id);
@@ -125,8 +124,8 @@ public class serverBRImpl extends UnicastRemoteObject implements serverBR {
     public Libro getLibro(int id_libro) throws RemoteException {
         Libro libro = null;
         String query = "SELECT * FROM libri WHERE id_libro = ?";
-        try (Connection conn = DatabaseManager.getConnection();
-                PreparedStatement ps = conn.prepareStatement(query)) {
+        try (Connection conn = DatabaseManager.getConnection(); 
+        PreparedStatement ps = conn.prepareStatement(query)) {
             // imposta i parametri della query
             ps.setInt(1, id_libro);
             try (ResultSet rs = ps.executeQuery()) {
@@ -150,8 +149,8 @@ public class serverBRImpl extends UnicastRemoteObject implements serverBR {
     public List<Valutazione> getValutazione(int id_libro) throws RemoteException {
         String query = "SELECT * FROM valutazioni WHERE id_libro = ?";
         List<Valutazione> valutazioni = null;
-        try (Connection conn = DatabaseManager.getConnection();
-                PreparedStatement ps = conn.prepareStatement(query)) {
+        try (Connection conn = DatabaseManager.getConnection(); 
+        PreparedStatement ps = conn.prepareStatement(query)) {
             ps.setInt(1, id_libro);
             try (ResultSet rs = ps.executeQuery()) {
                 while (rs.next()) {
@@ -183,8 +182,8 @@ public class serverBRImpl extends UnicastRemoteObject implements serverBR {
     public List<Libro> getConsiglio(int id_libro) throws RemoteException {
         String query = "SELECT * FROM libri_consigliati WHERE id_libro = ?";
         List<Libro> consigli = null;
-        try (Connection conn = DatabaseManager.getConnection();
-                PreparedStatement ps = conn.prepareStatement(query)) {
+        try (Connection conn = DatabaseManager.getConnection(); 
+        PreparedStatement ps = conn.prepareStatement(query)) {
             ps.setInt(1, id_libro);
             try (ResultSet rs = ps.executeQuery()) {
                 while (rs.next()) {
@@ -203,8 +202,8 @@ public class serverBRImpl extends UnicastRemoteObject implements serverBR {
     public double getVotoMedio(int id_libro) throws RemoteException {
         String query = "SELECT AVG(voto_medio) FROM valutazioni WHERE id_libro = ?";
         double voto_medio = 0.0;
-        try (Connection conn = DatabaseManager.getConnection();
-                PreparedStatement ps = conn.prepareStatement(query)) {
+        try (Connection conn = DatabaseManager.getConnection(); 
+        PreparedStatement ps = conn.prepareStatement(query)) {
             ps.setInt(1, id_libro);
             try (ResultSet rs = ps.executeQuery()) {
                 if (rs.next()) {
@@ -232,8 +231,8 @@ public class serverBRImpl extends UnicastRemoteObject implements serverBR {
             return null;
         }
 
-        try (Connection conn = DatabaseManager.getConnection();
-                PreparedStatement ps = conn.prepareStatement(query)) {
+        try (Connection conn = DatabaseManager.getConnection(); 
+        PreparedStatement ps = conn.prepareStatement(query)) {
 
             if (scelta == Ricerca.TITOLO) {
                 ps.setString(1, "%" + titolo + "%"); // ricerca sottostringa nel titolo
@@ -276,8 +275,8 @@ public class serverBRImpl extends UnicastRemoteObject implements serverBR {
 
         String query = "INSERT into librerie(id_utente, nome) VALUES (?, ?)";
         Libreria libreria = null;
-        try (Connection conn = DatabaseManager.getConnection();
-                PreparedStatement ps = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS)) {
+        try (Connection conn = DatabaseManager.getConnection(); 
+        PreparedStatement ps = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS)) {
 
             ps.setInt(1, id_utente);
             ps.setString(2, nome);
@@ -304,8 +303,8 @@ public class serverBRImpl extends UnicastRemoteObject implements serverBR {
     public Libreria addLibroLibreria(int id_libro, int id_libreria) throws RemoteException {
         String query = "INSERT into libri_librerie(id_libro, id_libreria) VALUES (?, ?)";
         Libreria libreria = null;
-        try (Connection conn = DatabaseManager.getConnection();
-                PreparedStatement ps = conn.prepareStatement(query)) {
+        try (Connection conn = DatabaseManager.getConnection(); 
+        PreparedStatement ps = conn.prepareStatement(query)) {
 
             ps.setInt(1, id_libro);
             ps.setInt(2, id_libreria);
@@ -322,13 +321,11 @@ public class serverBRImpl extends UnicastRemoteObject implements serverBR {
 
     }
 
-    public Libreria removeLibroLibreria(int id_libro, int id_libreria) throws RemoteException
-
-    {
+    public Libreria removeLibroLibreria(int id_libro, int id_libreria) throws RemoteException {
         String query = "DELETE FROM libri_librerie WHERE id_libro = ? AND id_libreria = ?";
         Libreria libreria = null;
-        try (Connection conn = DatabaseManager.getConnection();
-                PreparedStatement ps = conn.prepareStatement(query)) {
+        try (Connection conn = DatabaseManager.getConnection(); 
+        PreparedStatement ps = conn.prepareStatement(query)) {
             ps.setInt(1, id_libro);
             ps.setInt(2, id_libreria);
             int rows = ps.executeUpdate();
@@ -346,8 +343,8 @@ public class serverBRImpl extends UnicastRemoteObject implements serverBR {
 
         String query = "SELECT * FROM librerie L JOIN libreria_libri M on L.id_libreria = M.id_libreria WHERE id_libreria = ?";
         Libreria libreria = null;
-        try (Connection conn = DatabaseManager.getConnection();
-                PreparedStatement ps = conn.prepareStatement(query)) {
+        try (Connection conn = DatabaseManager.getConnection(); 
+        PreparedStatement ps = conn.prepareStatement(query)) {
 
             ps.setInt(1, id_libreria);
             try (ResultSet rs = ps.executeQuery()) {
@@ -362,7 +359,8 @@ public class serverBRImpl extends UnicastRemoteObject implements serverBR {
                     } while (rs.next());  //non penso sia corretto, da rivedere
                     libreria = new Libreria(id_utente, nome, (ArrayList<Libro>) libri, id_libreria);
                 }
-            } catch (RemoteException e) {}
+            } catch (RemoteException e) {
+            }
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -410,14 +408,14 @@ public class serverBRImpl extends UnicastRemoteObject implements serverBR {
             serverBRImpl server = new serverBRImpl();
             Naming.rebind("rmi://localhost:1099/serverBR", server);
             System.out.println("Server BR is running...");
-            
+
             //questo server solo con l'avvio con Maven
-             try {
-            Thread.sleep(Long.MAX_VALUE);
-        } catch (InterruptedException e) {
-            System.err.println("Server interrupted: " + e.getMessage());
-            e.printStackTrace();
-        }
+            try {
+                Thread.sleep(Long.MAX_VALUE);
+            } catch (InterruptedException e) {
+                System.err.println("Server interrupted: " + e.getMessage());
+                e.printStackTrace();
+            }
 
         } catch (RemoteException | MalformedURLException | SQLException e) {
             System.err.println("Server exception: " + e.toString());
