@@ -46,7 +46,13 @@ public class Utente implements Serializable {
     }
 
     //cosrteuttore vuoto
-    public Utente() {
+    public Utente(String nome, String cognome, String cf, String email, String password) {
+
+        this.nome = nome;
+        this.cognome = cognome;
+        this.cf = cf;
+        this.email = email;
+        this.password = password;
     
     }
 
