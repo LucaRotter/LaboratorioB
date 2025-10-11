@@ -1,9 +1,13 @@
 package applicationrob;
 
+import java.rmi.*;
 import javafx.fxml.FXML;
-import javafx.scene.control.TextField;
-import javafx.scene.control.PasswordField;
+import javafx.scene.control.*;
+import java.rmi.RemoteException;
 import javafx.event.ActionEvent;
+import LaboratorioB.common.models.*;
+
+
 
 public class RegisterController {
 
@@ -21,7 +25,7 @@ public class RegisterController {
     private int id_user;
 
     @FXML
-    void onRegisterUser(ActionEvent event) {
+    void onRegisterUser(ActionEvent event) throws RemoteException {
         String nome = nameField.getText().trim();
         String cognome = surnameField.getText().trim().toUpperCase();
         String cf = cfField.getText().trim();
@@ -37,7 +41,6 @@ public class RegisterController {
          id_user = clientBR.BR.registrazione(newUser);
 
         if (id_user == -1) {
-            showAlert("");
         }
 
     }
@@ -54,24 +57,19 @@ public class RegisterController {
 
     private boolean validateField(String nome, String cognome, String cf, String email, String pw) {
 
-        if (nome.isEmpty() || cognome.isEmpty() || cf.isEmpty() || email.isEmpty() || userId.isEmpty()
-                || pw.isEmpty()) {
-            showAlert("Campi mancanti", "Tutti i campi sono obbligatori.");
+        if (nome.isEmpty() || cognome.isEmpty() || cf.isEmpty() || email.isEmpty() || pw.isEmpty()) {
             return false;
         }
 
         if (!isFiscalCodeValidate(cf)) {
-            showAlert("Codice fiscale non valido", "Controlla che il codice fiscale sia corretto.");
             return false;
         }
 
         if (!email.matches("^[A-Za-z0-9+_.-]+@(.+)$")) {
-            showAlert("Email non valida", "Inserisci un'email corretta.");
             return false;
         }
 
         if (pw.length() < 6) {
-            showAlert("Password troppo corta", "La password deve avere almeno 6 caratteri.");
             return false;
         }
 
@@ -110,4 +108,8 @@ public class RegisterController {
         char expectedControl = (char) ('A' + (sum % 26));
         return cf.charAt(15) == expectedControl;
     }
+
+
+    private void showAlert(String title, String message) {
+}
 }
