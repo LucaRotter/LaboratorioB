@@ -9,7 +9,7 @@
 <AnchorPane fx:id="rootPane" prefWidth="1100" prefHeight="700"
             xmlns="http://javafx.com/javafx/22"
             xmlns:fx="http://javafx.com/fxml/1"
-            stylesheets="@loginPage.css"
+            stylesheets="@css/loginPage.css"
             fx:controller="applicationrob.RegisterController">
 
    
@@ -33,7 +33,6 @@
         <TextField fx:id="surnameField" promptText="Surname" prefWidth="250"/>
         <TextField fx:id="cfField" promptText="Fiscal Code" prefWidth="250"/>
         <TextField fx:id="emailField" promptText="Email" prefWidth="250"/>
-        <TextField fx:id="userIdField" promptText="User ID" prefWidth="250"/>
         <PasswordField fx:id="pwField" promptText="Password" prefWidth="250"/>
 
         <Button text="Register" onAction="#onRegisterUser" prefWidth="150"/>

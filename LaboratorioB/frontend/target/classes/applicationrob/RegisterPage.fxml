@@ -9,7 +9,7 @@
 <AnchorPane fx:id="rootPane" prefWidth="1100" prefHeight="700"
             xmlns="http://javafx.com/javafx/22"
             xmlns:fx="http://javafx.com/fxml/1"
-            stylesheets="@loginPage.css"
+            stylesheets="@css/loginPage.css"
             fx:controller="applicationrob.RegisterController">
 
    

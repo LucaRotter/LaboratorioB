@@ -19,26 +19,28 @@ public class LoginController {
     @FXML
     private Button backBtn;
 
-    @FXML
-    private void onUserLogin()throws RemoteException {
-
-        int id_user = clientBR.BR.login(emailField.getText(), pwField.getText());
-
-          
-        if(id_user == 1) { } else { }
-         
-        } 
+    private int id_user;
 
     @FXML
-    private void changeToRegister() {
+    public void onUserLogin()throws RemoteException {
+
+        id_user = clientBR.BR.login(emailField.getText(), pwField.getText());
+
+        if(id_user == -1) { 
+             showAlert("Login Failed", "Invalid email or password");
+             return;
+        }     
+    } 
+
+    @FXML
+    public void changeToRegister() {
     }
 
      @FXML
     public void onBackPressed() {
     }
     
-    private void showAlert(String title, String message) {
-        
+    public void showAlert(String title, String message) {   
     }
 
 }

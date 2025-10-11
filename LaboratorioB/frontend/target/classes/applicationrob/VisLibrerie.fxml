@@ -19,7 +19,7 @@
 
 
 
-<AnchorPane prefHeight="700.0" prefWidth="880.0" stylesheets="@libraries.css" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/22" fx:controller="applicationrob.VisLibrerieController">
+<AnchorPane prefHeight="700.0" prefWidth="880.0" stylesheets="@css/libraries.css" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/22" fx:controller="applicationrob.VisLibrerieController">
 	<children>
 	 <StackPane layoutY="25.0" prefWidth="880.0" alignment="CENTER">
        <Text fx:id="titleText" text="My Libraries" styleClass="page-title"/>

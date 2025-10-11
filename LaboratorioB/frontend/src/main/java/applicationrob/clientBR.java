@@ -19,7 +19,7 @@ public class clientBR{
 
 	protected clientBR()  throws RemoteException{
 		super();
-	}
+	} 
 
 	 public int registrazione(Utente user)throws RemoteException{
 		 return BR.registrazione(user);

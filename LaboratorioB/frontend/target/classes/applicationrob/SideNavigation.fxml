@@ -13,7 +13,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<VBox fillWidth="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="235.0" style="-fx-background-color: transparent; -fx-border-radius: 10px; -fx-background-radius: 10px;" stylesheets="@Sidebar.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="applicationrob.SideBarController">
+<VBox fillWidth="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="235.0" style="-fx-background-color: transparent; -fx-border-radius: 10px; -fx-background-radius: 10px;" stylesheets="@css/Sidebar.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="applicationrob.SideBarController">
    <children>
       <AnchorPane prefHeight="673.0" prefWidth="212.0" style="-fx-background-radius: 10px;">
          <children>
