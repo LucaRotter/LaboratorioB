@@ -5,9 +5,6 @@ import java.rmi.Naming;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.server.UnicastRemoteObject;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.sql.*;
@@ -341,12 +338,32 @@ public class serverBRImpl extends UnicastRemoteObject implements serverBR {
 
     public Libreria getLibreria(int id_libreria) throws RemoteException {
 
-        String query = "SELECT * FROM librerie L JOIN libreria_libri M on L.id_libreria = M.id_libreria WHERE id_libreria = ?";
+        String query = "SELECT * FROM librerie L JOIN libreria_libri M on L.id_libreria = M.id_libreria WHERE L.id_libreria = ?";
         Libreria libreria = null;
         try (Connection conn = DatabaseManager.getConnection(); 
         PreparedStatement ps = conn.prepareStatement(query)) {
 
             ps.setInt(1, id_libreria);
+            /*   try (ResultSet rs = ps.executeQuery()) {
+            int id_utente = -1;
+            String nome = null;
+
+            while (rs.next()) {
+                if (libreria == null) {
+                    id_utente = rs.getInt("id_utente");
+                    nome = rs.getString("nome");
+                }
+                int id_libro = rs.getInt("id_libro");
+                if (id_libro != 0) {
+                    Libro libro = getLibro(id_libro);
+                    libri.add(libro);
+                }
+            }
+
+            if (id_utente != -1) {
+                libreria = new Libreria(id_utente, nome, (ArrayList<Libro>) libri, id_libreria);
+            }
+        } */
             try (ResultSet rs = ps.executeQuery()) {
                 if (rs.next()) {
                     int id_utente = rs.getInt("id_utente");
@@ -373,10 +390,24 @@ public class serverBRImpl extends UnicastRemoteObject implements serverBR {
     @Override
     public List<Libreria> getLibrerie(int id_utente) throws RemoteException {
         // select da db
-        String query = "SELECT * FROM librerie WHERE id_utente = ?";
+        String query = "SELECT id_libreria FROM librerie WHERE id_utente = ?";
 
         List<Libreria> libreria = new ArrayList<Libreria>();
-        // libreria = risultato query
+        try (Connection conn = DatabaseManager.getConnection(); 
+        PreparedStatement ps = conn.prepareStatement(query)){
+            ps.setInt(1, id_utente);
+            try (ResultSet rs = ps.executeQuery()){
+                while(rs.next()){
+                    int id_libreria = rs.getInt("id_libreria");
+                    Libreria lib = getLibreria(id_libreria);
+                    libreria.add(lib);
+
+                }
+            }
+            
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         return libreria;
     }
 
