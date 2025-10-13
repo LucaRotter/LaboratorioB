@@ -5,12 +5,22 @@ import java.rmi.Naming;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.server.UnicastRemoteObject;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-import java.sql.*;
-import LaboratorioB.db.DatabaseManager;
-import LaboratorioB.common.models.*;
+
 import LaboratorioB.common.interfacce.serverBR;
+import LaboratorioB.common.models.Libreria;
+import LaboratorioB.common.models.Libro;
+import LaboratorioB.common.models.Ricerca;
+import LaboratorioB.common.models.Utente;
+import LaboratorioB.common.models.Valutazione;
+import LaboratorioB.db.DatabaseManager;
 //import javax.sql.*;
 
 public class serverBRImpl extends UnicastRemoteObject implements serverBR {
@@ -33,8 +43,7 @@ public class serverBRImpl extends UnicastRemoteObject implements serverBR {
 
         // creazione query e inserimento nel database
         String query = "INSERT INTO utenti (nome, cognome, cf, email, password) VALUES (?, ?, ?, ?, ?)";
-        try (Connection conn = DatabaseManager.getConnection(); 
-        PreparedStatement ps = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS)) {
+        try (Connection conn = DatabaseManager.getConnection(); PreparedStatement ps = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS)) {
 
             ps.setString(1, user.getNome());
             ps.setString(2, user.getCognome());
@@ -68,8 +77,7 @@ public class serverBRImpl extends UnicastRemoteObject implements serverBR {
         // creazione query e verifica nel database
         String query = "SELECT id_utente FROM utenti WHERE email = ? AND password = ?";
         int id = -1; // valore di default (se login fallisce)
-        try (Connection conn = DatabaseManager.getConnection(); 
-        PreparedStatement ps = conn.prepareStatement(query)) {
+        try (Connection conn = DatabaseManager.getConnection(); PreparedStatement ps = conn.prepareStatement(query)) {
 
             // imposta i parametri della query
             ps.setString(1, email);
@@ -93,8 +101,7 @@ public class serverBRImpl extends UnicastRemoteObject implements serverBR {
         Utente user = null;
 
         String query = "SELECT * FROM utenti WHERE id_utente = ?";
-        try (Connection conn = DatabaseManager.getConnection(); 
-        PreparedStatement ps = conn.prepareStatement(query)) {
+        try (Connection conn = DatabaseManager.getConnection(); PreparedStatement ps = conn.prepareStatement(query)) {
 
             // imposta i parametri della query
             ps.setInt(1, id);
@@ -121,8 +128,7 @@ public class serverBRImpl extends UnicastRemoteObject implements serverBR {
     public Libro getLibro(int id_libro) throws RemoteException {
         Libro libro = null;
         String query = "SELECT * FROM libri WHERE id_libro = ?";
-        try (Connection conn = DatabaseManager.getConnection(); 
-        PreparedStatement ps = conn.prepareStatement(query)) {
+        try (Connection conn = DatabaseManager.getConnection(); PreparedStatement ps = conn.prepareStatement(query)) {
             // imposta i parametri della query
             ps.setInt(1, id_libro);
             try (ResultSet rs = ps.executeQuery()) {
@@ -146,8 +152,7 @@ public class serverBRImpl extends UnicastRemoteObject implements serverBR {
     public List<Valutazione> getValutazione(int id_libro) throws RemoteException {
         String query = "SELECT * FROM valutazioni WHERE id_libro = ?";
         List<Valutazione> valutazioni = null;
-        try (Connection conn = DatabaseManager.getConnection(); 
-        PreparedStatement ps = conn.prepareStatement(query)) {
+        try (Connection conn = DatabaseManager.getConnection(); PreparedStatement ps = conn.prepareStatement(query)) {
             ps.setInt(1, id_libro);
             try (ResultSet rs = ps.executeQuery()) {
                 while (rs.next()) {
@@ -179,8 +184,7 @@ public class serverBRImpl extends UnicastRemoteObject implements serverBR {
     public List<Libro> getConsiglio(int id_libro) throws RemoteException {
         String query = "SELECT * FROM libri_consigliati WHERE id_libro = ?";
         List<Libro> consigli = null;
-        try (Connection conn = DatabaseManager.getConnection(); 
-        PreparedStatement ps = conn.prepareStatement(query)) {
+        try (Connection conn = DatabaseManager.getConnection(); PreparedStatement ps = conn.prepareStatement(query)) {
             ps.setInt(1, id_libro);
             try (ResultSet rs = ps.executeQuery()) {
                 while (rs.next()) {
@@ -199,8 +203,7 @@ public class serverBRImpl extends UnicastRemoteObject implements serverBR {
     public double getVotoMedio(int id_libro) throws RemoteException {
         String query = "SELECT AVG(voto_medio) FROM valutazioni WHERE id_libro = ?";
         double voto_medio = 0.0;
-        try (Connection conn = DatabaseManager.getConnection(); 
-        PreparedStatement ps = conn.prepareStatement(query)) {
+        try (Connection conn = DatabaseManager.getConnection(); PreparedStatement ps = conn.prepareStatement(query)) {
             ps.setInt(1, id_libro);
             try (ResultSet rs = ps.executeQuery()) {
                 if (rs.next()) {
@@ -219,17 +222,16 @@ public class serverBRImpl extends UnicastRemoteObject implements serverBR {
         String query = "SELECT * FROM libri WHERE ";
 
         if (scelta == Ricerca.TITOLO) {
-            query += "titolo LIKE ?";
+            query += "titolo ILIKE ?";
         } else if (scelta == Ricerca.ANNO) {
-            query += "autore = ? AND anno = ?";
+            query += "autore ILIKE ? AND anno = ?";
         } else if (scelta == Ricerca.AUTORE) {
-            query += "autore LIKE ?";
+            query += "autore ILIKE ?";
         } else {
             return null;
         }
 
-        try (Connection conn = DatabaseManager.getConnection(); 
-        PreparedStatement ps = conn.prepareStatement(query)) {
+        try (Connection conn = DatabaseManager.getConnection(); PreparedStatement ps = conn.prepareStatement(query)) {
 
             if (scelta == Ricerca.TITOLO) {
                 ps.setString(1, "%" + titolo + "%"); // ricerca sottostringa nel titolo
@@ -272,8 +274,7 @@ public class serverBRImpl extends UnicastRemoteObject implements serverBR {
 
         String query = "INSERT into librerie(id_utente, nome) VALUES (?, ?)";
         Libreria libreria = null;
-        try (Connection conn = DatabaseManager.getConnection(); 
-        PreparedStatement ps = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS)) {
+        try (Connection conn = DatabaseManager.getConnection(); PreparedStatement ps = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS)) {
 
             ps.setInt(1, id_utente);
             ps.setString(2, nome);
@@ -300,8 +301,7 @@ public class serverBRImpl extends UnicastRemoteObject implements serverBR {
     public Libreria addLibroLibreria(int id_libro, int id_libreria) throws RemoteException {
         String query = "INSERT into libri_librerie(id_libro, id_libreria) VALUES (?, ?)";
         Libreria libreria = null;
-        try (Connection conn = DatabaseManager.getConnection(); 
-        PreparedStatement ps = conn.prepareStatement(query)) {
+        try (Connection conn = DatabaseManager.getConnection(); PreparedStatement ps = conn.prepareStatement(query)) {
 
             ps.setInt(1, id_libro);
             ps.setInt(2, id_libreria);
@@ -321,8 +321,7 @@ public class serverBRImpl extends UnicastRemoteObject implements serverBR {
     public Libreria removeLibroLibreria(int id_libro, int id_libreria) throws RemoteException {
         String query = "DELETE FROM libri_librerie WHERE id_libro = ? AND id_libreria = ?";
         Libreria libreria = null;
-        try (Connection conn = DatabaseManager.getConnection(); 
-        PreparedStatement ps = conn.prepareStatement(query)) {
+        try (Connection conn = DatabaseManager.getConnection(); PreparedStatement ps = conn.prepareStatement(query)) {
             ps.setInt(1, id_libro);
             ps.setInt(2, id_libreria);
             int rows = ps.executeUpdate();
@@ -340,43 +339,29 @@ public class serverBRImpl extends UnicastRemoteObject implements serverBR {
 
         String query = "SELECT * FROM librerie L JOIN libreria_libri M on L.id_libreria = M.id_libreria WHERE L.id_libreria = ?";
         Libreria libreria = null;
-        try (Connection conn = DatabaseManager.getConnection(); 
-        PreparedStatement ps = conn.prepareStatement(query)) {
+        List<Libro> libri = new ArrayList<>();
+        try (Connection conn = DatabaseManager.getConnection(); PreparedStatement ps = conn.prepareStatement(query)) {
 
             ps.setInt(1, id_libreria);
-            /*   try (ResultSet rs = ps.executeQuery()) {
-            int id_utente = -1;
-            String nome = null;
-
-            while (rs.next()) {
-                if (libreria == null) {
-                    id_utente = rs.getInt("id_utente");
-                    nome = rs.getString("nome");
-                }
-                int id_libro = rs.getInt("id_libro");
-                if (id_libro != 0) {
-                    Libro libro = getLibro(id_libro);
-                    libri.add(libro);
-                }
-            }
-
-            if (id_utente != -1) {
-                libreria = new Libreria(id_utente, nome, (ArrayList<Libro>) libri, id_libreria);
-            }
-        } */
             try (ResultSet rs = ps.executeQuery()) {
-                if (rs.next()) {
-                    int id_utente = rs.getInt("id_utente");
-                    String nome = rs.getString("nome");
-                    List<Libro> libri = new ArrayList<>();
-                    do {
-                        int id_libro = rs.getInt("id_libro");
+                int id_utente = -1;
+                String nome = null;
+
+                while (rs.next()) {
+                    if (libreria == null) {
+                        id_utente = rs.getInt("id_utente");
+                        nome = rs.getString("nome");
+                    }
+                    int id_libro = rs.getInt("id_libro");
+                    if (id_libro != 0) {
                         Libro libro = getLibro(id_libro);
                         libri.add(libro);
-                    } while (rs.next());  //non penso sia corretto, da rivedere
+                    }
+                }
+
+                if (id_utente != -1) {
                     libreria = new Libreria(id_utente, nome, (ArrayList<Libro>) libri, id_libreria);
                 }
-            } catch (RemoteException e) {
             }
 
         } catch (SQLException e) {
@@ -393,18 +378,17 @@ public class serverBRImpl extends UnicastRemoteObject implements serverBR {
         String query = "SELECT id_libreria FROM librerie WHERE id_utente = ?";
 
         List<Libreria> libreria = new ArrayList<Libreria>();
-        try (Connection conn = DatabaseManager.getConnection(); 
-        PreparedStatement ps = conn.prepareStatement(query)){
+        try (Connection conn = DatabaseManager.getConnection(); PreparedStatement ps = conn.prepareStatement(query)) {
             ps.setInt(1, id_utente);
-            try (ResultSet rs = ps.executeQuery()){
-                while(rs.next()){
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
                     int id_libreria = rs.getInt("id_libreria");
                     Libreria lib = getLibreria(id_libreria);
                     libreria.add(lib);
 
                 }
             }
-            
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -412,23 +396,78 @@ public class serverBRImpl extends UnicastRemoteObject implements serverBR {
     }
 
     @Override
-    public synchronized boolean createConsiglio(int id_utente, int id_libro) throws RemoteException {
+    public synchronized boolean createConsiglio(int id_utente, int id_libro, int id_consiglio) throws RemoteException {
         int count = 0;
         // count = risultato count per utente e libro
-        String query = "SELECT count(*) FROM consigli WHERE id_utente = ? AND id_libro = ?"; // modificare struttura db
+        String query_count = "SELECT count(*) FROM Libri_consigliati WHERE id_utente = ? AND id_libro = ?"; // modificare struttura db
+
+        try (Connection conn = DatabaseManager.getConnection(); PreparedStatement ps = conn.prepareStatement(query_count)) {
+            ps.setInt(1, id_utente);
+            ps.setInt(2, id_libro);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    count = rs.getInt("count");
+                }
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
 
         if (count == 3) {
             return false;
         }
 
-        // query per inserire il libro selezionato
+        String query = "INSERT into Libri_consigliati (id_utente, id_libro, id_libro_consigliato) VALUES (?, ?, ?)";
+
+        try (Connection conn = DatabaseManager.getConnection(); PreparedStatement ps = conn.prepareStatement(query_count)) {
+            ps.setInt(1, id_utente);
+            ps.setInt(2, id_libro);
+            ps.setInt(3, id_consiglio);
+            int rows = ps.executeUpdate();
+            if (rows <= 0) {
+                return false;
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+
         return true;
     }
 
     @Override
     public synchronized boolean createValutazione(int id_utente, int id_libro, Valutazione val) throws RemoteException {
         // query per inserimento nel db
-        String query = "INSERT into valutazioni (id_utente, id_libro, altre cose) VALUES (?, ?, ?, ?)";
+        String query = "INSERT into valutazioni (id_utente, id_libro, edizione, voto_edizione, stile, voto_stile, contenuto, voto_contenuto, gradevolezza, voto_gradevolezza, originalita, voto_otiginalita, voto_medio) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? , ?)";
+
+        try (Connection conn = DatabaseManager.getConnection(); PreparedStatement ps = conn.prepareStatement(query)) {
+
+            ps.setInt(1, id_utente);
+            ps.setInt(2, id_libro);
+            ps.setString(3, val.getNoteEdizione());
+            ps.setInt(4, val.getVotoEdizione());
+            ps.setString(5, val.getNoteStile());
+            ps.setInt(6, val.getVotoStile());
+            ps.setString(7, val.getNoteContenuto());
+            ps.setInt(8, val.getVotoContenuto());
+            ps.setString(9, val.getNoteGradevolezza());
+            ps.setInt(10, val.getVotoGradevolezza());
+            ps.setString(11, val.getNoteOriginalita());
+            ps.setInt(12, val.getVotoOriginalita());
+            ps.setDouble(13, val.getVotoMedio());
+
+            int rows = ps.executeUpdate();
+            if (rows <= 0) {
+                return false;
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
 
         return true;
     }
