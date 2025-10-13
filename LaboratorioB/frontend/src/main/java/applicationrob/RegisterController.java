@@ -38,10 +38,11 @@ public class RegisterController {
 
         Utente newUser = new Utente(nome, cognome, cf, email, pw, 0);
 
-         id_user = clientBR.BR.registrazione(newUser);
+         id_user = clientBR.registrazione(newUser);
 
         if (id_user == -1) {
         }
+        TokenSession.setUserId(id_user);
 
     }
 
