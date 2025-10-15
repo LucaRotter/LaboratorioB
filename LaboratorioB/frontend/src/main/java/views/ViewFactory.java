@@ -47,7 +47,6 @@ public class ViewFactory {
 	}
 	
 	public AnchorPane getVisLibrerie(){
-			
 			if(VisLibrerie==null) {
 				
 				try {
