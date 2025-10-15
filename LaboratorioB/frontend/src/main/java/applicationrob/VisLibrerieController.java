@@ -66,18 +66,17 @@ public class VisLibrerieController {
 
     private Libreria libreria;
     private List<Libreria> listaLibrerie;
-    private ObservableList<Libreria> librerie = FXCollections.observableArrayList();
+    private ObservableList<Libreria> librerie;
+    private ObservableList<Libreria> currentLibr;
+    private ObservableList<Libreria> filterLibr;
 
     private int id_user;
 
-    private ObservableList<Libreria> currentLibr = FXCollections.observableArrayList();
-    private ObservableList<Libreria> filterLibr = FXCollections.observableArrayList();
-    
-  
-    
-   
     @FXML
     public void initialize() {
+        librerie = FXCollections.observableArrayList();
+        currentLibr = FXCollections.observableArrayList();
+        filterLibr = FXCollections.observableArrayList();
         id_user = TokenSession.getUserId();
         TokenSession.checkTkSession();
 
@@ -107,10 +106,11 @@ public class VisLibrerieController {
         if (libName.isEmpty()) {
             return; 
         } 
-       libreria = clientBR.createLibreria(libName, id_user);
-       listaLibrerie = clientBR.getLibrerie(id_user);
-       librerie.setAll(FXCollections.observableArrayList(listaLibrerie));
-       currentLibr.setAll(librerie);
+
+        libreria = clientBR.createLibreria(libName, id_user);
+        listaLibrerie = clientBR.getLibrerie(id_user);
+        librerie.setAll(FXCollections.observableArrayList(listaLibrerie));
+        currentLibr.setAll(librerie);
         rearrangeGrid(currentLibr); 
         modalOverlay.setVisible(false); 
         updateEmptyState();       
