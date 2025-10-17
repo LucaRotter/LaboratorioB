@@ -6,10 +6,13 @@ import applicationrob.ClientController;
 import applicationrob.VisLibroController;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.AnchorPane; 
 import javafx.stage.Stage;
+import LaboratorioB.common.models.*;
 
 public class ViewFactory {
 	
@@ -17,69 +20,33 @@ public class ViewFactory {
 	private AnchorPane DashboardMain;
 	private AnchorPane VisLibrerie;
 	private AnchorPane VisLibro;
-	private String selectedBook;
+	//private final StringProperty selectedBook;
+	private ObjectProperty<Libro> selectedLibr;
 	
 	public ViewFactory() {
-		
 		this.SideBarSelection = new SimpleStringProperty("");
-		
+		// this.selectedBook = new SimpleStringProperty("");
+		this.selectedLibr = new SimpleObjectProperty<Libro>();
 	}
 	
 	public StringProperty getSideBarSelectionItem() {
-		
 		return SideBarSelection;
 	}
 	
 	public AnchorPane getDashboardMain(){
-		
-		if(DashboardMain==null) {
-			
-			try {
-				
-				DashboardMain = new FXMLLoader(getClass().getResource("/applicationrob/Dashboard.fxml")).load();
-				
-			} catch (IOException e) {
-				
-				e.printStackTrace();
-			}
-		}
-		return DashboardMain;
+	    DashboardMain = MoveToPage("/applicationrob/Dashboard.fxml", DashboardMain);
+	    return DashboardMain;
 	}
 	
 	public AnchorPane getVisLibrerie(){
-			if(VisLibrerie==null) {
-				
-				try {
-					
-					VisLibrerie = new FXMLLoader(getClass().getResource("/applicationrob/VisLibrerie.fxml")).load();
-					
-				} catch (IOException e) {
-					
-					e.printStackTrace();
-					System.out.print("davide gay3");
-				}
-			}
-			
-			return VisLibrerie;
+		VisLibrerie = MoveToPage("/applicationrob/VisLibrerie.fxml", VisLibrerie);
+		return VisLibrerie;
 		}
 	
 	public AnchorPane getVisLibro() {
-		
-		
-		FXMLLoader loader= new FXMLLoader(getClass().getResource("/applicationrob/VisLibro.fxml"));
-		
-		try {
-			VisLibro = loader.load();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		VisLibroController visController = loader.getController();
-		visController.setLibro(this.selectedBook);
-		
+		VisLibro = MoveToPage("/applicationrob/VisLibro.fxml", VisLibro);
 		return VisLibro;
-	}
+	}                                            
 	
 		
 	public void changeToHome() {
@@ -90,7 +57,7 @@ public class ViewFactory {
 		Scene scene = null;
 		
 		try {
-			
+			 
 			scene =new Scene(loader.load());
 			
 		} catch (IOException e) {
@@ -103,11 +70,39 @@ public class ViewFactory {
 		stage.show();
 		
 	}
-	
-	public void setSelectedBook(String selectedBook) {
-		
-		this.selectedBook = selectedBook;
+
+
+    public ObjectProperty<Libro> selectedBookProperty() { 
+		return selectedLibr; 
 	}
+
+    public Libro getSelectedBook() { 
+		return selectedLibr.get(); 
+	}
+
+    public void setSelectedBook(Libro lib) { 
+		selectedLibr.set(lib); 
+	}
+	
+
+	public AnchorPane MoveToPage(String fxmlPath, AnchorPane pane) {
+        if (pane == null) {
+            try {
+                pane = new FXMLLoader(getClass().getResource(fxmlPath)).load();
+            } catch (IOException e) {
+            e.printStackTrace();
+            }
+        }
+        return pane;
+    }
+
+    /*private AnchorPane ChangeToPage(String fxmlPath, AnchorPane pane) {
+        if (pane == null) {
+    }
+        return pane;
+    } */
+
+	
 	
 	
 		

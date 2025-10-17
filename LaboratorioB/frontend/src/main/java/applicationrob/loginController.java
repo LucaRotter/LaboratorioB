@@ -9,9 +9,6 @@ import java.rmi.RemoteException;
 import LaboratorioB.common.models.*;
 
 
-
-    
-
 public class LoginController {
 
     @FXML

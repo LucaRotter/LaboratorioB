@@ -1,6 +1,6 @@
 package applicationrob;
 
-import java.io.IOException;
+import java.io.IOException; 
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
@@ -11,6 +11,9 @@ import javafx.scene.Parent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import models.Model;
+import LaboratorioB.common.models.*;
+import java.rmi.RemoteException;
+
 
 public class DashboardController implements Initializable{
 
@@ -35,13 +38,14 @@ public class DashboardController implements Initializable{
 	
 	
 	//metodo utilizzato per aggiungere i libri al gridPane e inizializzarne il contenuto
-	private void putBooks() throws IOException {
-		
+	private void putBooks() throws RemoteException, IOException {
+		 
 		int col= 0;
 		int row= 1;
 		int i;
 		
 		for(i=0; i<60; i++) {
+			int index = i; 
 			
 			if(col == 5) {
 				
@@ -54,13 +58,13 @@ public class DashboardController implements Initializable{
 			VBox vbox = loader.load();
 			
 			BookController Bookcontroller= loader.getController();
-			//Libro libro = metodo server
+			Libro libr = clientBR.getLibro(index);
 			
 			//Bookcontroller.setLabels(Libro libro);
 			
 			vbox.setOnMouseClicked(e->{
 
-				Model.getIstance().getView().setSelectedBook("ciaoooooo");
+				Model.getIstance().getView().setSelectedBook(libr);
 				Model.getIstance().getView().getSideBarSelectionItem().set("VisLibro");
 				
 			});
