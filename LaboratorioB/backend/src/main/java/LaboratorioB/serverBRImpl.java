@@ -272,7 +272,7 @@ public class serverBRImpl extends UnicastRemoteObject implements serverBR {
     public synchronized Libreria createLibreria(String nome, int id_utente) throws RemoteException {
         // inserimento in db
 
-        String query = "INSERT into librerie(id_utente, nome) VALUES (?, ?)";
+        String query = "INSERT into libreria (id_utente, nome) VALUES (?, ?)";
         Libreria libreria = null;
         try (Connection conn = DatabaseManager.getConnection(); PreparedStatement ps = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS)) {
 
