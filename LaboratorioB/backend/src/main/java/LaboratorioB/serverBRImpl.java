@@ -271,12 +271,8 @@ public class serverBRImpl extends UnicastRemoteObject implements serverBR {
     @Override
     public synchronized Libreria createLibreria(String nome, int id_utente) throws RemoteException {
         // inserimento in db
-
-<<<<<<< HEAD
         String query = "INSERT into libreria(id_utente, nome) VALUES (?, ?)";
-=======
-        String query = "INSERT into libreria (id_utente, nome) VALUES (?, ?)";
->>>>>>> c068e30d0911a859cd3d93e243edc53843750d04
+
         Libreria libreria = null;
         try (Connection conn = DatabaseManager.getConnection(); PreparedStatement ps = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS)) {
 
@@ -303,11 +299,7 @@ public class serverBRImpl extends UnicastRemoteObject implements serverBR {
 
     @Override
     public Libreria addLibroLibreria(int id_libro, int id_libreria) throws RemoteException {
-<<<<<<< HEAD
         String query = "INSERT into libreria_libri(id_libro, id_libreria) VALUES (?, ?)";
-=======
-        String query = "INSERT into libreria _libri (id_libro, id_libreria) VALUES (?, ?)";
->>>>>>> c068e30d0911a859cd3d93e243edc53843750d04
         Libreria libreria = null;
         try (Connection conn = DatabaseManager.getConnection(); PreparedStatement ps = conn.prepareStatement(query)) {
 
@@ -345,11 +337,7 @@ public class serverBRImpl extends UnicastRemoteObject implements serverBR {
 
     public Libreria getLibreria(int id_libreria) throws RemoteException {
 
-<<<<<<< HEAD
         String query = "SELECT * FROM libreria L LEFT JOIN libreria_libri M on L.id_libreria = M.id_libreria WHERE L.id_libreria = ?";
-=======
-        String query = "SELECT * FROM libreria L JOIN libreria_libri M on L.id_libreria = M.id_libreria WHERE L.id_libreria = ?";
->>>>>>> c068e30d0911a859cd3d93e243edc53843750d04
         Libreria libreria = null;
         List<Libro> libri = new ArrayList<>();
         try (Connection conn = DatabaseManager.getConnection(); PreparedStatement ps = conn.prepareStatement(query)) {
