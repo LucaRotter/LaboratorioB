@@ -272,7 +272,7 @@ public class serverBRImpl extends UnicastRemoteObject implements serverBR {
     public synchronized Libreria createLibreria(String nome, int id_utente) throws RemoteException {
         // inserimento in db
 
-        String query = "INSERT into librerie(id_utente, nome) VALUES (?, ?)";
+        String query = "INSERT into libreria(id_utente, nome) VALUES (?, ?)";
         Libreria libreria = null;
         try (Connection conn = DatabaseManager.getConnection(); PreparedStatement ps = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS)) {
 
@@ -299,7 +299,7 @@ public class serverBRImpl extends UnicastRemoteObject implements serverBR {
 
     @Override
     public Libreria addLibroLibreria(int id_libro, int id_libreria) throws RemoteException {
-        String query = "INSERT into libri_librerie(id_libro, id_libreria) VALUES (?, ?)";
+        String query = "INSERT into libreria_libri(id_libro, id_libreria) VALUES (?, ?)";
         Libreria libreria = null;
         try (Connection conn = DatabaseManager.getConnection(); PreparedStatement ps = conn.prepareStatement(query)) {
 
@@ -319,7 +319,7 @@ public class serverBRImpl extends UnicastRemoteObject implements serverBR {
     }
 
     public Libreria removeLibroLibreria(int id_libro, int id_libreria) throws RemoteException {
-        String query = "DELETE FROM libri_librerie WHERE id_libro = ? AND id_libreria = ?";
+        String query = "DELETE FROM libreria_libri WHERE id_libro = ? AND id_libreria = ?";
         Libreria libreria = null;
         try (Connection conn = DatabaseManager.getConnection(); PreparedStatement ps = conn.prepareStatement(query)) {
             ps.setInt(1, id_libro);
@@ -337,7 +337,7 @@ public class serverBRImpl extends UnicastRemoteObject implements serverBR {
 
     public Libreria getLibreria(int id_libreria) throws RemoteException {
 
-        String query = "SELECT * FROM librerie L JOIN libreria_libri M on L.id_libreria = M.id_libreria WHERE L.id_libreria = ?";
+        String query = "SELECT * FROM libreria L LEFT JOIN libreria_libri M on L.id_libreria = M.id_libreria WHERE L.id_libreria = ?";
         Libreria libreria = null;
         List<Libro> libri = new ArrayList<>();
         try (Connection conn = DatabaseManager.getConnection(); PreparedStatement ps = conn.prepareStatement(query)) {
@@ -362,7 +362,9 @@ public class serverBRImpl extends UnicastRemoteObject implements serverBR {
                 if (id_utente != -1) {
                     libreria = new Libreria(id_utente, nome, (ArrayList<Libro>) libri, id_libreria);
                 }
-            }
+            } catch (SQLException e) {
+                e.printStackTrace();
+        }
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -375,7 +377,7 @@ public class serverBRImpl extends UnicastRemoteObject implements serverBR {
     @Override
     public List<Libreria> getLibrerie(int id_utente) throws RemoteException {
         // select da db
-        String query = "SELECT id_libreria FROM librerie WHERE id_utente = ?";
+        String query = "SELECT id_libreria FROM libreria WHERE id_utente = ?";
 
         List<Libreria> libreria = new ArrayList<Libreria>();
         try (Connection conn = DatabaseManager.getConnection(); PreparedStatement ps = conn.prepareStatement(query)) {

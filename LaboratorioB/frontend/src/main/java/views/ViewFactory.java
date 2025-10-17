@@ -20,12 +20,10 @@ public class ViewFactory {
 	private AnchorPane DashboardMain;
 	private AnchorPane VisLibrerie;
 	private AnchorPane VisLibro;
-	//private final StringProperty selectedBook;
 	private ObjectProperty<Libro> selectedLibr;
 	
 	public ViewFactory() {
 		this.SideBarSelection = new SimpleStringProperty("");
-		// this.selectedBook = new SimpleStringProperty("");
 		this.selectedLibr = new SimpleObjectProperty<Libro>();
 	}
 	

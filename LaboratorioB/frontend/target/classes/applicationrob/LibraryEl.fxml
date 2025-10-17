@@ -10,10 +10,14 @@
     <children>
     <ImageView fitHeight="122.0" fitWidth="121.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../img/Library.png" />
+            <Image url="@../img/LibraryB.png" />
          </image>
       </ImageView>
-        <Label fx:id="libraryLabel" />
         <Button fx:id="removeBtn" text="-" StackPane.alignment="TOP_RIGHT"/>
     </children>
+    <Label fx:id="libraryLabel"
+           text="Nome Libreria"
+           alignment="CENTER"
+           wrapText="true"
+           maxWidth="120"/>
 </StackPane>

@@ -31,9 +31,39 @@ public class LibraryController {
         libraryLabel.setText(libreria.getNomeLibreria());
         removeBtn.setVisible(editMode);
 
-        removeBtn.setOnAction(e -> {
-            if (onRemove != null){ onRemove.run();}
-        });
+        removeLibrary();
+    }
+
+    @FXML
+    private void clickLibrary() {
+        if (!editMode && libreria != null) {
+            openLibraryPage();
+        }
+   }
+
+   private void openLibraryPage() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/applicationrob/VisLibreria.fxml"));
+            StackPane root = loader.load();
+
+            LibraryDetailController controller = loader.getController();
+            controller.setLibrary(libreria);
+
+            javafx.stage.Stage stage = new javafx.stage.Stage();
+            stage.setTitle(libreria.getNomeLibreria());
+            stage.setScene(new javafx.scene.Scene(root));
+            stage.show();
+
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    @FXML
+    public void removeLibrary() {
+        if (onRemove != null) {
+            onRemove.run();
+        }
     }
 
     public StackPane getRoot() {

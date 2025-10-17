@@ -1,4 +1,5 @@
 package applicationrob;
+import java.io.IOException;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
@@ -98,7 +99,14 @@ public class clientBR{
 	public boolean createValutazione(int user_id, int libro_id, Valutazione val)throws RemoteException{
 		return server.createValutazione(user_id, libro_id, val);
 	}
-	public static void main(String[] args) {
+	public static void main(String[] args) throws RemoteException, IOException, NotBoundException {
+		    clientBR client = clientBR.getInstance();
+		
+			int loginId = client.login("d@gmail.com", "password123");
+			//System.out.println(loginId);
+			TokenSession.setUserId(loginId);
+
+
 		Application.launch(startApp.class, args); 	
 	}
 }

@@ -26,10 +26,10 @@ public class VisLibroController implements Initializable{
 	@FXML
     private Label annoLabel;
 	@FXML
-    private Label idLibrLabel;
+    private Label starLabel;
 	
 	private Libro selectedBook;
-
+ 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		Model.getIstance().getView().selectedBookProperty().addListener((obs, oldLibr, newLibr) -> {
@@ -39,7 +39,6 @@ public class VisLibroController implements Initializable{
             genereLabel.setText(newLibr.getGenere());
             editoreLabel.setText(newLibr.getEditore());
             annoLabel.setText(String.valueOf(newLibr.getAnno()));
-            idLibrLabel.setText(String.valueOf(newLibr.getId()));
         }
     });
 
@@ -50,7 +49,6 @@ public class VisLibroController implements Initializable{
 			genereLabel.setText(libro.getGenere());
 			editoreLabel.setText(libro.getEditore());
 			annoLabel.setText(String.valueOf(libro.getAnno()));
-			idLibrLabel.setText(String.valueOf(libro.getId()));
 		}
 	}
 

@@ -73,12 +73,19 @@ public class VisLibrerieController {
     private int id_user;
 
     @FXML
-    public void initialize() {
+    public void initialize() throws RemoteException {
+        id_user = TokenSession.getUserId();
+        TokenSession.checkTkSession();
+
         librerie = FXCollections.observableArrayList();
         currentLibr = FXCollections.observableArrayList();
         filterLibr = FXCollections.observableArrayList();
-        id_user = TokenSession.getUserId();
-        TokenSession.checkTkSession();
+
+        listaLibrerie = clientBR.getInstance().getLibrerie(id_user);
+        if (listaLibrerie != null) {
+            librerie.setAll(FXCollections.observableArrayList(listaLibrerie));
+            currentLibr.setAll(librerie);
+        }
 
     	updateEmptyState();
     	
@@ -139,10 +146,10 @@ public class VisLibrerieController {
                 ObservableList<Libreria> filteredLibr = FXCollections.observableArrayList();
                     for (Libreria lib : librerie) {
                         if (lib.getNomeLibreria().toLowerCase().contains(textSlib)) {
-                            filterLibr.add(lib);
+                            filteredLibr.add(lib);
                         }
                     }
-                currentLibr.setAll(filterLibr); 
+                currentLibr.setAll(filteredLibr); 
         } 
         rearrangeGrid(currentLibr);   
     }
@@ -162,7 +169,7 @@ public class VisLibrerieController {
     void useEdit(ActionEvent event) throws RemoteException {
         TokenSession.checkTkSession();
         listaLibrerie = clientBR.getInstance().getLibrerie(id_user);
-       librerie.setAll(FXCollections.observableArrayList(listaLibrerie));
+        librerie.setAll(FXCollections.observableArrayList(listaLibrerie));
 
     	if (!librerie.isEmpty()) {
             editMode = !editMode;
@@ -186,13 +193,6 @@ public class VisLibrerieController {
         }
     }
     
-    public void addLibrary(Libreria libr) throws RemoteException {
-       listaLibrerie = clientBR.getInstance().getLibrerie(id_user);
-       librerie.setAll(FXCollections.observableArrayList(listaLibrerie));
-       updateEmptyState(); 
-       rearrangeGrid(currentLibr); 
-    } 
-    
   //Metodo per mostrare tutte le librerie
     private void rearrangeGrid() {
         rearrangeGrid(librerie); 
@@ -203,13 +203,17 @@ public class VisLibrerieController {
     private void rearrangeGrid(ObservableList<Libreria> listToShow) {
     librariesContainer.getChildren().clear();
 
-    int columns = 5;
+    int columns = 4;
     int row = 0;
-    int col = editMode ? 1 : 0;
+    int col = 0;
+   
 
     if (editMode) {
+         extraBtn.setPrefSize(120, 120);
         librariesContainer.add(extraBtn, 0, 0);
-        GridPane.setMargin(extraBtn, new Insets(15, 5, 5, 15));
+        GridPane.setMargin(extraBtn, new Insets(20, 20, 20, 20));
+        col = 1;
+        
     }
 
     for (Libreria lib : listToShow) {
@@ -226,14 +230,15 @@ public class VisLibrerieController {
             });
 
             libPane.setPrefSize(120, 120);
-            GridPane.setMargin(libPane, new Insets(15, 5, 5, 15));
+            GridPane.setMargin(libPane, new Insets(20, 20, 20, 20));
 
             librariesContainer.add(libPane, col, row);
-
+      
             col++;
                 if (col >= columns) {
-                    col = editMode ? 1 : 0;
-                    row++;
+                   col = 0; 
+                   row++;
+                   if (editMode && row == 0) col = 1;
                 }
             } catch (IOException e) {
                 e.printStackTrace();

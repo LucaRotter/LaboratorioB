@@ -17,7 +17,7 @@
       <Label fx:id="autoreLabel" layoutX="233.0" layoutY="142.0" prefHeight="18.0" prefWidth="294.0" text="Label" />
       <Label fx:id="genereLabel" layoutX="233.0" layoutY="108.0" prefHeight="18.0" prefWidth="256.0" text="Label" />
       <Label fx:id="editoreLabel" layoutX="233.0" layoutY="82.0" prefHeight="18.0" prefWidth="192.0" text="Label" />
-      <Label fx:id="annoLabel" layoutX="231.0" layoutY="178.0" prefHeight="18.0" prefWidth="387.0" text="Label" />
-      <Label fx:id="idLibrLabel" layoutX="799.0" layoutY="35.0" text="Label" />
+      <Label fx:id="annoLabel" layoutX="233.0" layoutY="178.0" prefHeight="18.0" prefWidth="387.0" text="Label" />
+      <Label fx:id="starLabel" layoutX="799.0" layoutY="35.0" text="Label" />
    </children>
 </AnchorPane>
