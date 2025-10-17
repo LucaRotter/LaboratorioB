@@ -1,11 +1,12 @@
 package applicationrob;
 
-import java.rmi.*;
-import javafx.fxml.FXML;
-import javafx.scene.control.*;
 import java.rmi.RemoteException;
+
+import LaboratorioB.common.models.Utente;
 import javafx.event.ActionEvent;
-import LaboratorioB.common.models.*;
+import javafx.fxml.FXML;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
 
 
 
@@ -38,7 +39,7 @@ public class RegisterController {
 
         Utente newUser = new Utente(nome, cognome, cf, email, pw, 0);
 
-         id_user = clientBR.registrazione(newUser);
+         id_user = clientBR.getInstance().registrazione(newUser);
 
         if (id_user == -1) {
         }

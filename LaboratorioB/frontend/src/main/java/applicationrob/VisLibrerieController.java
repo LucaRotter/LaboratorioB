@@ -1,11 +1,16 @@
 package applicationrob;
 
+import java.io.IOException;
+import java.rmi.RemoteException;
+import java.util.List;
+
+import LaboratorioB.common.models.Libreria;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
@@ -13,11 +18,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
-import java.rmi.RemoteException;
-import javafx.fxml.FXMLLoader;
-import java.io.IOException;
-import LaboratorioB.common.models.*;
-import java.util.*;
 
 public class VisLibrerieController {
 
@@ -107,8 +107,8 @@ public class VisLibrerieController {
             return; 
         } 
 
-        libreria = clientBR.createLibreria(libName, id_user);
-        listaLibrerie = clientBR.getLibrerie(id_user);
+        libreria = clientBR.getInstance().createLibreria(libName, id_user);
+        listaLibrerie = clientBR.getInstance().getLibrerie(id_user);
         librerie.setAll(FXCollections.observableArrayList(listaLibrerie));
         currentLibr.setAll(librerie);
         rearrangeGrid(currentLibr); 
@@ -131,7 +131,7 @@ public class VisLibrerieController {
     void searchLibraries(ActionEvent event) throws RemoteException {
         TokenSession.checkTkSession();
         String textSlib = searchBar.getText().trim().toLowerCase();
-        librerie.setAll(clientBR.getLibrerie(id_user));
+        librerie.setAll(clientBR.getInstance().getLibrerie(id_user));
     	
         if (textSlib.isEmpty()) {
             currentLibr.setAll(librerie);
@@ -161,7 +161,7 @@ public class VisLibrerieController {
     @FXML
     void useEdit(ActionEvent event) throws RemoteException {
         TokenSession.checkTkSession();
-        listaLibrerie = clientBR.getLibrerie(id_user);
+        listaLibrerie = clientBR.getInstance().getLibrerie(id_user);
        librerie.setAll(FXCollections.observableArrayList(listaLibrerie));
 
     	if (!librerie.isEmpty()) {
@@ -187,7 +187,7 @@ public class VisLibrerieController {
     }
     
     public void addLibrary(Libreria libr) throws RemoteException {
-       listaLibrerie = clientBR.getLibrerie(id_user);
+       listaLibrerie = clientBR.getInstance().getLibrerie(id_user);
        librerie.setAll(FXCollections.observableArrayList(listaLibrerie));
        updateEmptyState(); 
        rearrangeGrid(currentLibr); 

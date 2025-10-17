@@ -2,17 +2,16 @@ package applicationrob;
 
 import java.io.IOException; 
 import java.net.URL;
+import java.rmi.RemoteException;
 import java.util.ResourceBundle;
+
+import LaboratorioB.common.models.Libro;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
-import javafx.scene.Parent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import models.Model;
-import LaboratorioB.common.models.*;
-import java.rmi.RemoteException;
 
 
 public class DashboardController implements Initializable{
@@ -58,7 +57,7 @@ public class DashboardController implements Initializable{
 			VBox vbox = loader.load();
 			
 			BookController Bookcontroller= loader.getController();
-			Libro libr = clientBR.getLibro(index);
+			Libro libr = clientBR.getInstance().getLibro(index);
 			
 			//Bookcontroller.setLabels(Libro libro);
 			

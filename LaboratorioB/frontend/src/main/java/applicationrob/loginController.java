@@ -23,7 +23,7 @@ public class LoginController {
     @FXML
     public void onUserLogin()throws RemoteException {
 
-        id_user = clientBR.login(emailField.getText(), pwField.getText());
+        id_user = clientBR.getInstance().login(emailField.getText(), pwField.getText());
 
         if(id_user == -1) { 
              showAlert("Login Failed", "Invalid email or password");
