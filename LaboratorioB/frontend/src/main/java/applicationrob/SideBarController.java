@@ -27,12 +27,10 @@ public class SideBarController implements Initializable{
 	
 	public void onHome() {
 		Model.getIstance().getView().getSideBarSelectionItem().set("Home");
-		System.out.print("davide gay");
 	}
 	
 	public void onLibreries() {
 		Model.getIstance().getView().getSideBarSelectionItem().set("VisLibrerie");
-		System.out.print("davide gay2");
 	}
 	
 	

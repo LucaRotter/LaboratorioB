@@ -3,7 +3,6 @@ package applicationrob;
 import java.io.IOException;
 import java.rmi.RemoteException;
 import java.util.List;
-
 import LaboratorioB.common.models.Libreria;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;

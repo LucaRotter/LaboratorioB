@@ -50,15 +50,5 @@ public class VisLibroController implements Initializable{
 			editoreLabel.setText(libro.getEditore());
 			annoLabel.setText(String.valueOf(libro.getAnno()));
 		}
-	}
-
-	public void setLibro(Libro selectedBook) {
-			this.selectedBook = selectedBook;
-			
-	}
-
-	public void setSelectedBook(Libro selectedBook) {
-		
-		this.selectedBook = selectedBook;
-	}
+	}	
 }

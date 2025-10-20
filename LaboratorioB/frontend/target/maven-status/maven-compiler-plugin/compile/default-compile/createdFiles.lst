@@ -10,5 +10,6 @@ applicationrob\LibraryController.class
 models\Model.class
 applicationrob\ClientController.class
 views\ViewFactory.class
+applicationrob\VisLibreriaController.class
 applicationrob\startApp.class
 applicationrob\RegisterController.class

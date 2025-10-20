@@ -21,10 +21,12 @@ public class ViewFactory {
 	private AnchorPane VisLibrerie;
 	private AnchorPane VisLibro;
 	private ObjectProperty<Libro> selectedLibr;
+	private ObjectProperty<Libreria> selectedLibreria;
 	
 	public ViewFactory() {
 		this.SideBarSelection = new SimpleStringProperty("");
 		this.selectedLibr = new SimpleObjectProperty<Libro>();
+		this.selectedLibreria = new SimpleObjectProperty<Libreria>();
 	}
 	
 	public StringProperty getSideBarSelectionItem() {
@@ -44,7 +46,12 @@ public class ViewFactory {
 	public AnchorPane getVisLibro() {
 		VisLibro = MoveToPage("/applicationrob/VisLibro.fxml", VisLibro);
 		return VisLibro;
-	}                                            
+	}       
+	
+	public AnchorPane getVisLibreria() {
+		VisLibro = MoveToPage("/applicationrob/VisLibreria.fxml", VisLibro);
+		return VisLibro;
+	}  
 	
 		
 	public void changeToHome() {
@@ -80,6 +87,18 @@ public class ViewFactory {
 
     public void setSelectedBook(Libro lib) { 
 		selectedLibr.set(lib); 
+	}
+
+	public ObjectProperty<Libreria> selectedLibraryProperty() { 
+		return selectedLibreria; 
+	}
+
+    public Libreria getSelectedLibrary() { 
+		return selectedLibreria.get(); 
+	}
+
+    public void setSelectedLibrary(Libreria lib) { 
+		selectedLibreria.set(lib); 
 	}
 	
 

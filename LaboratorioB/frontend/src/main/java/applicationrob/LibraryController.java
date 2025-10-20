@@ -4,18 +4,18 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.AnchorPane;
 import java.lang.Runnable;
 import LaboratorioB.common.models.Libreria;
+import javafx.fxml.FXMLLoader;
+import java.io.IOException;
+import models.Model;
 
 
 public class LibraryController {
 
     @FXML
     private Button removeBtn;
-
-    @FXML
-    private StackPane rootPane;
-
     @FXML
     private Label libraryLabel;
 
@@ -31,33 +31,16 @@ public class LibraryController {
         libraryLabel.setText(libreria.getNomeLibreria());
         removeBtn.setVisible(editMode);
 
-        removeLibrary();
     }
 
     @FXML
     private void clickLibrary() {
         if (!editMode && libreria != null) {
-            openLibraryPage();
-        }
-   }
-
-   private void openLibraryPage() {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/applicationrob/VisLibreria.fxml"));
-            StackPane root = loader.load();
-
-            LibraryDetailController controller = loader.getController();
-            controller.setLibrary(libreria);
-
-            javafx.stage.Stage stage = new javafx.stage.Stage();
-            stage.setTitle(libreria.getNomeLibreria());
-            stage.setScene(new javafx.scene.Scene(root));
-            stage.show();
-
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
+        Model.getIstance().getView().setSelectedLibrary(libreria);
+        Model.getIstance().getView().getSideBarSelectionItem().set("VisLibreria");
+        
     }
+   }
 
     @FXML
     public void removeLibrary() {
@@ -66,7 +49,7 @@ public class LibraryController {
         }
     }
 
-    public StackPane getRoot() {
-        return rootPane;
-    }
+    
+
+     
 }
