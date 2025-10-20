@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
+
+
+<VBox maxHeight="400.0" maxWidth="600.0" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="applicationrob.TableReviewController">
+   <children>
+      <HBox prefHeight="400.0" prefWidth="600.0">
+         <children>
+            <VBox prefHeight="400.0" prefWidth="207.0" HBox.hgrow="ALWAYS">
+               <children>
+                  <Pane prefHeight="38.0" prefWidth="117.0" VBox.vgrow="ALWAYS">
+                     <children>
+                        <Text layoutX="14.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Criterio Valutazione" />
+                     </children>
+                  </Pane>
+                  <Pane layoutX="10.0" layoutY="10.0" prefHeight="47.0" prefWidth="138.0" VBox.vgrow="ALWAYS">
+                     <children>
+                        <Text layoutX="14.0" layoutY="34.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Stile" />
+                     </children>
+                  </Pane>
+                  <Pane layoutX="10.0" layoutY="57.0" prefHeight="47.0" prefWidth="138.0" VBox.vgrow="ALWAYS">
+                     <children>
+                        <Text layoutX="14.0" layoutY="34.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Contenuto" />
+                     </children>
+                  </Pane>
+                  <Pane layoutX="10.0" layoutY="104.0" prefHeight="47.0" prefWidth="138.0" VBox.vgrow="ALWAYS">
+                     <children>
+                        <Text layoutX="14.0" layoutY="34.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Gradevolezza" />
+                     </children>
+                  </Pane>
+                  <Pane layoutX="10.0" layoutY="152.0" prefHeight="47.0" prefWidth="138.0" VBox.vgrow="ALWAYS">
+                     <children>
+                        <Text layoutX="14.0" layoutY="34.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Originalità" />
+                     </children>
+                  </Pane>
+                  <Pane layoutX="10.0" layoutY="199.0" prefHeight="47.0" prefWidth="138.0" VBox.vgrow="ALWAYS">
+                     <children>
+                        <Text layoutX="14.0" layoutY="33.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Edizione" />
+                     </children>
+                  </Pane>
+                  <Pane layoutX="10.0" layoutY="246.0" prefHeight="47.0" prefWidth="138.0" VBox.vgrow="ALWAYS">
+                     <children>
+                        <Text layoutX="14.0" layoutY="33.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Voto Finale" />
+                     </children>
+                  </Pane>
+               </children>
+            </VBox>
+            <VBox layoutX="440.0" layoutY="10.0" prefHeight="400.0" prefWidth="134.0">
+               <children>
+                  <Pane prefHeight="47.0" prefWidth="138.0" VBox.vgrow="ALWAYS">
+                     <children>
+                        <Text layoutX="52.0" layoutY="33.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Score" />
+                     </children>
+                  </Pane>
+                  <Pane layoutX="10.0" layoutY="10.0" prefHeight="47.0" prefWidth="138.0" VBox.vgrow="ALWAYS">
+                     <children>
+                        <Text fx:id="scoreStyle" layoutX="56.0" layoutY="33.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
+                     </children>
+                  </Pane>
+                  <Pane layoutX="10.0" layoutY="57.0" prefHeight="47.0" prefWidth="138.0" VBox.vgrow="ALWAYS">
+                     <children>
+                        <Text fx:id="scoreContent" layoutX="56.0" layoutY="33.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
+                     </children>
+                  </Pane>
+                  <Pane layoutX="10.0" layoutY="104.0" prefHeight="47.0" prefWidth="138.0" VBox.vgrow="ALWAYS">
+                     <children>
+                        <Text fx:id="scorePleasantness" layoutX="56.0" layoutY="33.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
+                     </children>
+                  </Pane>
+                  <Pane layoutX="10.0" layoutY="152.0" prefHeight="47.0" prefWidth="138.0" VBox.vgrow="ALWAYS">
+                     <children>
+                        <Text fx:id="scoreOriginality" layoutX="56.0" layoutY="33.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
+                     </children>
+                  </Pane>
+                  <Pane layoutX="10.0" layoutY="199.0" prefHeight="47.0" prefWidth="138.0" VBox.vgrow="ALWAYS">
+                     <children>
+                        <Text fx:id="scoreEdition" layoutX="56.0" layoutY="33.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
+                     </children>
+                  </Pane>
+                  <Pane layoutX="10.0" layoutY="246.0" prefHeight="47.0" prefWidth="138.0" VBox.vgrow="ALWAYS">
+                     <children>
+                        <Text fx:id="scoreFinal" layoutX="56.0" layoutY="33.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
+                     </children>
+                  </Pane>
+               </children>
+            </VBox>
+            <VBox layoutX="268.0" layoutY="10.0" prefHeight="400.0" prefWidth="218.0">
+               <children>
+                  <Pane prefHeight="47.0" prefWidth="138.0" VBox.vgrow="ALWAYS">
+                     <children>
+                        <Text layoutX="96.0" layoutY="33.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Note" />
+                     </children>
+                  </Pane>
+                  <Pane layoutX="10.0" layoutY="10.0" prefHeight="47.0" prefWidth="138.0" VBox.vgrow="ALWAYS">
+                     <children>
+                        <Text fx:id="noteStyle" layoutX="14.0" layoutY="33.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
+                     </children>
+                  </Pane>
+                  <Pane layoutX="10.0" layoutY="57.0" prefHeight="47.0" prefWidth="138.0" VBox.vgrow="ALWAYS">
+                     <children>
+                        <Text fx:id="noteContent" layoutX="14.0" layoutY="33.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
+                     </children>
+                  </Pane>
+                  <Pane layoutX="10.0" layoutY="104.0" prefHeight="47.0" prefWidth="138.0" VBox.vgrow="ALWAYS">
+                     <children>
+                        <Text fx:id="notePleasantness" layoutX="14.0" layoutY="33.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
+                     </children>
+                  </Pane>
+                  <Pane layoutX="10.0" layoutY="152.0" prefHeight="47.0" prefWidth="138.0" VBox.vgrow="ALWAYS">
+                     <children>
+                        <Text fx:id="scoreOriginality" layoutX="14.0" layoutY="33.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
+                     </children>
+                  </Pane>
+                  <Pane layoutX="10.0" layoutY="199.0" prefHeight="47.0" prefWidth="138.0" VBox.vgrow="ALWAYS">
+                     <children>
+                        <Text fx:id="scoreEdition" layoutX="14.0" layoutY="33.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
+                     </children>
+                  </Pane>
+                  <Pane layoutX="10.0" layoutY="246.0" prefHeight="47.0" prefWidth="138.0" VBox.vgrow="ALWAYS">
+                     <children>
+                        <Text fx:id="scoreFinal" layoutX="14.0" layoutY="33.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
+                     </children>
+                  </Pane>
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+   </children>
+</VBox>
