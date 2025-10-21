@@ -10,7 +10,7 @@
 
 <AnchorPane prefHeight="700.0" prefWidth="880.0" stylesheets="@css/libraries.css" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/22" fx:controller="applicationrob.VisLibreriaController">
 <children>
- <Label fx:id="nomeLibrLabel" text="" style="-fx-font-size: 24px; -fx-text-fill: #333;" AnchorPane.topAnchor="20.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" alignment="CENTER"/>
+ <Label fx:id="bookNameLabel" text="" style="-fx-font-size: 24px; -fx-text-fill: #333;" AnchorPane.topAnchor="20.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" alignment="CENTER"/>
 
   <HBox spacing="10" AnchorPane.topAnchor="70.0" AnchorPane.leftAnchor="20.0">
         <TextField fx:id="searchBar" prefWidth="600.0" promptText="Search in library" onAction="#SearchControl"/>
@@ -20,7 +20,7 @@
 	 <ScrollPane fx:id="scrollContent" prefWidth="840.0" prefHeight="550.0"
                 AnchorPane.topAnchor="120.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0">
         <content>
-            <GridPane fx:id="bookContainer" hgap="10" vgap="10" />
+            <GridPane fx:id="booksContainer" hgap="10" vgap="10" />
         </content>
     </ScrollPane>
 	</children>
