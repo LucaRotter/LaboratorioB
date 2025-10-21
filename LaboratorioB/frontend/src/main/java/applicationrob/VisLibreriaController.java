@@ -25,37 +25,39 @@ import javafx.geometry.Insets;
 public class VisLibreriaController {
 
     @FXML
-    private Label nomeLibrLabel;
+    private Label bookNameLabel;
     @FXML
     private TextField searchBar;
     @FXML
     private Button searchBtn;
     @FXML
-    private GridPane bookContainer;
+    private GridPane booksContainer;
     
     private Libreria selectedLibrary ;
-    private Libro libr;
-    private List<Libro> libri;
-    private ObservableList<Libro> libriLibreria; 
-    private ObservableList<Libro> currentLibr;
+    private Libreria library;
+    private Libro book;
+    private ObservableList<Libro> booksLibrary; 
+    private ObservableList<Libro> currentBooks;
+    private ObservableList<Libro> filteredBooks;
 
     @FXML
     public void initialize() {
-        libriLibreria = FXCollections.observableArrayList(); 
-        currentLibr = FXCollections.observableArrayList(); 
+        booksLibrary = FXCollections.observableArrayList(); 
+        currentBooks = FXCollections.observableArrayList(); 
+        filteredBooks = FXCollections.observableArrayList();
 
         Model.getIstance().getView().selectedLibraryProperty().addListener((obs, oldLibrary, newLibrary) -> {
             if (newLibrary != null) {
-            nomeLibrLabel.setText(newLibrary.getNomeLibreria());
+            bookNameLabel.setText(newLibrary.getNomeLibreria());
           }
         });
 
-		Libreria library = Model.getIstance().getView().getSelectedLibrary();
+		library = Model.getIstance().getView().getSelectedLibrary();
 		if (library != null) {
-			nomeLibrLabel.setText(library.getNomeLibreria());
+			bookNameLabel.setText(library.getNomeLibreria());
 		}
 
-         libriLibreria.addAll(
+         booksLibrary.addAll(
         new Libro("Autore 1", "Titolo Libro 1", "Genere 1", "Editore 1", "2020", 1),
         new Libro("Autore 2", "Titolo Libro 2", "Genere 2", "Editore 2", "2021", 2),
         new Libro("Autore 3", "Titolo Libro 3", "Genere 3", "Editore 3", "2022", 3),
@@ -66,10 +68,10 @@ public class VisLibreriaController {
     );
 
     // Imposto currentLibr con tutti i libri fittizi
-    currentLibr.setAll(libriLibreria);
+    currentBooks.setAll(booksLibrary);
 
     // Aggiorno il GridPane con i libri
-    rearrangeGrid(currentLibr);
+    InsertingElements(currentBooks);
 
     }
 
@@ -81,59 +83,58 @@ public class VisLibreriaController {
     public void SearchControl(ActionEvent event) throws RemoteException, IOException {
         TokenSession.checkTkSession();
         String textSlib = searchBar.getText().trim().toLowerCase();
-        Libreria library = clientBR.getInstance().getLibreria(selectedLibrary.getIdLibreria());
-        libriLibreria.setAll(library.getLibreria());
+        library = clientBR.getInstance().getLibreria(selectedLibrary.getIdLibreria());
+        booksLibrary.setAll(library.getLibreria());
          if (textSlib.isEmpty()) {
-            currentLibr.setAll(libriLibreria);
+            currentBooks.setAll(booksLibrary);
         } else {
-            ObservableList<Libro> filteredLibr = FXCollections.observableArrayList();
-              for (Libro lib : libriLibreria) {
+              for (Libro lib : booksLibrary) {
                         if (lib.getTitolo().toLowerCase().contains(textSlib)) {
-                            filteredLibr.add(lib);
+                            filteredBooks.add(lib);
                         }
                     }
-                currentLibr.setAll(filteredLibr); 
-        } 
-        rearrangeGrid(currentLibr); 
+                currentBooks.setAll(filteredBooks); 
+        }  
+        InsertingElements(currentBooks); 
     }
 
     //Metodo per mostrare tutti i libri della libreria selezionata
-    private void rearrangeGrid() {
-        rearrangeGrid(libriLibreria); 
+    private void InsertingElements() {
+        InsertingElements(booksLibrary); 
     }
     
     
     //Metodo che si occupa di mostrare il filtraggio dei libri libreria selezionata
-    private void rearrangeGrid(ObservableList<Libro> listToShow) {
-    bookContainer.getChildren().clear();
-     if (listToShow == null || listToShow.isEmpty()) {
+    private void InsertingElements(ObservableList<Libro> listBooksToShow) {
+    booksContainer.getChildren().clear();
+     if (listBooksToShow == null || listBooksToShow.isEmpty()) {
         return;
     }
 
     int columns = 5;
-    int row = 0;
+    int row = 0; 
     int col = 0;
    
-    for (Libro lib : listToShow) {
+    for (Libro book : listBooksToShow) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/applicationrob/BookEL.fxml"));
-            VBox libPane = loader.load();
+            VBox booksPane = loader.load();
 
             BookController controller = loader.getController();
 			
 			BookController bookController= loader.getController();
-			//Libro libr = clientBR.getInstance().getLibro(lib.getId());
+			//books = clientBR.getInstance().getLibro(lib.getId());
 			//bookController.setLabels(libr.getAutore(), libr.getTitolo());
-            bookController.setLabels(lib.getAutore(), lib.getTitolo());
+            bookController.setLabels(book.getAutore(), book.getTitolo());
 
-            libPane.setPrefSize(120, 120);
-            GridPane.setMargin(libPane, new Insets(20, 20, 20, 20));
+            booksPane.setPrefSize(120, 120);
+            GridPane.setMargin(booksPane, new Insets(20, 20, 20, 20));
 
-            bookContainer.add(libPane, col, row);
+            booksContainer.add(booksPane, col, row);
 			
-			libPane.setOnMouseClicked(e->{
+			booksPane.setOnMouseClicked(e->{
 
-			    //Model.getIstance().getView().setSelectedBook(libr);
+			    Model.getIstance().getView().setSelectedBook(book);
 				Model.getIstance().getView().getSideBarSelectionItem().set("VisLibro");
 				
 			});

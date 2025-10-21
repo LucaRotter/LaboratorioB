@@ -43,7 +43,7 @@ public class DashboardController implements Initializable{
 		int row= 1;
 		int i;
 		
-		for(i=1; i<60; i++) {
+		for(i=1; i<60; i++) { 
 			if(col == 5) {
 				
 				row += 1;
