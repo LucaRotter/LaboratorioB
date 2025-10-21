@@ -29,13 +29,13 @@
                                     <Image url="@../img/Paomedia-Small-N-Flat-Book.512.png" />
                                  </image>
                               </ImageView>
-                              <VBox layoutX="232.0" layoutY="54.0" prefHeight="178.0" spacing="10.0">
+                              <VBox layoutX="233.0" layoutY="53.0" prefHeight="151.0" prefWidth="387.0" spacing="15.0">
                                  <children>
-                                    <Label prefHeight="18.0" text="nome" />
-                                    <Label prefHeight="18.0" text="anno" />
-                                    <Label prefHeight="18.0" text="autore" />
-                                    <Label prefHeight="18.0" prefWidth="387.0" text="casa editrice" />
-                                    <Label prefHeight="18.0" text="categoria" />
+                                    <Label fx:id="LBTitle" prefHeight="18.0" text="nome" />
+                                    <Label fx:id="LBYear" prefHeight="18.0" text="anno" />
+                                    <Label fx:id="LBAuthor" prefHeight="18.0" text="autore" />
+                                    <Label fx:id="LBHouse" prefHeight="18.0" prefWidth="387.0" text="casa editrice" />
+                                    <Label fx:id="LBGenre" prefHeight="18.0" text="categoria" />
                                  </children>
                               </VBox>
                               <Label layoutX="766.0" layoutY="24.0" text="valutazione" />

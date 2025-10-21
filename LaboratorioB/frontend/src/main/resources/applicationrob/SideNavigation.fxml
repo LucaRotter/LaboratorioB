@@ -3,6 +3,7 @@
 <?import java.lang.String?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -12,6 +13,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
+
 
 <VBox fillWidth="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="235.0" style="-fx-background-color: transparent; -fx-border-radius: 10px; -fx-background-radius: 10px;" stylesheets="@css/Sidebar.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="applicationrob.SideBarController">
    <children>
@@ -78,14 +80,14 @@
                   </Button>
                </children>
             </VBox>
-            <Text layoutX="10.0" layoutY="51.0" strokeType="OUTSIDE" strokeWidth="0.0" text="BOOKRECCOMENDER" textAlignment="CENTER" wrappingWidth="199.9999999999999">
+            <Text layoutX="6.0" layoutY="47.0" strokeType="OUTSIDE" strokeWidth="0.0" text="BOOKRECCOMENDER" textAlignment="CENTER" wrappingWidth="199.9999999999999">
                <font>
                   <Font name="Lucida Bright" size="18.0" />
                </font>
             </Text>
             <Pane layoutX="9.0" layoutY="495.0" prefHeight="166.0" prefWidth="193.0" styleClass="LoginPane">
                <children>
-                  <Button layoutX="30.0" layoutY="22.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="124.0">
+                  <Button fx:id="btnLogIn" layoutX="30.0" layoutY="22.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="124.0">
                      <graphic>
                         <HBox prefHeight="8.0" prefWidth="108.0">
                            <children>
@@ -103,7 +105,8 @@
                         <String fx:value="LogBtn" />
                      </styleClass>
                   </Button>
-                  <Text layoutX="17.0" layoutY="105.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Don't have an account ? regetister here" wrappingWidth="166.39999999999998" />
+                  <Text layoutX="17.0" layoutY="105.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Don't have an account ?" wrappingWidth="166.39999999999998" />
+                  <Hyperlink fx:id="linkRegister" layoutX="14.0" layoutY="110.0"  text="Register here"  />
                </children>
             </Pane>
          </children>

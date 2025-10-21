@@ -22,11 +22,17 @@ public class ViewFactory {
 	private AnchorPane VisLibro;
 	private ObjectProperty<Libro> selectedLibr;
 	private ObjectProperty<Libreria> selectedLibreria;
+
+	private Stage Stage;
+
+	
 	
 	public ViewFactory() {
 		this.SideBarSelection = new SimpleStringProperty("");
 		this.selectedLibr = new SimpleObjectProperty<Libro>();
 		this.selectedLibreria = new SimpleObjectProperty<Libreria>();
+
+		this.Stage = new Stage();
 	}
 	
 	public StringProperty getSideBarSelectionItem() {
@@ -56,26 +62,22 @@ public class ViewFactory {
 		
 	public void changeToHome() {
 		
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("/applicationrob/MainPage.fxml"));
-		ClientController controller = new ClientController();
-		loader.setController(controller);
-		Scene scene = null;
 		
-		try {
-			 
-			scene =new Scene(loader.load());
-			
-		} catch (IOException e) {
-			
-			e.printStackTrace();
-		}
-		
-		Stage stage =new Stage();
-		stage.setScene(scene);
-		stage.show();
+		initializeStage("/applicationrob/MainPage.fxml");
 		
 	}
 
+	public void changeToLogin() {
+		
+		initializeStage("/applicationrob/LoginPage.fxml");
+		
+	}
+
+	public void changeToRegister() {
+		
+		initializeStage("/applicationrob/RegisterPage.fxml");
+		
+	}
 
     public ObjectProperty<Libro> selectedBookProperty() { 
 		return selectedLibr; 
@@ -113,12 +115,23 @@ public class ViewFactory {
         return pane;
     }
 
-    /*private AnchorPane ChangeToPage(String fxmlPath, AnchorPane pane) {
-        if (pane == null) {
-    }
-        return pane;
-    } */
-
+   
+	public void initializeStage(String FilePath) {
+		FXMLLoader loader = new FXMLLoader(getClass().getResource(FilePath));
+		Scene scene = null;
+		
+		try {
+			
+			scene =new Scene(loader.load());
+			
+		} catch (IOException e) {
+			
+			e.printStackTrace();
+		}
+		
+		Stage.setScene(scene);
+		Stage.show();
+	}
 	
 	
 	
