@@ -91,6 +91,7 @@ public class ViewFactory {
 		selectedLibr.set(lib); 
 	}
 
+
 	public ObjectProperty<Libreria> selectedLibraryProperty() { 
 		return selectedLibreria; 
 	}
@@ -105,13 +106,11 @@ public class ViewFactory {
 	
 
 	public AnchorPane MoveToPage(String fxmlPath, AnchorPane pane) {
-        if (pane == null) {
             try {
                 pane = new FXMLLoader(getClass().getResource(fxmlPath)).load();
             } catch (IOException e) {
             e.printStackTrace();
-            }
-        }
+            }   
         return pane;
     }
 

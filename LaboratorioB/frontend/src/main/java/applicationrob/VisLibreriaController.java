@@ -35,7 +35,6 @@ public class VisLibreriaController {
     
     private Libreria selectedLibrary ;
     private Libreria library;
-    private Libro book;
     private ObservableList<Libro> booksLibrary; 
     private ObservableList<Libro> currentBooks;
     private ObservableList<Libro> filteredBooks;
@@ -56,7 +55,7 @@ public class VisLibreriaController {
 		if (library != null) {
 			bookNameLabel.setText(library.getNomeLibreria());
 		}
-
+        
          booksLibrary.addAll(
         new Libro("Autore 1", "Titolo Libro 1", "Genere 1", "Editore 1", "2020", 1),
         new Libro("Autore 2", "Titolo Libro 2", "Genere 2", "Editore 2", "2021", 2),
@@ -112,20 +111,19 @@ public class VisLibreriaController {
     }
 
     int columns = 5;
-    int row = 0; 
+    int row = 0;  
     int col = 0;
    
-    for (Libro book : listBooksToShow) {
+    for (Libro books : listBooksToShow) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/applicationrob/BookEL.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("BookEL.fxml"));
             VBox booksPane = loader.load();
-
-            BookController controller = loader.getController();
 			
 			BookController bookController= loader.getController();
 			//books = clientBR.getInstance().getLibro(lib.getId());
-			//bookController.setLabels(libr.getAutore(), libr.getTitolo());
-            bookController.setLabels(book.getAutore(), book.getTitolo());
+            Libro currentBook = books;
+
+            bookController.setLabels(currentBook.getAutore(), currentBook.getTitolo());
 
             booksPane.setPrefSize(120, 120);
             GridPane.setMargin(booksPane, new Insets(20, 20, 20, 20));
@@ -133,14 +131,13 @@ public class VisLibreriaController {
             booksContainer.add(booksPane, col, row);
 			
 			booksPane.setOnMouseClicked(e->{
-
-			    Model.getIstance().getView().setSelectedBook(book);
+			    Model.getIstance().getView().setSelectedBook(currentBook);
 				Model.getIstance().getView().getSideBarSelectionItem().set("VisLibro");
 				
 			});
 			
 			    col++;
-                    if (col == 4) { 
+                    if (col == 5) { 
                         col = 0;
                         row++;
                     }

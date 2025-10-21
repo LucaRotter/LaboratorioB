@@ -4,6 +4,7 @@ applicationrob\DashboardController.class
 applicationrob\clientBR.class
 applicationrob\TokenSession.class
 applicationrob\LoginController.class
+applicationrob\TableReviewController.class
 applicationrob\VisLibrerieController.class
 applicationrob\VisLibroController.class
 applicationrob\LibraryController.class
@@ -11,5 +12,6 @@ models\Model.class
 applicationrob\ClientController.class
 views\ViewFactory.class
 applicationrob\VisLibreriaController.class
+applicationrob\ReviewController.class
 applicationrob\startApp.class
 applicationrob\RegisterController.class
