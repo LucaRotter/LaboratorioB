@@ -25,15 +25,18 @@ import javafx.geometry.Insets;
 public class VisLibreriaController {
 
     @FXML
-    private Label bookNameLabel;
-    @FXML
-    private TextField searchBar;
-    @FXML
     private Button searchBtn;
+
     @FXML
     private GridPane booksContainer;
+
+    @FXML
+    private TextField searchBar;
+
+    @FXML
+    private Label bookNameLabel;
     
-    private Libreria selectedLibrary ;
+    private Libreria selectedLibrary;
     private Libreria library;
     private ObservableList<Libro> booksLibrary; 
     private ObservableList<Libro> currentBooks;
@@ -63,7 +66,7 @@ public class VisLibreriaController {
         new Libro("Autore 4", "Titolo Libro 4", "Genere 4", "Editore 4", "2023", 4),
         new Libro("Autore 5", "Titolo Libro 5", "Genere 5", "Editore 5", "2024", 5)
 
-         
+          
     );
 
     // Imposto currentLibr con tutti i libri fittizi
@@ -76,13 +79,10 @@ public class VisLibreriaController {
 
     @FXML
     public void SeachBooksInLibrary(ActionEvent event) throws RemoteException, IOException {
-    }
-
-    @FXML
-    public void SearchControl(ActionEvent event) throws RemoteException, IOException {
         TokenSession.checkTkSession();
         String textSlib = searchBar.getText().trim().toLowerCase();
-        library = clientBR.getInstance().getLibreria(selectedLibrary.getIdLibreria());
+        // library = clientBR.getInstance().getLibreria(selectedLibrary.getIdLibreria());
+        booksLibrary.setAll(clientBR.getInstance().getLibreria(selectedLibrary.getIdLibreria()));
         booksLibrary.setAll(library.getLibreria());
          if (textSlib.isEmpty()) {
             currentBooks.setAll(booksLibrary);
@@ -104,7 +104,7 @@ public class VisLibreriaController {
     
     
     //Metodo che si occupa di mostrare il filtraggio dei libri libreria selezionata
-    private void InsertingElements(ObservableList<Libro> listBooksToShow) {
+    private void InsertingElements(ObservableList<Libro> listBooksToShow)  {
     booksContainer.getChildren().clear();
      if (listBooksToShow == null || listBooksToShow.isEmpty()) {
         return;
