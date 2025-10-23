@@ -28,18 +28,14 @@ public class RegisterController {
     @FXML
     void onRegisterUser(ActionEvent event) throws RemoteException {
         String nome = nameField.getText().trim();
-        String cognome = surnameField.getText().trim().toUpperCase();
+        String cognome = surnameField.getText().trim();
         String cf = cfField.getText().trim();
         String email = emailField.getText().trim();
         String pw = pwField.getText().trim();
 
-        if (!validateField(nome, cognome, cf, email, pw)) {
-            return;
-        }
-
         Utente newUser = new Utente(nome, cognome, cf, email, pw, 0);
 
-         id_user = clientBR.getInstance().registrazione(newUser);
+        id_user = clientBR.getInstance().registrazione(newUser);
 
         if (id_user == -1) {
         }

@@ -5,6 +5,8 @@ import java.util.*;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
+import models.Model;
+
 import java.rmi.RemoteException;
 import LaboratorioB.common.models.*;
 
@@ -23,6 +25,7 @@ public class LoginController {
     @FXML
     public void onUserLogin()throws RemoteException {
 
+       
         id_user = clientBR.getInstance().login(emailField.getText(), pwField.getText());
 
         if(id_user == -1) { 
@@ -31,6 +34,7 @@ public class LoginController {
         }     
 
         TokenSession.setUserId(id_user);
+        Model.getIstance().getView().changeToHome();
     } 
 
     @FXML

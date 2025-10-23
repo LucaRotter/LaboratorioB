@@ -34,8 +34,6 @@ public class DashboardController implements Initializable{
 		
 	}
 	
-	
-	
 	//metodo utilizzato per aggiungere i libri al gridPane e inizializzarne il contenuto
 	private void putBooks() throws RemoteException, IOException {
 		 

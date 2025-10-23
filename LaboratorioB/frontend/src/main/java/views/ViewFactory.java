@@ -1,9 +1,6 @@
 package views;
 
 import java.io.IOException;
-
-import applicationrob.ClientController;
-import applicationrob.VisLibroController;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.beans.property.ObjectProperty;
@@ -17,12 +14,13 @@ import LaboratorioB.common.models.*;
 public class ViewFactory {
 	
 	private final StringProperty SideBarSelection;
-	private AnchorPane DashboardMain;
-	private AnchorPane VisLibrerie;
-	private AnchorPane VisLibro;
 	private ObjectProperty<Libro> selectedLibr;
 	private ObjectProperty<Libreria> selectedLibreria;
 
+	private AnchorPane DashboardMain;
+	private AnchorPane VisLibrerie;
+	private AnchorPane VisLibro;
+	private AnchorPane AddReview;
 	private Stage Stage;
 
 	
@@ -57,6 +55,11 @@ public class ViewFactory {
 	public AnchorPane getVisLibreria() {
 		VisLibro = MoveToPage("/applicationrob/VisLibreria.fxml", VisLibro);
 		return VisLibro;
+	}  
+
+	public AnchorPane getAddReview() {
+		AddReview = MoveToPage("/applicationrob/AddReview.fxml", AddReview);
+		return AddReview;
 	}  
 	
 		
@@ -105,6 +108,7 @@ public class ViewFactory {
 	
 
 	public AnchorPane MoveToPage(String fxmlPath, AnchorPane pane) {
+		  
         if (pane == null) {
             try {
                 pane = new FXMLLoader(getClass().getResource(fxmlPath)).load();
