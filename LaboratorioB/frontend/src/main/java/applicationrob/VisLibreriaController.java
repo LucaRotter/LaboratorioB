@@ -25,17 +25,19 @@ import javafx.geometry.Insets;
 public class VisLibreriaController {
 
     @FXML
-    private Label bookNameLabel;
-    @FXML
-    private TextField searchBar;
-    @FXML
     private Button searchBtn;
+
     @FXML
     private GridPane booksContainer;
+
+    @FXML
+    private TextField searchBar;
+
+    @FXML
+    private Label bookNameLabel;
     
-    private Libreria selectedLibrary ;
+    private Libreria selectedLibrary;
     private Libreria library;
-    private Libro book;
     private ObservableList<Libro> booksLibrary; 
     private ObservableList<Libro> currentBooks;
     private ObservableList<Libro> filteredBooks;
@@ -56,7 +58,7 @@ public class VisLibreriaController {
 		if (library != null) {
 			bookNameLabel.setText(library.getNomeLibreria());
 		}
-
+        
          booksLibrary.addAll(
         new Libro("Autore 1", "Titolo Libro 1", "Genere 1", "Editore 1", "2020", 1),
         new Libro("Autore 2", "Titolo Libro 2", "Genere 2", "Editore 2", "2021", 2),
@@ -64,7 +66,7 @@ public class VisLibreriaController {
         new Libro("Autore 4", "Titolo Libro 4", "Genere 4", "Editore 4", "2023", 4),
         new Libro("Autore 5", "Titolo Libro 5", "Genere 5", "Editore 5", "2024", 5)
 
-         
+          
     );
 
     // Imposto currentLibr con tutti i libri fittizi
@@ -77,13 +79,10 @@ public class VisLibreriaController {
 
     @FXML
     public void SeachBooksInLibrary(ActionEvent event) throws RemoteException, IOException {
-    }
-
-    @FXML
-    public void SearchControl(ActionEvent event) throws RemoteException, IOException {
         TokenSession.checkTkSession();
         String textSlib = searchBar.getText().trim().toLowerCase();
-        library = clientBR.getInstance().getLibreria(selectedLibrary.getIdLibreria());
+        // library = clientBR.getInstance().getLibreria(selectedLibrary.getIdLibreria());
+        booksLibrary.setAll(clientBR.getInstance().getLibreria(selectedLibrary.getIdLibreria()));
         booksLibrary.setAll(library.getLibreria());
          if (textSlib.isEmpty()) {
             currentBooks.setAll(booksLibrary);
@@ -105,27 +104,26 @@ public class VisLibreriaController {
     
     
     //Metodo che si occupa di mostrare il filtraggio dei libri libreria selezionata
-    private void InsertingElements(ObservableList<Libro> listBooksToShow) {
+    private void InsertingElements(ObservableList<Libro> listBooksToShow)  {
     booksContainer.getChildren().clear();
      if (listBooksToShow == null || listBooksToShow.isEmpty()) {
         return;
     }
 
     int columns = 5;
-    int row = 0; 
+    int row = 0;  
     int col = 0;
    
-    for (Libro book : listBooksToShow) {
+    for (Libro books : listBooksToShow) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/applicationrob/BookEL.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("BookEL.fxml"));
             VBox booksPane = loader.load();
-
-            BookController controller = loader.getController();
 			
 			BookController bookController= loader.getController();
 			//books = clientBR.getInstance().getLibro(lib.getId());
-			//bookController.setLabels(libr.getAutore(), libr.getTitolo());
-            bookController.setLabels(book.getAutore(), book.getTitolo());
+            Libro currentBook = books;
+
+            bookController.setLabels(currentBook.getAutore(), currentBook.getTitolo());
 
             booksPane.setPrefSize(120, 120);
             GridPane.setMargin(booksPane, new Insets(20, 20, 20, 20));
@@ -133,14 +131,13 @@ public class VisLibreriaController {
             booksContainer.add(booksPane, col, row);
 			
 			booksPane.setOnMouseClicked(e->{
-
-			    Model.getIstance().getView().setSelectedBook(book);
+			    Model.getIstance().getView().setSelectedBook(currentBook);
 				Model.getIstance().getView().getSideBarSelectionItem().set("VisLibro");
 				
 			});
 			
 			    col++;
-                    if (col == 4) { 
+                    if (col == 5) { 
                         col = 0;
                         row++;
                     }

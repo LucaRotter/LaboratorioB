@@ -20,7 +20,9 @@ public class ViewFactory {
 	private AnchorPane DashboardMain;
 	private AnchorPane VisLibrerie;
 	private AnchorPane VisLibro;
-	private AnchorPane AddReview;
+	private ObjectProperty<Libro> selectedLibr;
+	private ObjectProperty<Libreria> selectedLibreria;
+
 	private Stage Stage;
 
 	
@@ -51,10 +53,10 @@ public class ViewFactory {
 		VisLibro = MoveToPage("/applicationrob/VisLibro.fxml", VisLibro);
 		return VisLibro;
 	}       
-	
+	 
 	public AnchorPane getVisLibreria() {
-		VisLibro = MoveToPage("/applicationrob/VisLibreria.fxml", VisLibro);
-		return VisLibro;
+		VisLibreria = MoveToPage("/applicationrob/VisLibreria.fxml", VisLibreria);
+		return VisLibreria;
 	}  
 
 	public AnchorPane getAddReview() {
@@ -94,6 +96,7 @@ public class ViewFactory {
 		selectedLibr.set(lib); 
 	}
 
+
 	public ObjectProperty<Libreria> selectedLibraryProperty() { 
 		return selectedLibreria; 
 	}
@@ -108,14 +111,13 @@ public class ViewFactory {
 	
 
 	public AnchorPane MoveToPage(String fxmlPath, AnchorPane pane) {
-		  
         if (pane == null) {
             try {
                 pane = new FXMLLoader(getClass().getResource(fxmlPath)).load();
             } catch (IOException e) {
             e.printStackTrace();
-            }
-        }
+            }   
+		}
         return pane;
     }
 

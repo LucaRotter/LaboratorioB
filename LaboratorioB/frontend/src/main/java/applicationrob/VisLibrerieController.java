@@ -18,6 +18,9 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 
+import java.util.function.Function;
+import java.util.function.Consumer;
+
 public class VisLibrerieController {
 
    
@@ -50,24 +53,24 @@ public class VisLibrerieController {
 
     @FXML
     private TextField searchBar;
+
+    @FXML
+    private HBox modalContent;
     
     @FXML
     private Label emptyText;
     
     @FXML
-    private HBox modalContent;
-    
-    @FXML
     private Label imgFolder;
 
-    @FXML
+    
     private boolean editMode = false;
 
     private Libreria libreria;
     private List<Libreria> listaLibrerie;
     private ObservableList<Libreria> librerie;
     private ObservableList<Libreria> currentLibr;
-    private ObservableList<Libreria> filterLibr;
+    private ObservableList<Libreria> filteredLibr;
 
     private int id_user;
 
@@ -78,7 +81,7 @@ public class VisLibrerieController {
 
         librerie = FXCollections.observableArrayList();
         currentLibr = FXCollections.observableArrayList();
-        filterLibr = FXCollections.observableArrayList();
+        filteredLibr = FXCollections.observableArrayList();
 
         listaLibrerie = clientBR.getInstance().getLibrerie(id_user);
         if (listaLibrerie != null) {
@@ -94,7 +97,7 @@ public class VisLibrerieController {
     	        }
             });
 
-    	rearrangeGrid();
+    	InsertingElements();
     }
     
     //Metodo che permetta l'apertura del Modal
@@ -117,12 +120,12 @@ public class VisLibrerieController {
         listaLibrerie = clientBR.getInstance().getLibrerie(id_user);
         librerie.setAll(FXCollections.observableArrayList(listaLibrerie));
         currentLibr.setAll(librerie);
-        rearrangeGrid(currentLibr); 
+        InsertingElements(currentLibr); 
         modalOverlay.setVisible(false); 
         updateEmptyState();       
     }
 
-    @FXML
+    @FXML 
     void addLibraryEmpty(ActionEvent event) {
     	showModal();
     }
@@ -142,7 +145,7 @@ public class VisLibrerieController {
         if (textSlib.isEmpty()) {
             currentLibr.setAll(librerie);
         } else {
-                ObservableList<Libreria> filteredLibr = FXCollections.observableArrayList();
+                filteredLibr = FXCollections.observableArrayList();
                     for (Libreria lib : librerie) {
                         if (lib.getNomeLibreria().toLowerCase().contains(textSlib)) {
                             filteredLibr.add(lib);
@@ -150,8 +153,10 @@ public class VisLibrerieController {
                     }
                 currentLibr.setAll(filteredLibr); 
         } 
-        rearrangeGrid(currentLibr);   
+        InsertingElements(currentLibr);   
     }
+
+
     
  // Metodo di controllo per searchLibraries
     @FXML
@@ -172,7 +177,7 @@ public class VisLibrerieController {
 
     	if (!librerie.isEmpty()) {
             editMode = !editMode;
-            rearrangeGrid(currentLibr);
+            InsertingElements(currentLibr);
             extraBtn.setVisible(editMode);
     	}  
     }
@@ -193,13 +198,13 @@ public class VisLibrerieController {
     }
     
   //Metodo per mostrare tutte le librerie
-    private void rearrangeGrid() {
-        rearrangeGrid(librerie); 
+    private void InsertingElements() {
+        InsertingElements(librerie); 
     }
     
     
     //Metodo che si occupa di mostrare il filtraggio delle librerie
-    private void rearrangeGrid(ObservableList<Libreria> listToShow) {
+    private void InsertingElements(ObservableList<Libreria> listToShow) {
     librariesContainer.getChildren().clear();
 
     int columns = 4;
@@ -225,7 +230,7 @@ public class VisLibrerieController {
                 librerie.remove(lib);
                 currentLibr.remove(lib);
                 updateEmptyState();
-                rearrangeGrid(currentLibr);
+                InsertingElements(currentLibr);
             });
 
             libPane.setPrefSize(120, 120);
