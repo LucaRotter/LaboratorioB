@@ -136,7 +136,7 @@ public class VisLibrerieController {
     }
     
     // Metodo che cerca le librerie in base alla scritta nel TextField
-   /*  @FXML
+    @FXML
     void searchLibraries(ActionEvent event) throws RemoteException {
         TokenSession.checkTkSession();
         String textSlib = searchBar.getText().trim().toLowerCase();
@@ -154,21 +154,6 @@ public class VisLibrerieController {
                 currentLibr.setAll(filteredLibr); 
         } 
         InsertingElements(currentLibr);   
-    }*/
-
-     @FXML
-    void searchLibraries(ActionEvent event) throws RemoteException {
-        TokenSession.checkTkSession();
-        String textSlib = searchBar.getText().trim().toLowerCase();
-        librerie.setAll(clientBR.getInstance().getLibrerie(id_user));
-    	
-        searchAndFilter(
-            textSlib,
-            librerie,
-            currentLibr,
-            Libreria::getNomeLibreria,
-            this::InsertingElements
-        );
     }
 
 
@@ -264,30 +249,6 @@ public class VisLibrerieController {
             }
         }
     }
-
-
-    private <T> void searchAndFilter(
-        String searchText,
-        ObservableList<T> List,
-        ObservableList<T> currentList,
-        Function<T, String> textBookOrLibrary,
-        Consumer<ObservableList<T>> insertFunction
-) {
-    ObservableList<T> filteredList = FXCollections.observableArrayList();
-
-    if (searchText.isEmpty()) {
-        currentList.setAll(List);
-    } else {
-        for (T item : List) {
-            if (textBookOrLibrary.apply(item).toLowerCase().contains(searchText)) {
-                filteredList.add(item);
-            }
-        }
-        currentList.setAll(filteredList);
-    }
-
-    insertFunction.accept(currentList);
-}
 
 }
 
