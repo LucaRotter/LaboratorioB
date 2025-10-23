@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 C:\Program Files\LaboratorioB-8\LaboratorioB\frontend\src\main\java\applicationrob\BookController.java
 C:\Program Files\LaboratorioB-8\LaboratorioB\frontend\src\main\java\applicationrob\RegisterController.java
 C:\Program Files\LaboratorioB-8\LaboratorioB\frontend\src\main\java\applicationrob\VisLibreriaController.java
@@ -17,22 +16,3 @@ C:\Program Files\LaboratorioB-8\LaboratorioB\frontend\src\main\java\applicationr
 C:\Program Files\LaboratorioB-8\LaboratorioB\frontend\src\main\java\applicationrob\startApp.java
 C:\Program Files\LaboratorioB-8\LaboratorioB\frontend\src\main\java\views\ViewFactory.java
 C:\Program Files\LaboratorioB-8\LaboratorioB\frontend\src\main\java\applicationrob\LibraryController.java
-=======
-D:\Ide progetti\LaboratorioB\LaboratorioB\frontend\src\main\java\applicationrob\SideBarController.java
-D:\Ide progetti\LaboratorioB\LaboratorioB\frontend\src\main\java\applicationrob\BookController.java
-D:\Ide progetti\LaboratorioB\LaboratorioB\frontend\src\main\java\views\ViewFactory.java
-D:\Ide progetti\LaboratorioB\LaboratorioB\frontend\src\main\java\applicationrob\ClientController.java
-D:\Ide progetti\LaboratorioB\LaboratorioB\frontend\src\main\java\applicationrob\ReviewController.java
-D:\Ide progetti\LaboratorioB\LaboratorioB\frontend\src\main\java\applicationrob\VisLibroController.java
-D:\Ide progetti\LaboratorioB\LaboratorioB\frontend\src\main\java\applicationrob\TokenSession.java
-D:\Ide progetti\LaboratorioB\LaboratorioB\frontend\src\main\java\applicationrob\DashboardController.java
-D:\Ide progetti\LaboratorioB\LaboratorioB\frontend\src\main\java\applicationrob\TableReviewController.java
-D:\Ide progetti\LaboratorioB\LaboratorioB\frontend\src\main\java\applicationrob\LibraryController.java
-D:\Ide progetti\LaboratorioB\LaboratorioB\frontend\src\main\java\applicationrob\RegisterController.java
-D:\Ide progetti\LaboratorioB\LaboratorioB\frontend\src\main\java\applicationrob\VisLibreriaController.java
-D:\Ide progetti\LaboratorioB\LaboratorioB\frontend\src\main\java\applicationrob\startApp.java
-D:\Ide progetti\LaboratorioB\LaboratorioB\frontend\src\main\java\applicationrob\VisLibrerieController.java
-D:\Ide progetti\LaboratorioB\LaboratorioB\frontend\src\main\java\applicationrob\LoginController.java
-D:\Ide progetti\LaboratorioB\LaboratorioB\frontend\src\main\java\models\Model.java
-D:\Ide progetti\LaboratorioB\LaboratorioB\frontend\src\main\java\applicationrob\clientBR.java
->>>>>>> c3d6ab7ef75bc017ccb5d0ff700e16532a6e74d0

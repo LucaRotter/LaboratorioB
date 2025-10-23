@@ -81,9 +81,9 @@ public class VisLibreriaController {
     public void SeachBooksInLibrary(ActionEvent event) throws RemoteException, IOException {
         TokenSession.checkTkSession();
         String textSlib = searchBar.getText().trim().toLowerCase();
-        // library = clientBR.getInstance().getLibreria(selectedLibrary.getIdLibreria());
-        booksLibrary.setAll(clientBR.getInstance().getLibreria(selectedLibrary.getIdLibreria()));
-        booksLibrary.setAll(library.getLibreria());
+        //library = clientBR.getInstance().getLibreria(selectedLibrary.getIdLibreria());
+        booksLibrary.setAll(clientBR.getInstance().getLibreria(selectedLibrary.getIdLibreria()).getLibreria());
+        //booksLibrary.setAll(library.getLibreria());
          if (textSlib.isEmpty()) {
             currentBooks.setAll(booksLibrary);
         } else {

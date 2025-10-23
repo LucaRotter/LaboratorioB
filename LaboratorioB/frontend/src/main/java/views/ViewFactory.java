@@ -20,8 +20,8 @@ public class ViewFactory {
 	private AnchorPane DashboardMain;
 	private AnchorPane VisLibrerie;
 	private AnchorPane VisLibro;
-	private ObjectProperty<Libro> selectedLibr;
-	private ObjectProperty<Libreria> selectedLibreria;
+	private AnchorPane VisLibreria;
+	private AnchorPane AddReview;
 
 	private Stage Stage;
 

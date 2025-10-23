@@ -3,6 +3,7 @@ applicationrob\SideBarController.class
 applicationrob\DashboardController.class
 applicationrob\clientBR.class
 applicationrob\TokenSession.class
+applicationrob\AddReviewController.class
 applicationrob\LoginController.class
 applicationrob\TableReviewController.class
 applicationrob\VisLibrerieController.class
