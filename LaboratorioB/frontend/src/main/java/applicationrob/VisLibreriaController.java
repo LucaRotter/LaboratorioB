@@ -51,6 +51,18 @@ public class VisLibreriaController {
         Model.getIstance().getView().selectedLibraryProperty().addListener((obs, oldLibrary, newLibrary) -> {
             if (newLibrary != null) {
             bookNameLabel.setText(newLibrary.getNomeLibreria());
+
+            try {
+            booksLibrary.addAll(clientBR.getInstance().getLibreria(library.getIdLibreria()).getLibreria());
+            } catch (RemoteException e) {
+            e.printStackTrace();
+
+            // Imposto currentLibr con tutti i libri fittizi
+            currentBooks.setAll(booksLibrary);
+
+            // Aggiorno il GridPane con i libri
+            InsertingElements(currentBooks);
+        }
           }
         });
 
@@ -59,15 +71,14 @@ public class VisLibreriaController {
 			bookNameLabel.setText(library.getNomeLibreria());
 		}
         
-         booksLibrary.addAll(
-        new Libro("Autore 1", "Titolo Libro 1", "Genere 1", "Editore 1", "2020", 1),
-        new Libro("Autore 2", "Titolo Libro 2", "Genere 2", "Editore 2", "2021", 2),
-        new Libro("Autore 3", "Titolo Libro 3", "Genere 3", "Editore 3", "2022", 3),
-        new Libro("Autore 4", "Titolo Libro 4", "Genere 4", "Editore 4", "2023", 4),
-        new Libro("Autore 5", "Titolo Libro 5", "Genere 5", "Editore 5", "2024", 5)
+        try {
+            booksLibrary.addAll(clientBR.getInstance().getLibreria(library.getIdLibreria()).getLibreria());
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
 
-          
-    );
+        System.out.println("Books in Library: " + booksLibrary.size());
+
 
     // Imposto currentLibr con tutti i libri fittizi
     currentBooks.setAll(booksLibrary);
@@ -120,8 +131,8 @@ public class VisLibreriaController {
             VBox booksPane = loader.load();
 			
 			BookController bookController= loader.getController();
-			//books = clientBR.getInstance().getLibro(lib.getId());
-            Libro currentBook = books;
+			Libro currentBook = clientBR.getInstance().getLibro(books.getId());
+           
 
             bookController.setLabels(currentBook.getAutore(), currentBook.getTitolo());
 

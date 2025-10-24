@@ -25,7 +25,7 @@ import models.Model;
 public class VisLibroController implements Initializable{
 
 	@FXML
-    private Button BtnCancel;
+    private Button btnCancel;
 
     @FXML
     private Label LBAuthor;
@@ -111,6 +111,10 @@ public class VisLibroController implements Initializable{
 
 		btnConfirm.setOnAction(e->{
 			onConfirm();
+		});
+
+		btnCancel.setOnAction(e->{
+			closeModal();
 		});
 	}
 

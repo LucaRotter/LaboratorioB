@@ -26,7 +26,6 @@ public interface serverBR extends Remote {
     public Libreria getLibreria(int id_libreria) throws RemoteException;
     public List<Libreria> getLibrerie(int id_utente) throws RemoteException;
     public boolean createConsiglio(int user_id, int libro_id, int id_consiglio) throws RemoteException;
-    public boolean createValutazione(int user_id, int libro_id, Valutazione val) throws RemoteException;
-    
+    public boolean createValutazione( Valutazione val) throws RemoteException;
     
 }

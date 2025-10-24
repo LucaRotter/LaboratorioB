@@ -443,14 +443,14 @@ public class serverBRImpl extends UnicastRemoteObject implements serverBR {
     }
 
     @Override
-    public synchronized boolean createValutazione(int id_utente, int id_libro, Valutazione val) throws RemoteException {
+    public synchronized boolean createValutazione(Valutazione val) throws RemoteException {
         // query per inserimento nel db
         String query = "INSERT into Valutazioni_Libri (id_utente, id_libro, edizione, voto_edizione, stile, voto_stile, contenuto, voto_contenuto, gradevolezza, voto_gradevolezza, originalita, voto_originalita, voto_medio) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? , ?)";
 
         try (Connection conn = DatabaseManager.getConnection(); PreparedStatement ps = conn.prepareStatement(query)) {
 
-            ps.setInt(1, id_utente);
-            ps.setInt(2, id_libro);
+            ps.setInt(1, val.getIdLibro());
+            ps.setInt(2, val.getIdUtente());
             ps.setString(3, val.getNoteEdizione());
             ps.setInt(4, val.getVotoEdizione());
             ps.setString(5, val.getNoteStile());
