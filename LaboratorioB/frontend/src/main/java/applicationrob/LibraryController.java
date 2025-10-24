@@ -3,12 +3,8 @@ package applicationrob;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.layout.StackPane;
-import javafx.scene.layout.AnchorPane;
 import java.lang.Runnable;
 import LaboratorioB.common.models.Libreria;
-import javafx.fxml.FXMLLoader;
-import java.io.IOException;
 import models.Model;
 
 

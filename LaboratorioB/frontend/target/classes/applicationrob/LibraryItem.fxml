@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Text?>
+<?import javafx.scene.image.Image?> 
+
+
+<HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="57.0" prefWidth="208.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="applicationrob.LibraryItemController">
+   <children>
+      <ImageView fitHeight="37.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true" >
+         <image>
+               <Image url="@../img/LibraryB.png" />
+            </image>
+      </ImageView>
+      <Pane prefHeight="58.0" prefWidth="209.0">
+         <children>
+            <Text fx:id="txtName" layoutX="14.0" layoutY="28.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="90.9367094039917" />
+            <CheckBox fx:id="btnChek" layoutX="138.0" layoutY="15.0" mnemonicParsing="false" />
+         </children>
+      </Pane>
+   </children>
+   <opaqueInsets>
+      <Insets />
+   </opaqueInsets>
+   <padding>
+      <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+   </padding>
+</HBox>

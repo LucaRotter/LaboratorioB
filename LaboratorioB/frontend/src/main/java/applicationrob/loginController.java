@@ -1,8 +1,10 @@
 package applicationrob;
 
+import java.net.URL;
 import java.rmi.*;
 import java.util.*;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
 import models.Model;
@@ -11,7 +13,7 @@ import java.rmi.RemoteException;
 import LaboratorioB.common.models.*;
 
 
-public class LoginController {
+public class LoginController implements Initializable {
 
     @FXML
     private TextField emailField;
@@ -21,6 +23,15 @@ public class LoginController {
     private Button backBtn;
 
     private int id_user;
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        
+       backBtn.setOnAction(e -> {
+			
+			Model.getIstance().getView().changeToHome();
+		});
+    }
 
     @FXML
     public void onUserLogin()throws RemoteException {
@@ -47,5 +58,7 @@ public class LoginController {
     
     public void showAlert(String title, String message) {   
     }
+
+    
 
 }
