@@ -32,6 +32,7 @@ public class LibraryController {
     @FXML
     private void clickLibrary() {
         if (!editMode && libreria != null) {
+        Model.getIstance().getView().setSelectedLibrary(null);
         Model.getIstance().getView().setSelectedLibrary(libreria);
         Model.getIstance().getView().getSideBarSelectionItem().set("VisLibreria");
         

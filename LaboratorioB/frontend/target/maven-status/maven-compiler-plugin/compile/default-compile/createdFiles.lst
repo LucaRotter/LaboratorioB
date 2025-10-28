@@ -7,6 +7,7 @@ applicationrob\AddReviewController.class
 applicationrob\LoginController.class
 applicationrob\TableReviewController.class
 applicationrob\VisLibrerieController.class
+applicationrob\LibraryItemController.class
 applicationrob\VisLibroController.class
 applicationrob\LibraryController.class
 models\Model.class

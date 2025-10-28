@@ -49,21 +49,29 @@ public class VisLibreriaController {
         filteredBooks = FXCollections.observableArrayList();
 
         Model.getIstance().getView().selectedLibraryProperty().addListener((obs, oldLibrary, newLibrary) -> {
+
+            System.out.println("Selected library changed." + newLibrary.getNomeLibreria());
             if (newLibrary != null) {
-            bookNameLabel.setText(newLibrary.getNomeLibreria());
 
-            try {
-            booksLibrary.addAll(clientBR.getInstance().getLibreria(library.getIdLibreria()).getLibreria());
-            } catch (RemoteException e) {
-            e.printStackTrace();
+                System.out.println("Updating view for library: " + newLibrary.getNomeLibreria());
 
-            // Imposto currentLibr con tutti i libri fittizi
-            currentBooks.setAll(booksLibrary);
+                    selectedLibrary = newLibrary;
+                    bookNameLabel.setText(newLibrary.getNomeLibreria());
 
-            // Aggiorno il GridPane con i libri
-            InsertingElements(currentBooks);
-        }
-          }
+                    try {
+                        booksLibrary.clear();
+                        Libreria lib = clientBR.getInstance().getLibreria(newLibrary.getIdLibreria());
+                        booksLibrary.addAll(lib.getLibreria());
+                    } catch (RemoteException e) {
+                        e.printStackTrace();
+                    }
+
+       
+                System.out.println("Books in Library: " + booksLibrary.size());
+                currentBooks.setAll(booksLibrary);
+                InsertingElements(currentBooks);
+                
+                }
         });
 
 		library = Model.getIstance().getView().getSelectedLibrary();

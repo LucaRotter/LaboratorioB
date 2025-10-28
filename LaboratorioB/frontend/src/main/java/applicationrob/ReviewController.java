@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import LaboratorioB.common.models.Valutazione;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -14,14 +15,17 @@ public class ReviewController implements Initializable{
 	private Button btnShowMore;
 
 	private VisLibroController visLibro ;
-	
+
+	private Valutazione Val;
+
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		
 		btnShowMore.setOnAction(e->{
-			System.out.println("mi hai schiacciato");
+			
 			try {
-				visLibro.openModal();
+
+				visLibro.openModal(Val);
 				
 			} catch (IOException e1) {
 				// TODO Auto-generated catch block
@@ -30,16 +34,16 @@ public class ReviewController implements Initializable{
 		});
 		
 	}
+
+	public void setVislibroController(VisLibroController visLibroController) {
 	
-	public void showModal() {
+		this.visLibro = visLibroController;
 		
 	}
 
-	public void setVislibroController(VisLibroController visLibroController) {
+	public void setReview(Valutazione valutazione) {
 		
-		System.out.println(visLibroController);
-		this.visLibro = visLibroController;
-		
+		this.Val = valutazione;
 	}
 	
 }
