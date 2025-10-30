@@ -22,11 +22,10 @@ public class ViewFactory {
 	private AnchorPane VisLibro;
 	private AnchorPane VisLibreria;
 	private AnchorPane AddReview;
+	private AnchorPane AddReccomended;
 
 	private Stage Stage;
 
-	
-	
 	public ViewFactory() {
 		this.SideBarSelection = new SimpleStringProperty("");
 		this.selectedLibr = new SimpleObjectProperty<Libro>();
@@ -63,10 +62,14 @@ public class ViewFactory {
 		AddReview = MoveToPage("/applicationrob/AddReview.fxml", AddReview);
 		return AddReview;
 	}  
+
+	public AnchorPane getAddReccomended() {
+		AddReccomended = MoveToPage("/applicationrob/AddReccomended.fxml", AddReccomended);
+		return AddReccomended;
+	}  
 	
 		
 	public void changeToHome() {
-		
 		
 		initializeStage("/applicationrob/MainPage.fxml");
 		

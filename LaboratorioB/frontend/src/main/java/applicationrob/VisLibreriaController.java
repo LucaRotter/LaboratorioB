@@ -140,8 +140,7 @@ public class VisLibreriaController {
 			
 			BookController bookController= loader.getController();
 			Libro currentBook = clientBR.getInstance().getLibro(books.getId());
-           
-
+            
             bookController.setLabels(currentBook.getAutore(), currentBook.getTitolo());
 
             booksPane.setPrefSize(120, 120);
