@@ -125,6 +125,84 @@ public class serverBRImpl extends UnicastRemoteObject implements serverBR {
     }
 
     @Override
+    public List<Libro> lazyLoadingLibri() throws RemoteException {
+
+        final int LIMIT = 20;
+        List<Libro> libri = new ArrayList<>();
+
+        // Identifica il client RMI
+        String clientHost;
+        try {
+            clientHost = java.rmi.server.RemoteServer.getClientHost();
+        } catch (java.rmi.server.ServerNotActiveException e) {
+            clientHost = "unknown";
+        }
+
+        String query = """
+        SELECT l.id_libro, l.titolo, l.autore, l.genere, l.editore, l.anno
+        FROM libri l
+        LEFT JOIN libri_inviati li
+            ON l.id_libro = li.id_libro AND li.client_host = ?
+        WHERE li.id_libro IS NULL
+        ORDER BY l.id_libro
+        LIMIT ?
+    """;
+
+        try (Connection conn = DatabaseManager.getConnection(); PreparedStatement ps = conn.prepareStatement(query)) {
+
+            ps.setString(1, clientHost);
+            ps.setInt(2, LIMIT);
+
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    int id = rs.getInt("id_libro");
+                    String titolo = rs.getString("titolo");
+                    String autore = rs.getString("autore");
+                    String genere = rs.getString("genere");
+                    String editore = rs.getString("editore");
+                    String anno = rs.getString("anno");
+                    libri.add(new Libro(titolo, autore, genere, editore, anno, id));
+                }
+            }
+
+            // Se non ci sono nuovi libri, resetta (cioè cancella i record e riparti da capo)
+            if (libri.isEmpty()) {
+                resetLibriInviati(conn, clientHost);
+                // Dopo il reset, ricarica una volta
+                return lazyLoadingLibri();
+            }
+
+            // Registra nel DB i libri inviati a questo client
+            registraLibriInviati(conn, clientHost, libri);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return libri;
+    }
+
+    private void registraLibriInviati(Connection conn, String clientHost, List<Libro> libri) throws SQLException {
+        String insert = "INSERT IGNORE INTO libri_inviati (client_host, id_libro) VALUES (?, ?)";
+        try (PreparedStatement ps = conn.prepareStatement(insert)) {
+            for (Libro libro : libri) {
+                ps.setString(1, clientHost);
+                ps.setInt(2, libro.getId());
+                ps.addBatch();
+            }
+            ps.executeBatch();
+        }
+    }
+
+    private void resetLibriInviati(Connection conn, String clientHost) throws SQLException {
+        String delete = "DELETE FROM libri_inviati WHERE client_host = ?";
+        try (PreparedStatement ps = conn.prepareStatement(delete)) {
+            ps.setString(1, clientHost);
+            ps.executeUpdate();
+        }
+    }
+
+    @Override
     public Libro getLibro(int id_libro) throws RemoteException {
         Libro libro = null;
         String query = "SELECT * FROM libri WHERE id_libro = ?";

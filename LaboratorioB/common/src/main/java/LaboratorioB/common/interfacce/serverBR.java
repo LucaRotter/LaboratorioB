@@ -15,6 +15,7 @@ public interface serverBR extends Remote {
     public int registrazione(Utente user) throws RemoteException;
     public int login(String email, String password) throws RemoteException;
     public Utente getUtente(int id) throws RemoteException;
+    public List<Libro> lazyLoadingLibri() throws RemoteException;
     public Libro getLibro(int id) throws RemoteException;
     public List<Valutazione> getValutazione(int id) throws RemoteException;
     public List<Libro> getConsiglio(int id_libro) throws RemoteException;
