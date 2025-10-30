@@ -53,6 +53,14 @@ create table Valutazioni_Libri (
 
 );
 
+CREATE TABLE libri_inviati (
+    client_host VARCHAR(255) NOT NULL,
+    id_libro INT NOT NULL,
+    PRIMARY KEY (client_host, id_libro),
+    FOREIGN KEY (id_libro) REFERENCES libri(id_libro)
+);
+
+
 -- le valutazioni e i commenti sono obbligatori
 -- un utente può valutare un libro solo se presente nella sua libreria
 -- un utente può consigliare un libro solo se presente nella sua libreria
