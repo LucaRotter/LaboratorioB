@@ -89,6 +89,7 @@ public class VisLibroController implements Initializable{
 		Model.getIstance().getView().selectedBookProperty().addListener((obs, oldLibr, newLibr) -> {
 
 		if(newLibr != null){
+
         	setLibro(newLibr);
 		}
 
@@ -96,13 +97,16 @@ public class VisLibroController implements Initializable{
 
 	
 	}
-
 	
 	public void init(){
 
 		btnComments.setOnAction(e->{
 			onComments();
 		});	
+
+		btnRelated.setOnAction(e->{
+			onReccomended();
+		});
 
 		btnSave.setOnAction(e->{
 			OpenModalLibraries();
@@ -214,6 +218,10 @@ public class VisLibroController implements Initializable{
 		Model.getIstance().getView().getSideBarSelectionItem().set("AddReview");
 	}
 
+	public void onReccomended(){
+		Model.getIstance().getView().getSideBarSelectionItem().set("AddReccomended");
+	}	
+
 	//function to open/close the modal to add the book to libraries
 	public void OpenModalLibraries() {
 
@@ -283,7 +291,6 @@ public class VisLibroController implements Initializable{
 				
 				if(libraryItemController.isSelected()) {
 					
-					System.out.println("Adding book to library: " + libraryItemController.getId_library() + " Book ID: " + Model.getIstance().getView().getSelectedBook().getId());
 					try {
 						clientBR.getInstance().addLibroLibreria(
 							Model.getIstance().getView().getSelectedBook().getId(),
@@ -294,7 +301,7 @@ public class VisLibroController implements Initializable{
 						e.printStackTrace();
 					}
 				} else {
-					System.out.println("Remove book from library: " + libraryItemController.getId_library() + " Book ID: " + Model.getIstance().getView().getSelectedBook().getId());
+					
 					try {
 						clientBR.getInstance().removeLibroLibreria(
 							Model.getIstance().getView().getSelectedBook().getId(),

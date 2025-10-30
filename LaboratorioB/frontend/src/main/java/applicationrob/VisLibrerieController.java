@@ -77,7 +77,6 @@ public class VisLibrerieController {
     @FXML
     public void initialize() throws RemoteException {
         id_user = TokenSession.getUserId();
-        TokenSession.checkTkSession();
 
         librerie = FXCollections.observableArrayList();
         currentLibr = FXCollections.observableArrayList();
@@ -97,7 +96,7 @@ public class VisLibrerieController {
     	        }
             });
 
-    	InsertingElements();
+    	InsertingElements(currentLibr);
     }
     
     //Metodo che permetta l'apertura del Modal
@@ -109,7 +108,6 @@ public class VisLibrerieController {
     //Metodo per inviare dati inseriti nel Modal
     @FXML
     void sendModal(ActionEvent event) throws RemoteException {
-        TokenSession.checkTkSession();
         String libName = modalTextField.getText().trim();
 
         if (libName.isEmpty()) {
@@ -138,7 +136,6 @@ public class VisLibrerieController {
     // Metodo che cerca le librerie in base alla scritta nel TextField
     @FXML
     void searchLibraries(ActionEvent event) throws RemoteException {
-        TokenSession.checkTkSession();
         String textSlib = searchBar.getText().trim().toLowerCase();
         librerie.setAll(clientBR.getInstance().getLibrerie(id_user));
     	
@@ -171,7 +168,6 @@ public class VisLibrerieController {
  // Metodo per azionare la modifica/aggiunta librerie 
     @FXML
     void useEdit(ActionEvent event) throws RemoteException {
-        TokenSession.checkTkSession();
         listaLibrerie = clientBR.getInstance().getLibrerie(id_user);
         librerie.setAll(FXCollections.observableArrayList(listaLibrerie));
 
