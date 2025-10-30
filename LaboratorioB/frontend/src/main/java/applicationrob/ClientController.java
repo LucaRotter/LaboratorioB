@@ -30,6 +30,9 @@ public class ClientController implements Initializable{
 
 			case "AddReview": MainPage.setCenter(Model.getIstance().getView().getAddReview());
 			break;
+
+			case "AddReccomended": MainPage.setCenter(Model.getIstance().getView().getAddReccomended());
+			break;
 			
 			default: MainPage.setCenter(Model.getIstance().getView().getDashboardMain());
 			

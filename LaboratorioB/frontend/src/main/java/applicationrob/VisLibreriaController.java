@@ -67,7 +67,11 @@ public class VisLibreriaController {
             InsertingElements(currentBooks);
         
           }
+<<<<<<< HEAD
 
+=======
+             
+>>>>>>> 8d129a43b437cf6f5af83dd969aed5b85af26087
         });
 
 		selectedLibrary = Model.getIstance().getView().getSelectedLibrary();
@@ -159,10 +163,4 @@ public class VisLibreriaController {
             }
         }
     }
-
-        
-    
-
-
-
 }
