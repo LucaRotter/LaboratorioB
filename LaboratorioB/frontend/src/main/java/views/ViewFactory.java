@@ -106,7 +106,11 @@ public class ViewFactory {
 	}
 
     public void setSelectedLibrary(Libreria lib) { 
+		/*if (lib.getIdLibreria() == getSelectedLibrary().getIdLibreria()) {
+			selectedLibreria.set(null); 
+		} */
 		selectedLibreria.set(lib); 
+		
 	}
 	
 
