@@ -44,9 +44,8 @@ public class AddReccomendedController implements Initializable {
 
     @FXML
     public void initialize(URL location, ResourceBundle resources)  {
+
         
-        spot1.setOnMouseClicked(e-> System.out.println("cliccato"));
-        spot2.setOnMouseDragEntered(e->System.out.println("ciaoooo"));
 
         Model.getIstance().getView().selectedBookProperty().addListener((obs, oldLibr, newLibr) -> {
 
