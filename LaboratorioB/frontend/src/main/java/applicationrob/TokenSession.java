@@ -10,10 +10,11 @@ public class TokenSession {
         userId = id;
     }
 
-    public static void checkTkSession() {
+    public static boolean checkTkSession() {
         if (userId == -1) {
-            return;
+            return false;
         }
+        return true;
     }
     
 }
