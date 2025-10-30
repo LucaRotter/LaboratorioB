@@ -97,7 +97,7 @@ public class VisLibrerieController {
     	        }
             });
 
-    	InsertingElements();
+    	InsertingElements(currentLibr);
     }
     
     //Metodo che permetta l'apertura del Modal

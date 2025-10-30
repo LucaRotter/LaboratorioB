@@ -53,6 +53,22 @@ public class VisLibreriaController {
             System.out.println("Selected library changed." + newLibrary.getNomeLibreria());
             if (newLibrary != null) {
 
+<<<<<<< HEAD
+            try {
+            booksLibrary.clear();
+            booksLibrary.addAll(clientBR.getInstance().getLibreria(newLibrary.getIdLibreria()).getLibreria());
+            } catch (RemoteException e) {
+            e.printStackTrace();
+            } 
+
+            // Imposto currentLibr con tutti i libri fittizi
+            currentBooks.setAll(booksLibrary); 
+
+            // Aggiorno il GridPane con i libri
+            InsertingElements(currentBooks);
+        
+          }
+=======
                 System.out.println("Updating view for library: " + newLibrary.getNomeLibreria());
 
                     selectedLibrary = newLibrary;
@@ -72,15 +88,17 @@ public class VisLibreriaController {
                 InsertingElements(currentBooks);
                 
                 }
+>>>>>>> 5b9aae23993da47f94e0fa64fd2b9141611d5d36
         });
 
-		library = Model.getIstance().getView().getSelectedLibrary();
-		if (library != null) {
-			bookNameLabel.setText(library.getNomeLibreria());
+		selectedLibrary = Model.getIstance().getView().getSelectedLibrary();
+		if (selectedLibrary  != null) {
+			bookNameLabel.setText(selectedLibrary .getNomeLibreria());
 		}
         
         try {
-            booksLibrary.addAll(clientBR.getInstance().getLibreria(library.getIdLibreria()).getLibreria());
+            booksLibrary.clear();
+            booksLibrary.addAll(clientBR.getInstance().getLibreria(selectedLibrary .getIdLibreria()).getLibreria());
         } catch (RemoteException e) {
             e.printStackTrace();
         }
@@ -100,9 +118,7 @@ public class VisLibreriaController {
     public void SeachBooksInLibrary(ActionEvent event) throws RemoteException, IOException {
         TokenSession.checkTkSession();
         String textSlib = searchBar.getText().trim().toLowerCase();
-        //library = clientBR.getInstance().getLibreria(selectedLibrary.getIdLibreria());
         booksLibrary.setAll(clientBR.getInstance().getLibreria(selectedLibrary.getIdLibreria()).getLibreria());
-        //booksLibrary.setAll(library.getLibreria());
          if (textSlib.isEmpty()) {
             currentBooks.setAll(booksLibrary);
         } else {
@@ -139,9 +155,7 @@ public class VisLibreriaController {
             VBox booksPane = loader.load();
 			
 			BookController bookController= loader.getController();
-			Libro currentBook = clientBR.getInstance().getLibro(books.getId());
-            
-            bookController.setLabels(currentBook.getAutore(), currentBook.getTitolo());
+            bookController.setLabels(books.getAutore(), books.getTitolo());
 
             booksPane.setPrefSize(120, 120);
             GridPane.setMargin(booksPane, new Insets(20, 20, 20, 20));
@@ -149,7 +163,7 @@ public class VisLibreriaController {
             booksContainer.add(booksPane, col, row);
 			
 			booksPane.setOnMouseClicked(e->{
-			    Model.getIstance().getView().setSelectedBook(currentBook);
+			    Model.getIstance().getView().setSelectedBook(books);
 				Model.getIstance().getView().getSideBarSelectionItem().set("VisLibro");
 				
 			});
