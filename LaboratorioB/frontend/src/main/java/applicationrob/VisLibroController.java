@@ -119,13 +119,15 @@ public class VisLibroController implements Initializable{
 	}
 
 	//function to open the review modal
-	public void openModal() throws IOException {
+	public void openModal(Valutazione review) throws IOException {
 		
 		modalOverlay.setVisible(true);
 		root.setDisable(true);
 		modalOverlay.toFront();
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/applicationrob/TableReview.fxml"));
 		VBox modalContent = loader.load();
+		TableReviewController tableReviewController = loader.getController();
+		tableReviewController.setReview(review);
 		
 		modalOverlay.getChildren().add(modalContent);
 		 	
@@ -167,6 +169,7 @@ public class VisLibroController implements Initializable{
 		}
 
 		ReviewController reviewc =  loader1.getController();
+		reviewc.setReview(review.get(i));
 		reviewc.setVislibroController(this);
 
 		reviewContainer.getChildren().add(hBox);

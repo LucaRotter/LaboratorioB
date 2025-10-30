@@ -21,22 +21,22 @@ public class AddReviewController implements Initializable{
     private Button BtnRestar;
 
     @FXML
-    private ChoiceBox<?> ScoreContent;
+    private ChoiceBox<Integer> ScoreContent;
 
     @FXML
-    private ChoiceBox<?> ScoreEdition;
+    private ChoiceBox<Integer> ScoreEdition;
 
     @FXML
-    private ChoiceBox<?> ScoreFinal;
+    private ChoiceBox<Integer> ScoreFinal;
 
     @FXML
-    private ChoiceBox<?> ScoreOriginality;
+    private ChoiceBox<Integer> ScoreOriginality;
 
     @FXML
-    private ChoiceBox<?> ScorePleasentness;
+    private ChoiceBox<Integer> ScorePleasentness;
 
     @FXML
-    private ChoiceBox<?> ScoreStyle;
+    private ChoiceBox<Integer> ScoreStyle;
 
     @FXML
     private TextArea TxtContent;
@@ -59,6 +59,25 @@ public class AddReviewController implements Initializable{
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         init();
+
+        int i=1;
+
+        for(i=1; i<=5; i++){
+
+            ScoreStyle.getItems().add(i);
+
+            ScoreEdition.getItems().add(i);
+            ScoreContent.getItems().add(i);
+            ScorePleasentness.getItems().add(i);
+            ScoreOriginality.getItems().add(i);
+        }
+
+        ScoreStyle.setValue(1);
+        ScoreEdition.setValue(1);
+        ScoreContent.setValue(1);
+        ScorePleasentness.setValue(1);
+        ScoreOriginality.setValue(1);
+
     }
 
     public void init(){
@@ -99,12 +118,21 @@ public class AddReviewController implements Initializable{
         int originality = Integer.parseInt(ScoreOriginality.getValue().toString());
         double finalScore = (style + edition + content + pleasentness + originality) / 5.0;
 
+
         Valutazione val = new Valutazione(style, edition, content, pleasentness, originality, finalScore,
             TxtContent.getText(), TxtEdition.getText(), TxtStyle.getText(), TxtPleasentess.getText(), TxtOriginality.getText(), Model.getIstance().getView().getSelectedBook().getId(),
             TokenSession.getUserId()
         );
 
-        clientBR.getInstance().createValutazione(val);
+        System.out.println("Valutazione creata: " + val.getVotoStile());
+
+        if(clientBR.getInstance().createValutazione(val)){
+            System.out.println("Valutazione inserita con successo");
+            Model.getIstance().getView().getSideBarSelectionItem().set("VisLibro");
+        } else {
+            System.out.println("Errore nell'inserimento della valutazione");
+        }
+
     }
 
     

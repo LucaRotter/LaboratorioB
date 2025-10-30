@@ -112,17 +112,17 @@
                   </Pane>
                   <Pane layoutX="10.0" layoutY="152.0" prefHeight="47.0" prefWidth="138.0" VBox.vgrow="ALWAYS">
                      <children>
-                        <Text fx:id="scoreOriginality" layoutX="14.0" layoutY="33.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
+                        <Text fx:id="noteOriginality" layoutX="14.0" layoutY="33.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
                      </children>
                   </Pane>
                   <Pane layoutX="10.0" layoutY="199.0" prefHeight="47.0" prefWidth="138.0" VBox.vgrow="ALWAYS">
                      <children>
-                        <Text fx:id="scoreEdition" layoutX="14.0" layoutY="33.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
+                        <Text fx:id="noteEdition" layoutX="14.0" layoutY="33.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
                      </children>
                   </Pane>
                   <Pane layoutX="10.0" layoutY="246.0" prefHeight="47.0" prefWidth="138.0" VBox.vgrow="ALWAYS">
                      <children>
-                        <Text fx:id="scoreFinal" layoutX="14.0" layoutY="33.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
+                        <Text fx:id="noteFinal" layoutX="14.0" layoutY="33.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
                      </children>
                   </Pane>
                </children>

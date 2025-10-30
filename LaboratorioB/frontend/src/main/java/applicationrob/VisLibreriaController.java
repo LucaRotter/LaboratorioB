@@ -49,9 +49,11 @@ public class VisLibreriaController {
         filteredBooks = FXCollections.observableArrayList();
 
         Model.getIstance().getView().selectedLibraryProperty().addListener((obs, oldLibrary, newLibrary) -> {
-            if (newLibrary != null) {
-            bookNameLabel.setText(newLibrary.getNomeLibreria());
 
+            System.out.println("Selected library changed." + newLibrary.getNomeLibreria());
+            if (newLibrary != null) {
+
+<<<<<<< HEAD
             try {
             booksLibrary.clear();
             booksLibrary.addAll(clientBR.getInstance().getLibreria(newLibrary.getIdLibreria()).getLibreria());
@@ -66,6 +68,27 @@ public class VisLibreriaController {
             InsertingElements(currentBooks);
         
           }
+=======
+                System.out.println("Updating view for library: " + newLibrary.getNomeLibreria());
+
+                    selectedLibrary = newLibrary;
+                    bookNameLabel.setText(newLibrary.getNomeLibreria());
+
+                    try {
+                        booksLibrary.clear();
+                        Libreria lib = clientBR.getInstance().getLibreria(newLibrary.getIdLibreria());
+                        booksLibrary.addAll(lib.getLibreria());
+                    } catch (RemoteException e) {
+                        e.printStackTrace();
+                    }
+
+       
+                System.out.println("Books in Library: " + booksLibrary.size());
+                currentBooks.setAll(booksLibrary);
+                InsertingElements(currentBooks);
+                
+                }
+>>>>>>> 5b9aae23993da47f94e0fa64fd2b9141611d5d36
         });
 
 		selectedLibrary = Model.getIstance().getView().getSelectedLibrary();
