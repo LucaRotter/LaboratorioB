@@ -45,7 +45,7 @@ public class AddReccomendedController implements Initializable {
     @FXML
     public void initialize(URL location, ResourceBundle resources)  {
 
-        
+
 
         Model.getIstance().getView().selectedBookProperty().addListener((obs, oldLibr, newLibr) -> {
 
@@ -54,48 +54,6 @@ public class AddReccomendedController implements Initializable {
             
 		}
 
-		});
-
-        LinkedList<Libro> books = new LinkedList<>();
-
-        int row = 0;
-        int col = 0;
-
-        for(int i= 0; i<3; i++) {
-        
-        Libro book = null;
-        
-        try {
-            book = clientBR.getInstance().getLibro(i);
-        } catch (RemoteException e) {
-           
-            e.printStackTrace();
-        }
-        books.add(book);
-
-        }
-
-        bookList.addAll(books);
-
-        for (Libro book : bookList) {
-            System.out.println(book.getId());
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("BookEL.fxml"));
-            VBox booksPane = loader.load();
-			
-			BookController bookController= loader.getController();
-            
-            bookController.setLabels(book.getAutore(), book.getTitolo());
-
-            booksPane.setPrefSize(120, 120);
-            GridPane.setMargin(booksPane, new Insets(20, 20, 20, 20));
-
-            grid.add(booksPane, col, row);
-        
-        } catch (IOException e) {
-            
-            e.printStackTrace();
-        }
+    });
     }
-}
 }

@@ -34,7 +34,7 @@ public class SideBarController implements Initializable{
 	private int id_user;
 	
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		checkLogin();
+		//checkLogin();
 		init();
 	}
 	
@@ -72,7 +72,7 @@ public class SideBarController implements Initializable{
 	}
 
 
-	public void checkLogin() {
+	/*public void checkLogin() {
 		id_user = TokenSession.getUserId();
 		if(id_user != -1) {
 			btnLogOut.setVisible(true);
@@ -82,7 +82,7 @@ public class SideBarController implements Initializable{
 			loginPane.setVisible(true);
 		}
 	}
-
+*/
 	public void showAlert(String title, String message) {
     Alert alert = new Alert(Alert.AlertType.WARNING);
     alert.setTitle(title);
