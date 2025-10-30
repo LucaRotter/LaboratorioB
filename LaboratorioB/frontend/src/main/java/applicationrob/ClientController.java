@@ -22,12 +22,20 @@ public class ClientController implements Initializable{
 			case "VisLibrerie" : MainPage.setCenter(Model.getIstance().getView().getVisLibrerie());
 			break;
 			
+			case "VisLibreria" : MainPage.setCenter(Model.getIstance().getView().getVisLibreria());
+			break;
+			
 			case "VisLibro" : MainPage.setCenter(Model.getIstance().getView().getVisLibro());
+			break;
+
+			case "AddReview": MainPage.setCenter(Model.getIstance().getView().getAddReview());
 			break;
 			
 			default: MainPage.setCenter(Model.getIstance().getView().getDashboardMain());
 			
 			}
+
+			System.out.println("Changed to: " + newValue);
 		
 		}); 
 	}

@@ -1,66 +1,320 @@
 package applicationrob;
 
+import java.io.IOException;
 import java.net.URL;
+import java.rmi.RemoteException;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.ResourceBundle;
-import javafx.scene.control.Label;
+
+import LaboratorioB.common.models.Libreria;
+import LaboratorioB.common.models.Libro;
+import LaboratorioB.common.models.Valutazione;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.layout.AnchorPane;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import models.Model;
-import views.ViewFactory;
-import LaboratorioB.common.models.*;
 
 public class VisLibroController implements Initializable{
 
-	@FXML 
-	private AnchorPane root;
+	@FXML
+    private Button btnCancel;
+
+    @FXML
+    private Label LBAuthor;
+
+    @FXML
+    private Label LBGenre;
+
+    @FXML
+    private Label LBHouse;
+
+    @FXML
+    private Label LBTitle;
+
+    @FXML
+    private Label LBYear;
+
+    @FXML
+    private Pane ModalLibraries;
+
+    @FXML
+    private ScrollPane ScrollLibraries;
+
+    @FXML
+    private VBox VBoxLibraries;
+
+    @FXML
+    private Button btnComments;
+
+    @FXML
+    private Button btnRelated;
+
+    @FXML
+    private Button btnSave;
+
+    @FXML
+    private StackPane modalOverlay;
+
+    @FXML
+    private HBox recListBook;
+
+    @FXML
+    private VBox reviewContainer;
+
+    @FXML
+    private ScrollPane root;
 
 	@FXML
-    private Label titoloLabel;
-	@FXML
-    private Label autoreLabel;
-	@FXML
-    private Label genereLabel;
-	@FXML
-    private Label editoreLabel;
-	@FXML
-    private Label annoLabel;
-	@FXML
-    private Label idLibrLabel;
-	
-	private Libro selectedBook;
+	private Button btnConfirm;
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		Model.getIstance().getView().selectedBookProperty().addListener((obs, oldLibr, newLibr) -> {
-        if (newLibr != null) {
-            titoloLabel.setText(newLibr.getTitolo());
-            autoreLabel.setText(newLibr.getAutore());
-            genereLabel.setText(newLibr.getGenere());
-            editoreLabel.setText(newLibr.getEditore());
-            annoLabel.setText(String.valueOf(newLibr.getAnno()));
-            idLibrLabel.setText(String.valueOf(newLibr.getId()));
-        }
-    });
 
-		Libro libro = Model.getIstance().getView().getSelectedBook();
-		if (libro != null) {
-			titoloLabel.setText(libro.getTitolo());
-			autoreLabel.setText(libro.getAutore());
-			genereLabel.setText(libro.getGenere());
-			editoreLabel.setText(libro.getEditore());
-			annoLabel.setText(String.valueOf(libro.getAnno()));
-			idLibrLabel.setText(String.valueOf(libro.getId()));
-		}
-	}
-
-	public void setLibro(Libro selectedBook) {
-			this.selectedBook = selectedBook;
-			
-	}
-
-	public void setSelectedBook(Libro selectedBook) {
+		Libro book = Model.getIstance().getView().getSelectedBook();
 		
-		this.selectedBook = selectedBook;
+		init();
+
+		if (book != null) {
+    		setLibro(book);
+		}		
+
+		Model.getIstance().getView().selectedBookProperty().addListener((obs, oldLibr, newLibr) -> {
+
+		if(newLibr != null){
+        	setLibro(newLibr);
+		}
+
+		});
+
+	
+	}
+
+	
+	public void init(){
+
+		btnComments.setOnAction(e->{
+			onComments();
+		});	
+
+		btnSave.setOnAction(e->{
+			OpenModalLibraries();
+
+		});
+
+		btnConfirm.setOnAction(e->{
+			onConfirm();
+		});
+
+		btnCancel.setOnAction(e->{
+			closeModal();
+		});
+	}
+
+	//function to open the review modal
+	public void openModal(Valutazione review) throws IOException {
+		
+		modalOverlay.setVisible(true);
+		root.setDisable(true);
+		modalOverlay.toFront();
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/applicationrob/TableReview.fxml"));
+		VBox modalContent = loader.load();
+		TableReviewController tableReviewController = loader.getController();
+		tableReviewController.setReview(review);
+		
+		modalOverlay.getChildren().add(modalContent);
+		 	
+	}
+
+	//function to set the book details 
+	public void setLibro(Libro selectedBook) {
+
+		LBTitle.setText(selectedBook.getTitolo());	
+		LBAuthor.setText(selectedBook.getAutore());
+		LBHouse.setText(selectedBook.getEditore());
+		LBGenre.setText(selectedBook.getGenere());
+		LBYear.setText(String.valueOf(selectedBook.getAnno()));
+
+		int i ;
+		List<Valutazione> review = new LinkedList<>();
+
+		try {
+			review = clientBR.getInstance().getValutazione(2);
+		} catch (RemoteException e) {
+
+			e.printStackTrace();
+		}
+
+		//review initialization
+
+		reviewContainer.getChildren().clear();
+
+		for(i= 0;i<review.size();i++){
+		FXMLLoader loader1 = new FXMLLoader(getClass().getResource("/applicationrob/Review.fxml"));
+		
+		HBox hBox = null;
+
+		try {
+			hBox = loader1.load();
+		} catch (IOException e) {
+			
+			e.printStackTrace();
+		}
+
+		ReviewController reviewc =  loader1.getController();
+		reviewc.setReview(review.get(i));
+		reviewc.setVislibroController(this);
+
+		reviewContainer.getChildren().add(hBox);
+
+		//recommended books initialization
+
+		List<Libro> recommendList = new LinkedList<>();
+
+		try {
+			recommendList = clientBR.getInstance().getConsiglio(2);
+		} catch (RemoteException e) {
+
+			e.printStackTrace();
+		}
+
+		recListBook.getChildren().clear();  
+
+		for(i=0; i<recommendList.size(); i++) {
+
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/applicationrob/BookEl.fxml"));
+		BookController book = loader.getController();
+		book.setLabels(recommendList.get(i).getAutore(), recommendList.get(i).getTitolo());
+		VBox vbox = null;
+		
+		try {
+			vbox = loader.load();
+			
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		recListBook.getChildren().add(vbox);
+		}
+	  }
+
+	}
+
+	//function to go to the add reviews section
+	public void onComments(){
+		Model.getIstance().getView().getSideBarSelectionItem().set("AddReview");
+	}
+
+	//function to open/close the modal to add the book to libraries
+	public void OpenModalLibraries() {
+
+		if(ModalLibraries.isVisible()){
+			ModalLibraries.setVisible(false);
+			ModalLibraries.setDisable(true);
+			return;
+		}
+
+		ModalLibraries.setVisible(true);
+		ModalLibraries.setDisable(false);
+		ModalLibraries.toFront();
+	
+		//initialization of the libraries list
+		VBoxLibraries.getChildren().clear();
+		List<Libreria> libraries = new LinkedList<>();
+
+		try {
+			libraries = clientBR.getInstance().getLibrerie(TokenSession.getUserId());
+		} catch (RemoteException e) {
+			
+			e.printStackTrace();
+		}
+
+		for(int i= 0; i<libraries.size(); i++){
+
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("/applicationrob/LibraryItem.fxml"));
+			HBox hbox = null;
+
+			try {
+				hbox = loader.load();
+
+			} catch (IOException e) {
+				
+				e.printStackTrace();
+			}
+
+			boolean found = libraries.get(i).getLibreria().stream().anyMatch(libro -> 
+			libro.getId() == Model.getIstance().getView().getSelectedBook().getId());
+
+			LibraryItemController libraryItemController = loader.getController();
+			libraryItemController.initLibrary(libraries.get(i).getNomeLibreria(), libraries.get(i).getIdLibreria(),found);
+
+			//setting user data to retrieve the controller later
+			hbox.setUserData(libraryItemController);
+
+			VBoxLibraries.getChildren().add(hbox);
+		}
+
+	}
+
+	public void onConfirm(){
+
+		//adding the book to the selected libraries
+		VBoxLibraries.getChildren().size();
+		
+		for(int i=0; i<VBoxLibraries.getChildren().size(); i++){
+
+			//retrieving the controller
+			HBox hbox = (HBox) VBoxLibraries.getChildren().get(i);
+			LibraryItemController libraryItemController = (LibraryItemController)hbox.getUserData();
+			
+
+			if(libraryItemController.hasStateChanged()){
+
+				//calling the RMI method to add the book to the 
+				
+				if(libraryItemController.isSelected()) {
+					
+					System.out.println("Adding book to library: " + libraryItemController.getId_library() + " Book ID: " + Model.getIstance().getView().getSelectedBook().getId());
+					try {
+						clientBR.getInstance().addLibroLibreria(
+							Model.getIstance().getView().getSelectedBook().getId(),
+							libraryItemController.getId_library()
+						);
+					} catch (RemoteException e) {
+						
+						e.printStackTrace();
+					}
+				} else {
+					System.out.println("Remove book from library: " + libraryItemController.getId_library() + " Book ID: " + Model.getIstance().getView().getSelectedBook().getId());
+					try {
+						clientBR.getInstance().removeLibroLibreria(
+							Model.getIstance().getView().getSelectedBook().getId(),
+							libraryItemController.getId_library()
+						);
+					} catch (RemoteException e) {
+						
+						e.printStackTrace();
+					}
+				}
+
+			hbox.setUserData(null);
+			closeModal();
+		} 
+	}  
+
+	}
+
+	public void closeModal() {
+		ModalLibraries.setVisible(false);
+		ModalLibraries.setDisable(true);
 	}
 }

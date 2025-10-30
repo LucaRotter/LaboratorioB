@@ -34,8 +34,6 @@ public class DashboardController implements Initializable{
 		
 	}
 	
-	
-	
 	//metodo utilizzato per aggiungere i libri al gridPane e inizializzarne il contenuto
 	private void putBooks() throws RemoteException, IOException {
 		 
@@ -43,9 +41,7 @@ public class DashboardController implements Initializable{
 		int row= 1;
 		int i;
 		
-		for(i=0; i<60; i++) {
-			int index = i; 
-			
+		for(i=1; i<60; i++) { 
 			if(col == 5) {
 				
 				row += 1;
@@ -56,10 +52,9 @@ public class DashboardController implements Initializable{
 			loader.setLocation(getClass().getResource("BookEl.fxml"));
 			VBox vbox = loader.load();
 			
-			BookController Bookcontroller= loader.getController();
-			Libro libr = clientBR.getInstance().getLibro(index);
-			
-			//Bookcontroller.setLabels(Libro libro);
+			BookController bookController= loader.getController();
+			Libro libr = clientBR.getInstance().getLibro(i);
+			bookController.setLabels(libr.getAutore(), libr.getTitolo());
 			
 			vbox.setOnMouseClicked(e->{
 
@@ -70,15 +65,14 @@ public class DashboardController implements Initializable{
 			
 			vbox.setPrefSize(120, 180);
 			gridBooks.add(vbox, col++, row);
-			
 			gridBooks.setPrefSize(i, i);
 		}
 	}
 	
 	public void OnResearch() throws IOException {
-	 
 	  gridBooks.getChildren().clear();
 	  putBooks();
-	  
 	}
+
+	
 }

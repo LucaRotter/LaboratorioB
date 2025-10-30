@@ -12,6 +12,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 import LaboratorioB.common.interfacce.serverBR;
@@ -31,7 +32,7 @@ public class serverBRImpl extends UnicastRemoteObject implements serverBR {
     // Costruttore
     protected serverBRImpl() throws RemoteException, SQLException {
         super();
-        conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/labB", "postgres", "Rluca2004");
+        conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/LaboratorioB", "postgres", "@Aleks13082002");
         System.out.println("Database connected!");
     }
 
@@ -228,8 +229,8 @@ public class serverBRImpl extends UnicastRemoteObject implements serverBR {
 
     @Override
     public List<Valutazione> getValutazione(int id_libro) throws RemoteException {
-        String query = "SELECT * FROM valutazioni WHERE id_libro = ?";
-        List<Valutazione> valutazioni = null;
+        String query = "SELECT * FROM Valutazioni_Libri WHERE id_libro = ?";
+        List<Valutazione> valutazioni = new LinkedList<Valutazione>();
         try (Connection conn = DatabaseManager.getConnection(); PreparedStatement ps = conn.prepareStatement(query)) {
             ps.setInt(1, id_libro);
             try (ResultSet rs = ps.executeQuery()) {
@@ -237,19 +238,20 @@ public class serverBRImpl extends UnicastRemoteObject implements serverBR {
                     int voto_stile = rs.getInt("voto_stile");
                     int voto_edizione = rs.getInt("voto_edizione");
                     int voto_contenuto = rs.getInt("voto_contenuto");
-                    int voto_gradevolezza = rs.getInt("voto_gradevole");
+                    int voto_gradevolezza = rs.getInt("voto_gradevolezza");
                     int voto_originalita = rs.getInt("voto_originalita");
                     double voto_medio = rs.getDouble("voto_medio");
                     String stile = rs.getString("stile");
                     String edizione = rs.getString("edizione");
                     String contenuto = rs.getString("contenuto");
-                    String gradevole = rs.getString("gradevole");
+                    String gradevole = rs.getString("gradevolezza");
                     String originalita = rs.getString("originalita");
                     int id_utente = rs.getInt("id_utente");
                     Valutazione val = new Valutazione(voto_stile, voto_edizione, voto_contenuto,
                             voto_gradevolezza, voto_originalita, voto_medio, stile, edizione, contenuto,
                             gradevole, originalita, id_utente, id_libro);
                     valutazioni.add(val);
+                    
                 }
             }
         } catch (SQLException e) {
@@ -261,7 +263,7 @@ public class serverBRImpl extends UnicastRemoteObject implements serverBR {
     @Override
     public List<Libro> getConsiglio(int id_libro) throws RemoteException {
         String query = "SELECT * FROM libri_consigliati WHERE id_libro = ?";
-        List<Libro> consigli = null;
+        List<Libro> consigli = new LinkedList<Libro>();
         try (Connection conn = DatabaseManager.getConnection(); PreparedStatement ps = conn.prepareStatement(query)) {
             ps.setInt(1, id_libro);
             try (ResultSet rs = ps.executeQuery()) {
@@ -349,8 +351,8 @@ public class serverBRImpl extends UnicastRemoteObject implements serverBR {
     @Override
     public synchronized Libreria createLibreria(String nome, int id_utente) throws RemoteException {
         // inserimento in db
+        String query = "INSERT into libreria(id_utente, nome) VALUES (?, ?)";
 
-        String query = "INSERT into libreria (id_utente, nome) VALUES (?, ?)";
         Libreria libreria = null;
         try (Connection conn = DatabaseManager.getConnection(); PreparedStatement ps = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS)) {
 
@@ -377,7 +379,7 @@ public class serverBRImpl extends UnicastRemoteObject implements serverBR {
 
     @Override
     public Libreria addLibroLibreria(int id_libro, int id_libreria) throws RemoteException {
-        String query = "INSERT into libreria _libri (id_libro, id_libreria) VALUES (?, ?)";
+        String query = "INSERT into libreria_libri(id_libro, id_libreria) VALUES (?, ?)";
         Libreria libreria = null;
         try (Connection conn = DatabaseManager.getConnection(); PreparedStatement ps = conn.prepareStatement(query)) {
 
@@ -415,7 +417,7 @@ public class serverBRImpl extends UnicastRemoteObject implements serverBR {
 
     public Libreria getLibreria(int id_libreria) throws RemoteException {
 
-        String query = "SELECT * FROM libreria L JOIN libreria_libri M on L.id_libreria = M.id_libreria WHERE L.id_libreria = ?";
+        String query = "SELECT * FROM libreria L LEFT JOIN libreria_libri M on L.id_libreria = M.id_libreria WHERE L.id_libreria = ?";
         Libreria libreria = null;
         List<Libro> libri = new ArrayList<>();
         try (Connection conn = DatabaseManager.getConnection(); PreparedStatement ps = conn.prepareStatement(query)) {
@@ -440,7 +442,9 @@ public class serverBRImpl extends UnicastRemoteObject implements serverBR {
                 if (id_utente != -1) {
                     libreria = new Libreria(id_utente, nome, (ArrayList<Libro>) libri, id_libreria);
                 }
-            }
+            } catch (SQLException e) {
+                e.printStackTrace();
+        }
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -517,14 +521,14 @@ public class serverBRImpl extends UnicastRemoteObject implements serverBR {
     }
 
     @Override
-    public synchronized boolean createValutazione(int id_utente, int id_libro, Valutazione val) throws RemoteException {
+    public synchronized boolean createValutazione(Valutazione val) throws RemoteException {
         // query per inserimento nel db
-        String query = "INSERT into valutazioni (id_utente, id_libro, edizione, voto_edizione, stile, voto_stile, contenuto, voto_contenuto, gradevolezza, voto_gradevolezza, originalita, voto_otiginalita, voto_medio) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? , ?)";
+        String query = "INSERT into Valutazioni_Libri (id_utente, id_libro, edizione, voto_edizione, stile, voto_stile, contenuto, voto_contenuto, gradevolezza, voto_gradevolezza, originalita, voto_originalita, voto_medio) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? , ?)";
 
         try (Connection conn = DatabaseManager.getConnection(); PreparedStatement ps = conn.prepareStatement(query)) {
 
-            ps.setInt(1, id_utente);
-            ps.setInt(2, id_libro);
+            ps.setInt(1, val.getIdLibro());
+            ps.setInt(2, val.getIdUtente());
             ps.setString(3, val.getNoteEdizione());
             ps.setInt(4, val.getVotoEdizione());
             ps.setString(5, val.getNoteStile());
@@ -549,7 +553,6 @@ public class serverBRImpl extends UnicastRemoteObject implements serverBR {
 
         return true;
     }
-
     public static void main(String[] args) {
         try {
             LocateRegistry.createRegistry(1099);

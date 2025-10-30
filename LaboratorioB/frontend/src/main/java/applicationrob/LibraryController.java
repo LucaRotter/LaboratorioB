@@ -3,19 +3,15 @@ package applicationrob;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.layout.StackPane;
 import java.lang.Runnable;
 import LaboratorioB.common.models.Libreria;
+import models.Model;
 
 
 public class LibraryController {
 
     @FXML
     private Button removeBtn;
-
-    @FXML
-    private StackPane rootPane;
-
     @FXML
     private Label libraryLabel;
 
@@ -31,12 +27,26 @@ public class LibraryController {
         libraryLabel.setText(libreria.getNomeLibreria());
         removeBtn.setVisible(editMode);
 
-        removeBtn.setOnAction(e -> {
-            if (onRemove != null){ onRemove.run();}
-        });
     }
 
-    public StackPane getRoot() {
-        return rootPane;
+    @FXML
+    private void clickLibrary() {
+        if (!editMode && libreria != null) {
+        Model.getIstance().getView().setSelectedLibrary(null);
+        Model.getIstance().getView().setSelectedLibrary(libreria);
+        Model.getIstance().getView().getSideBarSelectionItem().set("VisLibreria");
+        
     }
+   }
+
+    @FXML
+    public void removeLibrary() {
+        if (onRemove != null) {
+            onRemove.run();
+        }
+    }
+
+    
+
+     
 }
