@@ -38,12 +38,7 @@ public class LoginController implements Initializable {
 
        
         id_user = clientBR.getInstance().login(emailField.getText(), pwField.getText());
-
-        if(id_user == -1) { 
-             showAlert("Login Failed", "Invalid email or password");
-             return;
-        }     
-
+        TokenSession.checkTkSession();    
         TokenSession.setUserId(id_user);
         Model.getIstance().getView().changeToHome();
     } 

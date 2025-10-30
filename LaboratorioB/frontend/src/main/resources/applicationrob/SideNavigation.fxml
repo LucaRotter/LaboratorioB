@@ -64,7 +64,7 @@
                         </HBox>
                      </graphic>
                   </Button>
-                  <Button fx:id="btnLogOut" mnemonicParsing="false" prefHeight="43.0" prefWidth="119.0" styleClass="NavigationBtn" visible="false">
+                  <Button fx:id="btnLogOut" mnemonicParsing="false" prefHeight="30.0" prefWidth="119.0" styleClass="NavigationBtn" visible="false">
                      <graphic>
                         <HBox prefHeight="8.0" prefWidth="108.0">
                            <children>
@@ -73,7 +73,7 @@
                                     <Image url="@../img/bookshelf-icon-png-6.jpg" />
                                  </image>
                               </ImageView>
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Libraries" wrappingWidth="68.53668212890625" />
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Log out" wrappingWidth="68.53668212890625" />
                            </children>
                         </HBox>
                      </graphic>
@@ -85,7 +85,7 @@
                   <Font name="Lucida Bright" size="18.0" />
                </font>
             </Text>
-            <Pane layoutX="9.0" layoutY="495.0" prefHeight="166.0" prefWidth="193.0" styleClass="LoginPane">
+            <Pane fx:id="loginPane" layoutX="9.0" layoutY="495.0" prefHeight="166.0" prefWidth="193.0" styleClass="LoginPane">
                <children>
                   <Button fx:id="btnLogIn" layoutX="30.0" layoutY="22.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="124.0">
                      <graphic>

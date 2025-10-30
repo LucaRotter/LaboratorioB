@@ -67,7 +67,6 @@ public class VisLibreriaController {
             InsertingElements(currentBooks);
         
           }
-             
         });
 
 		selectedLibrary = Model.getIstance().getView().getSelectedLibrary();
@@ -95,7 +94,6 @@ public class VisLibreriaController {
 
     @FXML
     public void SeachBooksInLibrary(ActionEvent event) throws RemoteException, IOException {
-        TokenSession.checkTkSession();
         String textSlib = searchBar.getText().trim().toLowerCase();
         booksLibrary.setAll(clientBR.getInstance().getLibreria(selectedLibrary.getIdLibreria()).getLibreria());
          if (textSlib.isEmpty()) {
