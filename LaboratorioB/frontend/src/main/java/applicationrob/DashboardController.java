@@ -49,20 +49,10 @@ public class DashboardController implements Initializable{
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		
 		init();
-
-		try {
-
-			Bookserver = clientBR.getInstance().cercaLibri("", 0, "", Ricerca.TITOLO);
-			
-			
-		} catch (RemoteException e) {
-			
-			e.printStackTrace();
-		}
 		
 		//inizializzazione libri
 		try {
-			putBooks(1);
+			putBooks(currentIndex.get());
 		} catch (IOException e) {
 			
 			e.printStackTrace();
@@ -106,11 +96,13 @@ public class DashboardController implements Initializable{
 	//metodo utilizzato per aggiungere i libri al gridPane e inizializzarne il contenuto
 	private void putBooks(int indice) throws RemoteException, IOException {
 
+		Bookserver.addAll(clientBR.getInstance().lazyLoadingLibri());
+
 		int col= 0;
 		int row= 1;
 		int i;
 		
-		for(i=indice; i < indice + 100 ; i++) { 
+		for(i=indice; i < indice + 20 ; i++) { 
 
 			if(col == 5) {
 				
