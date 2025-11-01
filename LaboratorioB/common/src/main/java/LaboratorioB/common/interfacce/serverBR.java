@@ -19,6 +19,7 @@ public interface serverBR extends Remote {
     public Libro getLibro(int id) throws RemoteException;
     public List<Valutazione> getValutazione(int id) throws RemoteException;
     public List<Libro> getConsiglio(int id_libro) throws RemoteException;
+    public List<Libro> getConsiglioUtente(int id_libro, int id_utente) throws RemoteException;
     public double getVotoMedio(int id_libro) throws RemoteException;
     public List<Libro> cercaLibri(String autore, int anno, String titolo, Ricerca scelta) throws RemoteException;
     public Libreria createLibreria(String nome, int user_id) throws RemoteException;
