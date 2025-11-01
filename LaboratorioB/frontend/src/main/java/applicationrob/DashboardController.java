@@ -10,16 +10,16 @@ import LaboratorioB.common.models.Ricerca;
 import LaboratorioB.common.models.Libro;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import models.Model;
-
 
 public class DashboardController implements Initializable{
 
@@ -41,7 +41,17 @@ public class DashboardController implements Initializable{
 	@FXML
 	private Button btnBack;
 
-	private IntegerProperty currentIndex = new SimpleIntegerProperty(1);
+	@FXML
+	private TextField searchBar;
+
+	@FXML 
+	private ChoiceBox<Ricerca> choiceBoxOrder;
+
+	private final int LIST_SIZE = 20;
+
+	private IntegerProperty currentIndex = new SimpleIntegerProperty(0);
+
+	private String MODRICERCA = "VISUALIZZA";
 
 	private List<Libro> Bookserver = new ArrayList<>();
 	
@@ -49,29 +59,44 @@ public class DashboardController implements Initializable{
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		
 		init();
+		initSrollButtons();
 		
-		//inizializzazione libri
 		try {
+
+			//first loading books
+			Bookserver.addAll(clientBR.getInstance().lazyLoadingLibri());
 			putBooks(currentIndex.get());
+			
 		} catch (IOException e) {
 			
 			e.printStackTrace();
 		}
 
-		btnLeft.setText(currentIndex.get()  + "");
-		btnCenter.setText(currentIndex.get()+ 1 +"");
-		btnRight.setText(currentIndex.get() + 2 + "");
-
+		//listener for scroll buttons that load more books or go to previous books when index change
 		currentIndex.addListener((obs, oldIndex, newIndex) -> {
 			
 			try {
 
+				System.out.println("Index changed from " + oldIndex + " to " + newIndex);
+				//lazy loading books when scrolling forward and in view mode
+				if(newIndex.intValue() > oldIndex.intValue() && MODRICERCA.equals("VISUALIZZA")){ 
+					
+					Bookserver.addAll(clientBR.getInstance().lazyLoadingLibri());
+				}
+
+				if((newIndex.intValue() + 2) * LIST_SIZE > Bookserver.size() && MODRICERCA.equals("RICERCA")) {
+
+				} else {
+
+					btnLeft.setText(newIndex.intValue() + 1 + "");
+					btnCenter.setText(newIndex.intValue() + 2 + "");
+					btnRight.setText(newIndex.intValue() + 3 + "");
+					
+				}
+
+				System.out.println("facciooooo");
 				gridBooks.getChildren().clear();
 				putBooks(newIndex.intValue());
-
-				btnLeft.setText(newIndex.intValue() - 1 + "");
-				btnCenter.setText(newIndex.intValue() + "");
-				btnRight.setText(newIndex.intValue() + 1 + "");
 
 			} catch ( IOException e) {
 				
@@ -82,6 +107,7 @@ public class DashboardController implements Initializable{
 	}
 
 	public void init(){
+
 		btnForward.setOnAction(e->{
 
 			OnForward();
@@ -91,18 +117,44 @@ public class DashboardController implements Initializable{
 
 			OnBack();
 		});
+
+		searchBar.setOnKeyPressed(e->{
+
+			if(e.getCode() == KeyCode.ENTER){
+
+			try {
+				OnResearch();
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
+			}
+		});
+
+		choiceBoxOrder.getItems().addAll(Ricerca.TITOLO, Ricerca.AUTORE, Ricerca.ANNO);
+	}
+
+	public void initSrollButtons(){
+
+		btnLeft.setText(currentIndex.get()  + 1 + "");
+		btnCenter.setText(currentIndex.get()+ 2 +"");
+		btnRight.setText(currentIndex.get() + 3 + "");
+
 	}
 	
 	//metodo utilizzato per aggiungere i libri al gridPane e inizializzarne il contenuto
 	private void putBooks(int indice) throws RemoteException, IOException {
 
-		Bookserver.addAll(clientBR.getInstance().lazyLoadingLibri());
-
 		int col= 0;
 		int row= 1;
 		int i;
+
 		
-		for(i=indice; i < indice + 20 ; i++) { 
+		
+		for(i=indice* LIST_SIZE; i <= indice * LIST_SIZE + 19 ; i++) { 
+			
+			if(i >= Bookserver.size()) {
+				break;
+			}
 
 			if(col == 5) {
 				
@@ -128,40 +180,57 @@ public class DashboardController implements Initializable{
 			
 			vbox.setPrefSize(120, 180);
 			gridBooks.add(vbox, col++, row);
-			gridBooks.setPrefSize(i, i);
+			
 		}
 	}
-	
+
 	public void OnResearch() throws IOException {
+		
+		String Title = searchBar.getText();
+
+		if(searchBar.getText().isEmpty()){
+
+			MODRICERCA = "VISUALIZZA";
+			gridBooks.getChildren().clear();
+			Bookserver.clear();
+			Bookserver.addAll(clientBR.getInstance().lazyLoadingLibri());
+
+			currentIndex.set(0);
+			putBooks(0);
+			return;
+		}
+
+		MODRICERCA = "RICERCA";
+		gridBooks.getChildren().clear();
+		List<Libro> ricercaLibri = clientBR.getInstance().cercaLibri("",0,Title, Ricerca.TITOLO);
+
+		Bookserver.clear();
+		Bookserver.addAll(ricercaLibri);
+
+		currentIndex.set(0);
 		
 	}
 
 	public void OnForward(){
 
-		System.out.println(currentIndex.get() + 3);
-		System.out.println( Bookserver.size());
-
-		if(currentIndex.get() + 3 <=  Bookserver.size()){
-
-			System.out.println(currentIndex.get());
+		if((currentIndex.get() + 1) * LIST_SIZE <=  Bookserver.size()){
 
 			int count= currentIndex.get() ;
-			count += 3;
+			count += 1;
 
 			currentIndex.set(count); 
-			;
+
 		}
 	}
 
 	public void OnBack(){
 
-		if(currentIndex.get() - 3 >= 1){
+		if(currentIndex.get() - 1 >= 0){
 
 			int count= currentIndex.get() ;
-			count -= 3;
+			count -= 1;
 
-			currentIndex.set(count); ;
-			;
+			currentIndex.set(count);
 		}
 		
 	}

@@ -32,7 +32,7 @@
             </HBox>
          </content>
       </ScrollPane>
-      <ChoiceBox layoutX="63.0" layoutY="190.0" prefHeight="34.0" prefWidth="150.0" />
+      <ChoiceBox fx:id="choiceBoxOrder" layoutX="63.0" layoutY="190.0" prefHeight="34.0" prefWidth="150.0" />
       <Button layoutX="749.0" layoutY="190.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="68.0" text="Filters" />
       <ScrollPane hbarPolicy="NEVER" layoutX="63.0" layoutY="248.0" prefHeight="404.0" prefWidth="754.0" styleClass="ScrollPaneBooks">
          <content>
@@ -48,7 +48,7 @@
       </ScrollPane>
       <Pane layoutX="564.0" layoutY="45.0" prefHeight="34.0" prefWidth="252.0" styleClass="SearchBar">
          <children>
-            <TextField layoutX="27.0" prefHeight="34.0" prefWidth="226.0" promptText="search" />
+            <TextField fx:id="searchBar" layoutX="27.0" prefHeight="34.0" prefWidth="226.0" promptText="search" />
             <ImageView fitHeight="23.0" fitWidth="18.0" layoutX="5.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../img/search.png" />
@@ -56,14 +56,14 @@
             </ImageView>
          </children>
       </Pane>
-      <Text layoutX="98.0" layoutY="212.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sort A-Z" wrappingWidth="90.13671112060547" />
+      
       <HBox layoutX="330.0" layoutY="658.0" prefHeight="27.0" prefWidth="200.0">
          <children>
             <Button fx:id="btnBack" mnemonicParsing="false" text=" back"/>
             <Button fx:id="btnLeft" mnemonicParsing="false" text="" />
             <Button fx:id="btnCenter" mnemonicParsing="false" text="" />
             <Button fx:id="btnRight" mnemonicParsing="false" text="" />
-            <Button fx:id="btnForward" mnemonicParsing="false" text=" forward" />
+            <Button fx:id="btnForward" mnemonicParsing="false" text="forward" />
          </children>
       </HBox>
    </children>

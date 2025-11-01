@@ -184,7 +184,7 @@ public class serverBRImpl extends UnicastRemoteObject implements serverBR {
     }
 
     private void registraLibriInviati(Connection conn, String clientHost, List<Libro> libri) throws SQLException {
-        String insert = "INSERT IGNORE INTO libri_inviati (client_host, id_libro) VALUES (?, ?)";
+        String insert = "INSERT INTO libri_inviati (client_host, id_libro) VALUES (?, ?) ON CONFLICT DO NOTHING";
         try (PreparedStatement ps = conn.prepareStatement(insert)) {
             for (Libro libro : libri) {
                 ps.setString(1, clientHost);

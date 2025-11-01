@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.rmi.RemoteException;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import LaboratorioB.common.models.Libro;
@@ -22,15 +23,6 @@ import models.Model;
 public class AddReccomendedController implements Initializable {
 
     @FXML
-    private Pane firstbook;
-
-    @FXML
-    private Pane secondbook;  
-    
-    @FXML
-    private Pane thirdbook;
-
-    @FXML
     private TextField searchBar;
     
     @FXML
@@ -43,16 +35,21 @@ public class AddReccomendedController implements Initializable {
     private Pane spot2;
 
     @FXML
+    private Pane spot3;
+
+    @FXML
     public void initialize(URL location, ResourceBundle resources)  {
-
-
-
+        
         Model.getIstance().getView().selectedBookProperty().addListener((obs, oldLibr, newLibr) -> {
 
-		if(newLibr != null){
+        try {
 
-            
-		}
+            List<Libro> List = clientBR.getInstance().getConsiglio(newLibr.getId());
+
+        } catch (RemoteException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
 
     });
     }
