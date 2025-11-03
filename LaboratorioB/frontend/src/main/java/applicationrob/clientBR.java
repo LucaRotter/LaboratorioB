@@ -68,6 +68,10 @@ public class clientBR{
 		return server.getConsiglio(id_libro);
 	}
 
+	public List<Libro> getConsiglioUtente(int id_libro, int id_utente) throws RemoteException{
+		return server.getConsiglioUtente(id_libro, id_utente);
+	}
+
 	public double getVotoMedio(int id_libro)throws RemoteException{
 		return server.getVotoMedio(id_libro);
 	}

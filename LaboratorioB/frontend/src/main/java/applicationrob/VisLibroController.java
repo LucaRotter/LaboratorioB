@@ -75,6 +75,8 @@ public class VisLibroController implements Initializable{
 	@FXML
 	private Button btnConfirm;
 
+	
+
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 
@@ -150,7 +152,7 @@ public class VisLibroController implements Initializable{
 		List<Valutazione> review = new LinkedList<>();
 
 		try {
-			review = clientBR.getInstance().getValutazione(2);
+			review = clientBR.getInstance().getValutazione(selectedBook.getId());
 		} catch (RemoteException e) {
 
 			e.printStackTrace();
@@ -159,6 +161,7 @@ public class VisLibroController implements Initializable{
 		//review initialization
 
 		reviewContainer.getChildren().clear();
+		System.out.println("inizializzo review");
 
 		for(i= 0;i<review.size();i++){
 		FXMLLoader loader1 = new FXMLLoader(getClass().getResource("/applicationrob/Review.fxml"));
@@ -177,27 +180,29 @@ public class VisLibroController implements Initializable{
 		reviewc.setVislibroController(this);
 
 		reviewContainer.getChildren().add(hBox);
+	}
 
 		//recommended books initialization
 
 		List<Libro> recommendList = new LinkedList<>();
+		System.out.println("inizializzo consigli");
 
 		try {
-			recommendList = clientBR.getInstance().getConsiglio(2);
+			recommendList = clientBR.getInstance().getConsiglio(selectedBook.getId());
 		} catch (RemoteException e) {
 
 			e.printStackTrace();
 		}
 
 		recListBook.getChildren().clear();  
+		System.out.println(recommendList.size());
 
 		for(i=0; i<recommendList.size(); i++) {
 
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("/applicationrob/BookEl.fxml"));
-		BookController book = loader.getController();
-		book.setLabels(recommendList.get(i).getAutore(), recommendList.get(i).getTitolo());
 		VBox vbox = null;
-		
+
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/applicationrob/BookEl.fxml"));
+
 		try {
 			vbox = loader.load();
 			
@@ -206,12 +211,14 @@ public class VisLibroController implements Initializable{
 			e.printStackTrace();
 		}
 		
+		BookController book = loader.getController();
+		book.setLabels(recommendList.get(i).getAutore(), recommendList.get(i).getTitolo());
 		
 		recListBook.getChildren().add(vbox);
+		
 		}
 	  }
 
-	}
 
 	//function to go to the add reviews section
 	public void onComments(){

@@ -523,7 +523,7 @@ public class serverBRImpl extends UnicastRemoteObject implements serverBR {
 
         String query = "INSERT into Libri_consigliati (id_utente, id_libro, id_libro_consigliato) VALUES (?, ?, ?)";
 
-        try (Connection conn = DatabaseManager.getConnection(); PreparedStatement ps = conn.prepareStatement(query_count)) {
+        try (Connection conn = DatabaseManager.getConnection(); PreparedStatement ps = conn.prepareStatement(query)) {
             ps.setInt(1, id_utente);
             ps.setInt(2, id_libro);
             ps.setInt(3, id_consiglio);
