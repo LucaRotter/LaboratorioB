@@ -52,6 +52,10 @@ public class clientBR{
 		return server.getUtente(id);
 	}
 
+	public List<Libro> lazyLoadingLibri() throws RemoteException{
+		return server.lazyLoadingLibri();
+	}
+
 	public Libro getLibro(int id)throws RemoteException{
 		return server.getLibro(id);
 	}
@@ -62,6 +66,10 @@ public class clientBR{
 
 	public List<Libro> getConsiglio(int id_libro)throws RemoteException{
 		return server.getConsiglio(id_libro);
+	}
+
+	public List<Libro> getConsiglioUtente(int id_libro, int id_utente) throws RemoteException{
+		return server.getConsiglioUtente(id_libro, id_utente);
 	}
 
 	public double getVotoMedio(int id_libro)throws RemoteException{

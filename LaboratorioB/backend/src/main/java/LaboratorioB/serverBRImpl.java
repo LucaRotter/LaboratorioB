@@ -32,7 +32,7 @@ public class serverBRImpl extends UnicastRemoteObject implements serverBR {
     // Costruttore
     protected serverBRImpl() throws RemoteException, SQLException {
         super();
-        conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/labB", "postgres", "Rluca2004");
+        conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/LaboratorioB", "postgres", "@Aleks13082002");
         System.out.println("Database connected!");
     }
 
@@ -184,7 +184,7 @@ public class serverBRImpl extends UnicastRemoteObject implements serverBR {
     }
 
     private void registraLibriInviati(Connection conn, String clientHost, List<Libro> libri) throws SQLException {
-        String insert = "INSERT IGNORE INTO libri_inviati (client_host, id_libro) VALUES (?, ?)";
+        String insert = "INSERT INTO libri_inviati (client_host, id_libro) VALUES (?, ?) ON CONFLICT DO NOTHING";
         try (PreparedStatement ps = conn.prepareStatement(insert)) {
             for (Libro libro : libri) {
                 ps.setString(1, clientHost);
@@ -266,6 +266,26 @@ public class serverBRImpl extends UnicastRemoteObject implements serverBR {
         List<Libro> consigli = new LinkedList<Libro>();
         try (Connection conn = DatabaseManager.getConnection(); PreparedStatement ps = conn.prepareStatement(query)) {
             ps.setInt(1, id_libro);
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    int id = rs.getInt("id_libro_consigliato");
+                    Libro libro = getLibro(id);
+                    consigli.add(libro);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return consigli;
+    }
+
+    @Override
+    public List<Libro> getConsiglioUtente(int id_libro, int id_utente) throws RemoteException{
+        String query = "SELECT * FROM libri_consigliati WHERE id_libro = ? AND id_utente = ?";
+        List<Libro> consigli = new LinkedList<Libro>();
+        try (Connection conn = DatabaseManager.getConnection(); PreparedStatement ps = conn.prepareStatement(query)) {
+            ps.setInt(1, id_libro);
+            ps.setInt(2, id_utente);
             try (ResultSet rs = ps.executeQuery()) {
                 while (rs.next()) {
                     int id = rs.getInt("id_libro_consigliato");
@@ -503,7 +523,7 @@ public class serverBRImpl extends UnicastRemoteObject implements serverBR {
 
         String query = "INSERT into Libri_consigliati (id_utente, id_libro, id_libro_consigliato) VALUES (?, ?, ?)";
 
-        try (Connection conn = DatabaseManager.getConnection(); PreparedStatement ps = conn.prepareStatement(query_count)) {
+        try (Connection conn = DatabaseManager.getConnection(); PreparedStatement ps = conn.prepareStatement(query)) {
             ps.setInt(1, id_utente);
             ps.setInt(2, id_libro);
             ps.setInt(3, id_consiglio);
