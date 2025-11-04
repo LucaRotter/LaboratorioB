@@ -77,6 +77,25 @@ public class AddReccomendedController implements Initializable {
         e.printStackTrace();
        }
 
+        for(Libro libr : reccomendedBooks){
+            VBox vbox = null;
+
+            FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(getClass().getResource("BookEl.fxml"));
+
+			try {
+                 vbox = loader.load();
+            } catch (IOException e) {
+                
+                e.printStackTrace();
+            }
+			
+			BookController bookController= loader.getController();
+			bookController.setLabels(libr.getAutore(), libr.getTitolo());
+
+            containerRec.getChildren().add(vbox);
+        }
+
        try {
 
 			//first loading books

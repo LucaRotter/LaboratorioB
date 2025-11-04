@@ -108,11 +108,9 @@ public class clientBR{
 		return server.createValutazione(val);
 	}
 	public static void main(String[] args) throws RemoteException, IOException, NotBoundException {
-		    clientBR client = clientBR.getInstance();
-	
+
 			//System.out.println(loginId);
 			TokenSession.setUserId(1); 
-
 
 		Application.launch(startApp.class, args); 	
 	}

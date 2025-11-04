@@ -156,16 +156,35 @@ public class DashboardController implements Initializable{
 
 
 		if ((index + 1) * 20 > Bookserver.size() && MODRICERCA.equals("RICERCA")) {
+
+		
+		btnCenter.getStyleClass().removeAll("SelectedIndex");
+		btnRight.getStyleClass().add("SelectedIndex");
+
         return;
     	}
 
 		if(index == 0 || index == 1){
+
+			if(index == 0){
+			btnCenter.getStyleClass().removeAll("SelectedIndex");
+			btnLeft.getStyleClass().add("SelectedIndex");
+
+			} else{
+
+			btnLeft.getStyleClass().removeAll("SelectedIndex");
+			btnCenter.getStyleClass().add("SelectedIndex");
+
+			}
 
 			btnLeft.setText( 1 + "");
 			btnCenter.setText(2 +"");
 			btnRight.setText( 3 + "");
 
 		} else{
+
+			btnRight.getStyleClass().removeAll("SelectedIndex");
+			btnCenter.getStyleClass().add("SelectedIndex");
 
 			btnLeft.setText(index + "");
 			btnCenter.setText(index + 1 +"");
@@ -180,9 +199,23 @@ public class DashboardController implements Initializable{
 		int index = currentIndex.get();
 		System.out.println(index + Bookserver.size());
 
-		if ((index + 1) * 20 > Bookserver.size()) {
+		if ((index + 1) * 20 > Bookserver.size()  ) {
+		
+		btnCenter.getStyleClass().removeAll("SelectedIndex");
+		btnRight.getStyleClass().add("SelectedIndex");
         return;
-    }
+
+		} else if(index== 0){
+
+		btnCenter.getStyleClass().removeAll("SelectedIndex");
+		btnLeft.getStyleClass().add("SelectedIndex");
+
+		return;
+		}
+
+		btnLeft.getStyleClass().removeAll("SelectedIndex");
+		btnRight.getStyleClass().removeAll("SelectedIndex");
+		btnCenter.getStyleClass().add("SelectedIndex");
 
 		btnLeft.setText(index  + "");
 		btnCenter.setText(index + 1+"");
@@ -262,6 +295,7 @@ public class DashboardController implements Initializable{
 			Bookserver.clear();
 			Bookserver.addAll(clientBR.getInstance().lazyLoadingLibri());
 			currentIndex.set(0);
+			initNavButtons();
 			putBooks(0);
 			return;
 		}

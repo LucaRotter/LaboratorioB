@@ -136,7 +136,20 @@ public class VisLibroController implements Initializable{
 		tableReviewController.setReview(review);
 		
 		modalOverlay.getChildren().add(modalContent);
+
+		 modalOverlay.setOnMouseClicked(event -> {
+        // se clicchi *direttamente* sull'overlay (e non sul contenuto)
+        if (event.getTarget() == modalOverlay) {
+            closeModalReview();
+        }
+    	});
 		 	
+	}
+
+	public void closeModalReview(){
+		modalOverlay.getChildren().clear();
+		modalOverlay.setVisible(false);
+		root.setDisable(false);
 	}
 
 	//function to set the book details 
