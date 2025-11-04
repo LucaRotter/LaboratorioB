@@ -18,8 +18,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 
-import java.util.function.Function;
-import java.util.function.Consumer;
+//aggiungere controllo max 20 librerie
 
 public class VisLibrerieController {
 
