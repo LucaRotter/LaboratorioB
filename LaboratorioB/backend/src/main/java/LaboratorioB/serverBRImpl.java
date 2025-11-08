@@ -261,6 +261,38 @@ public class serverBRImpl extends UnicastRemoteObject implements serverBR {
     }
 
     @Override
+    public List<Valutazione> getValutazioniUtente(int id_utente, int id_libro) throws RemoteException{
+        String query = "SELECT * FROM Valutazioni_Libri WHERE id_utente = ? AND id_libro = ?";
+        List<Valutazione> valutazioni = new LinkedList<Valutazione>();
+        try (Connection conn = DatabaseManager.getConnection(); PreparedStatement ps = conn.prepareStatement(query)) {
+            ps.setInt(1, id_utente);
+            ps.setInt(2, id_libro);
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    int voto_stile = rs.getInt("voto_stile");
+                    int voto_edizione = rs.getInt("voto_edizione");
+                    int voto_contenuto = rs.getInt("voto_contenuto");
+                    int voto_gradevolezza = rs.getInt("voto_gradevolezza");
+                    int voto_originalita = rs.getInt("voto_originalita");
+                    double voto_medio = rs.getDouble("voto_medio");
+                    String stile = rs.getString("stile");
+                    String edizione = rs.getString("edizione");
+                    String contenuto = rs.getString("contenuto");
+                    String gradevole = rs.getString("gradevolezza");
+                    String originalita = rs.getString("originalita");
+                    Valutazione val = new Valutazione(voto_stile, voto_edizione, voto_contenuto,
+                            voto_gradevolezza, voto_originalita, voto_medio, stile, edizione, contenuto,
+                            gradevole, originalita, id_utente, id_libro);
+                    valutazioni.add(val);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return valutazioni;
+    }
+
+    @Override
     public List<Libro> getConsiglio(int id_libro) throws RemoteException {
         String query = "SELECT * FROM libri_consigliati WHERE id_libro = ?";
         List<Libro> consigli = new LinkedList<Libro>();
@@ -395,6 +427,22 @@ public class serverBRImpl extends UnicastRemoteObject implements serverBR {
 
         // libreria = risultato query;
         return libreria;
+    }
+
+    @Override
+    public boolean deleteLibreria(int id_libreria) throws RemoteException{
+        String query = "DELETE FROM libreria WHERE id_libreria = ?";
+        boolean deleted = false;
+        try (Connection conn = DatabaseManager.getConnection(); PreparedStatement ps = conn.prepareStatement(query)) {
+            ps.setInt(1, id_libreria);
+            int rows = ps.executeUpdate();
+            if (rows > 0) {
+                deleted = true;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return deleted;
     }
 
     @Override
