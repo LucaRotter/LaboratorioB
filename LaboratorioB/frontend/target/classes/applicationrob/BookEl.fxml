@@ -13,8 +13,8 @@
             <Image url="@../img/Paomedia-Small-N-Flat-Book.512.png" />
          </image>
       </ImageView>
-      <Label fx:id="labelAuthor" prefHeight="36.0" prefWidth="120.0" text="" />
       <Label fx:id="labelName" prefHeight="36.0" prefWidth="120.0" text="" />
+      <Label fx:id="labelAuthor" prefHeight="36.0" prefWidth="120.0" text="" />
    </children>
    <cursor>
       <Cursor fx:constant="HAND" />

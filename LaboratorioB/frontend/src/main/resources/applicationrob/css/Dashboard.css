@@ -7,14 +7,63 @@
 	-fx-background-color:transparent;
 }
 
+ToggleButton{
+    -fx-background-color: #FFFF; 
+}
+
+GridPane {
+    -fx-background-color: #FFFF;
+    -fx-border-color: transparent;
+    -fx-border-width: 0;
+}
+
+ScrollPane:focused {
+    -fx-focus-color: transparent;
+    -fx-faint-focus-color: transparent;
+}
+
 Button {
 	-fx-background-color: #FFFF;
 	-fx-cursor: hand;
 
 }
 
-ChoiceBox{
-	-fx-background-color: #FFFF;
+.choiceBoxOrder{
+    -fx-background-color: #FFFFFF;
+    -fx-background-radius: 8;
+    -fx-border-radius: 4;
+    -fx-padding: 4 10 4 10;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.15), 8, 0.1, -2, 0);
+    -fx-font-size: 13px;
+    -fx-text-fill: #333333;
+}
+
+.choiceBoxOrder:hover {
+    -fx-cursor: hand;
+}
+
+.choiceBoxOrder:focused {
+    -fx-border-width: 0.5;
+}
+
+
+.choiceBoxOrder > .arrow {
+    -fx-background-color: #88bbf6; 
+}
+
+.choiceBoxOrder .context-menu {
+    -fx-background-color: #FFFFFF;
+    -fx-background-radius: 8;
+    -fx-border-color: #E0E0E0;
+    -fx-border-radius: 8;
+    -fx-effect: dropshadow(gaussian,  rgba(79, 79, 79, 0.15), 10, 0.5, -2, 1 );
+    -fx-border:none;
+}
+
+
+.choiceBoxOrder .menu-item:focused {
+    -fx-background-color: rgba(136, 187, 246, 1);
+    -fx-text-fill: #000000;
 }
 
 .CategoryBtn{
@@ -32,14 +81,49 @@ ChoiceBox{
 .ScrollPaneCategory,
 .ScrollPaneCategory HBox{
 	-fx-border-style:none;
+
 }
 
 .ScrollPaneBooks{
-	-fx-background: #FFFF;
+	
+	-fx-background-color: #FFFF;
+    -fx-border-color: transparent;
+    -fx-border-width: 0;
+    -fx-border-style: none;
+	-fx-effect: dropshadow(gaussian, rgba(79, 79, 79, 0.15), 6, 0.1, 2, 2);
+    -fx-background-radius: 8;
 }
 
+
+.ScrollPaneBooks .thumb{
+
+	-fx-pref-height: 10px;
+	-fx-background-color: rgba(0,0,0,0.1);
+    -fx-background-radius: 5;
+}
+
+.scroll-bar .increment-button,
+.scroll-bar .decrement-button {
+    -fx-background-color: transparent;
+    
+}
+
+.scroll-bar  {
+    -fx-background-color: transparent;  /* o transparent se vuoi sfondo vuoto */
+    -fx-border-color: transparent;
+}
+
+.scroll-bar .increment-button:hover,
+.scroll-bar .decrement-button:hover,
+.scroll-bar .thumb:hover,
+.scroll-bar .thumb:pressed{
+
+	-fx-background-color: rgba(0,0,0,0.3);
+}
+
+
 .SelectedIndex{
-	-fx-background-color: blue;
+	-fx-background-color: rgba(166, 166, 166, 0.2);
 }
 
 .NavigationBox{
@@ -62,11 +146,52 @@ ChoiceBox{
 
 
 .NavigationBox Button:hover{
-	-fx-background-color: blue;
+	-fx-background-color: rgba(166, 166, 166, 0.2);
 }
 
+.ScrollPaneCategory{
+    -fx-background-color: #FFFF;
+    -fx-border-color: transparent;
+    -fx-border-width: 0;
+    -fx-border-style: none;
+	-fx-effect: dropshadow(gaussian, rgba(79, 79, 79, 0.15), 6, 0.1, -2, -2);
+    -fx-background-radius: 8;
+}
 
+.SearchBar{
 
+    -fx-background-color: white;                
+    -fx-border-width: 2;              
+    -fx-background-radius: 15;        
+    -fx-border-radius: 15;            
+    -fx-padding: 10 10 10 0;
+     
+}
+
+.SearchBar Button{
+    -fx-background-radius: 50%;  
+    -fx-background-color: #86DBC5;  
+    
+}
+
+/* Hover */
+.CategoryBtn:hover {
+    -fx-background-color: #e0e0e0;
+    -fx-border-color: #888888;
+}
+
+/* Pressed */
+.CategoryBtn:pressed {
+    -fx-background-color: #d0d0d0;
+    -fx-border-color: #555555;
+}
+
+/* Selezionato */
+.CategoryBtn:selected {
+    -fx-background-color: #a0c4ff;
+    -fx-border-color: #3399ff;
+    -fx-text-fill: #ffffff;
+}
 
 
 
