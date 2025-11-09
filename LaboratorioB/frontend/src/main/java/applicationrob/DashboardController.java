@@ -15,18 +15,28 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import models.Model;
 
 public class DashboardController implements Initializable{
 
+	@FXML
+	private ScrollPane ScrollBooks;
+
 	@FXML 
 	private GridPane gridBooks;
+
+	@FXML 
+	private Button btnSearch;
 
 	@FXML
 	private Button btnForward;
@@ -145,6 +155,15 @@ public class DashboardController implements Initializable{
 			}
 		});
 
+		btnSearch.setOnAction(e->{
+			try {
+				OnResearch();
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
+			
+		});
+	
 		choiceBoxOrder.getItems().addAll(Ricerca.TITOLO, Ricerca.AUTORE, Ricerca.ANNO);
 	}
 
@@ -227,6 +246,14 @@ public class DashboardController implements Initializable{
 	//metodo utilizzato per aggiungere i libri al gridPane e inizializzarne il contenuto
 	private void putBooks(int indice) throws RemoteException, IOException {
 
+		
+		if(Bookserver.isEmpty()){
+			
+			setEmptyResearch("BOOK NOT FOUND");
+		}else{
+
+		ScrollBooks.setContent(gridBooks);
+
 		int col= 0;
 		int row= 1;
 		int i;
@@ -263,6 +290,7 @@ public class DashboardController implements Initializable{
 			gridBooks.add(vbox, col++, row);
 			
 		}
+	}
 	}
 
 	public void OnResearch() throws IOException {
@@ -344,6 +372,19 @@ public class DashboardController implements Initializable{
 
 		currentIndex.set(count-1);
 
+	}
+
+	public void setEmptyResearch(String text){
+
+		Label nessunLibro = new Label(text);
+		nessunLibro.setStyle("-fx-font-size: 16px; -fx-text-fill: gray;");
+
+		VBox container = new VBox(nessunLibro);
+		container.setAlignment(Pos.CENTER);
+		container.prefWidthProperty().bind(ScrollBooks.widthProperty());
+		container.prefHeightProperty().bind(ScrollBooks.heightProperty());
+
+		ScrollBooks.setContent(container);
 	}
 	
 }

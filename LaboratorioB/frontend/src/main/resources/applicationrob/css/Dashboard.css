@@ -12,7 +12,7 @@ ToggleButton{
 }
 
 GridPane {
-    -fx-background-color: #FFFF;
+    -fx-background-color: transparent;
     -fx-border-color: transparent;
     -fx-border-width: 0;
 }
@@ -86,7 +86,7 @@ Button {
 
 .ScrollPaneBooks{
 	
-	-fx-background-color: #FFFF;
+	-fx-background-color: #ffffff;
     -fx-border-color: transparent;
     -fx-border-width: 0;
     -fx-border-style: none;
@@ -108,11 +108,6 @@ Button {
     
 }
 
-.scroll-bar  {
-    -fx-background-color: transparent;  /* o transparent se vuoi sfondo vuoto */
-    -fx-border-color: transparent;
-}
-
 .scroll-bar .increment-button:hover,
 .scroll-bar .decrement-button:hover,
 .scroll-bar .thumb:hover,
@@ -121,6 +116,9 @@ Button {
 	-fx-background-color: rgba(0,0,0,0.3);
 }
 
+.ScrollPaneBooks > .viewport {
+    -fx-background-color: transparent; /* sfondo del viewport */
+}
 
 .SelectedIndex{
 	-fx-background-color: rgba(166, 166, 166, 0.2);
