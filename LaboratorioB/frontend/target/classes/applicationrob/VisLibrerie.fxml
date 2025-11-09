@@ -11,11 +11,12 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
-<?import javafx.scene.shape.SVGPath?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 
 
 
@@ -24,20 +25,20 @@
 	 <StackPane layoutY="25.0" prefWidth="880.0" alignment="CENTER">
        <Text fx:id="titleText" text="My Libraries" styleClass="page-title"/>
      </StackPane>
-      <Button fx:id="search" layoutX="650.0" layoutY="104.0" mnemonicParsing="false"  prefHeight="25.0" prefWidth="46.0" onAction="#searchLibraries">
+      <Button fx:id="search" layoutX="650.0" layoutY="66" mnemonicParsing="false"  prefHeight="25.0" prefWidth="46.0" onAction="#searchLibraries">
       <graphic>
             <SVGPath fx:id="searchIcon"
                      content="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
         </graphic>
     </Button>
-      <TextField fx:id="searchBar" layoutX="100.0" layoutY="104.0" onAction="#writeText" prefHeight="25.0" prefWidth="537.0" />
-      <Button fx:id="edit" layoutX="735.0" layoutY="104.0" mnemonicParsing="false"  prefHeight="25.0" prefWidth="46.0" onAction="#useEdit">
+      <TextField fx:id="searchBar" promptText="Search your saved libraries" layoutY="70" layoutX="20" onAction="#writeText" prefWidth="600.0" />
+      <Button fx:id="edit" layoutX="735.0" layoutY="66" mnemonicParsing="false"  prefHeight="25.0" prefWidth="46.0" onAction="#useEdit">
       <graphic>
             <SVGPath fx:id="editIcon"
                      content="M8.5 4a.5.5 0 0 0-1 0v2h-2a.5.5 0 0 0 0 1h2v2a.5.5 0 0 0 1 0V7h2a.5.5 0 0 0 0-1h-2zm-3 7a.5.5 0 0 0 0 1h5a.5.5 0 0 0 0-1z"/>
         </graphic>
     </Button>
-      <ScrollPane fx:id="scrollLibraries" layoutX="100.0" layoutY="153.0"  prefHeight="547.0" prefWidth="679.0" fitToWidth="true" fitToHeight="false" hbarPolicy="NEVER" vbarPolicy="NEVER">
+      <ScrollPane fx:id="scrollLibraries" AnchorPane.topAnchor="120.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0"  prefWidth="840.0" prefHeight="550.0" fitToWidth="true" fitToHeight="false" hbarPolicy="NEVER" vbarPolicy="NEVER" styleClass="library-scroll-pane" >
         <content>
          <GridPane fx:id="librariesContainer" hgap="15" vgap="15" alignment="TOP_LEFT">
             <AnchorPane prefWidth="679" prefHeight="547">
@@ -48,18 +49,15 @@
       <Button fx:id="emptyLbtn" text="+" prefWidth="80" prefHeight="80" layoutX="403.5" layoutY="300.5" onAction="#addLibraryEmpty"/>
             <Label fx:id="emptyText" text="Start creating your libraries" layoutX="336.5" layoutY="270" style="-fx-font-size: 16px; -fx-text-fill: gray;" />
        <Button fx:id="extraBtn" text="+" layoutX="110" layoutY="160" prefWidth="100" prefHeight="100" visible="false" onAction="#addLibrary"/>
-    <StackPane fx:id="modalOverlay" visible="false" style="-fx-background-color: rgba(0,0,0,0.5);" prefWidth="880" prefHeight="700" alignment="CENTER">   
+    <StackPane fx:id="modalOverlay" visible="false" style="-fx-background-color: rgba(0,0,0,0.5);" prefWidth="880" prefHeight="700" alignment="CENTER"  >   
     <VBox alignment="CENTER" spacing="10">
         <HBox fx:id="modalContent" spacing="20" style="-fx-background-color: white; -fx-border-radius: 10; -fx-background-radius: 10; -fx-padding: 20;" maxWidth="500" maxHeight="250">
-            <StackPane prefWidth="120" prefHeight="120" style="-fx-background-color: #F0F0F0; -fx-border-color: #BDBDBD; -fx-border-radius: 8; -fx-background-radius: 8;">
-                <Label  fx:id="imgFolder" text="" style="-fx-text-fill: gray; -fx-font-size: 14px;">
-                <graphic>
-			        <StackPane alignment="CENTER">
-			            <SVGPath fill="#BDBDBD" scaleX="2" scaleY="2"
-			                content="M8.5 2.687c.654-.689 1.782-.886 3.112-.752 1.234.124 2.503.523 3.388.893v9.923c-.918-.35-2.107-.692-3.287-.81-1.094-.111-2.278-.039-3.213.492zM8 1.783C7.015.936 5.587.81 4.287.94c-1.514.153-3.042.672-3.994 1.105A.5.5 0 0 0 0 2.5v11a.5.5 0 0 0 .707.455c.882-.4 2.303-.881 3.68-1.02 1.409-.142 2.59.087 3.223.877a.5.5 0 0 0 .78 0c.633-.79 1.814-1.019 3.222-.877 1.378.139 2.8.62 3.681 1.02A.5.5 0 0 0 16 13.5v-11a.5.5 0 0 0-.293-.455c-.952-.433-2.48-.952-3.994-1.105C10.413.809 8.985.936 8 1.783" />
-			        </StackPane>
-                 </graphic>
-                </Label>
+            <StackPane prefWidth="120" prefHeight="120" style="-fx-background-color: #f0f0f07c; -fx-border-color: #bdbdbd7b; -fx-border-radius: 8; -fx-background-radius: 8;">
+            <ImageView fitHeight="110" fitWidth="110">
+                    <image>
+                        <Image url="@../img/LibraryB.png" />
+                    </image>
+                </ImageView>
             </StackPane>
             <VBox spacing="15">
                 <VBox spacing="15">
