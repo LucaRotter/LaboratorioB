@@ -138,7 +138,6 @@ public class VisLibroController implements Initializable{
 		modalOverlay.getChildren().add(modalContent);
 
 		 modalOverlay.setOnMouseClicked(event -> {
-        // se clicchi *direttamente* sull'overlay (e non sul contenuto)
         if (event.getTarget() == modalOverlay) {
             closeModalReview();
         }
@@ -220,7 +219,7 @@ public class VisLibroController implements Initializable{
 			vbox = loader.load();
 			
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
 		
@@ -254,6 +253,14 @@ public class VisLibroController implements Initializable{
 		ModalLibraries.setVisible(true);
 		ModalLibraries.setDisable(false);
 		ModalLibraries.toFront();
+
+		ModalLibraries.setOnMouseClicked(event -> {
+        // se clicchi *direttamente* sull'overlay (e non sul contenuto)
+        if (event.getTarget() != ModalLibraries) {
+			System.out.println(event.getTarget());
+            closeModal();
+        }
+	});
 	
 		//initialization of the libraries list
 		VBoxLibraries.getChildren().clear();

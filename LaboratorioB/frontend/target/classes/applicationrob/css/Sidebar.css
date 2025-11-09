@@ -17,7 +17,7 @@ AnchorPane{
 	
 	-fx-background-color: #FFFFFF;
 	-fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 10, 0, 4, 4);
-	-fx-pref-width:10em;
+	
 	
 }
 
@@ -28,14 +28,16 @@ AnchorPane{
 
 .ButtonSection{
 	
-	-fx-padding:0 0  0 1.5em;
+	
 	-fx-spacing: 1.3em;
 	
 }
 
 .NavigationBtn HBox{
 	-fx-spacing: 1em;
+	-fx-alignament: CENTER_LEFT;
 }
+
 
 
 
