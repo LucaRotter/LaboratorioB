@@ -20,7 +20,8 @@ import java.rmi.RemoteException;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.VBox;
 import javafx.geometry.Insets;
-
+import javafx.scene.text.Text;
+import javafx.scene.text.Font;
 
 public class VisLibreriaController {
 
@@ -34,7 +35,7 @@ public class VisLibreriaController {
     private TextField searchBar;
 
     @FXML
-    private Label bookNameLabel;
+    private Text bookNameLabel;
     
     private Libreria selectedLibrary;
     private Libreria library;
@@ -49,16 +50,15 @@ public class VisLibreriaController {
         filteredBooks = FXCollections.observableArrayList();
 
         Model.getIstance().getView().selectedLibraryProperty().addListener((obs, oldLibrary, newLibrary) -> {
-
-            System.out.println("Selected library changed." + newLibrary.getNomeLibreria());
             if (newLibrary != null) {
-
             try {
             booksLibrary.clear();
             booksLibrary.addAll(clientBR.getInstance().getLibreria(newLibrary.getIdLibreria()).getLibreria());
             } catch (RemoteException e) {
             e.printStackTrace();
             } 
+
+            bookNameLabel.setText(newLibrary.getNomeLibreria());
 
             // Imposto currentLibr con tutti i libri fittizi
             currentBooks.setAll(booksLibrary); 
@@ -71,18 +71,15 @@ public class VisLibreriaController {
 
 		selectedLibrary = Model.getIstance().getView().getSelectedLibrary();
 		if (selectedLibrary  != null) {
-			bookNameLabel.setText(selectedLibrary .getNomeLibreria());
 		}
-        
         try {
             booksLibrary.clear();
-            booksLibrary.addAll(clientBR.getInstance().getLibreria(selectedLibrary .getIdLibreria()).getLibreria());
+            booksLibrary.addAll(clientBR.getInstance().getLibreria(selectedLibrary.getIdLibreria()).getLibreria());
         } catch (RemoteException e) {
             e.printStackTrace();
         }
 
-        System.out.println("Books in Library: " + booksLibrary.size());
-
+    bookNameLabel.setText(selectedLibrary.getNomeLibreria());
 
     // Imposto currentLibr con tutti i libri fittizi
     currentBooks.setAll(booksLibrary);
@@ -96,6 +93,7 @@ public class VisLibreriaController {
     public void SeachBooksInLibrary(ActionEvent event) throws RemoteException, IOException {
         String textSlib = searchBar.getText().trim().toLowerCase();
         booksLibrary.setAll(clientBR.getInstance().getLibreria(selectedLibrary.getIdLibreria()).getLibreria());
+        filteredBooks.clear();
          if (textSlib.isEmpty()) {
             currentBooks.setAll(booksLibrary);
         } else {
@@ -151,8 +149,9 @@ public class VisLibreriaController {
                         row++;
                     }
 
-        } catch (RemoteException e) {
+        } catch (RemoteException e ) {
             e.printStackTrace();
+             views.ViewFactory.showAlert("error", "Book error", "Server error, try again.", booksContainer, "error");
 		} catch (IOException e) {
                 e.printStackTrace();
             }

@@ -1,3 +1,6 @@
+<<<<<<< HEAD
+applicationrob\TokenSession.class
+=======
 applicationrob\BookController.class
 applicationrob\SideBarController.class
 applicationrob\DashboardController.class
@@ -8,13 +11,26 @@ applicationrob\LoginController.class
 applicationrob\TableReviewController.class
 applicationrob\VisLibrerieController.class
 applicationrob\LibraryItemController.class
+>>>>>>> 3cc2ccf84856a43d8c617a8e1d8c5b2ae948f84b
 applicationrob\VisLibroController.class
 applicationrob\LibraryController.class
-models\Model.class
 applicationrob\ClientController.class
-views\ViewFactory.class
 applicationrob\VisLibreriaController.class
 applicationrob\ReviewController.class
 applicationrob\startApp.class
 applicationrob\AddReccomendedController.class
 applicationrob\RegisterController.class
+<<<<<<< HEAD
+applicationrob\BookController.class
+applicationrob\SideBarController.class
+applicationrob\DashboardController.class
+applicationrob\clientBR.class
+applicationrob\AddReviewController.class
+applicationrob\AlertController.class
+applicationrob\TableReviewController.class
+applicationrob\VisLibrerieController.class
+applicationrob\LibraryItemController.class
+models\Model.class
+views\ViewFactory.class
+=======
+>>>>>>> 3cc2ccf84856a43d8c617a8e1d8c5b2ae948f84b

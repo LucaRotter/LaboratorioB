@@ -7,18 +7,30 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.shape.SVGPath?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.text.Text?>
+<?import javafx.scene.text.Font?>
+
 
 <AnchorPane prefHeight="700.0" prefWidth="880.0" stylesheets="@css/libraries.css" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/22" fx:controller="applicationrob.VisLibreriaController">
 <children>
- <Label fx:id="bookNameLabel" text="" style="-fx-font-size: 24px; -fx-text-fill: #333;" AnchorPane.topAnchor="20.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" alignment="CENTER"/>
+  <StackPane layoutY="25.0" prefWidth="880.0" alignment="CENTER">
+       <Text fx:id="bookNameLabel" text="" styleClass="page-title"/>
+     </StackPane>
 
   <HBox spacing="10" AnchorPane.topAnchor="70.0" AnchorPane.leftAnchor="20.0">
-        <TextField fx:id="searchBar" prefWidth="600.0" promptText="Search in library" onAction="#SeachBooksInLibrary"/>
-        <Button fx:id="searchBtn" text="Search" onAction="#SeachBooksInLibrary"/>
+        <TextField fx:id="searchBar" prefWidth="600.0" promptText="Search your saved library" onAction="#SeachBooksInLibrary"/>
+        <Button fx:id="searchBtn" onAction="#SeachBooksInLibrary" prefHeight="25.0" prefWidth="46.0" style=" -fx-translate-y: -3;">
+         <graphic>
+            <SVGPath fx:id="searchIcon"
+                     content="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
+        </graphic>
+        </Button>
     </HBox>
 
-	 <ScrollPane fx:id="scrollContent" prefWidth="840.0" prefHeight="550.0"
-                AnchorPane.topAnchor="120.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0">
+	 <ScrollPane fx:id="scrollContent" prefWidth="840.0" prefHeight="550.0" fitToWidth="true" fitToHeight="false" hbarPolicy="NEVER" vbarPolicy="NEVER"
+                AnchorPane.topAnchor="120.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" styleClass="library-scroll-pane">
         <content>
             <GridPane fx:id="booksContainer" hgap="10" vgap="10" />
         </content>
