@@ -170,39 +170,40 @@ public class DashboardController implements Initializable{
 	public void initNavButtons(){
 
 		int index = currentIndex.get();
-		System.out.println(index + Bookserver.size());
-		System.out.println(index == 0);
+		boolean update = true;
+		boolean controlIndex = (index + 1) * 20 > Bookserver.size();
 
-
-		if ((index + 1) * 20 > Bookserver.size() && MODRICERCA.equals("RICERCA")) {
-
-		
+		btnLeft.getStyleClass().removeAll("SelectedIndex");
 		btnCenter.getStyleClass().removeAll("SelectedIndex");
-		btnRight.getStyleClass().add("SelectedIndex");
+		btnRight.getStyleClass().removeAll("SelectedIndex");
 
-        return;
+		if (controlIndex && MODRICERCA.equals("RICERCA")) {
+
+		btnRight.getStyleClass().add("SelectedIndex");
+		update=false;
+
     	}
 
-		if(index == 0 || index == 1){
+		if(index == 0 || index == 1 ){
 
 			if(index == 0){
-			btnCenter.getStyleClass().removeAll("SelectedIndex");
+			
+			btnRight.getStyleClass().removeAll("SelectedIndex");
 			btnLeft.getStyleClass().add("SelectedIndex");
 
-			} else{
+			} else {
 
-			btnLeft.getStyleClass().removeAll("SelectedIndex");
+			btnRight.getStyleClass().removeAll("SelectedIndex");
 			btnCenter.getStyleClass().add("SelectedIndex");
-
+			
 			}
 
 			btnLeft.setText( 1 + "");
 			btnCenter.setText(2 +"");
 			btnRight.setText( 3 + "");
 
-		} else{
+		} else if(update){
 
-			btnRight.getStyleClass().removeAll("SelectedIndex");
 			btnCenter.getStyleClass().add("SelectedIndex");
 
 			btnLeft.setText(index + "");
@@ -218,28 +219,29 @@ public class DashboardController implements Initializable{
 		int index = currentIndex.get();
 		System.out.println(index + Bookserver.size());
 
-		if ((index + 1) * 20 > Bookserver.size()  ) {
+		if ((index + 1) * 20 > Bookserver.size()) {
 		
 		btnCenter.getStyleClass().removeAll("SelectedIndex");
 		btnRight.getStyleClass().add("SelectedIndex");
         return;
 
-		} else if(index== 0){
+		} else if(index == 0){
 
 		btnCenter.getStyleClass().removeAll("SelectedIndex");
 		btnLeft.getStyleClass().add("SelectedIndex");
 
 		return;
-		}
 
-		btnLeft.getStyleClass().removeAll("SelectedIndex");
+		}else{
+
 		btnRight.getStyleClass().removeAll("SelectedIndex");
+		btnLeft.getStyleClass().removeAll("SelectedIndex");
 		btnCenter.getStyleClass().add("SelectedIndex");
 
 		btnLeft.setText(index  + "");
 		btnCenter.setText(index + 1+"");
 		btnRight.setText(index + 2 + "");
-
+		}
 	}
 
 	
@@ -336,8 +338,8 @@ public class DashboardController implements Initializable{
 		Bookserver.addAll(ricercaLibri);
 
 		currentIndex.set(0);
-		putBooks(0);
 		initNavButtons();
+		putBooks(0);
 		
 	}
 
@@ -377,7 +379,7 @@ public class DashboardController implements Initializable{
 	public void setEmptyResearch(String text){
 
 		Label nessunLibro = new Label(text);
-		nessunLibro.setStyle("-fx-font-size: 16px; -fx-text-fill: gray;");
+		nessunLibro.setStyle("-fx-font-size: 32px; -fx-text-fill: gray;");
 
 		VBox container = new VBox(nessunLibro);
 		container.setAlignment(Pos.CENTER);

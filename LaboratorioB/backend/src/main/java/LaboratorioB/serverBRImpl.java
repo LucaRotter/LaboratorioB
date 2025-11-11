@@ -32,7 +32,7 @@ public class serverBRImpl extends UnicastRemoteObject implements serverBR {
     // Costruttore
     protected serverBRImpl() throws RemoteException, SQLException {
         super();
-        conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/labB", "postgres", "Rluca2004");
+        conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/LaboratorioB", "postgres", "@Aleks13082002");
         System.out.println("Database connected!");
     }
 
@@ -147,7 +147,7 @@ public class serverBRImpl extends UnicastRemoteObject implements serverBR {
         WHERE li.id_libro IS NULL
         ORDER BY l.id_libro
         LIMIT ?
-    """;
+        """;
 
         try (Connection conn = DatabaseManager.getConnection(); PreparedStatement ps = conn.prepareStatement(query)) {
 
@@ -571,7 +571,7 @@ public class serverBRImpl extends UnicastRemoteObject implements serverBR {
 
         String query = "INSERT into Libri_consigliati (id_utente, id_libro, id_libro_consigliato) VALUES (?, ?, ?)";
 
-        try (Connection conn = DatabaseManager.getConnection(); PreparedStatement ps = conn.prepareStatement(query)) {
+        try (Connection conn = DatabaseManager.getConnection(); PreparedStatement ps = conn.prepareStatement(query_count)) {
             ps.setInt(1, id_utente);
             ps.setInt(2, id_libro);
             ps.setInt(3, id_consiglio);
