@@ -1,12 +1,7 @@
-<<<<<<< HEAD
-=======
 applicationrob\TokenSession.class
->>>>>>> 5fd6e3094b0ca90744ad47ffcb480611bb5017fd
 applicationrob\VisLibroController.class
 applicationrob\ClientController.class
 applicationrob\ReviewController.class
-<<<<<<< HEAD
-=======
 applicationrob\startApp.class
 applicationrob\AddReccomendedController.class
 applicationrob\RegisterController.class
@@ -22,4 +17,3 @@ applicationrob\VisLibrerieController.class
 applicationrob\LibraryItemController.class
 models\Model.class
 views\ViewFactory.class
->>>>>>> 5fd6e3094b0ca90744ad47ffcb480611bb5017fd

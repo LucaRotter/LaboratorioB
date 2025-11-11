@@ -78,6 +78,8 @@ public class ViewFactory {
 		AddReccomended = MoveToPage("/applicationrob/AddReccomended.fxml", AddReccomended);
 		return AddReccomended;
 	}  
+
+	
 	
 		
 	public void changeToHome() {
