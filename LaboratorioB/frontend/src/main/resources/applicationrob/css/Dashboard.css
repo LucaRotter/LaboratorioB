@@ -17,11 +17,6 @@ GridPane {
     -fx-border-width: 0;
 }
 
-ScrollPane:focused {
-    -fx-focus-color: transparent;
-    -fx-faint-focus-color: transparent;
-}
-
 Button {
 	-fx-background-color: #FFFF;
 	-fx-cursor: hand;
@@ -57,7 +52,7 @@ Button {
     -fx-background-radius: 8;
     -fx-border-color: #E0E0E0;
     -fx-border-radius: 8;
-    -fx-effect: dropshadow(gaussian,  rgba(79, 79, 79, 0.15), 10, 0.5, -2, 1 );
+    -fx-effect: dropshadow(gaussian,  rgba(79, 79, 79, 0.15), 10, 0.5, -2, 0 );
     -fx-border:none;
 }
 

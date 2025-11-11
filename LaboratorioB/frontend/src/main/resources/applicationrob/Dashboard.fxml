@@ -17,7 +17,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="880.0" stylesheets="@css/Dashboard.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="applicationrob.DashboardController">
    <children>
-      <ScrollPane hbarPolicy="NEVER" layoutX="63.0" layoutY="135.0" prefHeight="42.0" prefWidth="754.0" styleClass="ScrollPaneCategory" vbarPolicy="NEVER">
+      <ScrollPane hbarPolicy="NEVER" layoutX="62.0" layoutY="135.0" prefHeight="42.0" prefWidth="754.0" styleClass="ScrollPaneCategory" vbarPolicy="NEVER">
          <content>
             <HBox alignment="CENTER" prefHeight="39.0" prefWidth="718.0">
                <children>
