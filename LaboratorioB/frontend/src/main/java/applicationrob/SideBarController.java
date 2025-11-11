@@ -59,7 +59,7 @@ public class SideBarController implements Initializable{
 	
 	public void onLibreries() {
 		if (!TokenSession.checkTkSession()) {
-			views.ViewFactory.showAlert("info", "Access denied", "You must login to access the libraries.", btnLibraries, "info");
+			views.ViewAlert.showAlert("info", "Access denied", "You must login to access the libraries.", btnLibraries, "info");
         } else {
 		    Model.getIstance().getView().getSideBarSelectionItem().set("VisLibrerie");
 	    }

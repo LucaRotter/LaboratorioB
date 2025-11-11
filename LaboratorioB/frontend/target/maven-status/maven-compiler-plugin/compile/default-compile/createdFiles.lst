@@ -1,3 +1,4 @@
+views\ViewAlert.class
 applicationrob\TokenSession.class
 applicationrob\VisLibroController.class
 applicationrob\ClientController.class

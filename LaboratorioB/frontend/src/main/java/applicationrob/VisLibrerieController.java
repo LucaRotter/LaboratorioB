@@ -92,7 +92,7 @@ public class VisLibrerieController {
     private void showModal() {
         if(librerie.size () >= 10) {
             modalOverlay.setVisible(false); 
-            views.ViewFactory.showAlert("info", "Maximum Libraries", "You have reached the maximum limit of libraries.", extraBtn, "info");
+            views.ViewAlert.showAlert("info", "Maximum Libraries", "You have reached the maximum limit of libraries.", extraBtn, "info");
             return;
         }
 
@@ -113,13 +113,13 @@ public class VisLibrerieController {
         clientBR.getInstance().createLibreria(textSlib, id_user);
         librerie.setAll(FXCollections.observableArrayList(clientBR.getInstance().getLibrerie(id_user)));
         InsertingElements(librerie);
-        views.ViewFactory.showAlert("success", "Library added", "Form now on you can save your favorite books.", modalSendButton, "success");
+        views.ViewAlert.showAlert("success", "Library added", "Form now on you can save your favorite books.", modalSendButton, "success");
         modalOverlay.setVisible(false); 
         updateEmptyState();
         
          } catch (RemoteException e) {
              e.printStackTrace();
-             views.ViewFactory.showAlert("error", "Library not added", "Server error, try again.", modalSendButton, "error");
+             views.ViewAlert.showAlert("error", "Library not added", "Server error, try again.", modalSendButton, "error");
          }
     }
 
@@ -238,7 +238,7 @@ public class VisLibrerieController {
                 }
             } catch (IOException e) {
                 e.printStackTrace();
-                views.ViewFactory.showAlert("error", "Library error", "Server error, try again.", librariesContainer, "error");
+                views.ViewAlert.showAlert("error", "Library error", "Server error, try again.", librariesContainer, "error");
             }
         }
     }
