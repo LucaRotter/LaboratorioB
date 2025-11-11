@@ -29,8 +29,8 @@
         </Button>
     </HBox>
 
-	 <ScrollPane fx:id="scrollContent" prefWidth="840.0" prefHeight="550.0" fitToWidth="true" fitToHeight="false" hbarPolicy="NEVER" vbarPolicy="NEVER"
-                AnchorPane.topAnchor="120.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" styleClass="library-scroll-pane">
+	 <ScrollPane fx:id="scrollContent" prefWidth="840.0" prefHeight="550.0" fitToWidth="true" fitToHeight="false" hbarPolicy="NEVER" 
+                AnchorPane.topAnchor="120.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" styleClass="ScrollPaneBooks">
         <content>
             <GridPane fx:id="booksContainer" hgap="10" vgap="10" />
         </content>

@@ -10,7 +10,10 @@ import models.Model;
 import javafx.scene.Node;
 import javafx.scene.layout.Pane;
 
-public class SideBarController implements Initializable{
+public class SideBarController implements Initializable{ 
+
+	@FXML
+	private Button btnBack;
 
 	@FXML
 	private Button btnHome;
@@ -38,11 +41,16 @@ public class SideBarController implements Initializable{
 	} 
 	
 	public void init() {
+		btnBack.setOnAction(e -> onBack());
 		btnHome.setOnAction(e -> onHome());
 		btnLibraries.setOnAction(e -> onLibreries()); 
 		btnLogIn.setOnAction(e -> onLogin());
 		btnLogOut.setOnAction(e -> onLogout());
 		linkRegister.setOnAction(e -> onRegister());
+	}
+
+	public void onBack() {
+		//Model.getIstance().getView().goBack();
 	}
 	
 	public void onHome() {
@@ -51,7 +59,7 @@ public class SideBarController implements Initializable{
 	
 	public void onLibreries() {
 		if (!TokenSession.checkTkSession()) {
-			views.ViewFactory.showAlert("info", "Access denied", "You must login to access the libraries.", btnLibraries, "info");
+			views.ViewAlert.showAlert("info", "Access denied", "You must login to access the libraries.", btnLibraries, "info");
         } else {
 		    Model.getIstance().getView().getSideBarSelectionItem().set("VisLibrerie");
 	    }

@@ -67,27 +67,6 @@
     -fx-fill: #4A90E2;
 }
 
-/* Scroll Pane */
-
-.library-scroll-pane {
-    -fx-background-color: #ffffff;
-    -fx-border-color: #dcdcdc;
-    -fx-border-width: 1;
-    -fx-border-radius: 10;
-    -fx-background-radius: 10;
-    -fx-padding: 10;
-}
-
-.library-scroll-pane .viewport {
-    -fx-background-color: transparent;
-}
-
-
-/* Grid Pane */
-
-.grid-pane {
-    -fx-alignment: top-left;
-}
 
 /* Empty Text */
 #emptyText {

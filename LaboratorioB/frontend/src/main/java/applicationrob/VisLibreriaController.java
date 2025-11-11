@@ -151,7 +151,7 @@ public class VisLibreriaController {
 
         } catch (RemoteException e ) {
             e.printStackTrace();
-             views.ViewFactory.showAlert("error", "Book error", "Server error, try again.", booksContainer, "error");
+             views.ViewAlert.showAlert("error", "Book error", "Server error, try again.", booksContainer, "error");
 		} catch (IOException e) {
                 e.printStackTrace();
             }

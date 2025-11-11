@@ -76,6 +76,13 @@ public class VisLibroController implements Initializable{
 	private Button btnConfirm;
 
 	
+	@FXML
+	private Label lbUserCounter;
+	@FXML
+	private Label lbAverage;
+
+
+	
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
@@ -175,6 +182,8 @@ public class VisLibroController implements Initializable{
 		reviewContainer.getChildren().clear();
 		System.out.println("inizializzo review");
 
+		double avarege = 0.0;
+
 		for(i= 0;i<review.size();i++){
 		FXMLLoader loader1 = new FXMLLoader(getClass().getResource("/applicationrob/Review.fxml"));
 		
@@ -191,8 +200,14 @@ public class VisLibroController implements Initializable{
 		reviewc.setReview(review.get(i));
 		reviewc.setVislibroController(this);
 
+		avarege += review.get(i).getVotoMedio(); 
+
 		reviewContainer.getChildren().add(hBox);
 	}
+
+	avarege = avarege / review.size();
+	lbAverage.setText(String.format("%.2f", avarege));	
+	lbUserCounter.setText(String.valueOf(review.size())); 
 
 		//recommended books initialization
 
