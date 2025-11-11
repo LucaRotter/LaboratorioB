@@ -154,7 +154,7 @@ public class ViewFactory {
 		}
 		
 		Stage.setScene(scene);
-		Stage.show();
+		Stage.show(); 
 	}
 
 	public static void showAlert(String type, String title, String message, Node node, String position) {

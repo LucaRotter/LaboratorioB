@@ -1,7 +1,4 @@
-
-/* StackPane */
-
-#rootPane {
+ #rootPane {
     -fx-background-color: #ffffff;
     -fx-background-radius: 12;
     -fx-border-radius: 12;
@@ -19,8 +16,6 @@
     -fx-border-color: #4A90E2;
 }
 
-/* Image */
- 
 .image-view {
     -fx-background-radius: 12;
     -fx-border-radius: 12;
@@ -32,40 +27,7 @@
     -fx-opacity: 1;
 }
 
-/* Remove Button */
-
-#removeBtn {
-    -fx-background-color: rgba(255, 50, 50, 0.85);
-    -fx-text-fill: white;
-    -fx-font-weight: bold;
-    -fx-background-radius: 20;
-    -fx-border-radius: 20;
-    -fx-font-size: 16px;
-    -fx-pref-width: 24px;
-    -fx-pref-height: 24px;
-    -fx-cursor: hand;
-    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 3, 0, 0, 1);
-    -fx-padding: 0;
-    -fx-alignment: center;
-    -fx-opacity: 0; 
-    -fx-transition: 0.2s;
-}
-
-#rootPane:hover #removeBtn {
-    -fx-opacity: 1; 
-}
-
-#removeBtn:hover {
-    -fx-background-color: #E53935;
-}
-
-/* Label */
-
-.vbox {
-    -fx-alignment: center;
-}
-
-#libraryLabel {
+#labelName, #labelAuthor {
     -fx-font-size: 14px;
     -fx-font-weight: 600;
     -fx-text-fill: #333333;
@@ -76,6 +38,6 @@
 }
 
 /* Effetto hover per il colore della Label */
-#rootPane:hover #libraryLabel {
+#rootPane:hover #labelName, #rootPane:hover #labelAuthor {
     -fx-text-fill: #4A90E2;
 }

@@ -53,11 +53,13 @@
     -fx-opacity: 0.9;
 }
 
-.alert-pane.error {
+.alert-pane.success .image-view, .alert-pane.error .image-view {
+    -fx-fit-width: 80px;
+    -fx-fit-height: 80px;
 }
 
-.alert-pane.success {
-}
+.alert-pane.info .image-view {
+     -fx-fit-width: 250px;
+    -fx-fit-height: 250px
 
-.alert-pane.info {
 }

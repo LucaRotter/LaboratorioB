@@ -15,6 +15,7 @@ import javafx.scene.layout.VBox;
 
 
 
+
 public class AlertController { 
 
 	@FXML
@@ -29,11 +30,14 @@ public class AlertController {
 	private ImageView iconImage;
 	@FXML
 	private VBox containerElement;
+
 	
 	private String imageText;
 	private BorderPane parentContainer;
 
-	
+	@FXML
+    public void initialize() {
+    }
 	
 	@FXML 
 	private void closeModal() {

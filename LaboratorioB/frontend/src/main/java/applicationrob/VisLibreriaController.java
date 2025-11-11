@@ -132,7 +132,7 @@ public class VisLibreriaController {
 			BookController bookController= loader.getController();
             bookController.setLabels(books.getAutore(), books.getTitolo());
 
-            booksPane.setPrefSize(120, 120);
+            booksPane.setPrefSize(140, 190);
             GridPane.setMargin(booksPane, new Insets(20, 20, 20, 20));
 
             booksContainer.add(booksPane, col, row);
