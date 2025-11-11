@@ -12,14 +12,9 @@ ToggleButton{
 }
 
 GridPane {
-    -fx-background-color: #FFFF;
+    -fx-background-color: transparent;
     -fx-border-color: transparent;
     -fx-border-width: 0;
-}
-
-ScrollPane:focused {
-    -fx-focus-color: transparent;
-    -fx-faint-focus-color: transparent;
 }
 
 Button {
@@ -30,12 +25,13 @@ Button {
 
 .choiceBoxOrder{
     -fx-background-color: #FFFFFF;
-    -fx-background-radius: 8;
+    -fx-background-radius: 0 8 8 8;
     -fx-border-radius: 4;
     -fx-padding: 4 10 4 10;
-    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.15), 8, 0.1, -2, 0);
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.15), 6, 0.1, -2, 0);
     -fx-font-size: 13px;
     -fx-text-fill: #333333;
+    -fx-border:none;
 }
 
 .choiceBoxOrder:hover {
@@ -56,7 +52,7 @@ Button {
     -fx-background-radius: 8;
     -fx-border-color: #E0E0E0;
     -fx-border-radius: 8;
-    -fx-effect: dropshadow(gaussian,  rgba(79, 79, 79, 0.15), 10, 0.5, -2, 1 );
+    -fx-effect: dropshadow(gaussian,  rgba(79, 79, 79, 0.15), 10, 0.5, -2, 0 );
     -fx-border:none;
 }
 
@@ -67,6 +63,7 @@ Button {
 }
 
 .CategoryBtn{
+    -fx-background-color:transparent;
     -fx-pref-width: 80px;   /* larghezza preferita */
     -fx-pref-height: 80px;   /* altezza preferita */
     -fx-min-width: 120px;     /* larghezza minima */
@@ -78,49 +75,15 @@ Button {
 	-fx-border-color: #86DBC5;
 }
 
-.ScrollPaneCategory,
+
 .ScrollPaneCategory HBox{
 	-fx-border-style:none;
-
-}
-
-.ScrollPaneBooks{
-	
-	-fx-background-color: #FFFF;
-    -fx-border-color: transparent;
-    -fx-border-width: 0;
-    -fx-border-style: none;
-	-fx-effect: dropshadow(gaussian, rgba(79, 79, 79, 0.15), 6, 0.1, 2, 2);
-    -fx-background-radius: 8;
-}
-
-
-.ScrollPaneBooks .thumb{
-
-	-fx-pref-height: 10px;
-	-fx-background-color: rgba(0,0,0,0.1);
-    -fx-background-radius: 5;
-}
-
-.scroll-bar .increment-button,
-.scroll-bar .decrement-button {
     -fx-background-color: transparent;
-    
 }
 
-.scroll-bar  {
-    -fx-background-color: transparent;  /* o transparent se vuoi sfondo vuoto */
-    -fx-border-color: transparent;
+.ScrollPaneCategory{
+    -fx-insets: 1;
 }
-
-.scroll-bar .increment-button:hover,
-.scroll-bar .decrement-button:hover,
-.scroll-bar .thumb:hover,
-.scroll-bar .thumb:pressed{
-
-	-fx-background-color: rgba(0,0,0,0.3);
-}
-
 
 .SelectedIndex{
 	-fx-background-color: rgba(166, 166, 166, 0.2);
@@ -149,13 +112,30 @@ Button {
 	-fx-background-color: rgba(166, 166, 166, 0.2);
 }
 
-.ScrollPaneCategory{
-    -fx-background-color: #FFFF;
+.ScrollPaneCategory {
+    -fx-background-color: transparent;
     -fx-border-color: transparent;
-    -fx-border-width: 0;
-    -fx-border-style: none;
-	-fx-effect: dropshadow(gaussian, rgba(79, 79, 79, 0.15), 6, 0.1, -2, -2);
-    -fx-background-radius: 8;
+    -fx-background-radius: 8 0 8 0;
+    -fx-border-radius: 8;
+    -fx-effect: dropshadow(gaussian, rgba(79, 79, 79, 0.15), 6, 0.1, -2, -2);
+    -fx-padding: 0;
+}
+
+.ScrollPaneCategory > .viewport {
+    -fx-background-color: #ffffff;
+    -fx-background-radius: 8 0 8 0;
+    -fx-border-radius: 8;
+    -fx-clip: true; /* forza il clipping sugli angoli */
+}
+
+.ScrollPaneCategory .content {
+    -fx-background-color: #ffffff;
+    -fx-background-radius: 8 0 8 0;
+}
+ 
+
+.ScrollPaneCategory > .viewport{
+    -fx-background-color:#FFFF;
 }
 
 .SearchBar{
@@ -193,6 +173,11 @@ Button {
     -fx-text-fill: #ffffff;
 }
 
+#btnForward,
+#btnBack{
+
+    -fx-background-color: transparent;
+}
 
 
 

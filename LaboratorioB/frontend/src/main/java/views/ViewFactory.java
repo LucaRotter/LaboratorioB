@@ -107,6 +107,7 @@ public class ViewFactory {
 	}
 
     public void setSelectedBook(Libro lib) { 
+		selectedLibr.set(null);
 		selectedLibr.set(lib); 
 	}
 
@@ -120,9 +121,7 @@ public class ViewFactory {
 	}
 
     public void setSelectedLibrary(Libreria lib) { 
-		/*if (lib.getIdLibreria() == getSelectedLibrary().getIdLibreria()) {
-			selectedLibreria.set(null); 
-		} */
+		selectedLibreria.set(null); 
 		selectedLibreria.set(lib); 
 		
 	}

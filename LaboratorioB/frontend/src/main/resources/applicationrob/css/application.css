@@ -1,8 +1,81 @@
 .root{
-	-fx-font-size: 14px;
+	-fx-font-size: 12px;
+}
+
+ScrollPane:focused {
+    -fx-focus-color: transparent;
+    -fx-faint-focus-color: transparent;
+}
+
+.ScrollPaneBooks{
+	
+	-fx-background-color: #ffffff;
+    -fx-border-color: transparent;
+    -fx-border-width: 0;
+    -fx-border-style: none;
+	-fx-effect: dropshadow(gaussian, rgba(79, 79, 79, 0.15), 6, 0.1, 2, 2);
+    -fx-background-radius: 8;
+}
+
+.ScrollPaneBooks .scroll-bar {
+    -fx-pref-width: 14px;   
+    -fx-pref-height: 14px;  
+	-fx-background-color: transparent; /* niente colore */
+    -fx-background-insets: 0;          /* rimuove margini interni */
+    -fx-background-radius: 0;          /* rimuove eventuali angoli arrotondati */
+    -fx-border-color: transparent;     /* elimina il bordo */
+    -fx-border-width: 0; 
+}
+
+.scroll-bar .track-background {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+}
+
+.ScrollPaneBooks .scroll-bar .thumb{
+
+	-fx-pref-height: 10px;
+	-fx-background-color: rgba(0,0,0,0.1);
+    -fx-background-radius: 5;
+}
+
+.ScrollPaneBooks .scroll-bar .track {
+    -fx-background-color: transparent; /* niente colore */
+   
+}
+
+.ScrollPaneBooks .scroll-bar .increment-button,
+.ScrollPaneBooks .scroll-bar .decrement-button {
+    -fx-background-color: transparent;
+    -fx-padding: 0;
+    -fx-shape: null;
+    -fx-max-width: 0;
+    -fx-max-height: 0;
+    -fx-min-width: 0;
+    -fx-min-height: 0;
+    -fx-pref-width: 0;
+    -fx-pref-height: 0;
+}
+
+.ScrollPaneBooks .scroll-bar .increment-arrow,
+.ScrollPaneBooks .scroll-bar .decrement-arrow {
+    -fx-shape: null;
+    -fx-padding: 0;
+    -fx-background-color: transparent;
+    -fx-max-width: 0;
+    -fx-max-height: 0;
 }
 
 
+.ScrollPaneBooks .scroll-bar .thumb:hover,
+.ScrollPaneBooks .scroll-bar .thumb:pressed{
+
+	-fx-background-color: rgba(0,0,0,0.3);
+}
+
+.ScrollPaneBooks > .viewport {
+    -fx-background-color: #ffffff; /* sfondo del viewport */
+}
 
 
 

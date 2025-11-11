@@ -17,7 +17,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="880.0" stylesheets="@css/Dashboard.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="applicationrob.DashboardController">
    <children>
-      <ScrollPane hbarPolicy="NEVER" layoutX="63.0" layoutY="135.0" prefHeight="42.0" prefWidth="754.0" styleClass="ScrollPaneCategory" vbarPolicy="NEVER">
+      <ScrollPane hbarPolicy="NEVER" layoutX="62.0" layoutY="135.0" prefHeight="42.0" prefWidth="754.0" styleClass="ScrollPaneCategory" vbarPolicy="NEVER">
          <content>
             <HBox alignment="CENTER" prefHeight="39.0" prefWidth="718.0">
                <children>
@@ -35,7 +35,7 @@
       </ScrollPane>
       <ChoiceBox fx:id="choiceBoxOrder" layoutX="63.0" layoutY="190.0" prefHeight="34.0" prefWidth="150.0" styleClass="choiceBoxOrder"/>
       <Button layoutX="749.0" layoutY="190.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="68.0" text="Filters" />
-      <ScrollPane hbarPolicy="NEVER" layoutX="63.0" layoutY="243.0" prefHeight="404.0" prefWidth="754.0" styleClass="ScrollPaneBooks">
+      <ScrollPane fx:id="ScrollBooks" hbarPolicy="NEVER" layoutX="63.0" layoutY="243.0" prefHeight="404.0" prefWidth="754.0" styleClass="ScrollPaneBooks">
          <content>
             <GridPane fx:id="gridBooks" hgap="30.0" prefHeight="0.0" vgap="25.0">
               <rowConstraints>
@@ -50,7 +50,7 @@
       <Pane layoutX="526.0" layoutY="45.0" prefHeight="40.0" prefWidth="290.0" styleClass="SearchBar">
          <children>
             <TextField fx:id="searchBar" layoutX="44.0" layoutY= "8.0" prefHeight="25.0" prefWidth="220.0" promptText="Search" />
-            <Button layoutX="5.0"  layoutY="5.0"  mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0">
+            <Button fx:id="btnSearch" layoutX="5.0"  layoutY="5.0"  mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0">
                <graphic>
                   <ImageView fitHeight="23.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -62,7 +62,7 @@
          </children>
       </Pane>
       
-      <HBox layoutX="330.0" layoutY="658.0" prefHeight="30.0" styleClass="NavigationBox">
+      <HBox layoutX="340.0" layoutY="658.0" prefHeight="30.0" styleClass="NavigationBox">
          <children>
             <Button fx:id="btnBack" mnemonicParsing="false" text=" back" >
                 <graphic>
