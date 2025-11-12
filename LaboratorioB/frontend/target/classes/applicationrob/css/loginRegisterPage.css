@@ -1,0 +1,86 @@
+.loginPage .formBox,
+.registerPage .formBox {
+    -fx-background-color: #ffffff;
+    -fx-background-radius: 12;
+    -fx-border-radius: 12;
+    -fx-border-color: #e0e0e0;
+    -fx-border-width: 1;
+    -fx-padding: 40;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 8, 0, 0, 2);
+    -fx-alignment: center;
+}
+
+/* FORM TITLE */
+.loginPage .formTitle,
+.registerPage .formTitle {
+    -fx-font-size: 28px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #4A90E2;
+}
+
+/* TEXT FIELD & PASSWORD FIELD */
+.loginPage .formBox TextField,
+.loginPage .formBox PasswordField,
+.registerPage .formBox TextField,
+.registerPage .formBox PasswordField {
+    -fx-background-color: #fafafa;
+    -fx-border-color: #d0d0d0;
+    -fx-border-radius: 8;
+    -fx-background-radius: 8;
+    -fx-padding: 8 12;
+    -fx-font-size: 14px;
+}
+
+.loginPage .formBox TextField:focused,
+.loginPage .formBox PasswordField:focused,
+.registerPage .formBox TextField:focused,
+.registerPage .formBox PasswordField:focused {
+    -fx-border-color: #4A90E2;
+}
+
+/* BUTTON */
+.loginPage .formBox Button,
+.registerPage .formBox Button {
+    -fx-background-color: #4A90E2;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-background-radius: 8;
+    -fx-border-color: transparent;
+    -fx-pref-width: 150px;
+    -fx-cursor: hand;
+}
+
+.loginPage .formBox Button:hover,
+.registerPage .formBox Button:hover {
+    -fx-background-color: #357ABD;
+}
+
+/* LABEL sotto il form */
+.loginPage .formBox Label,
+.registerPage .formBox Label {
+    -fx-font-size: 14px;
+    -fx-text-fill: #666;
+}
+
+/* HYPERLINK */
+.loginPage .formBox Hyperlink,
+.registerPage .formBox Hyperlink {
+    -fx-text-fill: #4A90E2;
+    -fx-underline: true;
+    -fx-font-size: 14px;
+    -fx-cursor: hand;
+}
+
+.loginPage .formBox Hyperlink:hover,
+.registerPage .formBox Hyperlink:hover {
+    -fx-text-fill: #357ABD;
+}
+
+/* BACK BUTTON */
+.loginPage #backBtn,
+.registerPage #backBtn {
+    -fx-font-size: 14px;
+    -fx-background-color: transparent;
+    -fx-text-fill: #333;
+    -fx-cursor: hand;
+}

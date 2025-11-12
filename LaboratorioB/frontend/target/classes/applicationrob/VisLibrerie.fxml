@@ -16,23 +16,34 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.ImageView?> 
+<?import javafx.scene.layout.Pane?>
 
 
 
-<AnchorPane prefHeight="700.0" prefWidth="880.0" stylesheets="@css/libraries.css" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/22" fx:controller="applicationrob.VisLibrerieController">
+
+<AnchorPane prefHeight="700.0" prefWidth="880.0" StyleClass="librariesPage" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/22" fx:controller="applicationrob.VisLibrerieController">
 	<children>
-	 <StackPane layoutY="25.0" prefWidth="880.0" alignment="CENTER">
+	<HBox layoutY="35.0" layoutX="20.0" prefWidth="840.0" spacing="20" alignment="CENTER_LEFT">
+    
        <Text fx:id="titleText" text="My Libraries" styleClass="page-title"/>
-     </StackPane>
-      <Button fx:id="search" layoutX="650.0" layoutY="66" mnemonicParsing="false"  prefHeight="25.0" prefWidth="46.0" onAction="#searchLibraries">
-      <graphic>
-            <SVGPath fx:id="searchIcon"
-                     content="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
-        </graphic>
-    </Button>
-      <TextField fx:id="searchBar" promptText="Search your saved libraries" layoutY="70" layoutX="20" onAction="#writeText" prefWidth="600.0" />
-      <Button fx:id="edit" layoutX="735.0" layoutY="66" mnemonicParsing="false"  prefHeight="25.0" prefWidth="46.0" onAction="#useEdit">
+       <Region HBox.hgrow="ALWAYS"/>
+     <Pane layoutX="526.0" layoutY="45.0" prefHeight="40.0" maxHeight= "40.0" prefWidth="290.0" styleClass="SearchBar">
+     <children>
+            <TextField fx:id="searchBar" layoutX="44.0" layoutY= "8.0" prefHeight="25.0" prefWidth="220.0" onAction="#writeText" promptText="Search your saved libraries" />
+            <Button fx:id="btnSearch" layoutX="5.0"  layoutY="5.0"  mnemonicParsing="false"  onAction="#searchLibraries" prefHeight="30.0" prefWidth="30.0">
+               <graphic>
+                  <ImageView fitHeight="23.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../img/search.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+         </children>
+      </Pane>
+    </HBox>
+     <Button fx:id="edit" layoutX="825.0" layoutY="52" mnemonicParsing="false"  prefHeight="30.0" prefWidth="30.0" onAction="#useEdit" styleClass="LibrariesEditButton">
       <graphic>
             <SVGPath fx:id="editIcon"
                      content="M8.5 4a.5.5 0 0 0-1 0v2h-2a.5.5 0 0 0 0 1h2v2a.5.5 0 0 0 1 0V7h2a.5.5 0 0 0 0-1h-2zm-3 7a.5.5 0 0 0 0 1h5a.5.5 0 0 0 0-1z"/>

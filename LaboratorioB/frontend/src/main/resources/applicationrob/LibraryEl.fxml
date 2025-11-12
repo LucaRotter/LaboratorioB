@@ -9,10 +9,9 @@
 
 <StackPane fx:id="rootPane" 
            xmlns:fx="http://javafx.com/fxml"
-           stylesheets="@css/library.css"
            fx:controller="applicationrob.LibraryController"
            onMouseClicked="#clickLibrary"
-           prefHeight="150.0" prefWidth="121.0">
+           prefHeight="150.0" prefWidth="121.0" StyleClass="libraryElement">
 
     <children>
         <VBox alignment="CENTER" spacing="5">

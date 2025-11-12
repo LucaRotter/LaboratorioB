@@ -21,12 +21,12 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.VBox;
 import javafx.geometry.Insets;
 import javafx.scene.text.Text;
-import javafx.scene.text.Font;
+import javafx.scene.text.Font; 
 
 public class VisLibreriaController {
 
     @FXML
-    private Button searchBtn;
+    private Button btnSearch;
 
     @FXML
     private GridPane booksContainer;
@@ -132,8 +132,8 @@ public class VisLibreriaController {
 			BookController bookController= loader.getController();
             bookController.setLabels(books.getAutore(), books.getTitolo());
 
-            booksPane.setPrefSize(140, 190);
-            GridPane.setMargin(booksPane, new Insets(20, 20, 20, 20));
+            booksPane.setPrefSize(120, 180);
+            GridPane.setMargin(booksPane, new Insets(15, 10, 10, 20));
 
             booksContainer.add(booksPane, col, row);
 			

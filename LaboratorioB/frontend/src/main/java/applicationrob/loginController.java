@@ -22,7 +22,7 @@ public class LoginController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         
-       backBtn.setOnAction(e -> {
+       backBtn.setOnAction(e -> { 
 			
 			Model.getIstance().getView().changeToHome();
 		});
@@ -40,15 +40,7 @@ public class LoginController implements Initializable {
 
     @FXML
     public void changeToRegister() {
+         Model.getIstance().getView().changeToRegister();
     }
-
-     @FXML
-    public void onBackPressed() {
-    }
-    
-    public void showAlert(String title, String message) {   
-    }
-
-    
 
 }

@@ -25,7 +25,7 @@ public class VisLibrerieController {
 
    
     @FXML
-    private Button search;
+    private Button btnSearch;
     
     @FXML
     private Button edit;
@@ -138,7 +138,7 @@ public class VisLibrerieController {
     void searchLibraries(ActionEvent event) throws RemoteException {
         textSlib = searchBar.getText().trim().toLowerCase();
         librerie.setAll(clientBR.getInstance().getLibrerie(id_user));
-
+ 
         if (textSlib.isEmpty()) {
             InsertingElements(librerie);
             return;
@@ -202,7 +202,7 @@ public class VisLibrerieController {
 
     int columns = 5;
     int row = 0;
-    int col = 0;
+    int col = 0; 
    
 
     if (editMode) {

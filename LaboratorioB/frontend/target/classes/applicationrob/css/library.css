@@ -1,7 +1,7 @@
 
 /* StackPane */
 
-#rootPane {
+.libraryElement{
     -fx-background-color: #ffffff;
     -fx-background-radius: 12;
     -fx-border-radius: 12;
@@ -13,7 +13,7 @@
     -fx-transition: 0.3s;
 }
 
-#rootPane:hover {
+.libraryElement:hover {
     -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.15), 10, 0, 0, 4);
     -fx-background-color: #fdfdfd;
     -fx-border-color: #4A90E2;
@@ -21,20 +21,20 @@
 
 /* Image */
  
-.image-view {
+.libraryElement #libraryImage {
     -fx-background-radius: 12;
     -fx-border-radius: 12;
     -fx-opacity: 0.95;
     -fx-effect: innershadow(gaussian, rgba(0,0,0,0.05), 4, 0.3, 0, 0);
 }
 
-#rootPane:hover .image-view {
+.libraryElement:hover #libraryImage {
     -fx-opacity: 1;
 }
 
 /* Remove Button */
 
-#removeBtn {
+.libraryElement #removeBtn {
     -fx-background-color: rgba(255, 50, 50, 0.85);
     -fx-text-fill: white;
     -fx-font-weight: bold;
@@ -51,21 +51,17 @@
     -fx-transition: 0.2s;
 }
 
-#rootPane:hover #removeBtn {
+.libraryElement:hover #removeBtn {
     -fx-opacity: 1; 
 }
 
-#removeBtn:hover {
+.libraryElement #removeBtn:hover {
     -fx-background-color: #E53935;
 }
 
-/* Label */
 
-.vbox {
-    -fx-alignment: center;
-}
 
-#libraryLabel {
+.libraryElement #libraryLabel {
     -fx-font-size: 14px;
     -fx-font-weight: 600;
     -fx-text-fill: #333333;
@@ -76,6 +72,6 @@
 }
 
 /* Effetto hover per il colore della Label */
-#rootPane:hover #libraryLabel {
+.libraryElement:hover #libraryLabel {
     -fx-text-fill: #4A90E2;
 }
