@@ -165,6 +165,7 @@ public class DashboardController implements Initializable{
 		});
 	
 		choiceBoxOrder.getItems().addAll(Ricerca.TITOLO, Ricerca.AUTORE, Ricerca.ANNO);
+		choiceBoxOrder.setValue(Ricerca.TITOLO);
 	}
 
 	public void initNavButtons(){
@@ -385,6 +386,7 @@ public class DashboardController implements Initializable{
 		container.setAlignment(Pos.CENTER);
 		container.prefWidthProperty().bind(ScrollBooks.widthProperty());
 		container.prefHeightProperty().bind(ScrollBooks.heightProperty());
+
 
 		ScrollBooks.setContent(container);
 	}

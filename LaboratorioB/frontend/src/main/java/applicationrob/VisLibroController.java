@@ -10,9 +10,11 @@ import java.util.ResourceBundle;
 import LaboratorioB.common.models.Libreria;
 import LaboratorioB.common.models.Libro;
 import LaboratorioB.common.models.Valutazione;
+import javafx.animation.FadeTransition;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
@@ -20,6 +22,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.util.Duration;
 import models.Model;
 
 public class VisLibroController implements Initializable{
@@ -29,6 +32,9 @@ public class VisLibroController implements Initializable{
 
     @FXML
     private Label LBAuthor;
+
+	@FXML
+	private ScrollPane ScrollRec;
 
     @FXML
     private Label LBGenre;
@@ -180,9 +186,8 @@ public class VisLibroController implements Initializable{
 		//review initialization
 
 		reviewContainer.getChildren().clear();
-		System.out.println("inizializzo review");
 
-		double avarege = 0.0;
+		double avarege = 0;
 
 		for(i= 0;i<review.size();i++){
 		FXMLLoader loader1 = new FXMLLoader(getClass().getResource("/applicationrob/Review.fxml"));
@@ -197,7 +202,12 @@ public class VisLibroController implements Initializable{
 		}
 
 		ReviewController reviewc =  loader1.getController();
-		reviewc.setReview(review.get(i));
+		try {
+			reviewc.setReview(review.get(i));
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		reviewc.setVislibroController(this);
 
 		avarege += review.get(i).getVotoMedio(); 
@@ -205,8 +215,28 @@ public class VisLibroController implements Initializable{
 		reviewContainer.getChildren().add(hBox);
 	}
 
-	avarege = avarege / review.size();
-	lbAverage.setText(String.format("%.2f", avarege));	
+	
+	if( review.size() == 0){
+
+		lbAverage.setText("0.0");
+		Label nessunLibro = new Label("NO BOOK REVIEW");
+		nessunLibro.setStyle("-fx-font-size: 32px; -fx-text-fill: gray;");
+
+		
+				reviewContainer.setAlignment(Pos.CENTER);
+				reviewContainer.prefHeightProperty().set(200.0);
+				
+				reviewContainer.getChildren().add(nessunLibro);
+				
+	
+	} else{
+		lbAverage.setText(String.format("%.2f", avarege));	
+		ScrollRec.setContent(recListBook);
+	}
+	
+	if(review.size()== 0){
+	    
+	}
 	lbUserCounter.setText(String.valueOf(review.size())); 
 
 		//recommended books initialization
@@ -244,6 +274,20 @@ public class VisLibroController implements Initializable{
 		recListBook.getChildren().add(vbox);
 		
 		}
+
+		if(recommendList.size() == 0){
+
+				Label nessunLibro = new Label("NO BOOK RECCOMMENDED");
+				nessunLibro.setStyle("-fx-font-size: 32px; -fx-text-fill: gray;");
+
+				VBox container = new VBox(nessunLibro);
+				container.setAlignment(Pos.CENTER);
+				container.prefWidthProperty().bind(ScrollRec.widthProperty());
+				container.prefHeightProperty().set(200.0);
+				
+				ScrollRec.setContent(container);
+
+		}
 	  }
 
 
@@ -268,14 +312,6 @@ public class VisLibroController implements Initializable{
 		ModalLibraries.setVisible(true);
 		ModalLibraries.setDisable(false);
 		ModalLibraries.toFront();
-
-		ModalLibraries.setOnMouseClicked(event -> {
-        // se clicchi *direttamente* sull'overlay (e non sul contenuto)
-        if (event.getTarget() != ModalLibraries) {
-			System.out.println(event.getTarget());
-            closeModal();
-        }
-	});
 	
 		//initialization of the libraries list
 		VBoxLibraries.getChildren().clear();

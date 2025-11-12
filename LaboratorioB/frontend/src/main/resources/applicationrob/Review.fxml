@@ -14,13 +14,13 @@
             <children>
                <Button fx:id="btnShowMore" layoutX="700.0" layoutY="24.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="52.0" >
                <graphic>
-                  <Group scaleX="3" scaleY="3">
+                  <Group scaleX="1" scaleY="1">
                      <SVGPath fill="black" content="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0" />
                      <SVGPath fill="black" content="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8m8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7" />
                   </Group>
-                  <graphic/>
-               <Button/>
-            <Label layoutX="32.0" layoutY="24.0" prefHeight="30.0" text="Nome utente" />
+                  </graphic>
+               </Button>
+            <Label fx:id="lbUser" layoutX="32.0" layoutY="24.0" prefHeight="30.0" text="Nome utente" />
             <Label layoutX="268.0" layoutY="30.0" prefHeight="17.0" text="voto complessivo : " />
          </children>
       </Pane>

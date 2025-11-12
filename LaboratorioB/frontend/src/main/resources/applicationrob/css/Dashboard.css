@@ -1,12 +1,3 @@
-.SearchBar {
-	-fx-background-color: #FFFF;
-	-fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 10, 0, 0, 0);
-}
-
-.SearchBar TextField{
-	-fx-background-color:transparent;
-}
-
 ToggleButton{
     -fx-background-color: #FFFF; 
 }
@@ -136,22 +127,6 @@ Button {
 
 .ScrollPaneCategory > .viewport{
     -fx-background-color:#FFFF;
-}
-
-.SearchBar{
-
-    -fx-background-color: white;                
-    -fx-border-width: 2;              
-    -fx-background-radius: 15;        
-    -fx-border-radius: 15;            
-    -fx-padding: 10 10 10 0;
-     
-}
-
-.SearchBar Button{
-    -fx-background-radius: 50%;  
-    -fx-background-color: #86DBC5;  
-    
 }
 
 /* Hover */

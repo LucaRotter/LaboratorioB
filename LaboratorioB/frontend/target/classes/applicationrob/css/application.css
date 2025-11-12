@@ -2,6 +2,12 @@
 	-fx-font-size: 12px;
 }
 
+ScrollPane{
+	-fx-background-color: #ffffff;
+    -fx-border-color: transparent;
+	-fx-border-style: none;
+}
+
 ScrollPane:focused {
     -fx-focus-color: transparent;
     -fx-faint-focus-color: transparent;
@@ -9,15 +15,12 @@ ScrollPane:focused {
 
 .ScrollPaneBooks{
 	
-	-fx-background-color: #ffffff;
-    -fx-border-color: transparent;
     -fx-border-width: 0;
-    -fx-border-style: none;
 	-fx-effect: dropshadow(gaussian, rgba(79, 79, 79, 0.15), 6, 0.1, 2, 2);
     -fx-background-radius: 8;
 }
 
-.ScrollPaneBooks .scroll-bar {
+.scroll-bar {
     -fx-pref-width: 14px;   
     -fx-pref-height: 14px;  
 	-fx-background-color: transparent; /* niente colore */
@@ -32,20 +35,20 @@ ScrollPane:focused {
     -fx-border-color: transparent;
 }
 
-.ScrollPaneBooks .scroll-bar .thumb{
+.scroll-bar .thumb {
 
 	-fx-pref-height: 10px;
 	-fx-background-color: rgba(0,0,0,0.1);
     -fx-background-radius: 5;
 }
 
-.ScrollPaneBooks .scroll-bar .track {
+ .scroll-bar .track {
     -fx-background-color: transparent; /* niente colore */
    
 }
 
-.ScrollPaneBooks .scroll-bar .increment-button,
-.ScrollPaneBooks .scroll-bar .decrement-button {
+.scroll-bar .increment-button,
+.scroll-bar .decrement-button {
     -fx-background-color: transparent;
     -fx-padding: 0;
     -fx-shape: null;
@@ -57,8 +60,8 @@ ScrollPane:focused {
     -fx-pref-height: 0;
 }
 
-.ScrollPaneBooks .scroll-bar .increment-arrow,
-.ScrollPaneBooks .scroll-bar .decrement-arrow {
+ .scroll-bar .increment-arrow,
+ .scroll-bar .decrement-arrow {
     -fx-shape: null;
     -fx-padding: 0;
     -fx-background-color: transparent;
@@ -67,8 +70,8 @@ ScrollPane:focused {
 }
 
 
-.ScrollPaneBooks .scroll-bar .thumb:hover,
-.ScrollPaneBooks .scroll-bar .thumb:pressed{
+ .scroll-bar .thumb:hover,
+ .scroll-bar .thumb:pressed{
 
 	-fx-background-color: rgba(0,0,0,0.3);
 }
@@ -77,6 +80,84 @@ ScrollPane:focused {
     -fx-background-color: #ffffff; /* sfondo del viewport */
 }
 
+/*da spostare*/
+.reviewContainer{
+    -fx-border-color: transparent;
+	-fx-border-style: none;
+    -fx-border-width: 0;
+	-fx-effect: dropshadow(gaussian, rgba(79, 79, 79, 0.15), 6, 0.1, 2, 2);
+    -fx-background-radius: 8;
+}
+
+.PaneDetail{
+    -fx-background-color: #86DBC5;
+}
+
+.SearchBar{
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 10, 0, 0, 0);
+    -fx-background-color: white;                
+    -fx-border-width: 2;              
+    -fx-background-radius: 15;        
+    -fx-border-radius: 15;            
+    -fx-padding: 10 10 10 0;
+    
+}
+
+.SearchBar Button{
+    -fx-background-radius: 50%;  
+    -fx-background-color: #86DBC5;  
+    
+}
+
+.SearchBar TextField{
+	-fx-background-color:transparent;
+}
+
+Button{
+
+    -fx-background-color: #86DBC5;  
+    -fx-effect: dropshadow(gaussian, rgba(79, 79, 79, 0.15), 6, 0.1, 2, 2);
+}
+
+Button:hover{
+
+    -fx-opacity:0.3;
+    
+}
 
 
+.PaneModal{
 
+    -fx-background-color: #ffffff;  
+
+}
+
+.ScrollLibraries{
+	-fx-border-width: 0;
+}
+
+.check-box {
+    -fx-font-family: "Calibri";
+    -fx-font-size: 14px;
+    -fx-text-fill: #333;
+}
+
+.check-box .box {
+    -fx-background-color: white;
+    -fx-border-color: #aaa;
+    -fx-border-radius: 4;
+    -fx-background-radius: 4;
+}
+
+.check-box:selected .box {
+    -fx-background-color: #4CAF50;
+    -fx-border-color: #4CAF50;
+}
+
+.check-box:selected .mark {
+    -fx-background-color: white;
+}
+
+.TableReview{
+    
+}
