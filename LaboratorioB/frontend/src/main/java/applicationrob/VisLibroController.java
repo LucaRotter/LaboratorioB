@@ -270,6 +270,14 @@ public class VisLibroController implements Initializable{
 		
 		BookController book = loader.getController();
 		book.setLabels(recommendList.get(i).getAutore(), recommendList.get(i).getTitolo());
+		Libro libr = recommendList.get(i);
+
+		vbox.setOnMouseClicked(e->{
+
+				Model.getIstance().getView().setSelectedBook(libr);
+				Model.getIstance().getView().getSideBarSelectionItem().set("VisLibro");
+				
+			});
 		
 		recListBook.getChildren().add(vbox);
 		
