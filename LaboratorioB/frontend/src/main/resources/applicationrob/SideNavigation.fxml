@@ -13,6 +13,8 @@
 <?import javafx.scene.text.Text?>
 <?import javafx.scene.shape.SVGPath?>
 
+
+
 <VBox fillWidth="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="220.0" style="-fx-background-color: transparent; -fx-border-radius: 10px; -fx-background-radius: 10px;" stylesheets="@css/Sidebar.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="applicationrob.SideBarController">
    <children>
       <AnchorPane prefHeight="700.0" prefWidth="216.0" style="-fx-background-radius: 10px;">
@@ -67,7 +69,7 @@
                            <children>
                               <ImageView fitHeight="33.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@../img/bookshelf-icon-png-6.jpg" />
+                                    <Image url="@../img/logOut.png" />
                                  </image>
                               </ImageView>
                               <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Log out" wrappingWidth="68.53668212890625" />
@@ -89,6 +91,11 @@
                </HBox>
             </graphic>
          </Button>
+     <Pane fx:id="logPane" layoutX="13.0" layoutY="440.0" prefHeight="250.0" prefWidth="400.0" styleClass="LoginPane">
+    <children>
+       
+    </children>
+</Pane>
             <Pane fx:id="loginPane" layoutX="18.0" layoutY="499.0" prefHeight="166.0" prefWidth="180.0" styleClass="LoginPane">
                <children>
                   <Button fx:id="btnLogIn" layoutX="28.0" layoutY="22.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="124.0">

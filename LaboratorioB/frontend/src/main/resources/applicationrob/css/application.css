@@ -336,6 +336,18 @@ Button:hover{
 
 /* Book Element */
 
+.bookElement {
+    -fx-background-color: #ffffff;
+    -fx-background-radius: 12;
+    -fx-border-radius: 12;
+    -fx-border-color: #e0e0e0;
+    -fx-border-width: 1;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.05), 3, 0, 0, 2);
+    -fx-alignment: center;
+    -fx-transition: 0.3s;
+}
+
 .bookElement:hover {
     
     -fx-background-color: #fdfdfd;

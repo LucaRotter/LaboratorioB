@@ -620,7 +620,7 @@ public class serverBRImpl extends UnicastRemoteObject implements serverBR {
         }
 
         return true;
-    }
+    } 
     public static void main(String[] args) {
         try {
             LocateRegistry.createRegistry(1099);

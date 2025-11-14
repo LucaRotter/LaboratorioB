@@ -15,6 +15,8 @@
 <?import javafx.scene.shape.SVGPath?>
 <?import javafx.scene.control.ToggleButton?>
 
+<?import javafx.scene.text.Text?>
+
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="880.0" stylesheets="@css/Dashboard.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="applicationrob.DashboardController">
    <children>
       <ScrollPane hbarPolicy="NEVER" layoutX="62.0" layoutY="135.0" prefHeight="42.0" prefWidth="754.0" styleClass="ScrollPaneCategory" vbarPolicy="NEVER">
@@ -47,7 +49,11 @@
             <Insets left="10.0" />
          </padding>
       </ScrollPane>
-      <Pane layoutX="526.0" layoutY="45.0" prefHeight="40.0" prefWidth="290.0" styleClass="SearchBar">
+      
+    
+       <Text fx:id="titleText" text="Book Recommender" layoutY ="80.0" styleClass="page-title"/>
+       
+      <Pane layoutX="526.0" layoutY="45.0" prefHeight="40.0" maxHeight ="40.0" prefWidth="290.0" styleClass="SearchBar"> 
          <children>
             <TextField fx:id="searchBar" layoutX="44.0" layoutY= "8.0" prefHeight="25.0" prefWidth="220.0" promptText="Search" />
             <Button fx:id="btnSearch" layoutX="5.0"  layoutY="5.0"  mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0">
@@ -61,6 +67,7 @@
             </Button>
          </children>
       </Pane>
+      
       
       <HBox layoutX="340.0" layoutY="658.0" prefHeight="30.0" styleClass="NavigationBox">
          <children>
