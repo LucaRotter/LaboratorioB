@@ -33,8 +33,12 @@ public class SideBarController implements Initializable{
 	@FXML
 	private Pane loginPane; 
 
+	@FXML
+	private Pane logPane;
+
 	private int id_user;
 	
+	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		checkLogin();
 		init();
@@ -50,7 +54,12 @@ public class SideBarController implements Initializable{
 	}
 
 	public void onBack() {
-		//Model.getIstance().getView().goBack();
+		Model.getIstance().getView().lastHistory();
+		/*if () {
+			btnBack.setVisible(false);
+		}
+		*/	
+			
 	}
 	
 	public void onHome() {
@@ -84,9 +93,11 @@ public class SideBarController implements Initializable{
 		if(id_user != -1) {
 			btnLogOut.setVisible(true);
 			loginPane.setVisible(false);
+			logPane.setVisible(true);
 		} else {
 			btnLogOut.setVisible(false);
 			loginPane.setVisible(true);
+			logPane.setVisible(false);
 		}
 	}
 	

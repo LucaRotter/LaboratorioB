@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 views\ViewAlert.class
 applicationrob\TokenSession.class
 applicationrob\VisLibroController.class
@@ -20,3 +21,5 @@ applicationrob\VisLibrerieController.class
 applicationrob\LibraryItemController.class
 models\Model.class
 views\ViewFactory.class
+=======
+>>>>>>> 1fa6885eb87c8cc38017d24d5cfe77e17157f064

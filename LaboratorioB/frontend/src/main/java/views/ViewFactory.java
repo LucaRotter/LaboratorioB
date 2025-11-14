@@ -1,6 +1,7 @@
 package views;
 
-import java.io.IOException; 
+import java.io.IOException;
+import java.util.LinkedList;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.beans.property.ObjectProperty;
@@ -10,6 +11,7 @@ import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane; 
 import javafx.stage.Stage;
 import LaboratorioB.common.models.*;
+
 
 public class ViewFactory {
 	
@@ -24,12 +26,15 @@ public class ViewFactory {
 	private AnchorPane AddReview;
 	private AnchorPane AddReccomended;
 
+	private LinkedList<String> historyPage;
+
 	private Stage Stage;
 
 	public ViewFactory() {
 		this.SideBarSelection = new SimpleStringProperty("");
 		this.selectedLibr = new SimpleObjectProperty<Libro>();
 		this.selectedLibreria = new SimpleObjectProperty<Libreria>();
+		historyPage = new LinkedList<>();	
 
 		this.Stage = new Stage();
 	}
@@ -40,31 +45,37 @@ public class ViewFactory {
 	
 	public AnchorPane getDashboardMain(){
 	    DashboardMain = MoveToPage("/applicationrob/Dashboard.fxml", DashboardMain);
+		historyPage.clear();
 	    return DashboardMain;
 	}
 	
 	public AnchorPane getVisLibrerie(){
 		VisLibrerie = MoveToPage("/applicationrob/VisLibrerie.fxml", VisLibrerie);
+		historyPage.add("VisLibrerie");
 		return VisLibrerie;
 		}
 	
 	public AnchorPane getVisLibro() {
 		VisLibro = MoveToPage("/applicationrob/VisLibro.fxml", VisLibro);
+		historyPage.add("VisLibro");
 		return VisLibro;
 	}       
 	 
 	public AnchorPane getVisLibreria() {
 		VisLibreria = MoveToPage("/applicationrob/VisLibreria.fxml", VisLibreria);
+		historyPage.add("VisLibreria");
 		return VisLibreria;
 	}  
 
 	public AnchorPane getAddReview() {
 		AddReview = MoveToPage("/applicationrob/AddReview.fxml", AddReview);
+		historyPage.add("AddReview");
 		return AddReview;
 	}  
 
 	public AnchorPane getAddReccomended() {
 		AddReccomended = MoveToPage("/applicationrob/AddReccomended.fxml", AddReccomended);
+		historyPage.add("AddReccomended");
 		return AddReccomended;
 	}  
 		
@@ -142,6 +153,20 @@ public class ViewFactory {
 		
 		Stage.setScene(scene);
 		Stage.show(); 
+	}
+
+	public void lastHistory() {
+		  if (!historyPage.isEmpty()) {
+        historyPage.removeLast();
+
+        if (!historyPage.isEmpty()) {
+            String previous = historyPage.getLast();
+            SideBarSelection.set(previous);
+        } else {
+            SideBarSelection.set("Dashboard");
+        }
+    }
+		
 	}
 
 }
