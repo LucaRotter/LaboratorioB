@@ -27,9 +27,6 @@ public class AddReviewController implements Initializable{
     private ChoiceBox<Integer> ScoreEdition;
 
     @FXML
-    private ChoiceBox<Integer> ScoreFinal;
-
-    @FXML
     private ChoiceBox<Integer> ScoreOriginality;
 
     @FXML
@@ -43,9 +40,6 @@ public class AddReviewController implements Initializable{
 
     @FXML
     private TextArea TxtEdition;
-
-    @FXML
-    private TextArea TxtFinal;
 
     @FXML
     private TextArea TxtOriginality;
@@ -92,6 +86,12 @@ public class AddReviewController implements Initializable{
         BtnRestar.setOnAction(e->{
             onRestart();
         });
+
+        TxtStyle.setWrapText(true);
+        TxtContent.setWrapText(true);
+        TxtPleasentess.setWrapText(true);
+        TxtOriginality.setWrapText(true);
+        TxtEdition.setWrapText(true);
     }
 
     private void onRestart() {
@@ -102,7 +102,6 @@ public class AddReviewController implements Initializable{
         ScoreOriginality.setValue(null);
         TxtContent.clear();
         TxtEdition.clear();
-        TxtFinal.clear();
         TxtOriginality.clear();
         TxtPleasentess.clear();
         TxtStyle.clear();

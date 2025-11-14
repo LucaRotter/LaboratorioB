@@ -23,6 +23,8 @@
     -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 8, 0, 2, 2);
 }
 
+
+
 /* === Intestazioni delle colonne === */
 .header {
     -fx-font-weight: bold;
@@ -63,7 +65,7 @@
     -fx-border-color: #cccccc;
     -fx-border-radius: 6;
     -fx-background-radius: 6;
-    -fx-padding: 5;
+    
 }
 
 .text-area:hover {
@@ -99,4 +101,12 @@
 /* === Effetto tabella (righe alternate) === */
 .grid-pane > *:nth-child(even) {
     -fx-background-color: #fafafa;
+}
+
+.text-area .scroll-pane .viewport {
+    -fx-fit-to-width: true;
+}
+
+.text-area .scroll-pane {
+    -fx-hbar-policy: never;   /* disattiva scrollbar orizzontale */
 }

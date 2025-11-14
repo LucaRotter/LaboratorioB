@@ -1,7 +1,9 @@
 views\ViewAlert.class
 applicationrob\TokenSession.class
 applicationrob\VisLibroController.class
+applicationrob\LibraryController.class
 applicationrob\ClientController.class
+applicationrob\VisLibreriaController.class
 applicationrob\ReviewController.class
 applicationrob\startApp.class
 applicationrob\AddReccomendedController.class

@@ -1,80 +1,91 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.geometry.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/22"
-            xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="applicationrob.AddReviewController"
-            prefWidth="880" prefHeight="700"
-            stylesheets="@css/review.css">
+<AnchorPane prefHeight="700" prefWidth="880" stylesheets="@css/review.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="applicationrob.AddReviewController">
 
     <children>
-        <GridPane fx:id="ReviewTable"
-                  layoutX="30" layoutY="100"
-                  prefWidth="820" prefHeight="500"
-                  hgap="10" vgap="8"
-                  styleClass="TableReview">
+        <GridPane fx:id="ReviewTable" alignment="TOP_CENTER" hgap="10" layoutX="30.0" layoutY="30.0" prefHeight="500.0" prefWidth="820" styleClass="TableReview" vgap="8">
 
-            <!-- IMPORTANTE: ColumnConstraints deve stare dentro di <columnConstraints> -->
-            <columnConstraints>
-                <ColumnConstraints percentWidth="20" />
-                <ColumnConstraints percentWidth="30" />
-                <ColumnConstraints percentWidth="10" />
-                <ColumnConstraints percentWidth="40" />
-            </columnConstraints>
+    <!-- Colonne -->
+    <columnConstraints>
+        <ColumnConstraints percentWidth="17.0" />
+        <ColumnConstraints percentWidth="30.0" />
+        <ColumnConstraints percentWidth="13.0" />
+        <ColumnConstraints percentWidth="40.0" />
+    </columnConstraints>
 
-            <!-- Riga intestazioni -->
-            <Label text="Criterio" GridPane.rowIndex="0" GridPane.columnIndex="0" styleClass="header"/>
-            <Label text="Spiegazione" GridPane.rowIndex="0" GridPane.columnIndex="1" styleClass="header"/>
-            <Label text="Score" GridPane.rowIndex="0" GridPane.columnIndex="2" styleClass="header"/>
-            <Label text="Note" GridPane.rowIndex="0" GridPane.columnIndex="3" styleClass="header"/>
+    <!-- Righe (altezza 60px ciascuna) -->
+    <rowConstraints>
+        <RowConstraints minHeight="80" />
+        <RowConstraints minHeight="80" />
+        <RowConstraints minHeight="80" />
+        <RowConstraints minHeight="80" />
+        <RowConstraints minHeight="80" />
+        <RowConstraints minHeight="80" />
+        <RowConstraints minHeight="80" />
+    </rowConstraints>
 
-            <!-- Riga 1 -->
-            <Label text="Stile" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
-            <Label text="Valutazione sullo stile di scrittura" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
-            <ChoiceBox fx:id="ScoreStyle" GridPane.rowIndex="1" GridPane.columnIndex="2" prefWidth="60"/>
-            <TextArea fx:id="TxtStyle" GridPane.rowIndex="1" GridPane.columnIndex="3" prefRowCount="2"/>
+    <!-- Riga intestazioni -->
+    <Label styleClass="header" text="Criterio" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+    <Label styleClass="header" text="Spiegazione" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+    <Label styleClass="header" text="Score" GridPane.columnIndex="2" GridPane.rowIndex="0" />
+    <Label styleClass="header" text="Note" GridPane.columnIndex="3" GridPane.rowIndex="0" />
 
-            <!-- Riga 2 -->
-            <Label text="Contenuto" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
-            <Label text="Valutazione sui contenuti del libro" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
-            <ChoiceBox fx:id="ScoreContent" GridPane.rowIndex="2" GridPane.columnIndex="2" prefWidth="60"/>
-            <TextArea fx:id="TxtContent" GridPane.rowIndex="2" GridPane.columnIndex="3" prefRowCount="2"/>
+    <!-- Riga 1 -->
+    <Label text="Stile" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+    <Label text="Valutazione sullo stile di scrittura" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+    <ChoiceBox fx:id="ScoreStyle" prefWidth="60" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+    <TextArea fx:id="TxtStyle" prefRowCount="2" GridPane.columnIndex="3" GridPane.rowIndex="1" />
 
-            <!-- Riga 3 -->
-            <Label text="Gradevolezza" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
-            <Label text="Valutazione sul gradimento" GridPane.rowIndex="3" GridPane.columnIndex="1"/>
-            <ChoiceBox fx:id="ScorePleasentness" GridPane.rowIndex="3" GridPane.columnIndex="2" prefWidth="60"/>
-            <TextArea fx:id="TxtPleasentess" GridPane.rowIndex="3" GridPane.columnIndex="3" prefRowCount="2"/>
+    <!-- Riga 2 -->
+    <Label text="Contenuto" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+    <Label text="Valutazione sui contenuti del libro" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+    <ChoiceBox fx:id="ScoreContent" prefWidth="60" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+    <TextArea fx:id="TxtContent" prefRowCount="2" GridPane.columnIndex="3" GridPane.rowIndex="2" />
 
-            <!-- Riga 4 -->
-            <Label text="Originalità" GridPane.rowIndex="4" GridPane.columnIndex="0"/>
-            <Label text="Valutazione sulla originalità" GridPane.rowIndex="4" GridPane.columnIndex="1"/>
-            <ChoiceBox fx:id="ScoreOriginality" GridPane.rowIndex="4" GridPane.columnIndex="2" prefWidth="60"/>
-            <TextArea fx:id="TxtOriginality" GridPane.rowIndex="4" GridPane.columnIndex="3" prefRowCount="2"/>
+    <!-- Riga 3 -->
+    <Label text="Gradevolezza" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+    <Label text="Valutazione sul gradimento" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+    <ChoiceBox fx:id="ScorePleasentness" prefWidth="60" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+    <TextArea fx:id="TxtPleasentess" prefRowCount="2" GridPane.columnIndex="3" GridPane.rowIndex="3" />
 
-            <!-- Riga 5 -->
-            <Label text="Edizione" GridPane.rowIndex="5" GridPane.columnIndex="0"/>
-            <Label text="Valutazione sull’edizione" GridPane.rowIndex="5" GridPane.columnIndex="1"/>
-            <ChoiceBox fx:id="ScoreEdition" GridPane.rowIndex="5" GridPane.columnIndex="2" prefWidth="60"/>
-            <TextArea fx:id="TxtEdition" GridPane.rowIndex="5" GridPane.columnIndex="3" prefRowCount="2"/>
+    <!-- Riga 4 -->
+    <Label text="Originalità" GridPane.columnIndex="0" GridPane.rowIndex="4" />
+    <Label text="Valutazione sulla originalità" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+    <ChoiceBox fx:id="ScoreOriginality" prefWidth="60" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+    <TextArea fx:id="TxtOriginality" prefRowCount="2" GridPane.columnIndex="3" GridPane.rowIndex="4" />
 
-            <!-- Riga 6 -->
-            <Label text="Voto Finale" GridPane.rowIndex="6" GridPane.columnIndex="0"/>
-            <Label text="Valutazione complessiva del libro" GridPane.rowIndex="6" GridPane.columnIndex="1"/>
-            <ChoiceBox fx:id="ScoreFinal" GridPane.rowIndex="6" GridPane.columnIndex="2" prefWidth="60"/>
-            <TextArea fx:id="TxtFinal" GridPane.rowIndex="6" GridPane.columnIndex="3" prefRowCount="2"/>
+    <!-- Riga 5 -->
+    <Label text="Edizione" GridPane.columnIndex="0" GridPane.rowIndex="5" />
+    <Label text="Valutazione sull’edizione" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+    <ChoiceBox fx:id="ScoreEdition" prefWidth="60" GridPane.columnIndex="2" GridPane.rowIndex="5" />
+    <TextArea fx:id="TxtEdition" prefRowCount="2" GridPane.columnIndex="3" GridPane.rowIndex="5" />
 
-        </GridPane>
+    <!-- Riga 6 -->
+    <Label text="Voto Finale" GridPane.columnIndex="0" GridPane.rowIndex="6" />
+    <Label text="Valutazione complessiva del libro" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+         <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="6">
+            <children>
+                 <Button fx:id="BtnRestar" layoutX="32.0" layoutY="40.0" prefWidth="120" text="Restart" />
+         
+                 <Button fx:id="BtnConfirm" layoutX="183.0" layoutY="40.0" prefWidth="120" text="Confirm" />
+            </children>
+         </Pane>
+         <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="6">
+            <children>
+               <Label layoutX="19.0" layoutY="32.0" prefHeight="17.0" prefWidth="48.0" text="Media" />
+            </children>
+         </Pane>
 
-        <Button fx:id="BtnConfirm" text="Confirm" layoutX="720" layoutY="640" prefWidth="120"/>
-        <Button fx:id="BtnRestar" text="Restart" layoutX="590" layoutY="640" prefWidth="120"/>
+</GridPane>
     </children>
 </AnchorPane>
-
-            
-
-        
