@@ -6,6 +6,8 @@ import javafx.scene.control.Label;
 import java.lang.Runnable;
 import LaboratorioB.common.models.Libreria;
 import models.Model;
+import java.rmi.RemoteException;
+import applicationrob.clientBR;
 
 
 public class LibraryController {
@@ -40,16 +42,31 @@ public class LibraryController {
         //Model.getIstance().getView().setSelectedLibrary(null);
 
         Model.getIstance().getView().setSelectedLibrary(libreria);
-        Model.getIstance().getView().getSideBarSelectionItem().set("VisLibreria");
+        Model.getIstance().getView().getSideBarSelectionItem().set("VisLibreria"); 
         
     }
    }
 
     @FXML
     public void removeLibrary() {
-        if (onRemove != null) {
-            onRemove.run();
+        if (libreria != null) {
+        try {
+            
+            clientBR.getInstance().deleteLibreria(libreria.getIdLibreria());
+
+            if (onRemove != null) {
+                onRemove.run();
+            }
+
+
+        } catch (RemoteException e) {
+            e.printStackTrace();
+            if (onRemove != null) {
+                onRemove.run();
+            }
+
         }
+    }
     }
 
     

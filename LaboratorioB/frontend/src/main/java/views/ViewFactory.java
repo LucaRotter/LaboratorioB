@@ -52,6 +52,7 @@ public class ViewFactory {
 	public AnchorPane getVisLibrerie(){
 		VisLibrerie = MoveToPage("/applicationrob/VisLibrerie.fxml", VisLibrerie);
 		historyPage.add("VisLibrerie");
+		historyPage.removeLast();
 		return VisLibrerie;
 		}
 	
@@ -168,5 +169,6 @@ public class ViewFactory {
     }
 		
 	}
+	
 
 }

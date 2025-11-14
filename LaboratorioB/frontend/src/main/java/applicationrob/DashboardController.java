@@ -27,6 +27,7 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import models.Model;
 
+
 public class DashboardController implements Initializable{
 
 	@FXML
@@ -274,7 +275,7 @@ public class DashboardController implements Initializable{
 
 			}
 			
-			FXMLLoader loader = new FXMLLoader();
+			FXMLLoader loader = new FXMLLoader(); 
 			loader.setLocation(getClass().getResource("BookEl.fxml"));
 			VBox vbox = loader.load();
 			
