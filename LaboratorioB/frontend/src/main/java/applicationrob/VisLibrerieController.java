@@ -140,12 +140,19 @@ public class VisLibrerieController {
         librerie.setAll(clientBR.getInstance().getLibrerie(id_user));
  
         if (textSlib.isEmpty()) {
-            InsertingElements(librerie);
+            emptyText.setVisible(false);
             return;
         } 
             filteredLibr = librerie.stream()
             .filter(lib -> lib.getNomeLibreria().toLowerCase().contains(textSlib))
             .toList();
+
+            if (filteredLibr.isEmpty()) {
+        librariesContainer.getChildren().clear();
+        emptyText.setText("LIBRARIES NOT FOUND");
+        emptyText.setVisible(true);
+        return;
+    }
 
         InsertingElements(FXCollections.observableArrayList(filteredLibr));   
     }
@@ -220,13 +227,21 @@ public class VisLibrerieController {
 
             LibraryController controller = loader.getController();
             controller.setData(lib, editMode, () -> {
-                librerie.remove(lib);
-                updateEmptyState();
-                InsertingElements(librerie);
+              try {
+                    librerie.remove(lib);              
+                    updateEmptyState();                 
+                    InsertingElements(librerie);       
+
+                    views.ViewAlert.showAlert("success", "Library removed","The library has been removed successfully.", librariesContainer, "success");
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    views.ViewAlert.showAlert("error", "Library not removed","Server error, try again.",librariesContainer, "error");
+                }
             });
 
-            libPane.setPrefSize(120, 120);
-            GridPane.setMargin(libPane, new Insets(15, 10, 10, 19));
+            libPane.setPrefSize(120, 170);
+            GridPane.setMargin(libPane, new Insets(7, 10, 10, 19));
 
             librariesContainer.add(libPane, col, row);
       

@@ -91,7 +91,13 @@
                </HBox>
             </graphic>
          </Button>
+<<<<<<< HEAD
      <Pane fx:id="logPane" layoutX="13.0" layoutY="440.0" prefHeight="250.0" prefWidth="400.0" maxWidth ="200.0" styleClass="LoginPane">
+=======
+
+     <Pane fx:id="logPane" layoutX="13.0" layoutY="440.0" prefHeight="250.0" prefWidth="400.0" maxWidth ="200.0" styleClass="LoginPane">
+
+>>>>>>> 2f0bd1538ed2aecf797cf38b4d7155f7ab47baa0
     <children>
        
     </children>

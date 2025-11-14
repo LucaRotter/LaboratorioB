@@ -36,6 +36,9 @@ public class VisLibreriaController {
 
     @FXML
     private Text bookNameLabel;
+
+    @FXML
+    private Label emptyText;
     
     private Libreria selectedLibrary;
     private Libreria library;
@@ -95,6 +98,7 @@ public class VisLibreriaController {
         booksLibrary.setAll(clientBR.getInstance().getLibreria(selectedLibrary.getIdLibreria()).getLibreria());
         filteredBooks.clear();
          if (textSlib.isEmpty()) {
+            emptyText.setVisible(true);
             currentBooks.setAll(booksLibrary);
         } else {
               for (Libro lib : booksLibrary) {
@@ -104,6 +108,13 @@ public class VisLibreriaController {
                     }
                 currentBooks.setAll(filteredBooks); 
         }  
+
+       if (filteredBooks.isEmpty()) {
+        booksContainer.getChildren().clear();
+        emptyText.setText("BOOKS NOT FOUND");
+        emptyText.setVisible(true);
+        return;
+    }
         InsertingElements(currentBooks); 
     }
 
@@ -117,7 +128,10 @@ public class VisLibreriaController {
     private void InsertingElements(ObservableList<Libro> listBooksToShow)  {
     booksContainer.getChildren().clear();
      if (listBooksToShow == null || listBooksToShow.isEmpty()) {
+        emptyText.setVisible(true);
         return;
+    } else {
+        emptyText.setVisible(false);
     }
 
     int columns = 5;
@@ -132,8 +146,8 @@ public class VisLibreriaController {
 			BookController bookController= loader.getController();
             bookController.setLabels(books.getAutore(), books.getTitolo());
 
-            booksPane.setPrefSize(120, 180);
-            GridPane.setMargin(booksPane, new Insets(15, 10, 10, 20));
+            booksPane.setPrefSize(120, 170);
+            GridPane.setMargin(booksPane, new Insets(7, 10, 10, 19));
 
             booksContainer.add(booksPane, col, row);
 			

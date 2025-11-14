@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
+<?import javafx.scene.control.*?> 
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.*?>
@@ -14,7 +14,11 @@
 <children> 
   <HBox layoutY="35.0" layoutX="20.0" prefWidth="840.0" spacing="20" alignment="CENTER_LEFT">
     
-       <Text fx:id="bookNameLabel" text="My Libraries" styleClass="page-title"/>
+       <StackPane>
+        <Pane prefWidth="200" prefHeight="40" style="-fx-background-color: white; -fx-background-radius: 10; -fx-border-radius: 10;  -fx-border-width: 1;"/>
+        <Text fx:id="bookNameLabel" text="My Libraries" styleClass="page-title" />
+       </StackPane>
+       
        <Region HBox.hgrow="ALWAYS"/>
      <Pane layoutX="526.0" layoutY="45.0" prefHeight="40.0" maxHeight= "40.0" prefWidth="290.0" styleClass="SearchBar">
      <children>
@@ -32,11 +36,12 @@
       </Pane>
     </HBox>
 
-	 <ScrollPane fx:id="scrollContent" prefWidth="840.0" prefHeight="550.0" fitToWidth="true" fitToHeight="false" hbarPolicy="NEVER" 
+	 <ScrollPane fx:id="scrollContent" prefWidth="840.0" prefHeight="570.0" fitToWidth="true" fitToHeight="false" hbarPolicy="NEVER" 
                 AnchorPane.topAnchor="120.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" styleClass="ScrollPaneBooks" >
         <content>
-            <GridPane fx:id="booksContainer" hgap="10" vgap="10" />
+            <GridPane fx:id="booksContainer" hgap="15" vgap="5" />
         </content>
     </ScrollPane>
+    <Label fx:id="emptyText" text="Start saved your books" layoutX="270" layoutY="250" style="-fx-font-size: 32px; -fx-text-fill: gray;" />
 	</children>
 	</AnchorPane>
