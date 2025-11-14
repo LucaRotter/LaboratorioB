@@ -156,7 +156,7 @@ public class ViewFactory {
 	}
 
 	public void lastHistory() {
-		  if (!historyPage.isEmpty()) {
+		if (!historyPage.isEmpty()) {
         historyPage.removeLast();
 
         if (!historyPage.isEmpty()) {
