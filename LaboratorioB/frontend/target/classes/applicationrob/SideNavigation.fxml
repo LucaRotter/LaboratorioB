@@ -12,9 +12,6 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 <?import javafx.scene.shape.SVGPath?>
-<?import javafx.scene.media.Media?>
-<?import javafx.scene.media.MediaPlayer?>
-<?import javafx.scene.media.MediaView?>
 
 
 
@@ -94,9 +91,9 @@
                </HBox>
             </graphic>
          </Button>
-     <Pane fx:id="logPane" layoutX="13.0" layoutY="440.0" prefHeight="250.0" prefWidth="400.0" styleClass="LoginPane">
+     <Pane fx:id="logPane" layoutX="13.0" layoutY="440.0" prefHeight="250.0" prefWidth="400.0" maxWidth ="200.0" styleClass="LoginPane">
     <children>
-        <MediaView fx:id="mediaView" fitWidth="400.0" fitHeight="300.0" preserveRatio="true"/>
+       
     </children>
 </Pane>
             <Pane fx:id="loginPane" layoutX="18.0" layoutY="499.0" prefHeight="166.0" prefWidth="180.0" styleClass="LoginPane">

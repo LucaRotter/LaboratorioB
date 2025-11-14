@@ -1,9 +1,9 @@
 .root{
 	-fx-font-size: 12px;
-   /* -fx-background-image: url("/img/");*/
+    -fx-background-image: url("/img/backGroundPage.jpg");
     -fx-background-size: cover;
 }
-
+ 
 /* Page Title */
 .page-title {
   -fx-font-size: 48px;
