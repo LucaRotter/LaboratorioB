@@ -50,7 +50,7 @@ public class AddReccomendedController implements Initializable {
     private Button btnCancel;
 
     @FXML
-    private VBox containerRec;
+    private GridPane containerRec;
 
     private final int LIST_SIZE = 20;
 
@@ -76,6 +76,8 @@ public class AddReccomendedController implements Initializable {
         e.printStackTrace();
        }
 
+       int i = 0;
+
         for(Libro libr : reccomendedBooks){
             VBox vbox = null;
 
@@ -92,7 +94,7 @@ public class AddReccomendedController implements Initializable {
 			BookController bookController= loader.getController();
 			bookController.setLabels(libr.getAutore(), libr.getTitolo());
 
-            containerRec.getChildren().add(vbox);
+            containerRec.add(vbox,0,i++);
         }
 
        try {
@@ -204,7 +206,7 @@ public class AddReccomendedController implements Initializable {
 				break;
 			}
 
-			if(col == 5) {
+			if(col == 4) {
 				
 				row += 1;
 				col = 0;

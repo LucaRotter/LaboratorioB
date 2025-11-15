@@ -9,6 +9,7 @@ GridPane {
 }
 
 Button {
+    
 	-fx-background-color: #FFFF;
 	-fx-cursor: hand;
 
@@ -83,24 +84,6 @@ Button {
 .NavigationBox{
 	-fx-spacing: 1em;
 
-}
-
-.NavigationBox Button {
-    -fx-pref-width: 30px;    
-    -fx-min-width: 30px;
-    -fx-max-width: 30px;  
-	-fx-font-size:12px;    
-    -fx-padding: 2px 6px;
-    -fx-font-size: 10px;
-	-fx-min-height: 100%;
-    -fx-pref-height: 100%;
-	-fx-max-height: infinity;
-    -fx-alignment: center;
-}
-
-
-.NavigationBox Button:hover{
-	-fx-background-color: rgba(166, 166, 166, 0.2);
 }
 
 .ScrollPaneCategory {

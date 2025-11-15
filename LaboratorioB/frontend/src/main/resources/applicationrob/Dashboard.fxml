@@ -40,7 +40,7 @@
       <Button layoutX="749.0" layoutY="190.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="68.0" text="Filters" />
       <ScrollPane fx:id="ScrollBooks" hbarPolicy="NEVER" layoutX="63.0" layoutY="243.0" prefHeight="404.0" prefWidth="754.0" styleClass="ScrollPaneBooks">
          <content>
-            <GridPane fx:id="gridBooks" hgap="30.0" prefHeight="0.0" vgap="12.0">
+            <GridPane fx:id="gridBooks" hgap="30.0" prefHeight="0.0" vgap="20.0">
               <rowConstraints>
                 <RowConstraints minHeight="10.0" prefHeight="30.0" />
               </rowConstraints>
@@ -51,14 +51,7 @@
          </padding>
       </ScrollPane>
       
-      <StackPane layoutY="30.0" layoutX="20.0">
-    <Pane style="-fx-background-color: white; -fx-background-radius: 15; -fx-border-radius: 15; -fx-border-width: 1;" prefWidth="300.0" prefHeight="40.0" />
-    <Text fx:id="titleText" text="Book Recommender" styleClass="page-title">
-        <StackPane.margin>
-            <Insets left="5.0"/>
-        </StackPane.margin>
-    </Text>
-</StackPane>
+      <Text layoutX="63.0" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="page-title" text="Book Recommender" wrappingWidth="419.7366943359375" />
        
       <Pane layoutX="526.0" layoutY="45.0" prefHeight="40.0" maxHeight ="40.0" prefWidth="290.0" styleClass="SearchBar"> 
          <children>

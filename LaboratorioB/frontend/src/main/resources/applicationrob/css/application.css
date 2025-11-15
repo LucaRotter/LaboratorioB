@@ -1,12 +1,12 @@
 .root{
 	-fx-font-size: 12px;
-    -fx-background-image: url("/img/backGroundPage.jpg");
+    -fx-background-image: url("/img/");
     -fx-background-size: cover;
 }
  
 /* Page Title */
 .page-title {
-  -fx-font-size: 48px;
+  -fx-font-size: 34px;
     -fx-font-weight: 900;
     -fx-text-fill: linear-gradient(to right, #4A90E2, #50C9C3);
     -fx-font-family: "Poppins", "Segoe UI", sans-serif;
@@ -338,8 +338,9 @@ Button:hover{
 
 /* Book Element */
 
-.bookElement {
-    -fx-background-color: #ffffff;
+
+.bookElement:hover {
+
     -fx-background-radius: 12;
     -fx-border-radius: 12;
     -fx-border-color: #e0e0e0;
@@ -348,10 +349,6 @@ Button:hover{
     -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.05), 3, 0, 0, 2);
     -fx-alignment: center;
     -fx-transition: 0.3s;
-}
-
-.bookElement:hover {
-    
     -fx-background-color: #fdfdfd;
     -fx-border-color: #4A90E2;
 }
@@ -378,4 +375,26 @@ Button:hover{
 
 .bookElement:hover #labelName, .bookElement:hover #labelAuthor {
     -fx-text-fill: #4A90E2;
+}
+
+/*davide frocio*/
+
+.NavigationBox Button {
+    -fx-pref-width: 30px;    
+    -fx-min-width: 30px;
+    -fx-max-width: 30px;  
+	-fx-font-size:12px;    
+    -fx-padding: 2px 6px;
+    -fx-font-size: 10px;
+	-fx-min-height: 100%;
+    -fx-pref-height: 100%;
+	-fx-max-height: infinity;
+    -fx-alignment: center;
+    -fx-background-color: #FFFF;
+	-fx-cursor: hand;
+}
+
+
+.NavigationBox Button:hover{
+	-fx-background-color: rgba(166, 166, 166, 0.2);
 }

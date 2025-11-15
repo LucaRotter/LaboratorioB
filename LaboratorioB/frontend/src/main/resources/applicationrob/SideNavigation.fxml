@@ -14,10 +14,9 @@
 <?import javafx.scene.shape.SVGPath?>
 
 
-
 <VBox fillWidth="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="220.0" style="-fx-background-color: transparent; -fx-border-radius: 10px; -fx-background-radius: 10px;" stylesheets="@css/Sidebar.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="applicationrob.SideBarController">
    <children>
-      <AnchorPane prefHeight="700.0" prefWidth="216.0" style="-fx-background-radius: 10px;">
+      <AnchorPane prefHeight="700.0" prefWidth="216.0" >
          <children>
             <VBox layoutX="1.0" layoutY="147.0" prefHeight="230.0" prefWidth="214.0" styleClass="ButtonSection">
                <children>
@@ -91,13 +90,9 @@
                </HBox>
             </graphic>
          </Button>
-<<<<<<< HEAD
-     <Pane fx:id="logPane" layoutX="13.0" layoutY="440.0" prefHeight="250.0" prefWidth="400.0" maxWidth ="200.0" styleClass="LoginPane">
-=======
 
      <Pane fx:id="logPane" layoutX="13.0" layoutY="440.0" prefHeight="250.0" prefWidth="400.0" maxWidth ="200.0" styleClass="LoginPane">
 
->>>>>>> 2f0bd1538ed2aecf797cf38b4d7155f7ab47baa0
     <children>
        
     </children>
