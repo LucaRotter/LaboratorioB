@@ -14,7 +14,6 @@
 <?import javafx.scene.shape.SVGPath?>
 
 
-
 <VBox fillWidth="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="220.0" style="-fx-background-color: transparent; -fx-border-radius: 10px; -fx-background-radius: 10px;" stylesheets="@css/Sidebar.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="applicationrob.SideBarController">
    <children>
       <AnchorPane prefHeight="700.0" prefWidth="216.0" >

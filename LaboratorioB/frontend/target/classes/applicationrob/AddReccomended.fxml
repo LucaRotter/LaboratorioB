@@ -14,7 +14,7 @@
 <?import javafx.scene.text.Text?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.shape.SVGPath?>
-
+<?import javafx.scene.text.Font?>
 
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="880.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="applicationrob.AddReccomendedController" stylesheets="@css/Recommend.css">
@@ -31,6 +31,23 @@
                <columnConstraints>
                   <ColumnConstraints halignment="CENTER" percentWidth="100" />
                </columnConstraints>
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Add a Book">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Text>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Add a Book" GridPane.rowIndex="1">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Text>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Add a Book" GridPane.rowIndex="2">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Text>
+               </children>
       </GridPane>
    </children>
 </Pane>
@@ -40,7 +57,7 @@
             <Button fx:id="btnConfirm" layoutX="440.0" layoutY="541.0" mnemonicParsing="false" text="Confirm" />
             <ScrollPane layoutY="60.0" prefHeight="467.0" prefWidth="521.0">
              <content>
-               <GridPane fx:id="grid" layoutY="60.0" prefHeight="450.0" prefWidth="498.0" >
+               <GridPane fx:id="grid" layoutY="60.0" prefHeight="450.0" prefWidth="498.0">
                <rowConstraints>
                   <RowConstraints minHeight="10.0" prefHeight="30.0" />
                </rowConstraints>
