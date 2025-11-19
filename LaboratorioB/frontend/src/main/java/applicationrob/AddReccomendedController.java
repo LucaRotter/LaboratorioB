@@ -6,18 +6,21 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Observer;
 import java.util.ResourceBundle;
+
+import org.w3c.dom.Node;
 
 import LaboratorioB.common.models.Libro;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import models.Model;
 
@@ -51,7 +54,7 @@ public class AddReccomendedController implements Initializable {
     private Button btnCancel;
 
     @FXML
-    private VBox containerRec;
+    private GridPane containerRec;
 
     private final int LIST_SIZE = 20;
 
@@ -65,9 +68,12 @@ public class AddReccomendedController implements Initializable {
 
     private List<Libro> reccomendedBooks = new LinkedList<Libro>();
 
+    private int pos;
+
     @FXML
     public void initialize(URL location, ResourceBundle resources)  {
 
+        pos= 0;
         init();
 
        try {
@@ -93,7 +99,7 @@ public class AddReccomendedController implements Initializable {
 			BookController bookController= loader.getController();
 			bookController.setLabels(libr.getAutore(), libr.getTitolo());
 
-            containerRec.getChildren().add(vbox);
+            containerRec.add(vbox,0,pos++);
         }
 
        try {
@@ -108,6 +114,8 @@ public class AddReccomendedController implements Initializable {
 		}
 
         Model.getIstance().getView().selectedBookProperty().addListener((obs, oldLibr, newLibr) -> {
+
+        pos= 0;
 
         containerRec.getChildren().clear();
         
@@ -134,7 +142,7 @@ public class AddReccomendedController implements Initializable {
 			BookController bookController= loader.getController();
 			bookController.setLabels(libr.getAutore(), libr.getTitolo());
 
-            containerRec.getChildren().add(vbox);
+           containerRec.add(vbox,0,pos++);
         }
 
     });
@@ -205,7 +213,7 @@ public class AddReccomendedController implements Initializable {
 				break;
 			}
 
-			if(col == 5) {
+			if(col == 4) {
 				
 				row += 1;
 				col = 0;
@@ -232,8 +240,6 @@ public class AddReccomendedController implements Initializable {
 	}
 
     private void selectedBookHandler(Libro libr) {
-        
-        int pos = reccomendedBooks.size();
 
         if(pos < 3){
 
@@ -253,18 +259,8 @@ public class AddReccomendedController implements Initializable {
 			
 			BookController bookController= loader.getController();
 			bookController.setLabels(libr.getAutore(), libr.getTitolo());
-        
-        if(containerRec.getChildren().isEmpty() || containerRec.getChildren().size() == pos){
-
-            containerRec.getChildren().add(vbox);
-
-        }else{
-
-            containerRec.getChildren().remove(pos);
-            containerRec.getChildren().add(vbox);
-
-        }
-
+           
+            
         }
         
     }
@@ -311,4 +307,6 @@ public class AddReccomendedController implements Initializable {
        
        
     }
+
+    
 }

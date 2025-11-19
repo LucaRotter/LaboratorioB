@@ -760,7 +760,7 @@ public class serverBRImpl extends UnicastRemoteObject implements serverBR {
             ps.setInt(12, val.getVotoOriginalita());
             ps.setDouble(13, val.getVotoMedio());
 
-            int rows = ps.executeUpdate();
+            int rows = ps.executeUpdate(); 
             if (rows <= 0) {
                 return false;
             }
@@ -771,7 +771,7 @@ public class serverBRImpl extends UnicastRemoteObject implements serverBR {
         }
 
         return true;
-    }
+    } 
     public static void main(String[] args) {
         try {
             LocateRegistry.createRegistry(1099);

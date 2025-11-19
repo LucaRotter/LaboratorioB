@@ -1,17 +1,22 @@
 package applicationrob;
 
 import java.rmi.RemoteException;
-
 import LaboratorioB.common.models.Utente;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import java.net.URL;
+import java.util.ResourceBundle;
+import javafx.fxml.Initializable;
+import models.Model;
 
 
 
-public class RegisterController {
 
+public class RegisterController implements Initializable {
+
+    @FXML
+    private Button backBtn;
     @FXML
     private TextField nameField;
     @FXML
@@ -24,6 +29,15 @@ public class RegisterController {
     private PasswordField pwField;
 
     private int id_user;
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        
+       backBtn.setOnAction(e -> { 
+			
+			Model.getIstance().getView().changeToHome();
+		});
+    }
 
     @FXML
     void onRegisterUser(ActionEvent event) throws RemoteException {
@@ -44,13 +58,8 @@ public class RegisterController {
     }
 
     @FXML
-    void onBackPressed(ActionEvent event) {
-
-    }
-
-    @FXML
     void changeToLogin(ActionEvent event) {
-
+        Model.getIstance().getView().changeToLogin();
     }
 
     private boolean validateField(String nome, String cognome, String cf, String email, String pw) {
@@ -107,7 +116,4 @@ public class RegisterController {
         return cf.charAt(15) == expectedControl;
     }
 
-
-    private void showAlert(String title, String message) {
-}
 }

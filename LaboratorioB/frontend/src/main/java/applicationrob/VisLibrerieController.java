@@ -17,6 +17,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
+import javafx.scene.Node;
 
 //aggiungere controllo max 20 librerie
 
@@ -24,7 +25,7 @@ public class VisLibrerieController {
 
    
     @FXML
-    private Button search;
+    private Button btnSearch;
     
     @FXML
     private Button edit;
@@ -59,17 +60,13 @@ public class VisLibrerieController {
     @FXML
     private Label emptyText;
     
-    @FXML
-    private Label imgFolder;
-
     
+    
+    private String textSlib;
     private boolean editMode = false;
 
-    private Libreria libreria;
-    private List<Libreria> listaLibrerie;
+    private List<Libreria> filteredLibr;
     private ObservableList<Libreria> librerie;
-    private ObservableList<Libreria> currentLibr;
-    private ObservableList<Libreria> filteredLibr;
 
     private int id_user;
 
@@ -78,48 +75,52 @@ public class VisLibrerieController {
         id_user = TokenSession.getUserId();
 
         librerie = FXCollections.observableArrayList();
-        currentLibr = FXCollections.observableArrayList();
-        filteredLibr = FXCollections.observableArrayList();
 
-        listaLibrerie = clientBR.getInstance().getLibrerie(id_user);
-        if (listaLibrerie != null) {
-            librerie.setAll(FXCollections.observableArrayList(listaLibrerie));
-            currentLibr.setAll(librerie);
-        }
-
-    	updateEmptyState();
+        librerie.setAll(clientBR.getInstance().getLibrerie(id_user));
+        updateEmptyState();
     	
-    	    modalOverlay.setOnMouseClicked(event -> {
-    		    if (!modalContent.isHover()) {
-    	            modalOverlay.setVisible(false);
-    	        }
-            });
+    	modalOverlay.setOnMouseClicked(event -> {
+    		if (!modalContent.isHover()) {
+    	        modalOverlay.setVisible(false);
+    	    }
+        });
 
-    	InsertingElements(currentLibr);
+    	InsertingElements(librerie);
     }
     
     //Metodo che permetta l'apertura del Modal
     private void showModal() {
+        if(librerie.size () >= 10) {
+            modalOverlay.setVisible(false); 
+            views.ViewAlert.showAlert("info", "Maximum Libraries", "You have reached the maximum limit of libraries.", extraBtn, "info");
+            return;
+        }
+
         modalOverlay.setVisible(true);
         modalTextField.clear();
     }
 
     //Metodo per inviare dati inseriti nel Modal
     @FXML
-    void sendModal(ActionEvent event) throws RemoteException {
-        String libName = modalTextField.getText().trim();
+    void sendModal(ActionEvent event) {
+        textSlib = modalTextField.getText().trim();
 
-        if (libName.isEmpty()) {
+        if (textSlib.isEmpty()) {
             return; 
         } 
 
-        libreria = clientBR.getInstance().createLibreria(libName, id_user);
-        listaLibrerie = clientBR.getInstance().getLibrerie(id_user);
-        librerie.setAll(FXCollections.observableArrayList(listaLibrerie));
-        currentLibr.setAll(librerie);
-        InsertingElements(currentLibr); 
+        try {
+        clientBR.getInstance().createLibreria(textSlib, id_user);
+        librerie.setAll(FXCollections.observableArrayList(clientBR.getInstance().getLibrerie(id_user)));
+        InsertingElements(librerie);
+        views.ViewAlert.showAlert("success", "Library added", "Form now on you can save your favorite books.", modalSendButton, "success");
         modalOverlay.setVisible(false); 
-        updateEmptyState();       
+        updateEmptyState();
+        
+         } catch (RemoteException e) {
+             e.printStackTrace();
+             views.ViewAlert.showAlert("error", "Library not added", "Server error, try again.", modalSendButton, "error");
+         }
     }
 
     @FXML 
@@ -135,49 +136,53 @@ public class VisLibrerieController {
     // Metodo che cerca le librerie in base alla scritta nel TextField
     @FXML
     void searchLibraries(ActionEvent event) throws RemoteException {
-        String textSlib = searchBar.getText().trim().toLowerCase();
+        textSlib = searchBar.getText().trim().toLowerCase();
         librerie.setAll(clientBR.getInstance().getLibrerie(id_user));
-    	
+ 
         if (textSlib.isEmpty()) {
-            currentLibr.setAll(librerie);
-        } else {
-                filteredLibr = FXCollections.observableArrayList();
-                    for (Libreria lib : librerie) {
-                        if (lib.getNomeLibreria().toLowerCase().contains(textSlib)) {
-                            filteredLibr.add(lib);
-                        }
-                    }
-                currentLibr.setAll(filteredLibr); 
+            emptyText.setVisible(false);
+            return;
         } 
-        InsertingElements(currentLibr);   
+            filteredLibr = librerie.stream()
+            .filter(lib -> lib.getNomeLibreria().toLowerCase().contains(textSlib))
+            .toList();
+
+            if (filteredLibr.isEmpty()) {
+        librariesContainer.getChildren().clear();
+        emptyText.setText("LIBRARIES NOT FOUND");
+        emptyText.setVisible(true);
+        return;
     }
 
-
-    
- // Metodo di controllo per searchLibraries
-    @FXML
-    void writeText(ActionEvent event) {
-    	String textSlib = searchBar.getText().trim().toLowerCase();
-    	    
-    	    if (!textSlib.matches("[a-zA-Z0-9 ]*")) {
-    	        return;
-    	    }	    
-    	}
-
- // Metodo per azionare la modifica/aggiunta librerie 
-    @FXML
-    void useEdit(ActionEvent event) throws RemoteException {
-        listaLibrerie = clientBR.getInstance().getLibrerie(id_user);
-        librerie.setAll(FXCollections.observableArrayList(listaLibrerie));
-
-    	if (!librerie.isEmpty()) {
-            editMode = !editMode;
-            InsertingElements(currentLibr);
-            extraBtn.setVisible(editMode);
-    	}  
+        InsertingElements(FXCollections.observableArrayList(filteredLibr));   
     }
    
- // Metodo per impostare elementi se non ci sono librerie
+    // Metodo di controllo per searchLibraries
+    @FXML
+    void writeText(ActionEvent event) {
+    	textSlib = searchBar.getText().trim().toLowerCase();
+        
+    	if (!textSlib.matches("[a-zA-Z0-9 ]*")) {
+    	    return;
+    	}	    
+    }
+
+    // Metodo per azionare la modifica/aggiunta librerie 
+    @FXML
+    void useEdit(ActionEvent event) throws RemoteException {
+        editMode = !editMode;
+        extraBtn.setVisible(editMode);
+
+        textSlib = searchBar.getText().trim().toLowerCase();
+
+        if (!textSlib.isEmpty() && filteredLibr != null) {
+            InsertingElements(FXCollections.observableArrayList(filteredLibr));
+        } else {
+            InsertingElements(librerie);
+        }
+    }
+   
+    // Metodo per impostare elementi se non ci sono librerie
     private void updateEmptyState() {
     	boolean hasLibraries = librerie != null && !librerie.isEmpty();
 
@@ -192,7 +197,7 @@ public class VisLibrerieController {
         }
     }
     
-  //Metodo per mostrare tutte le librerie
+    //Metodo per mostrare tutte le librerie
     private void InsertingElements() {
         InsertingElements(librerie); 
     }
@@ -202,15 +207,15 @@ public class VisLibrerieController {
     private void InsertingElements(ObservableList<Libreria> listToShow) {
     librariesContainer.getChildren().clear();
 
-    int columns = 4;
+    int columns = 5;
     int row = 0;
-    int col = 0;
+    int col = 0; 
    
 
     if (editMode) {
-         extraBtn.setPrefSize(120, 120);
+        extraBtn.setPrefSize(120, 120);
         librariesContainer.add(extraBtn, 0, 0);
-        GridPane.setMargin(extraBtn, new Insets(20, 20, 20, 20));
+        GridPane.setMargin(extraBtn, new Insets(15, 15, 15, 20));
         col = 1;
         
     }
@@ -222,14 +227,21 @@ public class VisLibrerieController {
 
             LibraryController controller = loader.getController();
             controller.setData(lib, editMode, () -> {
-                librerie.remove(lib);
-                currentLibr.remove(lib);
-                updateEmptyState();
-                InsertingElements(currentLibr);
+              try {
+                    librerie.remove(lib);              
+                    updateEmptyState();                 
+                    InsertingElements(librerie);       
+
+                    views.ViewAlert.showAlert("success", "Library removed","The library has been removed successfully.", librariesContainer, "success");
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    views.ViewAlert.showAlert("error", "Library not removed","Server error, try again.",librariesContainer, "error");
+                }
             });
 
-            libPane.setPrefSize(120, 120);
-            GridPane.setMargin(libPane, new Insets(20, 20, 20, 20));
+            libPane.setPrefSize(120, 170);
+            GridPane.setMargin(libPane, new Insets(7, 10, 10, 19));
 
             librariesContainer.add(libPane, col, row);
       
@@ -241,6 +253,7 @@ public class VisLibrerieController {
                 }
             } catch (IOException e) {
                 e.printStackTrace();
+                views.ViewAlert.showAlert("error", "Library error", "Server error, try again.", librariesContainer, "error");
             }
         }
     }

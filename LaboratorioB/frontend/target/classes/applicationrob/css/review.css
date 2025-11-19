@@ -1,0 +1,112 @@
+/* === Stile generale della pagina === */
+.anchor-pane {
+    -fx-background-color: #f9f9fb;
+    -fx-padding: 20;
+    -fx-font-family: "Segoe UI", Calibri, sans-serif;
+    -fx-font-size: 14px;
+}
+
+/* === Titolo === */
+.text {
+    -fx-fill: #333;
+    -fx-font-weight: bold;
+}
+
+/* === Tabella delle recensioni === */
+.TableReview {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #d1d1d1;
+    -fx-border-width: 1;
+    -fx-border-radius: 8;
+    -fx-background-radius: 8;
+    -fx-padding: 15;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 8, 0, 2, 2);
+}
+
+
+
+/* === Intestazioni delle colonne === */
+.header {
+    -fx-font-weight: bold;
+    -fx-font-size: 15px;
+    -fx-text-fill: #2d2d2d;
+    -fx-padding: 5 0 5 0;
+    -fx-border-color: #dddddd;
+    -fx-border-width: 0 0 1 0;
+}
+
+/* === Celle della tabella === */
+.label {
+    -fx-text-fill: #333333;
+}
+
+/* === ChoiceBox (punteggio) === */
+.choice-box {
+    -fx-background-color: white;
+    -fx-border-color: #cccccc;
+    -fx-border-radius: 4;
+    -fx-background-radius: 4;
+    -fx-padding: 2 5 2 5;
+    -fx-font-size: 13px;
+    -fx-pref-width: 70;
+}
+
+.choice-box:hover {
+    -fx-border-color: #4a90e2;
+}
+
+.choice-box .label {
+    -fx-text-fill: #333;
+}
+
+/* === TextArea (note) === */
+.text-area {
+    -fx-background-color: white;
+    -fx-border-color: #cccccc;
+    -fx-border-radius: 6;
+    -fx-background-radius: 6;
+    
+}
+
+.text-area:hover {
+    -fx-border-color: #4a90e2;
+}
+
+.text-area:focused {
+    -fx-border-color: #4a90e2;
+    -fx-effect: dropshadow(gaussian, rgba(74,144,226,0.2), 4, 0, 0, 0);
+}
+
+/* === Pulsanti === */
+.button {
+    -fx-background-color: linear-gradient(to bottom, #4a90e2, #357abd);
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-background-radius: 6;
+    -fx-border-radius: 6;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.15), 3, 0, 0, 1);
+    -fx-pref-height: 30;
+}
+
+.button:hover {
+    -fx-background-color: linear-gradient(to bottom, #5aa0f0, #3f81c9);
+}
+
+.button:pressed {
+    -fx-background-color: linear-gradient(to bottom, #366fb2, #2b5d96);
+    -fx-effect: none;
+}
+
+/* === Effetto tabella (righe alternate) === */
+.grid-pane > *:nth-child(even) {
+    -fx-background-color: #fafafa;
+}
+
+.text-area .scroll-pane .viewport {
+    -fx-fit-to-width: true;
+}
+
+.text-area .scroll-pane {
+    -fx-hbar-policy: never;   /* disattiva scrollbar orizzontale */
+}

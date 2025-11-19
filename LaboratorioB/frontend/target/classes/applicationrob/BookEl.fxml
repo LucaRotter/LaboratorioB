@@ -5,16 +5,16 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.VBox?>
-
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="180.0" prefWidth="120.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="applicationrob.BookController">
+ 
+<VBox fx:id="rootPane" maxHeight="-Infinity"  maxWidth="-Infinity" styleClass="bookElement" minHeight="-Infinity" minWidth="-Infinity" prefHeight="180.0" prefWidth="120.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="applicationrob.BookController">
    <children>
-      <ImageView fitHeight="122.0" fitWidth="121.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="122.0" fitWidth="122.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../img/Paomedia-Small-N-Flat-Book.512.png" />
          </image>
       </ImageView>
-      <Label fx:id="labelAuthor" prefHeight="36.0" prefWidth="120.0" text="" />
       <Label fx:id="labelName" prefHeight="36.0" prefWidth="120.0" text="" />
+      <Label fx:id="labelAuthor" prefHeight="36.0" prefWidth="120.0" text="" />
    </children>
    <cursor>
       <Cursor fx:constant="HAND" />

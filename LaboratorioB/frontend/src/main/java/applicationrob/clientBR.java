@@ -107,6 +107,13 @@ public class clientBR{
 	public boolean createValutazione(Valutazione val)throws RemoteException{
 		return server.createValutazione(val);
 	}
+	public boolean deleteLibreria(int id_libreria)throws RemoteException{
+		return server.deleteLibreria(id_libreria);
+	}
+
+	public List<Valutazione> getValutazioniUtente(int id_utente, int id_libro) throws RemoteException{
+		return server.getValutazioniUtente(id_utente, id_libro);
+	}
 	public static void main(String[] args) throws RemoteException, IOException, NotBoundException {
 
 			//System.out.println(loginId);

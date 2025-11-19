@@ -17,7 +17,7 @@ public class ClientController implements Initializable{
 		
 		Model.getIstance().getView().getSideBarSelectionItem().addListener((ObservalValue, oldValue, newValue) -> {
 			
-			switch(newValue) {
+			switch(newValue) { 
 			
 			case "VisLibrerie" : MainPage.setCenter(Model.getIstance().getView().getVisLibrerie());
 			break;

@@ -13,30 +13,34 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.shape.SVGPath?>
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.layout.StackPane?>
+
+<?import javafx.scene.text.Text?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="880.0" stylesheets="@css/Dashboard.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="applicationrob.DashboardController">
    <children>
-      <ScrollPane hbarPolicy="NEVER" layoutX="63.0" layoutY="135.0" prefHeight="42.0" prefWidth="754.0" styleClass="ScrollPaneCategory" vbarPolicy="NEVER">
+      <ScrollPane hbarPolicy="NEVER" layoutX="62.0" layoutY="135.0" prefHeight="42.0" prefWidth="754.0" styleClass="ScrollPaneCategory" vbarPolicy="NEVER">
          <content>
             <HBox alignment="CENTER" prefHeight="39.0" prefWidth="718.0">
                <children>
-                  <Button mnemonicParsing="false" prefWidth="101.0" styleClass="CategoryBtn" text="Prova1 " HBox.hgrow="ALWAYS" />
-                  <Button mnemonicParsing="false" prefHeight="19.0" prefWidth="24.0" styleClass="CategoryBtn" text="Prova2" HBox.hgrow="ALWAYS" />
-                  <Button mnemonicParsing="false" styleClass="CategoryBtn" text="Prova3" HBox.hgrow="ALWAYS" />
-                  <Button mnemonicParsing="false" styleClass="CategoryBtn" text="Prova 23456" HBox.hgrow="ALWAYS" />
-                  <Button mnemonicParsing="false" styleClass="CategoryBtn" text="prova provato" HBox.hgrow="ALWAYS" />
-                  <Button mnemonicParsing="false" styleClass="CategoryBtn" text="Buongiorno" HBox.hgrow="ALWAYS" />
-                  <Button mnemonicParsing="false" styleClass="CategoryBtn" text="Buonasera" HBox.hgrow="ALWAYS" />
-                  <Button mnemonicParsing="false" styleClass="CategoryBtn" text="weeee" />
+                     <ToggleButton text="Prova1" styleClass="CategoryBtn" />
+                     <ToggleButton text="Prova2" styleClass="CategoryBtn" />
+                     <ToggleButton text="Prova3" styleClass="CategoryBtn" />
+                     <ToggleButton text="Prova 23456" styleClass="CategoryBtn" />
+                     <ToggleButton text="Prova provato" styleClass="CategoryBtn" />
+                     <ToggleButton text="Buongiorno" styleClass="CategoryBtn" />
+                     <ToggleButton text="Buonasera" styleClass="CategoryBtn" />
+                     <ToggleButton text="Weeee" styleClass="CategoryBtn" />
                </children>
             </HBox>
          </content>
       </ScrollPane>
-      <ChoiceBox fx:id="choiceBoxOrder" layoutX="63.0" layoutY="190.0" prefHeight="34.0" prefWidth="150.0" />
+      <ChoiceBox fx:id="choiceBoxOrder" layoutX="63.0" layoutY="190.0" prefHeight="34.0" prefWidth="150.0" styleClass="choiceBoxOrder"/>
       <Button layoutX="749.0" layoutY="190.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="68.0" text="Filters" />
-      <ScrollPane hbarPolicy="NEVER" layoutX="63.0" layoutY="248.0" prefHeight="404.0" prefWidth="754.0" styleClass="ScrollPaneBooks">
+      <ScrollPane fx:id="ScrollBooks" hbarPolicy="NEVER" layoutX="63.0" layoutY="243.0" prefHeight="404.0" prefWidth="754.0" styleClass="ScrollPaneBooks">
          <content>
-            <GridPane fx:id="gridBooks" hgap="30.0" prefHeight="0.0" vgap="25.0">
+            <GridPane fx:id="gridBooks" hgap="30.0" prefHeight="0.0" vgap="20.0">
               <rowConstraints>
                 <RowConstraints minHeight="10.0" prefHeight="30.0" />
               </rowConstraints>
@@ -46,10 +50,13 @@
             <Insets left="10.0" />
          </padding>
       </ScrollPane>
-      <Pane layoutX="558.0" layoutY="45.0" prefHeight="34.0" prefWidth="258.0" styleClass="SearchBar">
+      
+      <Text layoutX="63.0" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="page-title" text="Book Recommender" wrappingWidth="419.7366943359375" />
+       
+      <Pane layoutX="526.0" layoutY="45.0" prefHeight="40.0" maxHeight ="40.0" prefWidth="290.0" styleClass="SearchBar"> 
          <children>
-            <TextField fx:id="searchBar" layoutX="38.0" prefHeight="34.0" prefWidth="220.0" promptText="search" />
-            <Button mnemonicParsing="false" prefHeight="34.0" prefWidth="26.0">
+            <TextField fx:id="searchBar" layoutX="44.0" layoutY= "8.0" prefHeight="25.0" prefWidth="220.0" promptText="Search" />
+            <Button fx:id="btnSearch" layoutX="5.0"  layoutY="5.0"  mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0">
                <graphic>
                   <ImageView fitHeight="23.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -61,7 +68,8 @@
          </children>
       </Pane>
       
-      <HBox layoutX="330.0" layoutY="658.0" prefHeight="30.0" styleClass="NavigationBox">
+      
+      <HBox layoutX="340.0" layoutY="658.0" prefHeight="30.0" styleClass="NavigationBox">
          <children>
             <Button fx:id="btnBack" mnemonicParsing="false" text=" back" >
                 <graphic>

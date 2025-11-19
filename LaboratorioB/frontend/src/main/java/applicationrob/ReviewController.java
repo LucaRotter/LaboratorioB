@@ -2,21 +2,27 @@ package applicationrob;
 
 import java.io.IOException;
 import java.net.URL;
+import java.rmi.RemoteException;
 import java.util.ResourceBundle;
 
 import LaboratorioB.common.models.Valutazione;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 
 public class ReviewController implements Initializable{
 	
 	@FXML
 	private Button btnShowMore;
 
+	@FXML 
+	private Label lbUser;
+
 	private VisLibroController visLibro ;
 
 	private Valutazione Val;
+
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
@@ -41,9 +47,10 @@ public class ReviewController implements Initializable{
 		
 	}
 
-	public void setReview(Valutazione valutazione) {
+	public void setReview(Valutazione valutazione) throws RemoteException {
 		
 		this.Val = valutazione;
+		lbUser.setText(clientBR.getInstance().getUtente(valutazione.getIdUtente()).getNome());
 	}
 	
 }

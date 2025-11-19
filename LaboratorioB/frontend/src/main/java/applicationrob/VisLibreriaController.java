@@ -20,12 +20,13 @@ import java.rmi.RemoteException;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.VBox;
 import javafx.geometry.Insets;
-
+import javafx.scene.text.Text;
+import javafx.scene.text.Font; 
 
 public class VisLibreriaController {
 
     @FXML
-    private Button searchBtn;
+    private Button btnSearch;
 
     @FXML
     private GridPane booksContainer;
@@ -34,7 +35,10 @@ public class VisLibreriaController {
     private TextField searchBar;
 
     @FXML
-    private Label bookNameLabel;
+    private Text bookNameLabel;
+
+    @FXML
+    private Label emptyText;
     
     private Libreria selectedLibrary;
     private Libreria library;
@@ -49,16 +53,15 @@ public class VisLibreriaController {
         filteredBooks = FXCollections.observableArrayList();
 
         Model.getIstance().getView().selectedLibraryProperty().addListener((obs, oldLibrary, newLibrary) -> {
-
-            System.out.println("Selected library changed." + newLibrary.getNomeLibreria());
             if (newLibrary != null) {
-
             try {
             booksLibrary.clear();
             booksLibrary.addAll(clientBR.getInstance().getLibreria(newLibrary.getIdLibreria()).getLibreria());
             } catch (RemoteException e) {
             e.printStackTrace();
             } 
+
+            bookNameLabel.setText(newLibrary.getNomeLibreria());
 
             // Imposto currentLibr con tutti i libri fittizi
             currentBooks.setAll(booksLibrary); 
@@ -71,18 +74,15 @@ public class VisLibreriaController {
 
 		selectedLibrary = Model.getIstance().getView().getSelectedLibrary();
 		if (selectedLibrary  != null) {
-			bookNameLabel.setText(selectedLibrary .getNomeLibreria());
 		}
-        
         try {
             booksLibrary.clear();
-            booksLibrary.addAll(clientBR.getInstance().getLibreria(selectedLibrary .getIdLibreria()).getLibreria());
+            booksLibrary.addAll(clientBR.getInstance().getLibreria(selectedLibrary.getIdLibreria()).getLibreria());
         } catch (RemoteException e) {
             e.printStackTrace();
         }
 
-        System.out.println("Books in Library: " + booksLibrary.size());
-
+    bookNameLabel.setText(selectedLibrary.getNomeLibreria());
 
     // Imposto currentLibr con tutti i libri fittizi
     currentBooks.setAll(booksLibrary);
@@ -96,7 +96,9 @@ public class VisLibreriaController {
     public void SeachBooksInLibrary(ActionEvent event) throws RemoteException, IOException {
         String textSlib = searchBar.getText().trim().toLowerCase();
         booksLibrary.setAll(clientBR.getInstance().getLibreria(selectedLibrary.getIdLibreria()).getLibreria());
+        filteredBooks.clear();
          if (textSlib.isEmpty()) {
+            emptyText.setVisible(true);
             currentBooks.setAll(booksLibrary);
         } else {
               for (Libro lib : booksLibrary) {
@@ -106,6 +108,13 @@ public class VisLibreriaController {
                     }
                 currentBooks.setAll(filteredBooks); 
         }  
+
+       if (filteredBooks.isEmpty()) {
+        booksContainer.getChildren().clear();
+        emptyText.setText("BOOKS NOT FOUND");
+        emptyText.setVisible(true);
+        return;
+    }
         InsertingElements(currentBooks); 
     }
 
@@ -119,7 +128,10 @@ public class VisLibreriaController {
     private void InsertingElements(ObservableList<Libro> listBooksToShow)  {
     booksContainer.getChildren().clear();
      if (listBooksToShow == null || listBooksToShow.isEmpty()) {
+        emptyText.setVisible(true);
         return;
+    } else {
+        emptyText.setVisible(false);
     }
 
     int columns = 5;
@@ -134,8 +146,8 @@ public class VisLibreriaController {
 			BookController bookController= loader.getController();
             bookController.setLabels(books.getAutore(), books.getTitolo());
 
-            booksPane.setPrefSize(120, 120);
-            GridPane.setMargin(booksPane, new Insets(20, 20, 20, 20));
+            booksPane.setPrefSize(120, 170);
+            GridPane.setMargin(booksPane, new Insets(7, 10, 10, 19));
 
             booksContainer.add(booksPane, col, row);
 			
@@ -151,8 +163,9 @@ public class VisLibreriaController {
                         row++;
                     }
 
-        } catch (RemoteException e) {
+        } catch (RemoteException e ) {
             e.printStackTrace();
+             views.ViewAlert.showAlert("error", "Book error", "Server error, try again.", booksContainer, "error");
 		} catch (IOException e) {
                 e.printStackTrace();
             }

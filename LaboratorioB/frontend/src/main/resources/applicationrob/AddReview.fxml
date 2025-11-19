@@ -1,164 +1,91 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.Pane?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
+<?import javafx.scene.layout.RowConstraints?>
 
+<AnchorPane prefHeight="700" prefWidth="880" stylesheets="@css/review.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="applicationrob.AddReviewController">
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="880.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="applicationrob.AddReviewController">
-   <children>
-      <HBox layoutX="29.0" layoutY="105.0" prefHeight="526.0" prefWidth="822.0" spacing="15.0">
-         <children>
-            <VBox layoutX="10.0" layoutY="10.0" prefHeight="517.0" prefWidth="130.0" spacing="5.0">
-               <children>
-                  <Pane prefHeight="200.0" prefWidth="200.0">
-                     <children>
-                        <Text layoutX="4.0" layoutY="39.0" strokeType="OUTSIDE" strokeWidth="0.0" text=" Criterio Valutazione" wrappingWidth="107.390625" />
-                     </children>
-                  </Pane>
-                  <Pane prefHeight="200.0" prefWidth="200.0">
-                     <children>
-                        <Text layoutX="14.0" layoutY="41.0" strokeType="OUTSIDE" strokeWidth="0.0" text=" Stile" wrappingWidth="29.816375732421875" />
-                     </children>
-                  </Pane>
-                  <Pane prefHeight="200.0" prefWidth="200.0">
-                     <children>
-                        <Text layoutX="14.0" layoutY="41.0" strokeType="OUTSIDE" strokeWidth="0.0" text=" Contenuto" />
-                     </children>
-                  </Pane>
-                  <Pane prefHeight="200.0" prefWidth="200.0">
-                     <children>
-                        <Text layoutX="14.0" layoutY="41.0" strokeType="OUTSIDE" strokeWidth="0.0" text=" Gradevolezza" />
-                     </children>
-                  </Pane>
-                  <Pane prefHeight="200.0" prefWidth="200.0">
-                     <children>
-                        <Text layoutX="14.0" layoutY="42.0" strokeType="OUTSIDE" strokeWidth="0.0" text=" Originalità" />
-                     </children>
-                  </Pane>
-                  <Pane prefHeight="200.0" prefWidth="200.0">
-                     <children>
-                        <Text layoutX="14.0" layoutY="42.0" strokeType="OUTSIDE" strokeWidth="0.0" text=" Edizione" />
-                     </children>
-                  </Pane>
-                  <Pane prefHeight="200.0" prefWidth="200.0">
-                     <children>
-                        <Text layoutX="14.0" layoutY="42.0" strokeType="OUTSIDE" strokeWidth="0.0" text=" Voto Finale" />
-                     </children>
-                  </Pane>
-               </children>
-            </VBox>
-            <VBox layoutX="10.0" layoutY="10.0" prefHeight="517.0" prefWidth="293.0" spacing="5.0">
-               <children>
-                  <Pane prefHeight="200.0" prefWidth="200.0">
-                     <children>
-                        <Text layoutX="107.0" layoutY="39.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Spiegazione" />
-                     </children>
-                  </Pane>
-                  <Pane prefHeight="200.0" prefWidth="200.0">
-                     <children>
-                        <Text layoutX="14.0" layoutY="39.0" strokeType="OUTSIDE" strokeWidth="0.0" text=" Valutazione sullo stile di scrittura del libro" />
-                     </children>
-                  </Pane>
-                  <Pane prefHeight="200.0" prefWidth="200.0">
-                     <children>
-                        <Text layoutX="14.0" layoutY="39.0" strokeType="OUTSIDE" strokeWidth="0.0" text=" Valutazione sui contenuti del libro" />
-                     </children>
-                  </Pane>
-                  <Pane prefHeight="200.0" prefWidth="200.0">
-                     <children>
-                        <Text layoutX="14.0" layoutY="39.0" strokeType="OUTSIDE" strokeWidth="0.0" text=" Valutazione sul gradimento nella lettura del libro" />
-                     </children>
-                  </Pane>
-                  <Pane prefHeight="200.0" prefWidth="200.0">
-                     <children>
-                        <Text layoutX="14.0" layoutY="39.0" strokeType="OUTSIDE" strokeWidth="0.0" text=" Valutazione sulla originalità del libro" />
-                     </children>
-                  </Pane>
-                  <Pane prefHeight="200.0" prefWidth="200.0">
-                     <children>
-                        <Text layoutX="14.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text=" Valutazione sulla qualità dell’edizione del libro" />
-                     </children>
-                  </Pane>
-                  <Pane prefHeight="200.0" prefWidth="200.0">
-                     <children>
-                        <Text layoutX="14.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Valutazione complessiva del libro" />
-                     </children>
-                  </Pane>
-               </children>
-            </VBox>
-            <VBox prefHeight="517.0" prefWidth="77.0" spacing="5.0">
-               <children>
-                  <Pane prefHeight="200.0" prefWidth="200.0">
-                     <children>
-                        <Text layoutX="15.0" layoutY="39.0" strokeType="OUTSIDE" strokeWidth="0.0" text=" Score" />
-                     </children>
-                  </Pane>
-                  <Pane prefHeight="200.0" prefWidth="200.0">
-                     <children>
-                        <ChoiceBox fx:id="ScoreStyle" layoutX="12.0" layoutY="22.0" prefHeight="25.0" prefWidth="41.0" />
-                     </children>
-                  </Pane>
-                  <Pane prefHeight="200.0" prefWidth="200.0">
-                     <children>
-                        <ChoiceBox fx:id="ScoreContent" layoutX="11.0" layoutY="22.0" prefHeight="25.0" prefWidth="41.0" />
-                     </children>
-                  </Pane>
-                  <Pane prefHeight="200.0" prefWidth="200.0">
-                     <children>
-                        <ChoiceBox fx:id="ScorePleasentness" layoutX="12.0" layoutY="22.0" prefHeight="25.0" prefWidth="41.0" />
-                     </children>
-                  </Pane>
-                  <Pane prefHeight="200.0" prefWidth="200.0">
-                     <children>
-                        <ChoiceBox fx:id="ScoreOriginality" layoutX="12.0" layoutY="22.0" prefHeight="25.0" prefWidth="41.0" />
-                     </children>
-                  </Pane>
-                  <Pane prefHeight="200.0" prefWidth="200.0">
-                     <children>
-                        <ChoiceBox fx:id="ScoreEdition" layoutX="12.0" layoutY="23.0" prefHeight="25.0" prefWidth="41.0" />
-                     </children>
-                  </Pane>
-                  <Pane prefHeight="200.0" prefWidth="200.0">
-                     <children>
-                        <ChoiceBox fx:id="ScoreFinal" layoutX="12.0" layoutY="23.0" prefHeight="25.0" prefWidth="41.0" />
-                     </children>
-                  </Pane>
-               </children>
-            </VBox>
-            <VBox prefHeight="467.0" prefWidth="350.0" spacing="5.0">
-               <children>
-                  <Pane prefHeight="200.0" prefWidth="200.0">
-                     <children>
-                        <Text layoutX="112.0" layoutY="39.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Note (max 256 chars)" />
-                     </children>
-                  </Pane>
-                  <TextArea fx:id="TxtStyle" prefHeight="200.0" prefWidth="200.0" text="&#10;&#10;" />
-                  <TextArea fx:id="TxtContent" prefHeight="200.0" prefWidth="200.0" />
-                  <TextArea fx:id="TxtPleasentess" prefHeight="200.0" prefWidth="200.0" />
-                  <TextArea fx:id="TxtOriginality" prefHeight="200.0" prefWidth="200.0" />
-                  <TextArea fx:id="TxtEdition" prefHeight="200.0" prefWidth="200.0" />
-                  <TextArea fx:id="TxtFinal" prefHeight="200.0" prefWidth="200.0" />
-               </children>
-            </VBox>
-         </children>
-         <padding>
-            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-         </padding>
-      </HBox>
-      <Button fx:id="BtnConfirm" layoutX="724.0" layoutY="656.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="126.0" text="Confirm" />
-      <Button fx:id="BtnRestar" layoutX="655.0" layoutY="656.0" mnemonicParsing="false" text="restart" />
-      <Text layoutX="22.0" layoutY="50.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Add a personal review Aleksandar" textAlignment="CENTER" wrappingWidth="279.19999999999993">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Text>
-   </children>
+    <children>
+        <GridPane fx:id="ReviewTable" alignment="TOP_CENTER" hgap="10" layoutX="30.0" layoutY="30.0" prefHeight="500.0" prefWidth="820" styleClass="TableReview" vgap="8">
+
+    <!-- Colonne -->
+    <columnConstraints>
+        <ColumnConstraints percentWidth="17.0" />
+        <ColumnConstraints percentWidth="30.0" />
+        <ColumnConstraints percentWidth="13.0" />
+        <ColumnConstraints percentWidth="40.0" />
+    </columnConstraints>
+
+    <!-- Righe (altezza 60px ciascuna) -->
+    <rowConstraints>
+        <RowConstraints minHeight="80" />
+        <RowConstraints minHeight="80" />
+        <RowConstraints minHeight="80" />
+        <RowConstraints minHeight="80" />
+        <RowConstraints minHeight="80" />
+        <RowConstraints minHeight="80" />
+        <RowConstraints minHeight="80" />
+    </rowConstraints>
+
+    <!-- Riga intestazioni -->
+    <Label styleClass="header" text="Criterio" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+    <Label styleClass="header" text="Spiegazione" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+    <Label styleClass="header" text="Score" GridPane.columnIndex="2" GridPane.rowIndex="0" />
+    <Label styleClass="header" text="Note" GridPane.columnIndex="3" GridPane.rowIndex="0" />
+
+    <!-- Riga 1 -->
+    <Label text="Stile" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+    <Label text="Valutazione sullo stile di scrittura" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+    <ChoiceBox fx:id="ScoreStyle" prefWidth="60" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+    <TextArea fx:id="TxtStyle" prefRowCount="2" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+
+    <!-- Riga 2 -->
+    <Label text="Contenuto" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+    <Label text="Valutazione sui contenuti del libro" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+    <ChoiceBox fx:id="ScoreContent" prefWidth="60" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+    <TextArea fx:id="TxtContent" prefRowCount="2" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+
+    <!-- Riga 3 -->
+    <Label text="Gradevolezza" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+    <Label text="Valutazione sul gradimento" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+    <ChoiceBox fx:id="ScorePleasentness" prefWidth="60" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+    <TextArea fx:id="TxtPleasentess" prefRowCount="2" GridPane.columnIndex="3" GridPane.rowIndex="3" />
+
+    <!-- Riga 4 -->
+    <Label text="Originalità" GridPane.columnIndex="0" GridPane.rowIndex="4" />
+    <Label text="Valutazione sulla originalità" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+    <ChoiceBox fx:id="ScoreOriginality" prefWidth="60" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+    <TextArea fx:id="TxtOriginality" prefRowCount="2" GridPane.columnIndex="3" GridPane.rowIndex="4" />
+
+    <!-- Riga 5 -->
+    <Label text="Edizione" GridPane.columnIndex="0" GridPane.rowIndex="5" />
+    <Label text="Valutazione sull’edizione" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+    <ChoiceBox fx:id="ScoreEdition" prefWidth="60" GridPane.columnIndex="2" GridPane.rowIndex="5" />
+    <TextArea fx:id="TxtEdition" prefRowCount="2" GridPane.columnIndex="3" GridPane.rowIndex="5" />
+
+    <!-- Riga 6 -->
+    <Label text="Voto Finale" GridPane.columnIndex="0" GridPane.rowIndex="6" />
+    <Label text="Valutazione complessiva del libro" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+         <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="6">
+            <children>
+                 <Button fx:id="BtnRestar" layoutX="32.0" layoutY="40.0" prefWidth="120" text="Restart" />
+         
+                 <Button fx:id="BtnConfirm" layoutX="183.0" layoutY="40.0" prefWidth="120" text="Confirm" />
+            </children>
+         </Pane>
+         <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="6">
+            <children>
+               <Label layoutX="19.0" layoutY="32.0" prefHeight="17.0" prefWidth="48.0" text="Media" />
+            </children>
+         </Pane>
+
+</GridPane>
+    </children>
 </AnchorPane>
