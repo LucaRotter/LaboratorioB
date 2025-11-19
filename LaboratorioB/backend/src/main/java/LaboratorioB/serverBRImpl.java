@@ -22,7 +22,15 @@ import LaboratorioB.common.models.Ricerca;
 import LaboratorioB.common.models.Utente;
 import LaboratorioB.common.models.Valutazione;
 import LaboratorioB.db.DatabaseManager;
-//import javax.sql.*;
+
+/**
+ * Un oggetto della classe <code>serverBRImpl</code> rappresenta
+ * una API che permette la comunicazione tra client e server BR.
+ * Mette a disposizione metodi per la registrazione, login,
+ * gestione utenti, libri, librerie, valutazioni e consigli.
+ * 
+ * @author ProgettoLabA
+ */
 
 public class serverBRImpl extends UnicastRemoteObject implements serverBR {
 
@@ -30,6 +38,10 @@ public class serverBRImpl extends UnicastRemoteObject implements serverBR {
     private Connection conn;
 
     // Costruttore
+    /**
+     * Costruisce un oggetto serverBRImpl e stabilisce la connessione
+     * al database PostgreSQL.
+     */
     protected serverBRImpl() throws RemoteException, SQLException {
         super();
         conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/LaboratorioB", "postgres", "@Aleks13082002");
@@ -37,6 +49,12 @@ public class serverBRImpl extends UnicastRemoteObject implements serverBR {
     }
 
     // Implementazione dei metodi definiti nell'interfaccia serverBR
+    /** 
+     * Registra un nuovo utente nel sistema.
+     * @param user L'oggetto Utente contenente le informazioni dell'utente da registrare.
+     * @return L'ID univoco dell'utente registrato, o -1 in caso di errore.
+     * @throws RemoteException In caso di errore di comunicazione remota.
+     */
     @Override
     public synchronized int registrazione(Utente user) throws RemoteException {
 
@@ -71,6 +89,14 @@ public class serverBRImpl extends UnicastRemoteObject implements serverBR {
         }
     }
 
+    /**
+     * Effettua il login di un utente verificando le credenziali.
+     * @param email L'email dell'utente.
+     * @param password La password dell'utente.
+     * @return L'ID univoco dell'utente se il login ha successo, altrimenti -1.
+     * @throws RemoteException In caso di errore di comunicazione remota. 
+     */
+
     @Override
     public int login(String email, String password) throws RemoteException {
         String hashPassword = password.hashCode() + ""; // Semplice hash della password
@@ -97,6 +123,12 @@ public class serverBRImpl extends UnicastRemoteObject implements serverBR {
         return id;
     }
 
+    /** 
+     * Recupera le informazioni di un utente dato il suo ID.
+     * @param id L'ID univoco dell'utente.
+     * @return L'oggetto Utente contenente le informazioni dell'utente, o null se non trovato.
+     * @throws RemoteException In caso di errore di comunicazione remota.
+     */
     @Override
     public Utente getUtente(int id) throws RemoteException {
         Utente user = null;
@@ -125,6 +157,13 @@ public class serverBRImpl extends UnicastRemoteObject implements serverBR {
         return user;// restituisce null se non trova l'utente
     }
 
+    /** 
+     * Implementa il meccanismo di lazy loading per i libri.
+     * Restituisce una lista di libri non ancora inviati al client.
+     * @param id_libro L'ID del libro di riferimento (non utilizzato in questa implementazione).
+     * @return Una lista di oggetti Libro non ancora inviati al client.
+     * @throws RemoteException In caso di errore di comunicazione remota.
+     */
     @Override
     public List<Libro> lazyLoadingLibri() throws RemoteException {
 
@@ -183,6 +222,13 @@ public class serverBRImpl extends UnicastRemoteObject implements serverBR {
         return libri;
     }
 
+    /**
+     * Registra i libri inviati a un client specifico nel database.
+     * @param conn La connessione al database.
+     * @param clientHost L'host del client.
+     * @param libri La lista di libri inviati.
+     * @throws SQLException In caso di errore SQL.
+     */
     private void registraLibriInviati(Connection conn, String clientHost, List<Libro> libri) throws SQLException {
         String insert = "INSERT INTO libri_inviati (client_host, id_libro) VALUES (?, ?) ON CONFLICT DO NOTHING";
         try (PreparedStatement ps = conn.prepareStatement(insert)) {
@@ -195,6 +241,12 @@ public class serverBRImpl extends UnicastRemoteObject implements serverBR {
         }
     }
 
+    /**
+     * Resetta i libri inviati a un client specifico cancellando i record dal database.
+     * @param conn La connessione al database.
+     * @param clientHost L'host del client.
+     * @throws SQLException In caso di errore SQL.
+     */
     private void resetLibriInviati(Connection conn, String clientHost) throws SQLException {
         String delete = "DELETE FROM libri_inviati WHERE client_host = ?";
         try (PreparedStatement ps = conn.prepareStatement(delete)) {
@@ -203,6 +255,12 @@ public class serverBRImpl extends UnicastRemoteObject implements serverBR {
         }
     }
 
+    /** 
+     * Recupera le informazioni di un libro dato il suo ID.
+     * @param id_libro L'ID univoco del libro.
+     * @return L'oggetto Libro contenente le informazioni del libro, o null se non trovato.
+     * @throws RemoteException In caso di errore di comunicazione remota.
+     */
     @Override
     public Libro getLibro(int id_libro) throws RemoteException {
         Libro libro = null;
@@ -227,6 +285,12 @@ public class serverBRImpl extends UnicastRemoteObject implements serverBR {
         return libro;
     }
 
+    /**
+     * Recupera le valutazioni di un libro dato il suo ID.
+     * @param id_libro L'ID univoco del libro.
+     * @return Una lista di oggetti Valutazione associati al libro.
+     * @throws RemoteException In caso di errore di comunicazione remota.
+     */
     @Override
     public List<Valutazione> getValutazione(int id_libro) throws RemoteException {
         String query = "SELECT * FROM Valutazioni_Libri WHERE id_libro = ?";
@@ -260,6 +324,13 @@ public class serverBRImpl extends UnicastRemoteObject implements serverBR {
         return valutazioni;
     }
 
+    /**
+     * Recupera le valutazioni di un libro fatte da un utente specifico.
+     * @param id_utente L'ID univoco dell'utente.
+     * @param id_libro L'ID univoco del libro.
+     * @return Una lista di oggetti Valutazione associati all'utente e al libro.
+     * @throws RemoteException In caso di errore di comunicazione remota.
+     */
     @Override
     public List<Valutazione> getValutazioniUtente(int id_utente, int id_libro) throws RemoteException{
         String query = "SELECT * FROM Valutazioni_Libri WHERE id_utente = ? AND id_libro = ?";
@@ -292,6 +363,12 @@ public class serverBRImpl extends UnicastRemoteObject implements serverBR {
         return valutazioni;
     }
 
+    /**
+     * Recupera i libri consigliati per un dato libro.
+     * @param id_libro L'ID univoco del libro di riferimento.
+     * @return Una lista di oggetti Libro consigliati.
+     * @throws RemoteException In caso di errore di comunicazione remota.
+     */
     @Override
     public List<Libro> getConsiglio(int id_libro) throws RemoteException {
         String query = "SELECT * FROM libri_consigliati WHERE id_libro = ?";
@@ -311,6 +388,13 @@ public class serverBRImpl extends UnicastRemoteObject implements serverBR {
         return consigli;
     }
 
+    /**
+     * Recupera i libri consigliati per un dato libro da un utente specifico.
+     * @param id_libro L'ID univoco del libro di riferimento.
+     * @param id_utente L'ID univoco dell'utente.
+     * @return Una lista di oggetti Libro consigliati dall'utente.
+     * @throws RemoteException In caso di errore di comunicazione remota.
+     */
     @Override
     public List<Libro> getConsiglioUtente(int id_libro, int id_utente) throws RemoteException{
         String query = "SELECT * FROM libri_consigliati WHERE id_libro = ? AND id_utente = ?";
@@ -331,6 +415,12 @@ public class serverBRImpl extends UnicastRemoteObject implements serverBR {
         return consigli;
     }
 
+    /**
+     * Recupera il voto medio di un libro dato il suo ID.
+     * @param id_libro L'ID univoco del libro.
+     * @return Il voto medio del libro.
+     * @throws RemoteException In caso di errore di comunicazione remota.
+     */
     @Override
     public double getVotoMedio(int id_libro) throws RemoteException {
         String query = "SELECT AVG(voto_medio) FROM valutazioni WHERE id_libro = ?";
@@ -348,6 +438,15 @@ public class serverBRImpl extends UnicastRemoteObject implements serverBR {
         return voto_medio;
     }
 
+    /**
+     * Cerca libri in base a autore, anno o titolo.
+     * @param autore L'autore del libro.
+     * @param anno L'anno di pubblicazione del libro.
+     * @param titolo Il titolo del libro.
+     * @param scelta Il criterio di ricerca (AUTORE, ANNO, TITOLO).
+     * @return Una lista di oggetti Libro che corrispondono ai criteri di ricerca.
+     * @throws RemoteException In caso di errore di comunicazione remota.
+     */
     @Override
     public List<Libro> cercaLibri(String autore, int anno, String titolo, Ricerca scelta) throws RemoteException {
         List<Libro> libri = new ArrayList<>();
@@ -400,6 +499,13 @@ public class serverBRImpl extends UnicastRemoteObject implements serverBR {
         return libri;
     }
 
+    /**
+     * Crea una nuova libreria per un utente.
+     * @param nome Il nome della libreria.
+     * @param id_utente L'ID univoco dell'utente proprietario della libreria.
+     * @return L'oggetto Libreria appena creata.
+     * @throws RemoteException In caso di errore di comunicazione remota.
+     */
     @Override
     public synchronized Libreria createLibreria(String nome, int id_utente) throws RemoteException {
         // inserimento in db
@@ -429,6 +535,12 @@ public class serverBRImpl extends UnicastRemoteObject implements serverBR {
         return libreria;
     }
 
+    /**
+     * Elimina una libreria dato il suo ID.
+     * @param id_libreria L'ID univoco della libreria da eliminare.
+     * @return true se la libreria è stata eliminata con successo, false altrimenti.
+     * @throws RemoteException In caso di errore di comunicazione remota.
+     */
     @Override
     public boolean deleteLibreria(int id_libreria) throws RemoteException{
         String query = "DELETE FROM libreria WHERE id_libreria = ?";
@@ -445,6 +557,13 @@ public class serverBRImpl extends UnicastRemoteObject implements serverBR {
         return deleted;
     }
 
+    /**
+     * Aggiunge un libro a una libreria specifica.
+     * @param id_libro L'ID univoco del libro da aggiungere.
+     * @param id_libreria L'ID univoco della libreria a cui aggiungere il libro.
+     * @return L'oggetto Libreria aggiornato dopo l'aggiunta del libro.
+     * @throws RemoteException In caso di errore di comunicazione remota.
+     */
     @Override
     public Libreria addLibroLibreria(int id_libro, int id_libreria) throws RemoteException {
         String query = "INSERT into libreria_libri(id_libro, id_libreria) VALUES (?, ?)";
@@ -465,7 +584,13 @@ public class serverBRImpl extends UnicastRemoteObject implements serverBR {
         return libreria;
 
     }
-
+    /**
+     * Rimuove un libro da una libreria specifica.
+     * @param id_libro L'ID univoco del libro da rimuovere.
+     * @param id_libreria L'ID univoco della libreria da cui rimuovere il libro.
+     * @return L'oggetto Libreria aggiornato dopo la rimozione del libro.
+     * @throws RemoteException In caso di errore di comunicazione remota.
+     */
     public Libreria removeLibroLibreria(int id_libro, int id_libreria) throws RemoteException {
         String query = "DELETE FROM libreria_libri WHERE id_libro = ? AND id_libreria = ?";
         Libreria libreria = null;
@@ -483,6 +608,12 @@ public class serverBRImpl extends UnicastRemoteObject implements serverBR {
         return libreria;
     }
 
+    /**
+     * Recupera le informazioni di una libreria dato il suo ID.
+     * @param id_libreria L'ID univoco della libreria.
+     * @return L'oggetto Libreria contenente le informazioni della libreria, o null se non trovata.
+     * @throws RemoteException In caso di errore di comunicazione remota.
+     */
     public Libreria getLibreria(int id_libreria) throws RemoteException {
 
         String query = "SELECT * FROM libreria L LEFT JOIN libreria_libri M on L.id_libreria = M.id_libreria WHERE L.id_libreria = ?";
@@ -522,6 +653,12 @@ public class serverBRImpl extends UnicastRemoteObject implements serverBR {
 
     }
 
+    /**
+     * Recupera tutte le librerie di un utente specifico.
+     * @param id_utente L'ID univoco dell'utente.
+     * @return Una lista di oggetti Libreria associati all'utente.
+     * @throws RemoteException In caso di errore di comunicazione remota.
+     */
     @Override
     public List<Libreria> getLibrerie(int id_utente) throws RemoteException {
         // select da db
@@ -545,6 +682,14 @@ public class serverBRImpl extends UnicastRemoteObject implements serverBR {
         return libreria;
     }
 
+    /**
+     * Crea un consiglio associato ad un libro da parte di un utente.
+     * @param id_utente L'ID univoco dell'utente che consiglia
+     * @param id_libro L'ID univoco del libro di riferimento
+     * @param id_consiglio L'ID univoco del libro consigliato
+     * @return true se il consiglio è stato creato con successo, false altrimenti.
+     * @throws RemoteException In caso di errore di comunicazione remota.
+     */
     @Override
     public synchronized boolean createConsiglio(int id_utente, int id_libro, int id_consiglio) throws RemoteException {
         int count = 0;
@@ -588,6 +733,12 @@ public class serverBRImpl extends UnicastRemoteObject implements serverBR {
         return true;
     }
 
+    /**
+     * Crea una valutazione per un libro da parte di un utente.
+     * @param val L'oggetto Valutazione contenente le informazioni della valutazione da creare.
+     * @return true se la valutazione è stata creata con successo, false altrimenti.
+     * @throws RemoteException In caso di errore di comunicazione remota.
+     */
     @Override
     public synchronized boolean createValutazione(Valutazione val) throws RemoteException {
         // query per inserimento nel db
