@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.util.LinkedList;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.fxml.FXMLLoader;
@@ -11,7 +13,6 @@ import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane; 
 import javafx.stage.Stage;
 import LaboratorioB.common.models.*;
-
 
 public class ViewFactory {
 	
@@ -26,7 +27,7 @@ public class ViewFactory {
 	private AnchorPane AddReview;
 	private AnchorPane AddReccomended;
 
-	private LinkedList<String> historyPage;
+	private ObservableList<String> historyPage;
 
 	private Stage Stage;
 
@@ -34,7 +35,7 @@ public class ViewFactory {
 		this.SideBarSelection = new SimpleStringProperty("");
 		this.selectedLibr = new SimpleObjectProperty<Libro>();
 		this.selectedLibreria = new SimpleObjectProperty<Libreria>();
-		historyPage = new LinkedList<>();	
+		historyPage =  FXCollections.observableArrayList();
 
 		this.Stage = new Stage();
 	}
@@ -51,45 +52,44 @@ public class ViewFactory {
 	
 	public AnchorPane getVisLibrerie(){
 		VisLibrerie = MoveToPage("/applicationrob/VisLibrerie.fxml", VisLibrerie);
-		historyPage.add("VisLibrerie");
-		historyPage.removeLast();
+		listControl("VisLibrerie");
 		return VisLibrerie;
 		}
 	
 	public AnchorPane getVisLibro() {
 		VisLibro = MoveToPage("/applicationrob/VisLibro.fxml", VisLibro);
-		historyPage.add("VisLibro");
+		listControl("VisLibro");
 		return VisLibro;
 	}       
 	 
 	public AnchorPane getVisLibreria() {
 		VisLibreria = MoveToPage("/applicationrob/VisLibreria.fxml", VisLibreria);
-		historyPage.add("VisLibreria");
+		listControl("VisLibreria");
 		return VisLibreria;
 	}  
 
 	public AnchorPane getAddReview() {
 		AddReview = MoveToPage("/applicationrob/AddReview.fxml", AddReview);
-		historyPage.add("AddReview");
+		listControl("AddReview");
 		return AddReview;
 	}  
 
 	public AnchorPane getAddReccomended() {
 		AddReccomended = MoveToPage("/applicationrob/AddReccomended.fxml", AddReccomended);
-		historyPage.add("AddReccomended");
+		historyPage.add("AddRecommended");
 		return AddReccomended;
 	}  
 		
 	public void changeToHome() {
 		
 		initializeStage("/applicationrob/MainPage.fxml");
-		
+
 	}
 
 	public void changeToLogin() {
 		
 		initializeStage("/applicationrob/LoginPage.fxml");
-		
+	
 	}
 
 	public void changeToRegister() {
@@ -158,16 +158,38 @@ public class ViewFactory {
 
 	public void lastHistory() {
 		if (!historyPage.isEmpty()) {
+
+		for(String s :historyPage){
+			System.out.print(s + "-> ");
+		}
+
         historyPage.removeLast();
+		System.out.println("seconda stampa");
+		for(String s :historyPage){
+			 System.out.print(  s + "-> ");
+		}
 
         if (!historyPage.isEmpty()) {
+
+			System.out.print("cambio pagina");
             String previous = historyPage.getLast();
             SideBarSelection.set(previous);
+
         } else {
             SideBarSelection.set("Dashboard");
         }
     }
+	}
+
+	public void listControl(String selectValue) {
+    if (historyPage.isEmpty() || !selectValue.equals(historyPage.getLast())) {
+        historyPage.add(selectValue);
+    }
+}
+
+	public ObservableList<String> getHistoryPage() {
 		
+		return historyPage;
 	}
 	
 

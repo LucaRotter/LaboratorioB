@@ -12,15 +12,31 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 <?import javafx.scene.shape.SVGPath?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
 
 <VBox fillWidth="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="220.0" style="-fx-background-color: transparent; -fx-border-radius: 10px; -fx-background-radius: 10px;" stylesheets="@css/Sidebar.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="applicationrob.SideBarController">
    <children>
-      <AnchorPane prefHeight="700.0" prefWidth="216.0" >
+      <AnchorPane prefHeight="700.0" prefWidth="216.0">
          <children>
-            <VBox layoutX="1.0" layoutY="147.0" prefHeight="230.0" prefWidth="214.0" styleClass="ButtonSection">
+            <VBox layoutX="-1.0" layoutY="104.0" prefHeight="284.0" prefWidth="221.0" styleClass="ButtonSection">
                <children>
-                  <Button fx:id="btnHome" mnemonicParsing="false" prefHeight="43.0" prefWidth="289.0" styleClass="NavigationBtn">
+                  <Button fx:id="btnBack" disable="true" mnemonicParsing="false" prefHeight="56.0" prefWidth="222.0" styleClass="NavigationBtn" visible="false">
+                  <graphic>
+                     <HBox alignment="CENTER_LEFT" prefHeight="34.0" prefWidth="169.0">
+                        <children>
+                              <Pane prefHeight="33.0" prefWidth="40.0">
+                                 <children>
+                                <SVGPath content="M10 6L4 12L10 18 M4 12H20" fill="transparent" layoutX="7.0" layoutY="4.0" scaleX="1.4" scaleY="1.4" smooth="false" stroke="black" />
+                                 </children>
+                              </Pane>
+                           <Text strokeType="OUTSIDE" text="Back" />
+                        </children>
+                     </HBox>
+                  </graphic>
+               </Button>
+                  <Button fx:id="btnHome" mnemonicParsing="false" prefHeight="56.0" prefWidth="222.0" styleClass="NavigationBtn">
                      <graphic>
                         <HBox alignment="CENTER_LEFT" prefHeight="34.0" prefWidth="89.0">
                            <children>
@@ -29,12 +45,12 @@
                                     <Image url="@../img/Home_selected.png" />
                                  </image>
                               </ImageView>
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Home" wrappingWidth="68.53668212890625" />
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Home" />
                            </children>
                         </HBox>
                      </graphic>
                   </Button>
-                  <Button fx:id="btnLibraries" mnemonicParsing="false" prefHeight="43.0" prefWidth="261.0" styleClass="NavigationBtn">
+                  <Button fx:id="btnLibraries" mnemonicParsing="false" prefHeight="56.0" prefWidth="225.0" styleClass="NavigationBtn">
                      <graphic>
                         <HBox alignment="CENTER_LEFT" prefHeight="8.0" prefWidth="108.0">
                            <children>
@@ -43,7 +59,7 @@
                                     <Image url="@../img/bookshelf-icon-png-6.jpg" />
                                  </image>
                               </ImageView>
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Libraries" wrappingWidth="68.53668212890625" />
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Libraries" />
                            </children>
                         </HBox>
                      </graphic>
@@ -62,44 +78,13 @@
                         </HBox>
                      </graphic>
                   </Button>
-                  <Button fx:id="btnLogOut" mnemonicParsing="false" prefHeight="42.0" prefWidth="301.0" styleClass="NavigationBtn" visible="false">
-                     <graphic>
-                        <HBox prefHeight="8.0" prefWidth="108.0">
-                           <children>
-                              <ImageView fitHeight="33.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../img/logOut.png" />
-                                 </image>
-                              </ImageView>
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Log out" wrappingWidth="68.53668212890625" />
-                           </children>
-                        </HBox>
-                     </graphic>
-                  </Button>
                </children>
             </VBox>
-            <Button fx:id="btnBack" layoutY="14.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="216.0" styleClass="NavigationBtn">
-            <graphic>
-               <HBox alignment="CENTER_LEFT" spacing="10">
-                  <children>
-                    <SVGPath content="M10 6L4 12L10 18 M4 12H20" 
-                     fill="transparent" 
-                     stroke="black"/>
-                     <Text strokeType="OUTSIDE" text="Back" />
-                  </children>
-               </HBox>
-            </graphic>
-         </Button>
 
-     <Pane fx:id="logPane" layoutX="13.0" layoutY="440.0" prefHeight="250.0" prefWidth="400.0" maxWidth ="200.0" styleClass="LoginPane">
-
-    <children>
-       
-    </children>
-</Pane>
-            <Pane fx:id="loginPane" layoutX="18.0" layoutY="499.0" prefHeight="166.0" prefWidth="180.0" styleClass="LoginPane">
+     
+            <Pane fx:id="loginPane" layoutX="15.0" layoutY="491.0" prefHeight="188.0" prefWidth="190.0" styleClass="LoginPane" >
                <children>
-                  <Button fx:id="btnLogIn" layoutX="28.0" layoutY="22.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="124.0">
+                  <Button fx:id="btnLogIn" layoutX="27.0" layoutY="27.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="136.0">
                      <graphic>
                         <HBox alignment="CENTER" prefHeight="8.0" prefWidth="108.0">
                            <children>
@@ -108,13 +93,36 @@
                                     <Image url="@../img/64572.png" />
                                  </image>
                               </ImageView>
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Log in" textAlignment="CENTER" wrappingWidth="68.53668212890625" />
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Log in" textAlignment="CENTER" wrappingWidth="55.73669147491455" />
                            </children>
                         </HBox>
                      </graphic>
                   </Button>
-                  <Text layoutX="24.0" layoutY="114.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Don't have an account ?" wrappingWidth="131.19998779296873" />
-                  <Hyperlink fx:id="linkRegister" layoutX="51.0" layoutY="118.0" text="Register here" />
+                  <Text layoutX="20.0" layoutY="135.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Don't have an account ?" />
+                  <Hyperlink fx:id="linkRegister" layoutX="49.0" layoutY="140.0" text="Register here" />
+               </children>
+            </Pane>
+            <Text layoutX="19.0" layoutY="63.0" strokeType="OUTSIDE" strokeWidth="0.0" text="BookRecommend">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Text>
+            <Pane fx:id="logOutPane" layoutX="17.0" layoutY="491.0" prefHeight="188.0" prefWidth="190.0" styleClass="LoginPane" visible="false">
+               <children>
+                  <Button fx:id="btnLogOut" layoutX="13.0" layoutY="65.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="165.0">
+                     <graphic>
+                        <HBox alignment="CENTER" prefHeight="8.0" prefWidth="108.0">
+                           <children>
+                              <ImageView fitHeight="33.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../img/logOut.png" />
+                                 </image>
+                              </ImageView>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Log out" textAlignment="CENTER" wrappingWidth="68.5367431640625" />
+                           </children>
+                        </HBox>
+                     </graphic>
+                  </Button>
                </children>
             </Pane>
          </children>
