@@ -172,6 +172,15 @@ public class VisLibroController implements Initializable{
 		LBGenre.setText(selectedBook.getGenere());
 		LBYear.setText(String.valueOf(selectedBook.getAnno()));
 
+		
+	initRecoemmendedList(selectedBook);
+
+	initReviewList(selectedBook);
+
+		
+	}
+
+	public void initReviewList(Libro selectedBook){
 		int i ;
 		List<Valutazione> review = new LinkedList<>();
 
@@ -234,9 +243,11 @@ public class VisLibroController implements Initializable{
 
 	}	
 	lbUserCounter.setText(String.valueOf(review.size())); 
+	}
 
-		//recommended books initialization
+	public void initRecoemmendedList(Libro selectedBook){
 
+		ScrollRec.setContent(recListBook);
 		List<Libro> recommendList = new LinkedList<>();
 		System.out.println("inizializzo consigli");
 
@@ -250,7 +261,7 @@ public class VisLibroController implements Initializable{
 		recListBook.getChildren().clear();  
 		System.out.println(recommendList.size());
 
-		for(i=0; i<recommendList.size(); i++) {
+		for(int i=0; i<recommendList.size(); i++) {
 		
 		VBox vbox = null;
 
@@ -292,7 +303,7 @@ public class VisLibroController implements Initializable{
 				ScrollRec.setContent(container);
 
 		}
-	  }
+	}
 
 
 	//function to go to the add reviews section
