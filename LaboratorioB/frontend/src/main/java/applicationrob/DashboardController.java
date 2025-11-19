@@ -88,6 +88,8 @@ public class DashboardController implements Initializable{
 			
 			try {
 
+				ScrollBooks.setVvalue(0.0);
+
 				//da gestire diversamente magari caricare in base alla dimensione della lista 
 				
 				gridBooks.getChildren().clear();

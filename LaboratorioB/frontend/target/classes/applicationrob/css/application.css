@@ -398,6 +398,7 @@ Button:hover{
 .NavigationBox Button:hover{
 	-fx-background-color: rgba(166, 166, 166, 0.2);
 }
+
 .header-row {
     -fx-background-color: #00c2b3;
 }

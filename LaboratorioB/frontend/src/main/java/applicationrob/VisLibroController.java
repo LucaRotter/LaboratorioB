@@ -104,6 +104,8 @@ public class VisLibroController implements Initializable{
 
 		if(newLibr != null){
 
+			root.setVvalue(0.0);
+
         	setLibro(newLibr);
 			System.out.println(newLibr.getTitolo());
 		}
