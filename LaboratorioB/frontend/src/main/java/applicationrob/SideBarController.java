@@ -1,7 +1,12 @@
 package applicationrob;
 
 import java.net.URL;
-import java.util.ResourceBundle; 
+import java.util.ResourceBundle;
+
+import javafx.beans.binding.Bindings;
+import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -34,7 +39,7 @@ public class SideBarController implements Initializable{
 	private Pane loginPane; 
 
 	@FXML
-	private Pane logPane;
+	private Pane logOutPane;
 
 	private int id_user;
 	
@@ -42,6 +47,12 @@ public class SideBarController implements Initializable{
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		checkLogin();
 		init();
+
+		ObservableList<String> history = Model.getIstance().getView().getHistoryPage();
+
+		btnBack.disableProperty().bind(Bindings.size(history).lessThanOrEqualTo(0));
+		btnBack.visibleProperty().bind(Bindings.size(history).greaterThan(0));
+
 	} 
 	
 	public void init() {
@@ -93,11 +104,11 @@ public class SideBarController implements Initializable{
 		if(id_user != -1) {
 			btnLogOut.setVisible(true);
 			loginPane.setVisible(false);
-			logPane.setVisible(true);
+			logOutPane.setVisible(true);
 		} else {
 			btnLogOut.setVisible(false);
 			loginPane.setVisible(true);
-			logPane.setVisible(false);
+			logOutPane.setVisible(false);
 		}
 	}
 	

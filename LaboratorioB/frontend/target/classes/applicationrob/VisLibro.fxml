@@ -91,9 +91,9 @@
                            </children>
                         </Pane>
                         <VBox prefWidth="846.0" spacing="5.0" VBox.vgrow="ALWAYS">
-                           <Pane prefHeight="30.0" prefWidth="826.0">
+                           <Pane prefHeight="40.0" prefWidth="826.0" styleClass="PaneDetail">
                               <children>
-                                    <Text layoutX="14.0" layoutY="15.0" text="Recommended from other users" wrappingWidth="215.20000000000005">
+                                    <Text layoutX="14.0" layoutY="30.0" text="Recommended from other users" wrappingWidth="215.20000000000005">
                                     <font>
                                        <Font size="14.0" />
                                     </font></Text>
@@ -115,9 +115,9 @@
                               <Insets left="20.0" right="20.0" />
                            </VBox.margin>
                           </VBox>
-                        <VBox prefHeight="200.0" prefWidth="852.0" spacing="10" styleClass="reviewContainer">
+                        <VBox  prefWidth="852.0" spacing="10" styleClass="reviewContainer">
       				   <children>
-                              <Pane prefHeight="100.0" prefWidth="826.0" styleClass="PaneDetail">
+                              <Pane prefHeight="50.0" prefWidth="826.0" styleClass="PaneDetail" VBox.vgrow="NEVER">
                                  <children>
                                     <Text layoutX="14.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Review from other users" />
                                     <HBox layoutX="705.0" layoutY="6.0" prefHeight="40.0" prefWidth="107.0" spacing="10.0">

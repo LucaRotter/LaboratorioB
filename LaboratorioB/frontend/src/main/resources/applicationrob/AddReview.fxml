@@ -12,7 +12,7 @@
 
 <AnchorPane prefHeight="700" prefWidth="880" stylesheets="@css/review.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="applicationrob.AddReviewController">
 
-    <children>
+   <children>
         <GridPane fx:id="ReviewTable" alignment="TOP_CENTER" hgap="10" layoutX="30.0" layoutY="30.0" prefHeight="500.0" prefWidth="820" styleClass="TableReview" vgap="8">
 
     <!-- Colonne -->
@@ -34,42 +34,63 @@
         <RowConstraints minHeight="80" />
     </rowConstraints>
 
+    <!-- Sfondo per riga intestazioni -->
+    <Pane styleClass="header-row" GridPane.columnIndex="0" GridPane.columnSpan="4" GridPane.rowIndex="0" />
+    
     <!-- Riga intestazioni -->
     <Label styleClass="header" text="Criterio" GridPane.columnIndex="0" GridPane.rowIndex="0" />
     <Label styleClass="header" text="Spiegazione" GridPane.columnIndex="1" GridPane.rowIndex="0" />
     <Label styleClass="header" text="Score" GridPane.columnIndex="2" GridPane.rowIndex="0" />
     <Label styleClass="header" text="Note" GridPane.columnIndex="3" GridPane.rowIndex="0" />
 
+    <!-- Sfondo per riga 1 -->
+    <Pane styleClass="row-odd" GridPane.columnIndex="0" GridPane.columnSpan="4" GridPane.rowIndex="1" />
+    
     <!-- Riga 1 -->
     <Label text="Stile" GridPane.columnIndex="0" GridPane.rowIndex="1" />
     <Label text="Valutazione sullo stile di scrittura" GridPane.columnIndex="1" GridPane.rowIndex="1" />
     <ChoiceBox fx:id="ScoreStyle" prefWidth="60" GridPane.columnIndex="2" GridPane.rowIndex="1" />
     <TextArea fx:id="TxtStyle" prefRowCount="2" GridPane.columnIndex="3" GridPane.rowIndex="1" />
 
+    <!-- Sfondo per riga 2 -->
+    <Pane styleClass="row-even" GridPane.columnIndex="0" GridPane.columnSpan="4" GridPane.rowIndex="2" />
+    
     <!-- Riga 2 -->
     <Label text="Contenuto" GridPane.columnIndex="0" GridPane.rowIndex="2" />
     <Label text="Valutazione sui contenuti del libro" GridPane.columnIndex="1" GridPane.rowIndex="2" />
     <ChoiceBox fx:id="ScoreContent" prefWidth="60" GridPane.columnIndex="2" GridPane.rowIndex="2" />
     <TextArea fx:id="TxtContent" prefRowCount="2" GridPane.columnIndex="3" GridPane.rowIndex="2" />
 
+    <!-- Sfondo per riga 3 -->
+    <Pane styleClass="row-odd" GridPane.columnIndex="0" GridPane.columnSpan="4" GridPane.rowIndex="3" />
+    
     <!-- Riga 3 -->
     <Label text="Gradevolezza" GridPane.columnIndex="0" GridPane.rowIndex="3" />
     <Label text="Valutazione sul gradimento" GridPane.columnIndex="1" GridPane.rowIndex="3" />
     <ChoiceBox fx:id="ScorePleasentness" prefWidth="60" GridPane.columnIndex="2" GridPane.rowIndex="3" />
     <TextArea fx:id="TxtPleasentess" prefRowCount="2" GridPane.columnIndex="3" GridPane.rowIndex="3" />
 
+    <!-- Sfondo per riga 4 -->
+    <Pane styleClass="row-even" GridPane.columnIndex="0" GridPane.columnSpan="4" GridPane.rowIndex="4" />
+    
     <!-- Riga 4 -->
     <Label text="Originalità" GridPane.columnIndex="0" GridPane.rowIndex="4" />
     <Label text="Valutazione sulla originalità" GridPane.columnIndex="1" GridPane.rowIndex="4" />
     <ChoiceBox fx:id="ScoreOriginality" prefWidth="60" GridPane.columnIndex="2" GridPane.rowIndex="4" />
     <TextArea fx:id="TxtOriginality" prefRowCount="2" GridPane.columnIndex="3" GridPane.rowIndex="4" />
 
+    <!-- Sfondo per riga 5 -->
+    <Pane styleClass="row-odd" GridPane.columnIndex="0" GridPane.columnSpan="4" GridPane.rowIndex="5" />
+    
     <!-- Riga 5 -->
     <Label text="Edizione" GridPane.columnIndex="0" GridPane.rowIndex="5" />
-    <Label text="Valutazione sull’edizione" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+    <Label text="Valutazione sull'edizione" GridPane.columnIndex="1" GridPane.rowIndex="5" />
     <ChoiceBox fx:id="ScoreEdition" prefWidth="60" GridPane.columnIndex="2" GridPane.rowIndex="5" />
     <TextArea fx:id="TxtEdition" prefRowCount="2" GridPane.columnIndex="3" GridPane.rowIndex="5" />
 
+    <!-- Sfondo per riga 6 -->
+    <Pane styleClass="row-even" GridPane.columnIndex="0" GridPane.columnSpan="4" GridPane.rowIndex="6" />
+    
     <!-- Riga 6 -->
     <Label text="Voto Finale" GridPane.columnIndex="0" GridPane.rowIndex="6" />
     <Label text="Valutazione complessiva del libro" GridPane.columnIndex="1" GridPane.rowIndex="6" />

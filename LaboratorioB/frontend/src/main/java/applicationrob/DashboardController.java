@@ -64,8 +64,6 @@ public class DashboardController implements Initializable{
 
 	private IntegerProperty currentIndex = new SimpleIntegerProperty(0);
 
-	private String MODRICERCA = "VISUALIZZA";
-
 	private List<Libro> Bookserver = new ArrayList<>();
 	
 	@Override
@@ -77,7 +75,7 @@ public class DashboardController implements Initializable{
 		try {
 
 			//first loading books
-			Bookserver.addAll(clientBR.getInstance().lazyLoadingLibri());
+			Bookserver.addAll(clientBR.getInstance().cercaLibri("", 0, "", Ricerca.TITOLO));
 			putBooks(currentIndex.get());
 			
 		} catch (IOException e) {
@@ -90,12 +88,10 @@ public class DashboardController implements Initializable{
 			
 			try {
 
-				//da gestire diversamente magari caricare in base alla dimensione della lista 
-				if(newIndex.intValue() > oldIndex.intValue() && MODRICERCA.equals("VISUALIZZA")){ 
-					
-					Bookserver.addAll(clientBR.getInstance().lazyLoadingLibri());
-				}	
+				ScrollBooks.setVvalue(0.0);
 
+				//da gestire diversamente magari caricare in base alla dimensione della lista 
+				
 				gridBooks.getChildren().clear();
 				putBooks(newIndex.intValue());
 
@@ -179,7 +175,7 @@ public class DashboardController implements Initializable{
 		btnCenter.getStyleClass().removeAll("SelectedIndex");
 		btnRight.getStyleClass().removeAll("SelectedIndex");
 
-		if (controlIndex && MODRICERCA.equals("RICERCA")) {
+		if (controlIndex) {
 
 		btnRight.getStyleClass().add("SelectedIndex");
 		update=false;
@@ -322,17 +318,16 @@ public class DashboardController implements Initializable{
 
 		if(searchBar.getText().isEmpty()){
 
-			MODRICERCA = "VISUALIZZA";
 			gridBooks.getChildren().clear();
 			Bookserver.clear();
-			Bookserver.addAll(clientBR.getInstance().lazyLoadingLibri());
+			Bookserver.addAll(clientBR.getInstance().cercaLibri("",0,"",Ricerca.TITOLO));
 			currentIndex.set(0);
 			initNavButtons();
 			putBooks(0);
 			return;
 		}
 
-		MODRICERCA = "RICERCA";
+		
 		gridBooks.getChildren().clear();
 		List<Libro> ricercaLibri = clientBR.getInstance().cercaLibri(author,year,title, mod);
 

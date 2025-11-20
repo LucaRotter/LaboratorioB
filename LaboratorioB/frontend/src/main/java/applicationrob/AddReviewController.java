@@ -53,6 +53,7 @@ public class AddReviewController implements Initializable{
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         init();
+        
 
         int i=1;
 
@@ -102,6 +103,7 @@ public class AddReviewController implements Initializable{
         ScoreOriginality.setValue(null);
         TxtContent.clear();
         TxtEdition.clear();
+
         TxtOriginality.clear();
         TxtPleasentess.clear();
         TxtStyle.clear();

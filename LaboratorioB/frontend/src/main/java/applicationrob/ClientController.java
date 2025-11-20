@@ -37,10 +37,12 @@ public class ClientController implements Initializable{
 			default: MainPage.setCenter(Model.getIstance().getView().getDashboardMain());
 			
 			}
-
-			System.out.println("Changed to: " + newValue);
 		
 		}); 
+
+		
+		Model.getIstance().getView().getSideBarSelectionItem().set(null);
+		Model.getIstance().getView().getSideBarSelectionItem().set("Dashboard");
 	}
 	
 	

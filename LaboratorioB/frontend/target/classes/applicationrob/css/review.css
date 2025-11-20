@@ -79,23 +79,18 @@
 
 /* === Pulsanti === */
 .button {
-    -fx-background-color: linear-gradient(to bottom, #4a90e2, #357abd);
-    -fx-text-fill: white;
-    -fx-font-weight: bold;
-    -fx-background-radius: 6;
-    -fx-border-radius: 6;
-    -fx-cursor: hand;
-    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.15), 3, 0, 0, 1);
-    -fx-pref-height: 30;
+    
+	-fx-background-color: #FFFF;
+	-fx-cursor: hand;
+
 }
 
 .button:hover {
-    -fx-background-color: linear-gradient(to bottom, #5aa0f0, #3f81c9);
+    
 }
 
 .button:pressed {
-    -fx-background-color: linear-gradient(to bottom, #366fb2, #2b5d96);
-    -fx-effect: none;
+    
 }
 
 /* === Effetto tabella (righe alternate) === */

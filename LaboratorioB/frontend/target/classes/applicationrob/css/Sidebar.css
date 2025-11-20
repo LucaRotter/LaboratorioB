@@ -37,10 +37,7 @@ AnchorPane{
     -fx-translate-y: -1;
 }
 
-.ButtonSection{
 
-	-fx-spacing: 1.3em;
-}
 
 .NavigationBtn HBox{
 	-fx-spacing: 1em;
