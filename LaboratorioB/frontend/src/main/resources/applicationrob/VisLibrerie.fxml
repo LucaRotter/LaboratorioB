@@ -24,12 +24,11 @@
 
 <AnchorPane prefHeight="700.0" prefWidth="880.0" StyleClass="librariesPage" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/22" fx:controller="applicationrob.VisLibrerieController">
 	<children>
-	<HBox layoutY="35.0" layoutX="20.0" prefWidth="840.0" spacing="20" alignment="CENTER_LEFT">
+	<HBox layoutY="35.0" layoutX="35.0" prefWidth="825.0" spacing="20" alignment="CENTER_LEFT">
 
-    <StackPane>
-        <Pane prefWidth="500" prefHeight="40" style="-fx-background-color: white; -fx-background-radius: 10; -fx-border-radius: 10;  -fx-border-width: 1;"/>
-       <Text fx:id="titleText" text="My Libraries" styleClass="page-title"/>
-    </StackPane>
+    
+       <Text fx:id="titleText" text="My Libraries" styleClass="page-title" />
+    
        <Region HBox.hgrow="ALWAYS"/>
      <Pane layoutX="526.0" layoutY="45.0" prefHeight="40.0" maxHeight= "40.0" prefWidth="290.0" styleClass="SearchBar">
      <children>
@@ -46,7 +45,7 @@
          </children>
       </Pane>
     </HBox>
-     <Button fx:id="edit" layoutX="825.0" layoutY="52" mnemonicParsing="false"  prefHeight="30.0" prefWidth="30.0" onAction="#useEdit" styleClass="LibrariesEditButton">
+     <Button fx:id="edit" layoutX="825.0" layoutY="43" mnemonicParsing="false"  prefHeight="30.0" prefWidth="30.0" onAction="#useEdit" styleClass="LibrariesEditButton">
       <graphic>
             <SVGPath fx:id="editIcon"
                      content="M8.5 4a.5.5 0 0 0-1 0v2h-2a.5.5 0 0 0 0 1h2v2a.5.5 0 0 0 1 0V7h2a.5.5 0 0 0 0-1h-2zm-3 7a.5.5 0 0 0 0 1h5a.5.5 0 0 0 0-1z"/>

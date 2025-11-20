@@ -12,12 +12,11 @@
 
 <AnchorPane prefHeight="700.0" prefWidth="880.0" stylesheets="@css/libraries.css" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/22" fx:controller="applicationrob.VisLibreriaController">
 <children> 
-  <HBox layoutY="35.0" layoutX="20.0" prefWidth="840.0" spacing="20" alignment="CENTER_LEFT">
+  <HBox layoutY="35.0" layoutX="35.0" prefWidth="825.0" spacing="20" alignment="CENTER_LEFT">
     
-       <StackPane>
-        <Pane prefWidth="200" prefHeight="40" style="-fx-background-color: white; -fx-background-radius: 10; -fx-border-radius: 10;  -fx-border-width: 1;"/>
+      
         <Text fx:id="bookNameLabel" text="My Libraries" styleClass="page-title" />
-       </StackPane>
+       
        
        <Region HBox.hgrow="ALWAYS"/>
      <Pane layoutX="526.0" layoutY="45.0" prefHeight="40.0" maxHeight= "40.0" prefWidth="290.0" styleClass="SearchBar">
