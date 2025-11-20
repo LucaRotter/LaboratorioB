@@ -79,6 +79,4 @@ public class Libro implements Serializable {
     }
 
 
-    // METODI SETTER (?)
-
 }

@@ -1,5 +1,6 @@
 package LaboratorioB.common.interfacce;
 
+// importazioni necessarie
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.util.List;
@@ -10,6 +11,11 @@ import LaboratorioB.common.models.Ricerca;
 import LaboratorioB.common.models.Utente;
 import LaboratorioB.common.models.Valutazione;
 
+/**
+ * Interfaccia remota per il server BR.
+ * Definisce i metodi che possono essere invocati dai client remoti.
+ * @author Laboratorio B
+ */
 public interface serverBR extends Remote {
     /* elenco dei metodi che il server deve implementare */
     public int registrazione(Utente user) throws RemoteException;

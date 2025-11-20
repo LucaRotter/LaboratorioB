@@ -1,5 +1,6 @@
 package LaboratorioB;
 
+//import necessari per il funzionamento del server RMI e la connessione al database
 import java.net.MalformedURLException;
 import java.rmi.Naming;
 import java.rmi.RemoteException;
@@ -49,6 +50,10 @@ public class serverBRImpl extends UnicastRemoteObject implements serverBR {
     }
 
     // Implementazione dei metodi definiti nell'interfaccia serverBR
+    
+    //metodi per l'utente
+
+    //registrazione
     /** 
      * Registra un nuovo utente nel sistema.
      * @param user L'oggetto Utente contenente le informazioni dell'utente da registrare.
@@ -89,6 +94,7 @@ public class serverBRImpl extends UnicastRemoteObject implements serverBR {
         }
     }
 
+    //login
     /**
      * Effettua il login di un utente verificando le credenziali.
      * @param email L'email dell'utente.
@@ -112,7 +118,7 @@ public class serverBRImpl extends UnicastRemoteObject implements serverBR {
 
             try (ResultSet rs = ps.executeQuery()) {
                 if (rs.next()) {
-                    id = rs.getInt("id_utente");
+                    id = rs.getInt("id_utente"); // login riuscito
                 }
             }
 
@@ -123,6 +129,7 @@ public class serverBRImpl extends UnicastRemoteObject implements serverBR {
         return id;
     }
 
+    //recupero utente
     /** 
      * Recupera le informazioni di un utente dato il suo ID.
      * @param id L'ID univoco dell'utente.
@@ -133,13 +140,14 @@ public class serverBRImpl extends UnicastRemoteObject implements serverBR {
     public Utente getUtente(int id) throws RemoteException {
         Utente user = null;
 
+        // creazione query e recupero dal database
         String query = "SELECT * FROM utenti WHERE id_utente = ?";
         try (Connection conn = DatabaseManager.getConnection(); PreparedStatement ps = conn.prepareStatement(query)) {
 
             // imposta i parametri della query
             ps.setInt(1, id);
             try (ResultSet rs = ps.executeQuery()) {
-                if (rs.next()) {
+                if (rs.next()) { // utente trovato
                     String nome = rs.getString("nome");
                     String cognome = rs.getString("cognome");
                     String cf = rs.getString("cf");
@@ -157,6 +165,9 @@ public class serverBRImpl extends UnicastRemoteObject implements serverBR {
         return user;// restituisce null se non trova l'utente
     }
 
+    //metodi per i libri
+
+    //lazy loading libri
     /** 
      * Implementa il meccanismo di lazy loading per i libri.
      * Restituisce una lista di libri non ancora inviati al client.
@@ -178,6 +189,7 @@ public class serverBRImpl extends UnicastRemoteObject implements serverBR {
             clientHost = "unknown";
         }
 
+        // Query per selezionare libri non ancora inviati al client
         String query = """
         SELECT l.id_libro, l.titolo, l.autore, l.genere, l.editore, l.anno
         FROM libri l
@@ -188,13 +200,14 @@ public class serverBRImpl extends UnicastRemoteObject implements serverBR {
         LIMIT ?
     """;
 
+        // Esegui la query
         try (Connection conn = DatabaseManager.getConnection(); PreparedStatement ps = conn.prepareStatement(query)) {
 
             ps.setString(1, clientHost);
             ps.setInt(2, LIMIT);
 
             try (ResultSet rs = ps.executeQuery()) {
-                while (rs.next()) {
+                while (rs.next()) { // libri trovati
                     int id = rs.getInt("id_libro");
                     String titolo = rs.getString("titolo");
                     String autore = rs.getString("autore");
@@ -221,6 +234,10 @@ public class serverBRImpl extends UnicastRemoteObject implements serverBR {
 
         return libri;
     }
+
+
+    //metodi ausiliari per lazy loading
+
 
     /**
      * Registra i libri inviati a un client specifico nel database.
@@ -255,6 +272,8 @@ public class serverBRImpl extends UnicastRemoteObject implements serverBR {
         }
     }
 
+
+    //restituisce libro dato l'id
     /** 
      * Recupera le informazioni di un libro dato il suo ID.
      * @param id_libro L'ID univoco del libro.
@@ -263,7 +282,8 @@ public class serverBRImpl extends UnicastRemoteObject implements serverBR {
      */
     @Override
     public Libro getLibro(int id_libro) throws RemoteException {
-        Libro libro = null;
+        Libro libro = null; // valore di default (se libro non trovato)
+        // creazione query e recupero dal database
         String query = "SELECT * FROM libri WHERE id_libro = ?";
         try (Connection conn = DatabaseManager.getConnection(); PreparedStatement ps = conn.prepareStatement(query)) {
             // imposta i parametri della query
@@ -285,6 +305,9 @@ public class serverBRImpl extends UnicastRemoteObject implements serverBR {
         return libro;
     }
 
+    //metodi per le valutazioni e consigli
+
+    //restituisce valutazioni dato id libro
     /**
      * Recupera le valutazioni di un libro dato il suo ID.
      * @param id_libro L'ID univoco del libro.
@@ -293,8 +316,11 @@ public class serverBRImpl extends UnicastRemoteObject implements serverBR {
      */
     @Override
     public List<Valutazione> getValutazione(int id_libro) throws RemoteException {
+
+        // creazione query e recupero dal database
         String query = "SELECT * FROM Valutazioni_Libri WHERE id_libro = ?";
-        List<Valutazione> valutazioni = new LinkedList<Valutazione>();
+        List<Valutazione> valutazioni = new LinkedList<Valutazione>(); // lista di valutazioni da restituire
+        
         try (Connection conn = DatabaseManager.getConnection(); PreparedStatement ps = conn.prepareStatement(query)) {
             ps.setInt(1, id_libro);
             try (ResultSet rs = ps.executeQuery()) {
@@ -324,6 +350,7 @@ public class serverBRImpl extends UnicastRemoteObject implements serverBR {
         return valutazioni;
     }
 
+    //restituisce valutazioni dato id libro e id utente
     /**
      * Recupera le valutazioni di un libro fatte da un utente specifico.
      * @param id_utente L'ID univoco dell'utente.
@@ -333,8 +360,10 @@ public class serverBRImpl extends UnicastRemoteObject implements serverBR {
      */
     @Override
     public List<Valutazione> getValutazioniUtente(int id_utente, int id_libro) throws RemoteException{
+        // creazione query e recupero dal database
         String query = "SELECT * FROM Valutazioni_Libri WHERE id_utente = ? AND id_libro = ?";
         List<Valutazione> valutazioni = new LinkedList<Valutazione>();
+        
         try (Connection conn = DatabaseManager.getConnection(); PreparedStatement ps = conn.prepareStatement(query)) {
             ps.setInt(1, id_utente);
             ps.setInt(2, id_libro);
@@ -363,6 +392,7 @@ public class serverBRImpl extends UnicastRemoteObject implements serverBR {
         return valutazioni;
     }
 
+    //restituisce consigli dato id libro
     /**
      * Recupera i libri consigliati per un dato libro.
      * @param id_libro L'ID univoco del libro di riferimento.
@@ -371,8 +401,11 @@ public class serverBRImpl extends UnicastRemoteObject implements serverBR {
      */
     @Override
     public List<Libro> getConsiglio(int id_libro) throws RemoteException {
+        // creazione query e recupero dal database
         String query = "SELECT * FROM libri_consigliati WHERE id_libro = ?";
         List<Libro> consigli = new LinkedList<Libro>();
+
+        // lista di libri consigliati da restituire
         try (Connection conn = DatabaseManager.getConnection(); PreparedStatement ps = conn.prepareStatement(query)) {
             ps.setInt(1, id_libro);
             try (ResultSet rs = ps.executeQuery()) {
@@ -388,6 +421,7 @@ public class serverBRImpl extends UnicastRemoteObject implements serverBR {
         return consigli;
     }
 
+    //restituisce consigli dato id libro e id utente
     /**
      * Recupera i libri consigliati per un dato libro da un utente specifico.
      * @param id_libro L'ID univoco del libro di riferimento.
@@ -397,11 +431,15 @@ public class serverBRImpl extends UnicastRemoteObject implements serverBR {
      */
     @Override
     public List<Libro> getConsiglioUtente(int id_libro, int id_utente) throws RemoteException{
+        // creazione query e recupero dal database
         String query = "SELECT * FROM libri_consigliati WHERE id_libro = ? AND id_utente = ?";
         List<Libro> consigli = new LinkedList<Libro>();
+
         try (Connection conn = DatabaseManager.getConnection(); PreparedStatement ps = conn.prepareStatement(query)) {
             ps.setInt(1, id_libro);
             ps.setInt(2, id_utente);
+
+            // esecuzione della query
             try (ResultSet rs = ps.executeQuery()) {
                 while (rs.next()) {
                     int id = rs.getInt("id_libro_consigliato");
@@ -414,7 +452,8 @@ public class serverBRImpl extends UnicastRemoteObject implements serverBR {
         }
         return consigli;
     }
-
+    
+    //restituisce voto medio dato id libro
     /**
      * Recupera il voto medio di un libro dato il suo ID.
      * @param id_libro L'ID univoco del libro.
@@ -438,6 +477,7 @@ public class serverBRImpl extends UnicastRemoteObject implements serverBR {
         return voto_medio;
     }
 
+    //ricerca dei libri
     /**
      * Cerca libri in base a autore, anno o titolo.
      * @param autore L'autore del libro.
@@ -452,6 +492,7 @@ public class serverBRImpl extends UnicastRemoteObject implements serverBR {
         List<Libro> libri = new ArrayList<>();
         String query = "SELECT * FROM libri WHERE ";
 
+        // Costruzione della query in base al criterio di ricerca
         if (scelta == Ricerca.TITOLO) {
             query += "titolo ILIKE ?";
         } else if (scelta == Ricerca.ANNO) {
@@ -464,6 +505,7 @@ public class serverBRImpl extends UnicastRemoteObject implements serverBR {
 
         try (Connection conn = DatabaseManager.getConnection(); PreparedStatement ps = conn.prepareStatement(query)) {
 
+            // Impostazione dei parametri della query
             if (scelta == Ricerca.TITOLO) {
                 ps.setString(1, "%" + titolo + "%"); // ricerca sottostringa nel titolo
             } else if (scelta == Ricerca.ANNO) {
@@ -499,6 +541,7 @@ public class serverBRImpl extends UnicastRemoteObject implements serverBR {
         return libri;
     }
 
+    //creazione librerie
     /**
      * Crea una nuova libreria per un utente.
      * @param nome Il nome della libreria.
@@ -535,6 +578,7 @@ public class serverBRImpl extends UnicastRemoteObject implements serverBR {
         return libreria;
     }
 
+    //eliminazione librerie
     /**
      * Elimina una libreria dato il suo ID.
      * @param id_libreria L'ID univoco della libreria da eliminare.
@@ -557,6 +601,7 @@ public class serverBRImpl extends UnicastRemoteObject implements serverBR {
         return deleted;
     }
 
+    //aggiunta e rimozione libri da librerie
     /**
      * Aggiunge un libro a una libreria specifica.
      * @param id_libro L'ID univoco del libro da aggiungere.
@@ -566,6 +611,7 @@ public class serverBRImpl extends UnicastRemoteObject implements serverBR {
      */
     @Override
     public Libreria addLibroLibreria(int id_libro, int id_libreria) throws RemoteException {
+        // insert in db
         String query = "INSERT into libreria_libri(id_libro, id_libreria) VALUES (?, ?)";
         Libreria libreria = null;
         try (Connection conn = DatabaseManager.getConnection(); PreparedStatement ps = conn.prepareStatement(query)) {
@@ -592,6 +638,7 @@ public class serverBRImpl extends UnicastRemoteObject implements serverBR {
      * @throws RemoteException In caso di errore di comunicazione remota.
      */
     public Libreria removeLibroLibreria(int id_libro, int id_libreria) throws RemoteException {
+        // delete da db
         String query = "DELETE FROM libreria_libri WHERE id_libro = ? AND id_libreria = ?";
         Libreria libreria = null;
         try (Connection conn = DatabaseManager.getConnection(); PreparedStatement ps = conn.prepareStatement(query)) {
@@ -608,6 +655,7 @@ public class serverBRImpl extends UnicastRemoteObject implements serverBR {
         return libreria;
     }
 
+    //recupera libreria dato id libreria
     /**
      * Recupera le informazioni di una libreria dato il suo ID.
      * @param id_libreria L'ID univoco della libreria.
@@ -615,10 +663,12 @@ public class serverBRImpl extends UnicastRemoteObject implements serverBR {
      * @throws RemoteException In caso di errore di comunicazione remota.
      */
     public Libreria getLibreria(int id_libreria) throws RemoteException {
-
+        // select da db con join per prendere anche i libri
         String query = "SELECT * FROM libreria L LEFT JOIN libreria_libri M on L.id_libreria = M.id_libreria WHERE L.id_libreria = ?";
         Libreria libreria = null;
         List<Libro> libri = new ArrayList<>();
+
+        // esecuzione della query
         try (Connection conn = DatabaseManager.getConnection(); PreparedStatement ps = conn.prepareStatement(query)) {
 
             ps.setInt(1, id_libreria);
@@ -626,6 +676,7 @@ public class serverBRImpl extends UnicastRemoteObject implements serverBR {
                 int id_utente = -1;
                 String nome = null;
 
+                // ciclo sui risultati
                 while (rs.next()) {
                     if (libreria == null) {
                         id_utente = rs.getInt("id_utente");
@@ -638,6 +689,7 @@ public class serverBRImpl extends UnicastRemoteObject implements serverBR {
                     }
                 }
 
+                // creazione dell'oggetto Libreria
                 if (id_utente != -1) {
                     libreria = new Libreria(id_utente, nome, (ArrayList<Libro>) libri, id_libreria);
                 }
@@ -653,6 +705,7 @@ public class serverBRImpl extends UnicastRemoteObject implements serverBR {
 
     }
 
+    //recupera librerie dato id utente
     /**
      * Recupera tutte le librerie di un utente specifico.
      * @param id_utente L'ID univoco dell'utente.
@@ -666,6 +719,7 @@ public class serverBRImpl extends UnicastRemoteObject implements serverBR {
 
         List<Libreria> libreria = new ArrayList<Libreria>();
         try (Connection conn = DatabaseManager.getConnection(); PreparedStatement ps = conn.prepareStatement(query)) {
+            // esecuzione della query
             ps.setInt(1, id_utente);
             try (ResultSet rs = ps.executeQuery()) {
                 while (rs.next()) {
@@ -682,6 +736,7 @@ public class serverBRImpl extends UnicastRemoteObject implements serverBR {
         return libreria;
     }
 
+    //creazione consigli
     /**
      * Crea un consiglio associato ad un libro da parte di un utente.
      * @param id_utente L'ID univoco dell'utente che consiglia
@@ -694,7 +749,7 @@ public class serverBRImpl extends UnicastRemoteObject implements serverBR {
     public synchronized boolean createConsiglio(int id_utente, int id_libro, int id_consiglio) throws RemoteException {
         int count = 0;
         // count = risultato count per utente e libro
-        String query_count = "SELECT count(*) FROM Libri_consigliati WHERE id_utente = ? AND id_libro = ?"; // modificare struttura db
+        String query_count = "SELECT count(*) FROM Libri_consigliati WHERE id_utente = ? AND id_libro = ?";
 
         try (Connection conn = DatabaseManager.getConnection(); PreparedStatement ps = conn.prepareStatement(query_count)) {
             ps.setInt(1, id_utente);
@@ -710,6 +765,7 @@ public class serverBRImpl extends UnicastRemoteObject implements serverBR {
             return false;
         }
 
+        // controllo se ha già dato 3 consigli per quel libro
         if (count == 3) {
             return false;
         }
@@ -733,6 +789,7 @@ public class serverBRImpl extends UnicastRemoteObject implements serverBR {
         return true;
     }
 
+    //creazione valutazioni
     /**
      * Crea una valutazione per un libro da parte di un utente.
      * @param val L'oggetto Valutazione contenente le informazioni della valutazione da creare.
