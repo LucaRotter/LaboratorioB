@@ -6,21 +6,23 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Observer;
 import java.util.ResourceBundle;
-
-import org.w3c.dom.Node;
-
 import LaboratorioB.common.models.Libro;
+import LaboratorioB.common.models.Ricerca;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Cursor;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import models.Model;
 
@@ -83,29 +85,12 @@ public class AddReccomendedController implements Initializable {
         e.printStackTrace();
        }
 
-        for(Libro libr : reccomendedBooks){
-            VBox vbox = null;
-
-            FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(getClass().getResource("BookEl.fxml"));
-
-			try {
-                 vbox = loader.load();
-            } catch (IOException e) {
-                
-                e.printStackTrace();
-            }
-			
-			BookController bookController= loader.getController();
-			bookController.setLabels(libr.getAutore(), libr.getTitolo());
-
-            containerRec.add(vbox,0,pos++);
-        }
+       initRecoemmended();
 
        try {
 
 			//first loading books
-			Bookserver.addAll(clientBR.getInstance().lazyLoadingLibri());
+			Bookserver.addAll(clientBR.getInstance().cercaLibri("", 0, "", Ricerca.TITOLO));
 			putBooks(currentIndex.get());
 			
 		} catch (IOException e) {
@@ -126,24 +111,7 @@ public class AddReccomendedController implements Initializable {
         e.printStackTrace();
        }
 
-       for(Libro libr : reccomendedBooks){
-            VBox vbox = null;
-
-            FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(getClass().getResource("BookEl.fxml"));
-
-			try {
-                 vbox = loader.load();
-            } catch (IOException e) {
-                
-                e.printStackTrace();
-            }
-			
-			BookController bookController= loader.getController();
-			bookController.setLabels(libr.getAutore(), libr.getTitolo());
-
-           containerRec.add(vbox,0,pos++);
-        }
+       initRecoemmended();
 
     });
 
@@ -176,6 +144,38 @@ public class AddReccomendedController implements Initializable {
 			}
 		});
     }
+
+        private VBox createPlaceHolder() {
+            // VBox principale
+            VBox box = new VBox();
+            box.setPrefWidth(120);
+            box.setPrefHeight(180);
+            box.setMaxWidth(Region.USE_PREF_SIZE);
+            box.setMinWidth(Region.USE_PREF_SIZE);
+           
+
+            // Immagine placeholder
+            ImageView imageView = new ImageView(new Image(
+                getClass().getResourceAsStream("/img/noBook.png")
+            ));
+            imageView.setFitWidth(122);
+            imageView.setFitHeight(122);
+            imageView.setPreserveRatio(true);
+            imageView.setPickOnBounds(true);
+
+            // Testo "Empty Space"
+            Label label = new Label("Empty Space");
+            label.setPrefWidth(120);
+            label.setPrefHeight(36);
+
+            // Aggiunta dei nodi
+            box.getChildren().addAll(imageView, label);
+
+            // Mano come cursor, come nel tuo FXML
+            box.setCursor(Cursor.HAND);
+
+            return box;
+        }
 
     public void init(){
 
@@ -259,8 +259,12 @@ public class AddReccomendedController implements Initializable {
 			
 			BookController bookController= loader.getController();
 			bookController.setLabels(libr.getAutore(), libr.getTitolo());
-           
-            
+
+            Node old = getNodeByRowColumnIndex(pos, 0, containerRec);
+            if (old != null) {
+                containerRec.getChildren().remove(old);
+            }
+            containerRec.add(vbox, 0, pos);
         }
         
     }
@@ -298,6 +302,7 @@ public class AddReccomendedController implements Initializable {
             e.printStackTrace();
         }
 
+        pos++;
         reccomendedBooks.add(selectedBook);
         
     }
@@ -308,5 +313,47 @@ public class AddReccomendedController implements Initializable {
        
     }
 
-    
+    private Node getNodeByRowColumnIndex(int row, int column, GridPane gridPane) {
+    for (Node node : gridPane.getChildren()) {
+        Integer rowIndex = GridPane.getRowIndex(node);
+        Integer colIndex = GridPane.getColumnIndex(node);
+
+        if ((rowIndex == null ? 0 : rowIndex) == row &&
+            (colIndex == null ? 0 : colIndex) == column) {
+            return node;
+        }
+    }
+    return null;
+    }
+
+    public void initRecoemmended(){
+        for(int i = 0; i < 3; i++){
+
+            if(i< reccomendedBooks.size()){
+
+            Libro libr = reccomendedBooks.get(i);
+            VBox vbox = null;
+
+            FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(getClass().getResource("BookEl.fxml"));
+
+			try {
+                 vbox = loader.load();
+            } catch (IOException e) {
+                
+                e.printStackTrace();
+            }
+			
+			BookController bookController= loader.getController();
+			bookController.setLabels(libr.getAutore(), libr.getTitolo());
+
+            containerRec.add(vbox,0,pos++);
+
+            }else{
+
+            containerRec.add(createPlaceHolder(),0,i);
+            }
+            
+        }
+    }
 }

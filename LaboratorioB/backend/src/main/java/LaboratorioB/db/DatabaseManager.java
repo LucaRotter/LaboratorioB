@@ -14,12 +14,12 @@ public class DatabaseManager {
     static {
         try {
             HikariConfig config = new HikariConfig();
-            config.setJdbcUrl("jdbc:postgresql://localhost:5432/LaboratorioB");
+            config.setJdbcUrl("jdbc:postgresql://localhost:5432/labB");
             System.out.println("Inserisci username e password del database:");
             //String username = in.nextLine();
             config.setUsername("postgres");
             //String pwd = in.nextLine();
-            config.setPassword("@Aleks13082002"); 
+            config.setPassword("Rluca2004"); 
             config.setDriverClassName("org.postgresql.Driver");
 
             // Parametri opzionali del pool

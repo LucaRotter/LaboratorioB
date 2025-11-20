@@ -10,7 +10,6 @@ import java.util.ResourceBundle;
 import LaboratorioB.common.models.Libreria;
 import LaboratorioB.common.models.Libro;
 import LaboratorioB.common.models.Valutazione;
-import javafx.animation.FadeTransition;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -20,9 +19,9 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-import javafx.util.Duration;
 import models.Model;
 
 public class VisLibroController implements Initializable{
@@ -105,11 +104,13 @@ public class VisLibroController implements Initializable{
 
 		if(newLibr != null){
 
+			root.setVvalue(0.0);
+
         	setLibro(newLibr);
+			System.out.println(newLibr.getTitolo());
 		}
 
 		});
-
 	
 	}
 	
@@ -173,6 +174,15 @@ public class VisLibroController implements Initializable{
 		LBGenre.setText(selectedBook.getGenere());
 		LBYear.setText(String.valueOf(selectedBook.getAnno()));
 
+		
+	initRecoemmendedList(selectedBook);
+
+	initReviewList(selectedBook);
+
+		
+	}
+
+	public void initReviewList(Libro selectedBook){
 		int i ;
 		List<Valutazione> review = new LinkedList<>();
 
@@ -205,7 +215,7 @@ public class VisLibroController implements Initializable{
 		try {
 			reviewc.setReview(review.get(i));
 		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
 		reviewc.setVislibroController(this);
@@ -223,24 +233,23 @@ public class VisLibroController implements Initializable{
 		nessunLibro.setStyle("-fx-font-size: 32px; -fx-text-fill: gray;");
 
 		
-				reviewContainer.setAlignment(Pos.CENTER);
-				reviewContainer.prefHeightProperty().set(200.0);
+			reviewContainer.setAlignment(Pos.CENTER);
+			reviewContainer.prefHeightProperty().set(200.0);
 				
-				reviewContainer.getChildren().add(nessunLibro);
+			reviewContainer.getChildren().add(nessunLibro);
 				
-	
 	} else{
-		lbAverage.setText(String.format("%.2f", avarege));	
-		ScrollRec.setContent(recListBook);
-	}
-	
-	if(review.size()== 0){
-	    
-	}
+
+	lbAverage.setText(String.format("%.2f", avarege));	
+	reviewContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
+
+	}	
 	lbUserCounter.setText(String.valueOf(review.size())); 
+	}
 
-		//recommended books initialization
+	public void initRecoemmendedList(Libro selectedBook){
 
+		ScrollRec.setContent(recListBook);
 		List<Libro> recommendList = new LinkedList<>();
 		System.out.println("inizializzo consigli");
 
@@ -254,8 +263,8 @@ public class VisLibroController implements Initializable{
 		recListBook.getChildren().clear();  
 		System.out.println(recommendList.size());
 
-		for(i=0; i<recommendList.size(); i++) {
-
+		for(int i=0; i<recommendList.size(); i++) {
+		
 		VBox vbox = null;
 
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/applicationrob/BookEl.fxml"));
@@ -296,7 +305,7 @@ public class VisLibroController implements Initializable{
 				ScrollRec.setContent(container);
 
 		}
-	  }
+	}
 
 
 	//function to go to the add reviews section
@@ -372,8 +381,6 @@ public class VisLibroController implements Initializable{
 			
 
 			if(libraryItemController.hasStateChanged()){
-
-				//calling the RMI method to add the book to the 
 				
 				if(libraryItemController.isSelected()) {
 					

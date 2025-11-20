@@ -45,7 +45,7 @@ public class serverBRImpl extends UnicastRemoteObject implements serverBR {
      */
     protected serverBRImpl() throws RemoteException, SQLException {
         super();
-        conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/LaboratorioB", "postgres", "@Aleks13082002");
+        conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/labB", "postgres", "Rluca2004");
         System.out.println("Database connected!");
     }
 
