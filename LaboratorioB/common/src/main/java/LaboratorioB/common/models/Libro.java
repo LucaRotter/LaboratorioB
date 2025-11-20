@@ -20,7 +20,7 @@ public class Libro implements Serializable {
 	private String autore;
 	private String genere;
 	private String editore;
-	private String anno;
+	private int anno;
     private int id_libro;
 
     //COSTRUTTORI
@@ -36,7 +36,7 @@ public class Libro implements Serializable {
 	 * @param anno l'anno
      * @param id_libro l'id
 	 */
-    public Libro(String titolo, String autore, String genere, String editore, String anno, int id_libro) {
+    public Libro(String titolo, String autore, String genere, String editore, int anno, int id_libro) {
         this.titolo = titolo;
         this.autore = autore;
         this.genere = genere;
@@ -70,7 +70,7 @@ public class Libro implements Serializable {
         return editore;
     }
     
-    public String getAnno() {
+    public int getAnno() {
         return anno;
     }
 
