@@ -14,56 +14,67 @@
 <?import javafx.scene.shape.SVGPath?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.control.Separator?>
 
 
 <VBox fillWidth="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="220.0" style="-fx-background-color: transparent; -fx-border-radius: 10px; -fx-background-radius: 10px;" stylesheets="@css/Sidebar.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="applicationrob.SideBarController">
    <children>
       <AnchorPane prefHeight="700.0" prefWidth="216.0">
          <children>
-            <VBox layoutX="-1.0" layoutY="104.0" prefHeight="284.0" prefWidth="221.0" styleClass="ButtonSection">
+            <VBox layoutX="-1.0" layoutY="126.0" prefHeight="284.0" prefWidth="221.0" spacing="10.0" styleClass="ButtonSection">
                <children>
-                  <Button fx:id="btnBack" disable="true" mnemonicParsing="false" prefHeight="56.0" prefWidth="222.0" styleClass="NavigationBtn" visible="false">
-                  <graphic>
-                     <HBox alignment="CENTER_LEFT" prefHeight="34.0" prefWidth="169.0">
-                        <children>
-                              <Pane prefHeight="33.0" prefWidth="40.0">
-                                 <children>
-                                <SVGPath content="M10 6L4 12L10 18 M4 12H20" fill="transparent" layoutX="7.0" layoutY="4.0" scaleX="1.4" scaleY="1.4" smooth="false" stroke="black" />
-                                 </children>
-                              </Pane>
-                           <Text strokeType="OUTSIDE" text="Back" />
-                        </children>
-                     </HBox>
-                  </graphic>
-               </Button>
-                  <Button fx:id="btnHome" mnemonicParsing="false" prefHeight="56.0" prefWidth="222.0" styleClass="NavigationBtn">
-                     <graphic>
-                        <HBox alignment="CENTER_LEFT" prefHeight="34.0" prefWidth="89.0">
-                           <children>
-                              <ImageView fitHeight="33.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../img/Home_selected.png" />
-                                 </image>
-                              </ImageView>
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Home" />
-                           </children>
-                        </HBox>
-                     </graphic>
-                  </Button>
-                  <Button fx:id="btnLibraries" mnemonicParsing="false" prefHeight="56.0" prefWidth="225.0" styleClass="NavigationBtn">
-                     <graphic>
-                        <HBox alignment="CENTER_LEFT" prefHeight="8.0" prefWidth="108.0">
-                           <children>
-                              <ImageView fitHeight="33.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../img/bookshelf-icon-png-6.jpg" />
-                                 </image>
-                              </ImageView>
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Libraries" />
-                           </children>
-                        </HBox>
-                     </graphic>
-                  </Button>
+                  <Button fx:id="btnBack" disable="true" mnemonicParsing="false" prefHeight="56.0" prefWidth="192.0" styleClass="NavigationBtn" visible="false">
+   <graphic>
+      <HBox alignment="CENTER_LEFT" prefHeight="34.0" prefWidth="169.0">
+         <children>
+            <Pane prefHeight="33.0" prefWidth="40.0">
+               <children>
+                  <SVGPath content="M10 6L4 12L10 18 M4 12H20" fill="transparent" layoutX="7.0" layoutY="4.0" scaleX="1.4" scaleY="1.4" smooth="false" stroke="black" />
+               </children>
+            </Pane>
+            <Text strokeType="OUTSIDE" text="Back" />
+         </children>
+      </HBox>
+   </graphic>
+</Button>
+
+<!-- *** SPAZIO EXTRA *** -->
+<Region prefHeight="20" />
+
+<!-- *** SEPARATORE GRAFICO *** -->
+<Separator prefWidth="170" />
+
+<!-- Bottoni normali -->
+<Button fx:id="btnHome" mnemonicParsing="false" prefHeight="56.0" prefWidth="192.0" styleClass="NavigationBtn">
+   <graphic>
+      <HBox alignment="CENTER_LEFT" prefHeight="34.0" prefWidth="89.0">
+         <children>
+            <ImageView fitHeight="33.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../img/Home_selected.png" />
+               </image>
+            </ImageView>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Home" />
+         </children>
+      </HBox>
+   </graphic>
+</Button>
+
+<Button fx:id="btnLibraries" mnemonicParsing="false" prefHeight="56.0" prefWidth="193.0" styleClass="NavigationBtn">
+   <graphic>
+      <HBox alignment="CENTER_LEFT" prefHeight="8.0" prefWidth="108.0">
+         <children>
+            <ImageView fitHeight="33.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../img/bookshelf-icon-png-6.jpg" />
+               </image>
+            </ImageView>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Libraries" />
+         </children>
+      </HBox>
+   </graphic>
+</Button>
                   <Button fx:id="btnAccount" mnemonicParsing="false" prefHeight="43.0" prefWidth="214.0" styleClass="NavigationBtn" visible="false">
                      <graphic>
                         <HBox prefHeight="8.0" prefWidth="108.0">
@@ -79,10 +90,13 @@
                      </graphic>
                   </Button>
                </children>
+               <padding>
+                  <Insets left="10.0" />
+               </padding>
             </VBox>
 
      
-            <Pane fx:id="loginPane" layoutX="15.0" layoutY="491.0" prefHeight="188.0" prefWidth="190.0" styleClass="LoginPane" >
+            <Pane fx:id="loginPane" layoutX="15.0" layoutY="491.0" prefHeight="188.0" prefWidth="190.0" styleClass="LoginPane">
                <children>
                   <Button fx:id="btnLogIn" layoutX="27.0" layoutY="27.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="136.0">
                      <graphic>

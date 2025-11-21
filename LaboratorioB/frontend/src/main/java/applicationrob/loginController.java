@@ -48,7 +48,9 @@ public class LoginController implements Initializable {
         views.ViewAlert.showAlert("error", "Invalid email or password.", "", null, "error");
         return;  
         }   
+
         TokenSession.setUserId(id_user);
+        System.out.println(TokenSession.checkTkSession());
         Model.getIstance().getView().changeToHome();
     } 
 

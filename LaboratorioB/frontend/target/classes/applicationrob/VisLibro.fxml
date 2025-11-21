@@ -21,7 +21,7 @@
       <StackPane prefHeight="700.0" prefWidth="879.0">
          <children>
             <StackPane fx:id="modalOverlay" prefHeight="150.0" prefWidth="200.0" visible="false" />
-            <ScrollPane fx:id="root" hbarPolicy="NEVER" prefHeight="700.0" prefWidth="896.0" vbarPolicy="ALWAYS">
+            <ScrollPane fx:id="root1" hbarPolicy="NEVER" prefHeight="700.0" prefWidth="896.0" vbarPolicy="ALWAYS">
                <content>
                   <VBox prefWidth="865.0" spacing="40.0">
                      <children>
@@ -142,12 +142,12 @@
                               </Pane>
       				       <VBox fx:id="reviewContainer" alignment="CENTER" spacing="10">
                                  <VBox.margin>
-                                    <Insets />
+                                    <Insets top="15.0"/>
                                  </VBox.margin>
                               </VBox>
       				   </children>
                            <VBox.margin>
-                              <Insets left="20.0" right="20.0" top="30.0" />
+                              <Insets left="20.0" right="20.0" top="30.0" bottom="30.0"/>
                            </VBox.margin>
       				</VBox>
                      </children>

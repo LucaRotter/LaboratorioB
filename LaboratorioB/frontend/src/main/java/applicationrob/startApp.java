@@ -8,5 +8,6 @@ public class startApp extends Application {
     @Override
 	public void start(Stage primaryStage){
 		Model.getIstance().getView().changeToHome();
+		primaryStage.setResizable(false);
 	}   
 }

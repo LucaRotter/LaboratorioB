@@ -10,6 +10,7 @@ import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane; 
 import javafx.stage.Stage;
 import LaboratorioB.common.models.*;
@@ -32,12 +33,16 @@ public class ViewFactory {
 	private Stage Stage;
 
 	public ViewFactory() {
+		
 		this.SideBarSelection = new SimpleStringProperty("");
 		this.selectedLibr = new SimpleObjectProperty<Libro>();
 		this.selectedLibreria = new SimpleObjectProperty<Libreria>();
 		historyPage =  FXCollections.observableArrayList();
 
 		this.Stage = new Stage();
+		this.Stage.setResizable(false);
+		this.Stage.getIcons().add(new Image(getClass().getResourceAsStream("/img/iconBK.png")));
+		this.Stage.setTitle("BookRecommended");
 	}
 	
 	public StringProperty getSideBarSelectionItem() {
