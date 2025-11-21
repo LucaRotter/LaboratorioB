@@ -1,11 +1,20 @@
 package LaboratorioB.db;
 
+//import necessari
+
 import java.sql.Connection;
 import java.sql.SQLException;
 
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 
+/**
+ * Classe per la gestione del pool di connessioni al database utilizzando HikariCP.
+ * Fornisce metodi per ottenere connessioni e chiudere il pool.
+ * @version 1.0
+ * @since 2024-06-10
+ * @author Laboratorio B
+ */
 public class DatabaseManager {
 
     private static HikariDataSource dataSource;
@@ -13,6 +22,7 @@ public class DatabaseManager {
 
     static {
         try {
+            // Configurazione di HikariCP per PostgreSQL
             HikariConfig config = new HikariConfig();
             config.setJdbcUrl("jdbc:postgresql://localhost:5432/labB");
             System.out.println("Inserisci username e password del database:");
@@ -39,10 +49,18 @@ public class DatabaseManager {
         }
     }
 
+    /**
+     * Ottiene una connessione dal pool di connessioni.
+     * @return Una connessione al database.
+     * @throws SQLException Se si verifica un errore durante l'ottenimento della connessione.
+     */
     public static Connection getConnection() throws SQLException {
         return dataSource.getConnection();
     }
 
+    /**
+     * Chiude il pool di connessioni HikariCP.
+     */
     public static void shutdown() {
         if (dataSource != null && !dataSource.isClosed()) {
             dataSource.close();
