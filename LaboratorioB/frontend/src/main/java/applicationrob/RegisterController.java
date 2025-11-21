@@ -9,12 +9,15 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.Initializable;
 import models.Model;
+import javafx.scene.layout.AnchorPane;
 
 
 
 
 public class RegisterController implements Initializable {
 
+    @FXML
+    private AnchorPane rootPane;
     @FXML
     private Button backBtn;
     @FXML
@@ -47,11 +50,17 @@ public class RegisterController implements Initializable {
         String email = emailField.getText().trim();
         String pw = pwField.getText().trim();
 
+        if (!validateField(nome, cognome, cf, email, pw)) { 
+            views.ViewAlert.showAlert("error", "","",rootPane, "error");
+            return;
+        }
         Utente newUser = new Utente(nome, cognome, cf, email, pw, 0);
 
         id_user = clientBR.getInstance().registrazione(newUser);
 
         if (id_user == -1) {
+            views.ViewAlert.showAlert("error", "","",rootPane, "error");
+            return;
         }
         TokenSession.setUserId(id_user);
 
@@ -65,18 +74,22 @@ public class RegisterController implements Initializable {
     private boolean validateField(String nome, String cognome, String cf, String email, String pw) {
 
         if (nome.isEmpty() || cognome.isEmpty() || cf.isEmpty() || email.isEmpty() || pw.isEmpty()) {
+            views.ViewAlert.showAlert("error", " ", "", rootPane, "error");
             return false;
         }
-
+        
         if (!isFiscalCodeValidate(cf)) {
+            views.ViewAlert.showAlert("error", " ", "", rootPane, "error");
             return false;
         }
 
         if (!email.matches("^[A-Za-z0-9+_.-]+@(.+)$")) {
+            views.ViewAlert.showAlert("error", " ", "", rootPane, "error");
             return false;
         }
 
         if (pw.length() < 6) {
+            views.ViewAlert.showAlert("error", " ", "", rootPane, "error");
             return false;
         }
 
