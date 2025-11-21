@@ -33,8 +33,9 @@ public class LoginController implements Initializable {
 
        
         id_user = clientBR.getInstance().login(emailField.getText(), pwField.getText());
-        TokenSession.checkTkSession();    
+            
         TokenSession.setUserId(id_user);
+        System.out.println(TokenSession.checkTkSession());
         Model.getIstance().getView().changeToHome();
     } 
 

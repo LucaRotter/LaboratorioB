@@ -200,7 +200,7 @@ public class serverBRImpl extends UnicastRemoteObject implements serverBR {
                     String autore = rs.getString("autore");
                     String genere = rs.getString("genere");
                     String editore = rs.getString("editore");
-                    String anno = rs.getString("anno");
+                    int anno = rs.getInt("anno");
                     libri.add(new Libro(titolo, autore, genere, editore, anno, id));
                 }
             }
@@ -274,7 +274,7 @@ public class serverBRImpl extends UnicastRemoteObject implements serverBR {
                     String autore = rs.getString("autore");
                     String genere = rs.getString("genere");
                     String editore = rs.getString("editore");
-                    String anno = rs.getString("anno");
+                    int anno = rs.getInt("anno");
                     libro = new Libro(titolo, autore, genere, editore, anno, id_libro);
                 }
             }
@@ -480,7 +480,7 @@ public class serverBRImpl extends UnicastRemoteObject implements serverBR {
                     String autore_libro = rs.getString("autore");
                     String genere_libro = rs.getString("genere");
                     String editore_libro = rs.getString("editore");
-                    String anno_libro = rs.getString("anno");
+                    int anno_libro = rs.getInt("anno");
 
                     Libro libro = new Libro(
                             titolo_libro,
@@ -772,6 +772,36 @@ public class serverBRImpl extends UnicastRemoteObject implements serverBR {
 
         return true;
     } 
+
+    //eliminazione consiglio
+    /**
+     * Elimina un consiglio dato l'ID dell'utente, del libro e del consiglio.
+     * @param id_utente L'ID univoco dell'utente che ha dato
+     * @param id_libro L'ID univoco del libro di riferimento
+     * @param id_consiglio L'ID univoco del libro consigliato da eliminare
+     * @return true se il consiglio è stato eliminato con successo, false altrimenti.
+     * @throws RemoteException In caso di errore di comunicazione remota.
+    */
+    @Override
+    public synchronized boolean deleteConsiglio(int id_utente, int id_libro, int id_consiglio) throws RemoteException {
+        // delete da db
+        String query = "DELETE FROM Libri_consigliati WHERE id_utente = ? AND id_libro = ? AND id_libro_consigliato = ?";
+        boolean deleted = false;
+        
+        try (Connection conn = DatabaseManager.getConnection(); PreparedStatement ps = conn.prepareStatement(query)) {
+            ps.setInt(1, id_utente);
+            ps.setInt(2, id_libro);
+            ps.setInt(3, id_consiglio);
+            int rows = ps.executeUpdate();
+            if (rows > 0) {
+                deleted = true;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return deleted;
+    }
+    
     public static void main(String[] args) {
         try {
             LocateRegistry.createRegistry(1099);
@@ -792,4 +822,6 @@ public class serverBRImpl extends UnicastRemoteObject implements serverBR {
             e.printStackTrace();
         }
     }
+
+    
 }
