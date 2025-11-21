@@ -11,7 +11,7 @@
            xmlns:fx="http://javafx.com/fxml"
            fx:controller="applicationrob.LibraryController"
            onMouseClicked="#clickLibrary"
-           prefHeight="150.0" prefWidth="121.0" StyleClass="libraryElement">
+           prefHeight="170.0" prefWidth="121.0" StyleClass="libraryElement">
 
     <children>
         <VBox alignment="CENTER" spacing="5">
@@ -25,10 +25,7 @@
                         <Image url="@../img/LibraryB.png" />
                     </image>
                 </ImageView>
-                <Button fx:id="removeBtn"
-                        text="-"
-                        StackPane.alignment="TOP_RIGHT"
-                        onAction="#removeLibrary"/>
+               
             </StackPane>
 
             <Label fx:id="libraryLabel"
@@ -37,5 +34,9 @@
                    wrapText="true"
                    maxWidth="110"/>
         </VBox>
+         <Button fx:id="removeBtn"
+                        text="-"
+                        StackPane.alignment="TOP_RIGHT"
+                        onAction="#removeLibrary"/>
     </children>
 </StackPane>
