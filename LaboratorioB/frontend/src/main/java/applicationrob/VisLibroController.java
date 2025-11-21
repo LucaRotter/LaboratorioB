@@ -75,7 +75,7 @@ public class VisLibroController implements Initializable{
     private VBox reviewContainer;
 
     @FXML
-    private ScrollPane root;
+    private ScrollPane root1;
 
 	@FXML
 	private Button btnConfirm;
@@ -104,7 +104,7 @@ public class VisLibroController implements Initializable{
 
 		if(newLibr != null){
 
-			root.setVvalue(0.0);
+			root1.setVvalue(0.0);
 
         	setLibro(newLibr);
 			System.out.println(newLibr.getTitolo());
@@ -142,7 +142,7 @@ public class VisLibroController implements Initializable{
 	public void openModal(Valutazione review) throws IOException {
 		
 		modalOverlay.setVisible(true);
-		root.setDisable(true);
+		root1.setDisable(true);
 		modalOverlay.toFront();
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/applicationrob/TableReview.fxml"));
 		VBox modalContent = loader.load();
@@ -162,7 +162,7 @@ public class VisLibroController implements Initializable{
 	public void closeModalReview(){
 		modalOverlay.getChildren().clear();
 		modalOverlay.setVisible(false);
-		root.setDisable(false);
+		root1.setDisable(false);
 	}
 
 	//function to set the book details 
@@ -310,15 +310,29 @@ public class VisLibroController implements Initializable{
 
 	//function to go to the add reviews section
 	public void onComments(){
+
+		if(!TokenSession.checkTkSession()){
+		views.ViewAlert.showAlert("error", "Library error", "Server error, try again.", btnComments, "error");
+		}else{
 		Model.getIstance().getView().getSideBarSelectionItem().set("AddReview");
 	}
+}
 
 	public void onReccomended(){
+		if(!TokenSession.checkTkSession()){
+		views.ViewAlert.showAlert("error", "Library error", "Server error, try again.", btnComments, "error");
+		}else{
 		Model.getIstance().getView().getSideBarSelectionItem().set("AddReccomended");
 	}	
+}
 
 	//function to open/close the modal to add the book to libraries
 	public void OpenModalLibraries() {
+	
+	if(!TokenSession.checkTkSession()){
+		views.ViewAlert.showAlert("error", "Library error", "Server error, try again.", btnComments, "error");
+		return;
+		}
 
 		if(ModalLibraries.isVisible()){
 			ModalLibraries.setVisible(false);

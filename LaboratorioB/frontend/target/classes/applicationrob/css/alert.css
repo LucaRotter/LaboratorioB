@@ -6,8 +6,8 @@
 }
 
 .alert-pane.success, .alert-pane.error {
-    -fx-pref-width: 250px;
-    -fx-pref-height: 100px;
+    -fx-pref-width: 400px;
+    -fx-pref-height: 200px;
 }
 
 .alert-pane.info {
@@ -52,13 +52,8 @@
     -fx-opacity: 0.9;
 }
 
-.alert-pane.success .image-view, .alert-pane.error .image-view {
-    -fx-fit-width: 80px;
-    -fx-fit-height: 80px;
+.alert-pane.success .image-view, .alert-pane.error .image-view, .alert-pane.info .image-view {
+    -fx-fit-width: 100px;
+    -fx-fit-height: 100px;
 }
 
-.alert-pane.info .image-view {
-     -fx-fit-width: 250px;
-    -fx-fit-height: 250px
-
-}

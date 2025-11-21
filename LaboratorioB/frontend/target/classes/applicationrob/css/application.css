@@ -1,8 +1,15 @@
 .root{
 	-fx-font-size: 12px;
-    -fx-background-image: url("/img/");
+    -fx-background-image: url("/img/download.png");
     -fx-background-size: cover;
+    -fx-text-fill: #ffffff;
 }
+
+#root1, #root1 .viewport{
+    -fx-background-color: transparent;
+}
+
+
  
 /* Page Title */
 .page-title {

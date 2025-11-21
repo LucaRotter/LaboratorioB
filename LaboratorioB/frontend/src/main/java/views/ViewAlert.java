@@ -51,7 +51,7 @@ public static void showAlert(String type, String title, String message, Node nod
 
 			if (type.equalsIgnoreCase("success") || type.equalsIgnoreCase("error")) {
 			    grayLayer.setMouseTransparent(true);
-				setDurationAlert(overlayGroup, rootPane, 2.5, 1.0);
+				setDurationAlert(overlayGroup, rootPane, 0.7, 1.0);
 			}
 
 
@@ -69,7 +69,7 @@ public static void showAlert(String type, String title, String message, Node nod
 				break;
 			case "success":
 			case "error":
-				StackPane.setMargin(alertRoot, new Insets(15, 0, 0, 820));
+				StackPane.setMargin(alertRoot, new Insets(15, 0, 0, 450));
 				grayLayer.setMouseTransparent(true);
 				break;
 			default:
