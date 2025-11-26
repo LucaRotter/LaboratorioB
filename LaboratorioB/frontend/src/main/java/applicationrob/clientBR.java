@@ -52,8 +52,8 @@ public class clientBR{
 		return server.getUtente(id);
 	}
 
-	public List<Libro> lazyLoadingLibri() throws RemoteException{
-		return server.lazyLoadingLibri();
+	public List<Libro> lazyLoadingLibri(String arg) throws RemoteException{
+		return server.lazyLoadingLibri(arg);
 	}
 
 	public Libro getLibro(int id)throws RemoteException{

@@ -42,7 +42,7 @@ public class ViewFactory {
 		this.Stage = new Stage();
 		this.Stage.setResizable(false);
 		this.Stage.getIcons().add(new Image(getClass().getResourceAsStream("/img/iconBK.png")));
-		this.Stage.setTitle("BookRecommended");
+		this.Stage.setTitle("BookRecommender");
 	}
 	
 	public StringProperty getSideBarSelectionItem() {

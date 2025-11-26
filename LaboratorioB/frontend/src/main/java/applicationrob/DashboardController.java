@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.net.URL;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
-import java.util.EventObject;
 import java.util.List;
 import java.util.ResourceBundle;
 import LaboratorioB.common.models.Ricerca;
@@ -23,7 +22,6 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import models.Model;
 
@@ -65,6 +63,8 @@ public class DashboardController implements Initializable{
 	private IntegerProperty currentIndex = new SimpleIntegerProperty(0);
 
 	private List<Libro> Bookserver = new ArrayList<>();
+
+	private LoadMode currentMode = LoadMode.LAZY;
 	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
@@ -75,7 +75,6 @@ public class DashboardController implements Initializable{
 		try {
 
 			//first loading books
-			Bookserver.addAll(clientBR.getInstance().cercaLibri("", 0, "", Ricerca.TITOLO));
 			putBooks(currentIndex.get());
 			
 		} catch (IOException e) {
@@ -89,8 +88,6 @@ public class DashboardController implements Initializable{
 			try {
 
 				ScrollBooks.setVvalue(0.0);
-
-				//da gestire diversamente magari caricare in base alla dimensione della lista 
 				
 				gridBooks.getChildren().clear();
 				putBooks(newIndex.intValue());
@@ -107,36 +104,31 @@ public class DashboardController implements Initializable{
 
 		btnForward.setOnAction(e->{
 
-			OnForward();
-			initNavButtons();
+			OnForward();	
 
 		});
 
 		btnBack.setOnAction(e->{
 
 			OnBack();
-			initNavButtons();
 
 		});
 
 		btnLeft.setOnAction(e->{
 
 			onNavButton(e);
-			updateindexButton();
 
 		});
 
 		btnCenter.setOnAction(e->{
 
 			onNavButton(e);
-			updateindexButton();
 
 		});
 
 		btnRight.setOnAction(e->{
 
 			onNavButton(e);
-			updateindexButton();
 
 		});
 
@@ -175,6 +167,8 @@ public class DashboardController implements Initializable{
 		btnCenter.getStyleClass().removeAll("SelectedIndex");
 		btnRight.getStyleClass().removeAll("SelectedIndex");
 
+		
+		
 		if (controlIndex) {
 
 		btnRight.getStyleClass().add("SelectedIndex");
@@ -244,12 +238,27 @@ public class DashboardController implements Initializable{
 
 	
 	//metodo utilizzato per aggiungere i libri al gridPane e inizializzarne il contenuto
-	private void putBooks(int indice) throws RemoteException, IOException {
+	private void putBooks(int index) throws RemoteException, IOException {
 
+		// if current mode is lazy load more books when needed else the books are just loaded once
+		if(currentMode == LoadMode.LAZY){	
+
+				if(Bookserver.isEmpty()){
+
+					for(int i = 0; i<3; i++) {
+						Bookserver.addAll(clientBR.getInstance().lazyLoadingLibri(null));
+					}
+				}
+				else if((index + 1) * LIST_SIZE > Bookserver.size()) {
+            		Bookserver.addAll(clientBR.getInstance().lazyLoadingLibri(null));
+        		}
+			
+		}
 		
 		if(Bookserver.isEmpty()){
 			
 			setEmptyResearch("BOOK NOT FOUND");
+
 		}else{
 
 		ScrollBooks.setContent(gridBooks);
@@ -258,7 +267,7 @@ public class DashboardController implements Initializable{
 		int row= 1;
 		int i;
 		
-		for(i=indice* LIST_SIZE; i <= indice * LIST_SIZE + 19 ; i++) { 
+		for(i=index* LIST_SIZE; i <= index * LIST_SIZE + 19 ; i++) { 
 			
 			if(i >= Bookserver.size()) {
 				break;
@@ -320,7 +329,7 @@ public class DashboardController implements Initializable{
 
 			gridBooks.getChildren().clear();
 			Bookserver.clear();
-			Bookserver.addAll(clientBR.getInstance().cercaLibri("",0,"",Ricerca.TITOLO));
+			currentMode = LoadMode.LAZY;
 			currentIndex.set(0);
 			initNavButtons();
 			putBooks(0);
@@ -329,6 +338,7 @@ public class DashboardController implements Initializable{
 
 		
 		gridBooks.getChildren().clear();
+		currentMode = LoadMode.FULL;
 		List<Libro> ricercaLibri = clientBR.getInstance().cercaLibri(author,year,title, mod);
 
 		Bookserver.clear();
@@ -348,7 +358,7 @@ public class DashboardController implements Initializable{
 			count += 1;
 
 			currentIndex.set(count); 
-
+			initNavButtons();
 		}
 	}
 
@@ -360,6 +370,7 @@ public class DashboardController implements Initializable{
 			count -= 1;
 
 			currentIndex.set(count);
+			initNavButtons();
 		}
 		
 	}
@@ -369,7 +380,13 @@ public class DashboardController implements Initializable{
 		Button btn = (Button) event.getSource();
     	int count = Integer.parseInt(btn.getText());
 
+
+		if((int) Math.ceil((double) Bookserver.size() / LIST_SIZE) == 1){
+			return;
+		}
+
 		currentIndex.set(count-1);
+		updateindexButton();
 
 	}
 

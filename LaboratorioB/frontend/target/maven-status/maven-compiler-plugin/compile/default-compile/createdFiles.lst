@@ -8,6 +8,7 @@ applicationrob\ReviewController.class
 applicationrob\startApp.class
 applicationrob\AddReccomendedController.class
 applicationrob\RegisterController.class
+applicationrob\LoadMode.class
 applicationrob\BookController.class
 applicationrob\SideBarController.class
 applicationrob\DashboardController.class
