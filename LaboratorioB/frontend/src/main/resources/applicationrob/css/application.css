@@ -384,6 +384,17 @@ Button:hover{
     -fx-text-fill: #4A90E2;
 }
 
+.PaneDetail{
+    fx-background-color: #ffffff;
+    -fx-background-radius: 12;
+
+    /* Ombra interna per effetto incavo */
+    -fx-effect: innershadow(gaussian, rgba(0,0,0,0.18), 6, 0.1, 2, 2);
+                
+    
+    -fx-padding: 10;
+}
+
 .SelectedIndex{
 	-fx-background-color: rgba(166, 166, 166, 0.5);
     -fx-text-fill: #ffffff;

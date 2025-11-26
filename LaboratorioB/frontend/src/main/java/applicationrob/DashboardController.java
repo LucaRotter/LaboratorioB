@@ -107,8 +107,7 @@ public class DashboardController implements Initializable{
 
 		btnForward.setOnAction(e->{
 
-			OnForward();
-			initNavButtons();
+			OnForward();	
 
 		});
 
@@ -227,7 +226,7 @@ public class DashboardController implements Initializable{
 
 		btnCenter.getStyleClass().removeAll("SelectedIndex");
 		btnLeft.getStyleClass().add("SelectedIndex");
-
+			
 		return;
 
 		}else{
@@ -348,7 +347,7 @@ public class DashboardController implements Initializable{
 			count += 1;
 
 			currentIndex.set(count); 
-
+			initNavButtons();
 		}
 	}
 
