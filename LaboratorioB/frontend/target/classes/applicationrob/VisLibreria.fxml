@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.shape.SVGPath?>
 <?import javafx.scene.text.*?>
-<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Font?> 
 
 
 <AnchorPane prefHeight="700.0" prefWidth="880.0" stylesheets="@css/libraries.css" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/22" fx:controller="applicationrob.VisLibreriaController">
@@ -35,7 +35,7 @@
       </Pane>
     </HBox>
 
-	 <ScrollPane fx:id="scrollContent" prefWidth="840.0" prefHeight="380.0" fitToWidth="true" fitToHeight="false" hbarPolicy="NEVER" 
+	 <ScrollPane fx:id="scrollContent" prefWidth="840.0" prefHeight="370.0" fitToWidth="true" fitToHeight="false" hbarPolicy="NEVER" 
                 AnchorPane.topAnchor="200.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" styleClass="ScrollPaneBooks" >
         <content>
             <GridPane fx:id="booksContainer" hgap="15" vgap="5" />

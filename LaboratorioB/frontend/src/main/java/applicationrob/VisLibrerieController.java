@@ -174,7 +174,7 @@ public class VisLibrerieController {
         
     	if (!textSlib.matches("[a-zA-Z0-9 ]*")) {
     	    return;
-    	}	    
+    	}	     
     }
 
     // Metodo per azionare la modifica/aggiunta librerie 
