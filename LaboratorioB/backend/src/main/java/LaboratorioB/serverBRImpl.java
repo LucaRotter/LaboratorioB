@@ -165,7 +165,7 @@ public class serverBRImpl extends UnicastRemoteObject implements serverBR {
      * @throws RemoteException In caso di errore di comunicazione remota.
      */
     @Override
-    public List<Libro> lazyLoadingLibri() throws RemoteException {
+    public List<Libro> lazyLoadingLibri(String genere_ricerca) throws RemoteException {
 
         final int LIMIT = 20;
         List<Libro> libri = new ArrayList<>();
@@ -184,14 +184,24 @@ public class serverBRImpl extends UnicastRemoteObject implements serverBR {
         LEFT JOIN libri_inviati li
             ON l.id_libro = li.id_libro AND li.client_host = ?
         WHERE li.id_libro IS NULL
+        """;
+        if (genere_ricerca != null && !genere_ricerca.isEmpty()) {
+            query += " AND l.genere ILIKE ?";
+        }
+        query += """ 
         ORDER BY l.id_libro
         LIMIT ?
-    """;
-
+        """;
+        
         try (Connection conn = DatabaseManager.getConnection(); PreparedStatement ps = conn.prepareStatement(query)) {
 
             ps.setString(1, clientHost);
-            ps.setInt(2, LIMIT);
+            if(genere_ricerca != null && !genere_ricerca.isEmpty()) {
+                ps.setString(2, "%"+genere_ricerca+"%");
+                ps.setInt(3, LIMIT);
+            } else {
+                ps.setInt(2, LIMIT);
+            }
 
             try (ResultSet rs = ps.executeQuery()) {
                 while (rs.next()) {
@@ -209,7 +219,7 @@ public class serverBRImpl extends UnicastRemoteObject implements serverBR {
             if (libri.isEmpty()) {
                 resetLibriInviati(conn, clientHost);
                 // Dopo il reset, ricarica una volta
-                return lazyLoadingLibri();
+                return lazyLoadingLibri(genere_ricerca);
             }
 
             // Registra nel DB i libri inviati a questo client
