@@ -246,11 +246,11 @@ public class DashboardController implements Initializable{
 				if(Bookserver.isEmpty()){
 
 					for(int i = 0; i<3; i++) {
-						Bookserver.addAll(clientBR.getInstance().lazyLoadingLibri());
+						Bookserver.addAll(clientBR.getInstance().lazyLoadingLibri(null));
 					}
 				}
 				else if((index + 1) * LIST_SIZE > Bookserver.size()) {
-            		Bookserver.addAll(clientBR.getInstance().lazyLoadingLibri());
+            		Bookserver.addAll(clientBR.getInstance().lazyLoadingLibri(null));
         		}
 			
 		}

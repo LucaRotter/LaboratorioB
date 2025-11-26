@@ -122,7 +122,7 @@ public class AddReccomendedController implements Initializable {
 				//lazy loading books when scrolling forward and in view mode
 				if(newIndex.intValue() > oldIndex.intValue() && MODRICERCA.equals("VISUALIZZA")){ 
 					
-					Bookserver.addAll(clientBR.getInstance().lazyLoadingLibri());
+					Bookserver.addAll(clientBR.getInstance().lazyLoadingLibri(null));
 				}
 
 				if((newIndex.intValue() + 2) * LIST_SIZE > Bookserver.size() && MODRICERCA.equals("RICERCA")) {
