@@ -35,8 +35,8 @@
       </Pane>
     </HBox>
 
-	 <ScrollPane fx:id="scrollContent" prefWidth="840.0" prefHeight="570.0" fitToWidth="true" fitToHeight="false" hbarPolicy="NEVER" 
-                AnchorPane.topAnchor="120.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" styleClass="ScrollPaneBooks" >
+	 <ScrollPane fx:id="scrollContent" prefWidth="840.0" prefHeight="380.0" fitToWidth="true" fitToHeight="false" hbarPolicy="NEVER" 
+                AnchorPane.topAnchor="200.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" styleClass="ScrollPaneBooks" >
         <content>
             <GridPane fx:id="booksContainer" hgap="15" vgap="5" />
         </content>

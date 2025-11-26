@@ -39,7 +39,7 @@
                      <image>
                         <Image url="@../img/search.png" />
                      </image>
-                  </ImageView>
+                  </ImageView> 
                </graphic>
             </Button>
          </children>
@@ -51,7 +51,7 @@
                      content="M8.5 4a.5.5 0 0 0-1 0v2h-2a.5.5 0 0 0 0 1h2v2a.5.5 0 0 0 1 0V7h2a.5.5 0 0 0 0-1h-2zm-3 7a.5.5 0 0 0 0 1h5a.5.5 0 0 0 0-1z"/>
         </graphic>
     </Button>
-      <ScrollPane fx:id="scrollLibraries" AnchorPane.topAnchor="120.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0"  prefWidth="840.0" prefHeight="570.0" fitToWidth="true" fitToHeight="false" hbarPolicy="NEVER"  styleClass="ScrollPaneBooks" >
+      <ScrollPane fx:id="scrollLibraries" AnchorPane.topAnchor="200.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0"  prefWidth="840.0" prefHeight="380.0" fitToWidth="true" fitToHeight="false" hbarPolicy="NEVER"  styleClass="ScrollPaneBooks" >
         <content>
          <GridPane fx:id="librariesContainer" hgap="15" vgap="5" alignment="TOP_LEFT">
             <AnchorPane prefWidth="679" prefHeight="547">

@@ -7,6 +7,9 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import javax.security.auth.login.AppConfigurationEntry.LoginModuleControlFlag;
+
 import javafx.fxml.Initializable;
 import models.Model;
 import javafx.scene.layout.AnchorPane;
@@ -30,6 +33,8 @@ public class RegisterController implements Initializable {
     private TextField emailField;
     @FXML
     private PasswordField pwField;
+    @FXML
+    private Label errorLabel;
 
     private int id_user;
 
@@ -50,8 +55,9 @@ public class RegisterController implements Initializable {
         String email = emailField.getText().trim();
         String pw = pwField.getText().trim();
 
-        if (!validateField(nome, cognome, cf, email, pw)) { 
-            views.ViewAlert.showAlert("error", "","",rootPane, "error");
+        String validationError = validateField(nome, cognome, cf, email, pw);
+        if (validationError != null) { 
+            showErrorMessage(validationError);
             return;
         }
         Utente newUser = new Utente(nome, cognome, cf, email, pw, 0);
@@ -59,8 +65,8 @@ public class RegisterController implements Initializable {
         id_user = clientBR.getInstance().registrazione(newUser);
 
         if (id_user == -1) {
-            views.ViewAlert.showAlert("error", "","",rootPane, "error");
-            return;
+           showErrorMessage("Registration failed");
+           return;
         }
         TokenSession.setUserId(id_user);
 
@@ -71,29 +77,45 @@ public class RegisterController implements Initializable {
         Model.getIstance().getView().changeToLogin();
     }
 
-    private boolean validateField(String nome, String cognome, String cf, String email, String pw) {
+    private String validateField(String nome, String cognome, String cf, String email, String pw) {
 
-        if (nome.isEmpty() || cognome.isEmpty() || cf.isEmpty() || email.isEmpty() || pw.isEmpty()) {
-            views.ViewAlert.showAlert("error", " ", "", rootPane, "error");
-            return false;
+        if (nome.isEmpty() && cognome.isEmpty() && cf.isEmpty() && email.isEmpty() && pw.isEmpty()) {
+        return "All fields are required";
+        }
+
+        if (nome.isEmpty()) {
+            return "Name is required";
+        }
+
+        if (cognome.isEmpty()) {
+            return "Surname is required";
+        }
+
+        if (cf.isEmpty()) {
+            return "Fiscal code is required";
+        }
+
+        if (email.isEmpty()) {
+            return "Email is required";
+        }
+
+        if (pw.isEmpty()) {
+            return "Password is required";
         }
         
         if (!isFiscalCodeValidate(cf)) {
-            views.ViewAlert.showAlert("error", " ", "", rootPane, "error");
-            return false;
+            return "Invalid fiscal code";
         }
 
         if (!email.matches("^[A-Za-z0-9+_.-]+@(.+)$")) {
-            views.ViewAlert.showAlert("error", " ", "", rootPane, "error");
-            return false;
+            return "Invalid email format";
         }
 
-        if (pw.length() < 6) {
-            views.ViewAlert.showAlert("error", " ", "", rootPane, "error");
-            return false;
+        if (pw.length() < 6) { 
+            return "Password must be at least 6 characters";
         }
 
-        return true;
+        return null;
     }
 
     private boolean isFiscalCodeValidate(String cf) {
@@ -127,6 +149,11 @@ public class RegisterController implements Initializable {
 
         char expectedControl = (char) ('A' + (sum % 26));
         return cf.charAt(15) == expectedControl;
+    }
+
+    private void showErrorMessage(String message) {
+        errorLabel.setText(message);
+        errorLabel.setVisible(true);
     }
 
 }
