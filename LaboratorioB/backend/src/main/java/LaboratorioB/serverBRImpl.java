@@ -196,7 +196,7 @@ public class serverBRImpl extends UnicastRemoteObject implements serverBR {
         try (Connection conn = DatabaseManager.getConnection(); PreparedStatement ps = conn.prepareStatement(query)) {
 
             ps.setString(1, clientHost);
-            if(genere_ricerca != null && !genere_ricerca.isEmpty()) {
+            if(genere_ricerca != null && !genere_ricerca.isBlank()) {
                 ps.setString(2, "%"+genere_ricerca+"%");
                 ps.setInt(3, LIMIT);
             } else {
