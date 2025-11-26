@@ -111,28 +111,24 @@ public class DashboardController implements Initializable{
 		btnBack.setOnAction(e->{
 
 			OnBack();
-			initNavButtons();
 
 		});
 
 		btnLeft.setOnAction(e->{
 
 			onNavButton(e);
-			updateindexButton();
 
 		});
 
 		btnCenter.setOnAction(e->{
 
 			onNavButton(e);
-			updateindexButton();
 
 		});
 
 		btnRight.setOnAction(e->{
 
 			onNavButton(e);
-			updateindexButton();
 
 		});
 
@@ -171,6 +167,8 @@ public class DashboardController implements Initializable{
 		btnCenter.getStyleClass().removeAll("SelectedIndex");
 		btnRight.getStyleClass().removeAll("SelectedIndex");
 
+		
+		
 		if (controlIndex) {
 
 		btnRight.getStyleClass().add("SelectedIndex");
@@ -245,7 +243,13 @@ public class DashboardController implements Initializable{
 		// if current mode is lazy load more books when needed else the books are just loaded once
 		if(currentMode == LoadMode.LAZY){	
 
-				if ((index + 1) * LIST_SIZE > Bookserver.size()) {
+				if(Bookserver.isEmpty()){
+
+					for(int i = 0; i<3; i++) {
+						Bookserver.addAll(clientBR.getInstance().lazyLoadingLibri());
+					}
+				}
+				else if((index + 1) * LIST_SIZE > Bookserver.size()) {
             		Bookserver.addAll(clientBR.getInstance().lazyLoadingLibri());
         		}
 			
@@ -366,6 +370,7 @@ public class DashboardController implements Initializable{
 			count -= 1;
 
 			currentIndex.set(count);
+			initNavButtons();
 		}
 		
 	}
@@ -375,7 +380,13 @@ public class DashboardController implements Initializable{
 		Button btn = (Button) event.getSource();
     	int count = Integer.parseInt(btn.getText());
 
+
+		if((int) Math.ceil((double) Bookserver.size() / LIST_SIZE) == 1){
+			return;
+		}
+
 		currentIndex.set(count-1);
+		updateindexButton();
 
 	}
 
