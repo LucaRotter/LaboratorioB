@@ -186,7 +186,7 @@ public class serverBRImpl extends UnicastRemoteObject implements serverBR {
         WHERE li.id_libro IS NULL
         """;
         if (genere_ricerca != null && !genere_ricerca.isBlank()) {
-            query += " AND l.genere ILIKE ?";
+            query += " AND l.genere ILIKE ? ";
         }
         query += """ 
         ORDER BY l.id_libro

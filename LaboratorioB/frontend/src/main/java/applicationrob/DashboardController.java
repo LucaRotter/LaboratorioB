@@ -1,12 +1,14 @@
 package applicationrob;
 
-import java.io.IOException; 
+import java.io.IOException;
+import java.lang.classfile.components.ClassPrinter.Node;
 import java.net.URL;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import LaboratorioB.common.models.Ricerca;
+import LaboratorioB.common.interfacce.serverBR;
 import LaboratorioB.common.models.Libro;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -15,13 +17,21 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
+import javafx.scene.Cursor;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Toggle;
+import javafx.scene.control.ToggleButton;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.input.KeyCode;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import models.Model;
 
@@ -30,6 +40,9 @@ public class DashboardController implements Initializable{
 
 	@FXML
 	private ScrollPane ScrollBooks;
+
+	@FXML
+	private ScrollPane ScrollCategories;
 
 	@FXML 
 	private GridPane gridBooks;
@@ -55,6 +68,8 @@ public class DashboardController implements Initializable{
 	@FXML
 	private TextField searchBar;
 
+	@FXML HBox ToggleContainer;
+
 	@FXML 
 	private ChoiceBox<Ricerca> choiceBoxOrder;
 
@@ -65,12 +80,73 @@ public class DashboardController implements Initializable{
 	private List<Libro> Bookserver = new ArrayList<>();
 
 	private LoadMode currentMode = LoadMode.LAZY;
+
+	private String selectedCategory = null;
+
+	ToggleGroup group = new ToggleGroup();
+
+	final Toggle[] lastSelected = { null };
 	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		
 		init();
 		initNavButtons();
+	
+	//aggiungere qui metodo per scorrere le categorie il drag non funziona bene quindi useremo un pulante 
+	 for (javafx.scene.Node node : ToggleContainer.getChildren()) {
+    if (node instanceof ToggleButton btn) {
+        btn.setToggleGroup(group);
+
+        // intercetta sempre il click, anche sullo stesso bottone
+        btn.addEventFilter(MouseEvent.MOUSE_PRESSED, e -> {
+            if (btn.equals(lastSelected[0])) {
+                // deseleziona
+                group.selectToggle(null);
+                lastSelected[0] = null;
+
+                System.out.println("Deselezionato → vista normale");
+
+                // reset books
+                try {
+                    Bookserver.clear();
+                    gridBooks.getChildren().clear();
+                    currentIndex.set(0);
+					selectedCategory = null;
+                    initNavButtons();
+                    putBooks(currentIndex.get());
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
+
+                e.consume(); // evita che il toggle si ri-selezioni automaticamente
+            }
+        });
+    }
+}
+
+// listener sul gruppo per nuove selezioni
+group.selectedToggleProperty().addListener((obs, oldT, newT) -> {
+    if (newT != null) {
+        lastSelected[0] = (Toggle) newT;
+        ToggleButton selected = (ToggleButton) newT;
+        selectedCategory = selected.getText();
+
+        System.out.println("Categoria selezionata: " + selectedCategory);
+
+        // aggiorna libri filtrati
+        try {
+            Bookserver.clear();
+            gridBooks.getChildren().clear();
+            currentIndex.set(0);
+            initNavButtons();
+            putBooks(currentIndex.get());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+});
+
 		
 		try {
 
@@ -152,6 +228,8 @@ public class DashboardController implements Initializable{
 			}
 			
 		});
+
+
 	
 		choiceBoxOrder.getItems().addAll(Ricerca.TITOLO, Ricerca.AUTORE, Ricerca.ANNO);
 		choiceBoxOrder.setValue(Ricerca.TITOLO);
@@ -246,11 +324,11 @@ public class DashboardController implements Initializable{
 				if(Bookserver.isEmpty()){
 
 					for(int i = 0; i<3; i++) {
-						Bookserver.addAll(clientBR.getInstance().lazyLoadingLibri(null));
+						Bookserver.addAll(clientBR.getInstance().lazyLoadingLibri(selectedCategory));
 					}
 				}
 				else if((index + 1) * LIST_SIZE > Bookserver.size()) {
-            		Bookserver.addAll(clientBR.getInstance().lazyLoadingLibri(null));
+            		Bookserver.addAll(clientBR.getInstance().lazyLoadingLibri(selectedCategory));
         		}
 			
 		}
