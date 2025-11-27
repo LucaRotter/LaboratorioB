@@ -5,8 +5,6 @@
 <?import javafx.geometry.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.scene.shape.SVGPath?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
 
 <AnchorPane fx:id="rootPane" prefWidth="1100" prefHeight="700"
             xmlns="http://javafx.com/javafx/22"
@@ -15,20 +13,17 @@
             fx:controller="applicationrob.RegisterController" styleClass="registerPage">
 
    
-    <Button fx:id="backBtn" text="" layoutX="20" layoutY="20"
+    <Button fx:id="backBtn" text="Back" layoutX="20" layoutY="20"
             style="-fx-font-size: 14px; -fx-background-color: transparent; -fx-text-fill: #333;">
         <graphic>
-        <ImageView fitHeight="33.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../img/backBtn.png" />
-               </image>
-            </ImageView>
+            <SVGPath fill="#333333" scaleX="1.2" scaleY="1.2"
+                     content="M15.683 3a2 2 0 0 0-2-2h-7.08a2 2 0 0 0-1.519.698L.241 7.35a1 1 0 0 0 0 1.302l4.843 5.65A2 2 0 0 0 6.603 15h7.08a2 2 0 0 0 2-2zM5.829 5.854a.5.5 0 1 1 .707-.708l2.147 2.147 2.146-2.147a.5.5 0 1 1 .707.708L9.39 8l2.146 2.146a.5.5 0 0 1-.707.708L8.683 8.707l-2.147 2.147a.5.5 0 0 1-.707-.708L7.976 8z"/>
         </graphic>
     </Button>
 
-     
+    
     <VBox fx:id="registerBox" spacing="15" alignment="CENTER"
-          layoutX="350" layoutY="80" prefWidth="400" prefHeight="500"
+          layoutX="350" layoutY="50" prefWidth="400" prefHeight="500"
           styleClass="formBox">
 
         <Label text="User Registration" styleClass="formTitle"/>

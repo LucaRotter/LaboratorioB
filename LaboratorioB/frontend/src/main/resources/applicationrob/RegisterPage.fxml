@@ -35,7 +35,7 @@
         <PasswordField fx:id="pwField" promptText="Password" prefWidth="250"/>
 
         <Button text="Register" onAction="#onRegisterUser" prefWidth="150"/>
-
+        <Label fx:id="errorLabel" text="" visible="false"/>
         <Label text="Already have an account?"/>
         <Hyperlink text="Click Here" onAction="#changeToLogin"/>
 
