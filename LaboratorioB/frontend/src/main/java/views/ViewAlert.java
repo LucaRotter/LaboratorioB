@@ -15,6 +15,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.AnchorPane;
 import java.io.IOException;
 
+
+
 public class ViewAlert {
     
 
@@ -26,11 +28,11 @@ public static void showAlert(String type, String title, String message, Node nod
 				
 	        AlertController controller = loader.getController();
 	        controller.setAlert(type, title, message);
-				
+	
 			BorderPane rootPane = (BorderPane) node.getScene().getRoot();
             controller.setParentContainer(rootPane);
 
-			 if (rootPane.lookup("#alertOverlay") != null) {
+			if (rootPane.lookup("#alertOverlay") != null) {
             return;
         }
 

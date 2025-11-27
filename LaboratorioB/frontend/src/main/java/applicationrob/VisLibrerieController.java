@@ -19,7 +19,6 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.Node;
 
-//aggiungere controllo max 20 librerie
 
 public class VisLibrerieController {
 
@@ -90,7 +89,7 @@ public class VisLibrerieController {
     
     //Metodo che permetta l'apertura del Modal
     private void showModal() {
-        if(librerie.size () >= 10) {
+        if(librerie.size () >= 50) {
             modalOverlay.setVisible(false); 
             views.ViewAlert.showAlert("info", "Maximum Libraries", "You have reached the maximum limit of libraries.", extraBtn, "info");
             return;
@@ -104,10 +103,21 @@ public class VisLibrerieController {
     @FXML
     void sendModal(ActionEvent event) {
         textSlib = modalTextField.getText().trim();
+        boolean exists = false;
 
         if (textSlib.isEmpty()) {
             return; 
         } 
+
+        for (Libreria lib : librerie) {
+        if (lib.getNomeLibreria().equalsIgnoreCase(textSlib)) {
+            exists = true;
+            views.ViewAlert.showAlert("error", "Library arleady exist","A library with this name already exists" , modalSendButton, "error");
+            return;
+            
+
+        }
+    }
 
         try {
         clientBR.getInstance().createLibreria(textSlib, id_user);
@@ -164,7 +174,7 @@ public class VisLibrerieController {
         
     	if (!textSlib.matches("[a-zA-Z0-9 ]*")) {
     	    return;
-    	}	    
+    	}	     
     }
 
     // Metodo per azionare la modifica/aggiunta librerie 

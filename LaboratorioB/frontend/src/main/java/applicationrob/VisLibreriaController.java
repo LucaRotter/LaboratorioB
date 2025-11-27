@@ -47,7 +47,7 @@ public class VisLibreriaController {
     private ObservableList<Libro> filteredBooks;
 
     @FXML
-    public void initialize() {
+    public void initialize() { 
         booksLibrary = FXCollections.observableArrayList(); 
         currentBooks = FXCollections.observableArrayList(); 
         filteredBooks = FXCollections.observableArrayList();
@@ -71,7 +71,7 @@ public class VisLibreriaController {
         
           }
         });
-
+ 
 		selectedLibrary = Model.getIstance().getView().getSelectedLibrary();
 		if (selectedLibrary  != null) {
 		}

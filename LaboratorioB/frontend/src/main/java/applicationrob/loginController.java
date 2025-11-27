@@ -9,17 +9,19 @@ import models.Model;
 import java.rmi.RemoteException;
 import javafx.scene.layout.AnchorPane;
 
+
 public class LoginController implements Initializable {
 
     @FXML
     private AnchorPane rootPane;
-
     @FXML
     private TextField emailField;
     @FXML
     private PasswordField pwField;
     @FXML
     private Button backBtn;
+    @FXML
+    private Label errorLabel;
 
     private int id_user;
 
@@ -37,15 +39,16 @@ public class LoginController implements Initializable {
         String email = emailField.getText().trim();
         String pw = pwField.getText().trim();
 
-        if (email.isEmpty() || pw.isEmpty()) {
-        views.ViewAlert.showAlert("error", "Please enter email and password.", "", rootPane, "error");
-        return;
+        String validationError = validateField(email, pw);
+        if (validationError != null) { 
+            showErrorMessage(validationError);
+            return;
         }
 
         id_user = clientBR.getInstance().login(email, pw);
 
         if (id_user == -1) {
-        views.ViewAlert.showAlert("error", "Invalid email or password.", "", null, "error");
+            showErrorMessage("Invalid email or password");
         return;  
         }   
 
@@ -57,6 +60,37 @@ public class LoginController implements Initializable {
     @FXML
     public void changeToRegister() {
          Model.getIstance().getView().changeToRegister();
+    }
+
+    private String validateField(String email, String pw) {
+
+        if (email.isEmpty() && pw.isEmpty()) {
+        return "All fields are required";
+        }
+
+        if (email.isEmpty()) {
+            return "Email is required";
+        }
+
+        if (pw.isEmpty()) {
+            return "Password is required";
+        }
+
+        if (!email.matches("^[A-Za-z0-9+_.-]+@(.+)$")) {
+            return "Invalid email format";
+        }
+
+        if (pw.length() < 6) { 
+            return "Password must be at least 6 characters";
+        }
+
+        return null;
+    }
+
+
+    private void showErrorMessage(String message) {
+        errorLabel.setText(message);
+        errorLabel.setVisible(true);
     }
 
 }
