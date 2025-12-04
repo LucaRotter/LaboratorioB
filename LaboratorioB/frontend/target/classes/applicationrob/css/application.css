@@ -4,7 +4,7 @@
     -fx-background-size: cover;
     
 }
- 
+
 #root1, #root1 .viewport{
     -fx-background-color: transparent;
 }

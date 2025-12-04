@@ -44,7 +44,7 @@ public class serverBRImpl extends UnicastRemoteObject implements serverBR {
      */
     protected serverBRImpl() throws RemoteException, SQLException {
         super();
-        conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/labB", "postgres", "Rluca2004");
+        conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/LaboratorioB", "postgres", "@Aleks13082002");
         System.out.println("Database connected!");
     }
 
@@ -186,7 +186,7 @@ public class serverBRImpl extends UnicastRemoteObject implements serverBR {
         WHERE li.id_libro IS NULL
         """;
         if (genere_ricerca != null && !genere_ricerca.isBlank()) {
-            query += " AND l.genere ILIKE ?";
+            query += " AND l.genere ILIKE ? ";
         }
         query += """ 
         ORDER BY l.id_libro

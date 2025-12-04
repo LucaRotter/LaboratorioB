@@ -26,6 +26,7 @@
         <PasswordField fx:id="pwField" promptText="Password" prefWidth="250"/>
 
         <Button text="Login" onAction="#onUserLogin" prefWidth="150"/>
+        <Label fx:id="errorLabel" text="" visible="false"/>
         <Label text="Don't have an account?"/>
         <Hyperlink text="Click Here" onAction="#changeToRegister"/>
     </VBox>

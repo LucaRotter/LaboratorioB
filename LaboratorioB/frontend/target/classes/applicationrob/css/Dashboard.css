@@ -62,11 +62,6 @@ Button {
     -fx-max-width: 200px; 
 }
 
-.CategoryBtn:hover{
-	-fx-border-width: 0 0 2 0;
-	-fx-border-color: #86DBC5;
-}
-
 
 .ScrollPaneCategory HBox{
 	-fx-border-style:none;
@@ -108,11 +103,15 @@ Button {
     -fx-background-radius: 8 0 8 0;
 }
  
-
-.ScrollPaneCategory > .viewport{
+#ScrollPaneCategory > .viewport{
     -fx-background-color:#FFFF;
 }
 
+.CategoryBtn:hover, .CategoryBtn:selected{
+    -fx-border-width: 0 0 0 0;
+    -fx-background-color: rgba(166, 166, 166, 0.5);
+    -fx-border: none;
+}
 
 #btnForward,
 #btnBack{

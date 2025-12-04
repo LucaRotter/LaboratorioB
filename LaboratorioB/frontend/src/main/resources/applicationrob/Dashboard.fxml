@@ -20,18 +20,22 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="880.0" stylesheets="@css/Dashboard.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="applicationrob.DashboardController">
    <children>
-      <ScrollPane hbarPolicy="NEVER" layoutX="62.0" layoutY="135.0" prefHeight="42.0" prefWidth="754.0" styleClass="ScrollPaneCategory" vbarPolicy="NEVER">
+      <ScrollPane fx:id="ScrollCategories" hbarPolicy="NEVER" layoutX="62.0" layoutY="135.0" prefHeight="42.0" prefWidth="754.0" styleClass="ScrollPaneCategory" vbarPolicy="NEVER">
          <content>
-            <HBox alignment="CENTER" prefHeight="39.0" prefWidth="718.0">
+            <HBox fx:id="ToggleContainer" alignment="CENTER" prefHeight="39.0" prefWidth="718.0">
                <children>
-                     <ToggleButton text="Prova1" styleClass="CategoryBtn" />
-                     <ToggleButton text="Prova2" styleClass="CategoryBtn" />
-                     <ToggleButton text="Prova3" styleClass="CategoryBtn" />
-                     <ToggleButton text="Prova 23456" styleClass="CategoryBtn" />
-                     <ToggleButton text="Prova provato" styleClass="CategoryBtn" />
-                     <ToggleButton text="Buongiorno" styleClass="CategoryBtn" />
-                     <ToggleButton text="Buonasera" styleClass="CategoryBtn" />
-                     <ToggleButton text="Weeee" styleClass="CategoryBtn" />
+                     <ToggleButton text="Fiction" styleClass="CategoryBtn" />
+                     <ToggleButton text="Religion" styleClass="CategoryBtn" />
+                     <ToggleButton text="Cooking" styleClass="CategoryBtn" />
+                     <ToggleButton text="Romance" styleClass="CategoryBtn" />
+                     <ToggleButton text="Business &amp; economics" styleClass="CategoryBtn" />
+                     <ToggleButton text="History" styleClass="CategoryBtn" />
+                     <ToggleButton text="Biography &amp; Autobiography" styleClass="CategoryBtn" />
+                     <ToggleButton text="Mystery  Detective" styleClass="CategoryBtn" />
+                     <ToggleButton text="Thrillers" styleClass="CategoryBtn" />
+                     <ToggleButton text="Political &amp; Science" styleClass="CategoryBtn" />
+                     <ToggleButton text="Literary" styleClass="CategoryBtn" />
+                     <ToggleButton text="Health &amp; Fitness" styleClass="CategoryBtn" />
                </children>
             </HBox>
          </content>
@@ -47,7 +51,7 @@
             </GridPane>
          </content>
          <padding>
-            <Insets left="10.0" />
+            <Insets left="10.0" bottom="10.0"/>
          </padding>
       </ScrollPane>
        
