@@ -52,7 +52,23 @@ public class AddReviewController implements Initializable{
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
         init();
+        
+        try {
+
+            if(clientBR.getInstance().getValutazioniUtente(TokenSession.getUserId(), 
+                Model.getIstance().getView().getSelectedBook().getId()).isEmpty()){
+
+                System.out.println("Nessuna valutazione trovata per questo utente e libro.");
+                } else {
+                    
+                }
+
+        } catch (RemoteException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
         
 
         int i=1;

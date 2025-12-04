@@ -6,8 +6,7 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
-import LaboratorioB.common.models.Ricerca;
-import LaboratorioB.common.interfacce.serverBR;
+import LaboratorioB.common.models.Ricerca;  
 import LaboratorioB.common.models.Libro;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -16,7 +15,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
-import javafx.scene.Cursor;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
@@ -29,8 +27,6 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import models.Model;
 
@@ -71,6 +67,9 @@ public class DashboardController implements Initializable{
 
 	@FXML 
 	private ChoiceBox<Ricerca> choiceBoxOrder;
+
+	@FXML
+	private TextField Yearfield;
 
 	private final int LIST_SIZE = 20;
 
@@ -231,6 +230,18 @@ group.selectedToggleProperty().addListener((obs, oldT, newT) -> {
 
 	
 		choiceBoxOrder.getItems().addAll(Ricerca.TITOLO, Ricerca.AUTORE, Ricerca.ANNO);
+		
+		choiceBoxOrder.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newVal) -> {
+
+        if (newVal == null) return;
+
+        if (newVal.equals(Ricerca.ANNO)) {
+            Yearfield.setDisable(false);
+        } else {
+            Yearfield.setDisable(true);
+			Yearfield.clear();
+        }
+    });
 		choiceBoxOrder.setValue(Ricerca.TITOLO);
 	}
 
@@ -398,8 +409,8 @@ group.selectedToggleProperty().addListener((obs, oldT, newT) -> {
 
 		} else if(mod.equals(Ricerca.ANNO)){
 
-			year = Integer.parseInt(writeText.trim());
-
+			author = writeText;
+			year = Integer.parseInt(Yearfield.getText().trim());
 		}
 
 		if(searchBar.getText().isEmpty()){

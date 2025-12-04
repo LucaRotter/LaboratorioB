@@ -41,7 +41,6 @@
          </content>
       </ScrollPane>
       <ChoiceBox fx:id="choiceBoxOrder" layoutX="63.0" layoutY="190.0" prefHeight="34.0" prefWidth="150.0" styleClass="choiceBoxOrder"/>
-      <Button layoutX="749.0" layoutY="190.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="68.0" text="Filters" />
       <ScrollPane fx:id="ScrollBooks" hbarPolicy="NEVER" layoutX="63.0" layoutY="243.0" prefHeight="404.0" prefWidth="754.0" styleClass="ScrollPaneBooks">
          <content>
             <GridPane fx:id="gridBooks" hgap="30.0" prefHeight="0.0" vgap="20.0">
@@ -90,5 +89,6 @@
                </Button>
          </children>
       </HBox>
+      <TextField fx:id="Yearfield" alignment="CENTER" layoutX="744.0" layoutY="192.0" prefHeight="30.0" prefWidth="72.0" promptText="year" disable="true"/>
    </children>
 </AnchorPane>
