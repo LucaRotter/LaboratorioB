@@ -477,7 +477,7 @@ public class serverBRImpl extends UnicastRemoteObject implements serverBR {
             if (scelta == Ricerca.TITOLO) {
                 ps.setString(1, "%" + titolo + "%"); // ricerca sottostringa nel titolo
             } else if (scelta == Ricerca.ANNO) {
-                ps.setString(1, autore);
+                ps.setString(1, "%" + autore + "%"); // ricerca sottostringa nell'autore
                 ps.setInt(2, anno);
             } else if (scelta == Ricerca.AUTORE) {
                 ps.setString(1, "%" + autore + "%"); // ricerca sottostringa nell'autore
