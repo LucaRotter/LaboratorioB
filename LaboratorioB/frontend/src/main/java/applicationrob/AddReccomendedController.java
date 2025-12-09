@@ -56,6 +56,9 @@ public class AddReccomendedController implements Initializable {
     private Button btnCancel;
 
     @FXML
+    private Button btnRemove;
+
+    @FXML
     private GridPane containerRec;
 
     private final int LIST_SIZE = 20;
@@ -65,6 +68,8 @@ public class AddReccomendedController implements Initializable {
 	private String MODRICERCA = "VISUALIZZA";
 
     private Libro selectedBook;
+
+    private Libro BookToRemove;
 
 	private List<Libro> Bookserver = new ArrayList<>();
 
@@ -106,6 +111,7 @@ public class AddReccomendedController implements Initializable {
         
         try {
         reccomendedBooks = clientBR.getInstance().getConsiglioUtente(Model.getIstance().getView().getSelectedBook().getId(), TokenSession.getUserId());
+        
         } catch (RemoteException e) {
         // TODO Auto-generated catch block
         e.printStackTrace();
@@ -199,6 +205,26 @@ public class AddReccomendedController implements Initializable {
             onClean();
         });
 
+        btnRemove.setOnAction(e->{
+
+            System.out.println("Rimuovo il libro con id: " + BookToRemove.getTitolo());
+
+            if(BookToRemove != null){
+
+                try {
+                    
+                    clientBR.getInstance().deleteConsiglio(TokenSession.getUserId(), Model.getIstance().getView().getSelectedBook().getId(), BookToRemove.getId());
+                    reccomendedBooks.remove(BookToRemove);
+                    containerRec.getChildren().clear();
+                    pos=0;
+                    initRecoemmended();
+                } catch (RemoteException e1) {
+                   
+                    e1.printStackTrace();
+                }
+                
+            }
+        });
     }
 
     private void putBooks(int indice) throws RemoteException, IOException {
@@ -252,6 +278,7 @@ public class AddReccomendedController implements Initializable {
 
 			try {
                  vbox = loader.load();
+           
             } catch (IOException e) {
                 
                 e.printStackTrace();
@@ -259,8 +286,15 @@ public class AddReccomendedController implements Initializable {
 			
 			BookController bookController= loader.getController();
 			bookController.setLabels(libr.getAutore(), libr.getTitolo());
+            
+            vbox.setOnMouseClicked(e->{
+
+                BookToRemove = libr;
+
+            });
 
             Node old = getNodeByRowColumnIndex(pos, 0, containerRec);
+            
             if (old != null) {
                 containerRec.getChildren().remove(old);
             }
@@ -346,6 +380,13 @@ public class AddReccomendedController implements Initializable {
 			
 			BookController bookController= loader.getController();
 			bookController.setLabels(libr.getAutore(), libr.getTitolo());
+
+            vbox.setOnMouseClicked(e->{
+
+                System.out.println("Selezionato il libro con id: " + libr.getTitolo());
+                BookToRemove = libr;
+
+            });
 
             containerRec.add(vbox,0,pos++);
 

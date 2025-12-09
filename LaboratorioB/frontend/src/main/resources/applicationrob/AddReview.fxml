@@ -114,7 +114,7 @@
          </Pane>
          <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="6">
             <children>
-               <Label fx:id="lbAverage" layoutX="19.0" layoutY="32.0" prefHeight="17.0" prefWidth="48.0" text="Media" />
+               <Label fx:id="lbAverage" layoutX="9.0" layoutY="32.0" prefHeight="17.0" prefWidth="60.0" text="Media" textAlignment="CENTER" />
             </children>
          </Pane>
 

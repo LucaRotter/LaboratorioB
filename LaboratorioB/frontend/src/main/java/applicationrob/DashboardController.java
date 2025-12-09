@@ -3,11 +3,16 @@ package applicationrob;
 import java.io.IOException;
 import java.net.URL;
 import java.rmi.RemoteException;
+import javafx.util.Duration;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import LaboratorioB.common.models.Ricerca;  
 import LaboratorioB.common.models.Libro;
+import javafx.animation.Interpolator;
+import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
+import javafx.animation.Timeline;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.event.ActionEvent;
@@ -15,6 +20,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
@@ -27,6 +33,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import models.Model;
 
@@ -71,6 +78,15 @@ public class DashboardController implements Initializable{
 	@FXML
 	private TextField Yearfield;
 
+	@FXML
+	private Button btnCatLeft;
+
+	@FXML
+	private Button btnCatRight;
+
+	@FXML
+	private Pane MouseBlocker;
+
 	private final int LIST_SIZE = 20;
 
 	private IntegerProperty currentIndex = new SimpleIntegerProperty(0);
@@ -84,6 +100,11 @@ public class DashboardController implements Initializable{
 	ToggleGroup group = new ToggleGroup();
 
 	final Toggle[] lastSelected = { null };
+
+	private int currentPage = 0;
+	
+	private final int totalPages = 4; // oppure 3
+
 	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
@@ -227,6 +248,22 @@ group.selectedToggleProperty().addListener((obs, oldT, newT) -> {
 			
 		});
 
+		btnCatLeft.setOnAction(e -> {
+			goToPage(currentPage - 1);
+		});
+
+		btnCatRight.setOnAction(e -> {
+			goToPage(currentPage + 1);
+		});
+
+
+		  // ENTER frecce
+    btnCatLeft.setOnMouseEntered(e -> MouseBlocker.setMouseTransparent(false));
+    btnCatRight.setOnMouseEntered(e -> MouseBlocker.setMouseTransparent(false));
+
+    // EXIT frecce
+    btnCatLeft.setOnMouseExited(e -> MouseBlocker.setMouseTransparent(true));
+    btnCatRight.setOnMouseExited(e -> MouseBlocker.setMouseTransparent(true));
 
 	
 		choiceBoxOrder.getItems().addAll(Ricerca.TITOLO, Ricerca.AUTORE, Ricerca.ANNO);
@@ -491,5 +528,31 @@ group.selectedToggleProperty().addListener((obs, oldT, newT) -> {
 
 		ScrollBooks.setContent(container);
 	}
+
+	private void goToPage(int page) {
+
+    if(page < 0) page = 0;
+    if(page > totalPages - 1) page = totalPages - 1;
+
+    currentPage = page;
+
+    double target = (double) currentPage / (totalPages - 1);
+
+    Timeline tl = new Timeline(
+            new KeyFrame(Duration.ZERO,
+                    new KeyValue(ScrollCategories.hvalueProperty(), ScrollCategories.getHvalue())
+            ),
+            new KeyFrame(Duration.millis(260),
+                    new KeyValue(ScrollCategories.hvalueProperty(), target, Interpolator.EASE_BOTH)
+            )
+    );
+    tl.play();
+
+	btnCatLeft.setVisible(currentPage > 0);
+
+    btnCatRight.setVisible(currentPage < totalPages - 1);
+}
 	
 }
+
+

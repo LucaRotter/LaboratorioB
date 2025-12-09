@@ -1,9 +1,11 @@
 package applicationrob;
 
+
 import java.net.URL;
 import java.rmi.RemoteException;
+import java.util.List;
 import java.util.ResourceBundle;
-
+import javafx.scene.control.Label;
 import LaboratorioB.common.models.Valutazione;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -50,45 +52,23 @@ public class AddReviewController implements Initializable{
     @FXML
     private TextArea TxtStyle;
 
+    @FXML
+    private Label lbAverage;
+
+    List<Valutazione> items = null;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
         init();
+        initValues();
+    
+        Model.getIstance().getView().selectedBookProperty().addListener((obs, oldLibr, newLibr) -> {
+
+        initValues();
         
-        try {
-
-            if(clientBR.getInstance().getValutazioniUtente(TokenSession.getUserId(), 
-                Model.getIstance().getView().getSelectedBook().getId()).isEmpty()){
-
-                System.out.println("Nessuna valutazione trovata per questo utente e libro.");
-                } else {
-                    
-                }
-
-        } catch (RemoteException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-        
-
-        int i=1;
-
-        for(i=1; i<=5; i++){
-
-            ScoreStyle.getItems().add(i);
-
-            ScoreEdition.getItems().add(i);
-            ScoreContent.getItems().add(i);
-            ScorePleasentness.getItems().add(i);
-            ScoreOriginality.getItems().add(i);
-        }
-
-        ScoreStyle.setValue(1);
-        ScoreEdition.setValue(1);
-        ScoreContent.setValue(1);
-        ScorePleasentness.setValue(1);
-        ScoreOriginality.setValue(1);
-
+    
+    });
     }
 
     public void init(){
@@ -103,6 +83,25 @@ public class AddReviewController implements Initializable{
         BtnRestar.setOnAction(e->{
             onRestart();
         });
+
+        int i=1;
+
+        for(i=1; i<=5; i++){
+
+        ScoreStyle.getItems().add(i);
+        ScoreEdition.getItems().add(i);
+        ScoreContent.getItems().add(i);
+        ScorePleasentness.getItems().add(i);
+        ScoreOriginality.getItems().add(i);
+        }
+
+        ScoreStyle.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newVal) -> updateMedia());
+        ScoreEdition.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newVal) -> updateMedia());
+        ScoreContent.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newVal) -> updateMedia());
+        ScorePleasentness.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newVal) -> updateMedia());
+        ScoreOriginality.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newVal) -> updateMedia());
+
+        
 
         TxtStyle.setWrapText(true);
         TxtContent.setWrapText(true);
@@ -123,6 +122,48 @@ public class AddReviewController implements Initializable{
         TxtOriginality.clear();
         TxtPleasentess.clear();
         TxtStyle.clear();
+    }
+
+    public void initValues(){
+
+        try {
+            items = clientBR.getInstance().getValutazioniUtente(TokenSession.getUserId(), 
+                    Model.getIstance().getView().getSelectedBook().getId());
+        } catch (RemoteException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
+            if(items.isEmpty()){
+                
+
+                        ScoreStyle.setValue(1);
+                        ScoreEdition.setValue(1);
+                        ScoreContent.setValue(1);
+                        ScorePleasentness.setValue(1);
+                        ScoreOriginality.setValue(1);
+
+                        BtnRestar.setDisable(false);
+                        BtnRestar.setVisible(true);
+
+                } else {
+                    
+
+                        ScoreStyle.setValue(items.get(0).getVotoStile());
+                        ScoreEdition.setValue(items.get(0).getVotoEdizione());
+                        ScoreContent.setValue(items.get(0).getVotoContenuto());
+                        ScorePleasentness.setValue(items.get(0).getVotoGradevolezza());
+                        ScoreOriginality.setValue( items.get(0).getVotoOriginalita());
+
+                        TxtContent.setText(items.get(0).getNoteContenuto());
+                        TxtEdition.setText(items.get(0).getNoteEdizione());
+                        TxtOriginality.setText(items.get(0).getNoteOriginalita());
+                        TxtPleasentess.setText(items.get(0).getNoteGradevolezza());
+                        TxtStyle.setText(items.get(0).getNoteStile());
+
+                        BtnRestar.setDisable(true);
+                        BtnRestar.setVisible(false);
+                }
     }
 
     public void onConfirm() throws RemoteException {
@@ -151,6 +192,24 @@ public class AddReviewController implements Initializable{
         }
 
     }
+
+    private void updateMedia() {
+    try {
+        Integer style = ScoreStyle.getValue();
+        Integer edition = ScoreEdition.getValue();
+        Integer content = ScoreContent.getValue();
+        Integer pleasentness = ScorePleasentness.getValue();
+        Integer originality = ScoreOriginality.getValue();
+
+        if(style != null && edition != null && content != null && pleasentness != null && originality != null) {
+            double media = (style + edition + content + pleasentness + originality) / 5.0;
+            lbAverage.setText(String.format("%.2f", media));
+        }
+    } catch (Exception e) {
+        // se uno dei campi non è selezionato
+        lbAverage.setText("--");
+    }
+}
 
     
 }

@@ -48,7 +48,7 @@
                </GridPane>
                </content>
             </ScrollPane>
-            <HBox layoutX="7.0" layoutY="553.0" prefHeight="27.0" prefWidth="200.0" styleClass="NavigationBox">
+            <HBox layoutY="553.0" prefHeight="27.0" prefWidth="200.0" styleClass="NavigationBox">
                <children>
                   <Button fx:id="btnBack" mnemonicParsing="false">
                 <graphic>
@@ -82,7 +82,7 @@
             </Button>
          </children>
       </Pane>
-            <Button fx:id="btnRemove" layoutX="14.0" layoutY="15.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="71.0" text="Remove" />
+            <Button fx:id="btnRemove" layoutY="15.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="71.0" text="Remove" />
            
          </children>
       </Pane>

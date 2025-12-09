@@ -230,7 +230,7 @@ public class VisLibroController implements Initializable{
 
 		lbAverage.setText("0.0");
 		Label nessunLibro = new Label("NO BOOK REVIEW");
-		nessunLibro.setStyle("-fx-font-size: 32px; -fx-text-fill: gray;");
+		nessunLibro.setStyle("-fx-font-size: 32px; -fx-text-fill: white;");
 
 		
 			reviewContainer.setAlignment(Pos.CENTER);

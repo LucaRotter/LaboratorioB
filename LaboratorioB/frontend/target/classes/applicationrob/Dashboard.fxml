@@ -20,26 +20,56 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="880.0" stylesheets="@css/Dashboard.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="applicationrob.DashboardController">
    <children>
-      <ScrollPane fx:id="ScrollCategories" hbarPolicy="NEVER" layoutX="62.0" layoutY="135.0" prefHeight="42.0" prefWidth="754.0" styleClass="ScrollPaneCategory" vbarPolicy="NEVER">
-         <content>
-            <HBox fx:id="ToggleContainer" alignment="CENTER" prefHeight="39.0" prefWidth="718.0">
-               <children>
-                     <ToggleButton text="Fiction" styleClass="CategoryBtn" />
-                     <ToggleButton text="Religion" styleClass="CategoryBtn" />
-                     <ToggleButton text="Cooking" styleClass="CategoryBtn" />
-                     <ToggleButton text="Romance" styleClass="CategoryBtn" />
-                     <ToggleButton text="Business &amp; economics" styleClass="CategoryBtn" />
-                     <ToggleButton text="History" styleClass="CategoryBtn" />
-                     <ToggleButton text="Biography &amp; Autobiography" styleClass="CategoryBtn" />
-                     <ToggleButton text="Mystery  Detective" styleClass="CategoryBtn" />
-                     <ToggleButton text="Thrillers" styleClass="CategoryBtn" />
-                     <ToggleButton text="Political &amp; Science" styleClass="CategoryBtn" />
-                     <ToggleButton text="Literary" styleClass="CategoryBtn" />
-                     <ToggleButton text="Health &amp; Fitness" styleClass="CategoryBtn" />
-               </children>
-            </HBox>
-         </content>
-      </ScrollPane>
+      
+         <StackPane layoutX="62.0" layoutY="135.0">
+
+         <!-- lo scroll -->
+        <ScrollPane fx:id="ScrollCategories" hbarPolicy="NEVER"  prefHeight="42.0" prefWidth="754.0" styleClass="ScrollPaneCategory" vbarPolicy="NEVER">
+
+            <content>
+                     <HBox fx:id="ToggleContainer" alignment="CENTER" prefHeight="39.0" prefWidth="718.0">
+                  <children>
+                        <ToggleButton text="Fiction" styleClass="CategoryBtn" />
+                        <ToggleButton text="Religion" styleClass="CategoryBtn" />
+                        <ToggleButton text="Cooking" styleClass="CategoryBtn" />
+                        <ToggleButton text="Romance" styleClass="CategoryBtn" />
+                        <ToggleButton text="Business &amp; economics" styleClass="CategoryBtn" />
+                        <ToggleButton text="History" styleClass="CategoryBtn" />
+                        <ToggleButton text="Biography &amp; Autobiography" styleClass="CategoryBtn" />
+                        <ToggleButton text="Mystery  Detective" styleClass="CategoryBtn" />
+                        <ToggleButton text="Thrillers" styleClass="CategoryBtn" />
+                        <ToggleButton text="Political &amp; Science" styleClass="CategoryBtn" />
+                        <ToggleButton text="Literary" styleClass="CategoryBtn" />
+                        <ToggleButton text="Health &amp; Fitness" styleClass="CategoryBtn" />
+                  </children>
+               </HBox>
+            </content>
+
+         </ScrollPane>
+
+        <HBox fx:id="ArrowOverlay"
+      alignment="CENTER"
+      pickOnBounds="false">
+
+    <Button fx:id="btnCatLeft"
+            text="◀"
+            styleClass="ArrowScroll"
+            visible="false"/>
+
+    <!-- blocco click -->
+    <Pane fx:id="MouseBlocker"
+          mouseTransparent="true"
+            HBox.hgrow="ALWAYS"
+            pickOnBounds="false"
+          />
+
+    <Button fx:id="btnCatRight"
+            text="▶"
+            styleClass="ArrowScroll"/>
+
+</HBox>
+
+      </StackPane>
       <ChoiceBox fx:id="choiceBoxOrder" layoutX="63.0" layoutY="190.0" prefHeight="34.0" prefWidth="150.0" styleClass="choiceBoxOrder"/>
       <ScrollPane fx:id="ScrollBooks" hbarPolicy="NEVER" layoutX="63.0" layoutY="243.0" prefHeight="404.0" prefWidth="754.0" styleClass="ScrollPaneBooks">
          <content>

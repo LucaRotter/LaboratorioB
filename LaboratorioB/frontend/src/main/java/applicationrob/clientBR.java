@@ -104,6 +104,12 @@ public class clientBR{
 		return server.createConsiglio(user_id, libro_id, consiglio_id);
 	}
 
+
+	public void deleteConsiglio(int userId, int libro_id, int consiglio_id) throws RemoteException{
+		server.deleteConsiglio( userId, libro_id, consiglio_id);
+		
+	}
+
 	public boolean createValutazione(Valutazione val)throws RemoteException{
 		return server.createValutazione(val);
 	}
@@ -114,10 +120,14 @@ public class clientBR{
 	public List<Valutazione> getValutazioniUtente(int id_utente, int id_libro) throws RemoteException{
 		return server.getValutazioniUtente(id_utente, id_libro);
 	}
+
+
 	public static void main(String[] args) throws RemoteException, IOException, NotBoundException {
 
 			TokenSession.setUserId(1); 
 
 		Application.launch(startApp.class, args); 	
 	}
+
+	
 }
