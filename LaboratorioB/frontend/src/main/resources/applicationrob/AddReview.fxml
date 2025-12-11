@@ -1,123 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ChoiceBox?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.Pane?>
-<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.BorderPane?>
 
-<AnchorPane prefHeight="700" prefWidth="880" stylesheets="@css/review.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="applicationrob.AddReviewController">
+<AnchorPane xmlns="http://javafx.com/javafx/22"
+            xmlns:fx="http://javafx.com/fxml/1"
+          >
 
-   <children>
-        <GridPane fx:id="ReviewTable" alignment="TOP_CENTER" hgap="10" layoutX="30.0" layoutY="46.0" prefHeight="500.0" prefWidth="820" styleClass="TableReview" vgap="8">
+    <children>
+        <BorderPane fx:id="rootBorder"
+                    prefHeight="700"
+                    prefWidth="880"
+                    stylesheets="@css/review.css"
+                    layoutX="0"
+                    layoutY="0"
+                    AnchorPane.topAnchor="0.0"
+                    AnchorPane.leftAnchor="0.0"
+                    AnchorPane.rightAnchor="0.0"
+                    AnchorPane.bottomAnchor="0.0"
+                    fx:controller="applicationrob.addReviewController">
 
-    
-    <columnConstraints>
-        <ColumnConstraints percentWidth="17.0" />
-        <ColumnConstraints percentWidth="30.0" />
-        <ColumnConstraints percentWidth="13.0" />
-        <ColumnConstraints percentWidth="40.0" />
-    </columnConstraints>
+            <center>
+                <fx:include fx:id="tableReview" source="TableReview.fxml"/>
+            </center>
 
-   
-    <rowConstraints>
-        <RowConstraints minHeight="80" />
-        <RowConstraints minHeight="80" />
-        <RowConstraints minHeight="80" />
-        <RowConstraints minHeight="80" />
-        <RowConstraints minHeight="80" />
-        <RowConstraints minHeight="80" />
-        <RowConstraints minHeight="80" />
-    </rowConstraints>
-
-   
-    <Pane styleClass="header-row" GridPane.columnIndex="0" GridPane.columnSpan="4" GridPane.rowIndex="0">
-            <children>
-          
-                   
-          <Label layoutX="14.0" layoutY="25.0" styleClass="header" text="Criterio" />
-            </children></Pane>
-    <Label styleClass="header" text="Spiegazione" GridPane.columnIndex="1" GridPane.rowIndex="0" />
-    <Label styleClass="header" text="Score" GridPane.columnIndex="2" GridPane.rowIndex="0" />
-    <Label styleClass="header" text="Note" GridPane.columnIndex="3" GridPane.rowIndex="0" />
-
-  
-    <Pane styleClass="row-odd" GridPane.columnIndex="0" GridPane.columnSpan="4" GridPane.rowIndex="1">
-            <children>
-      
-          <Label layoutX="14.0" layoutY="33.0" text="Stile" />
-            </children></Pane>
-    <Label text="Valutazione sullo stile di scrittura" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-    <ChoiceBox fx:id="ScoreStyle" prefWidth="60" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-    <TextArea fx:id="TxtStyle" prefRowCount="2" GridPane.columnIndex="3" GridPane.rowIndex="1" />
-
-   
-    <Pane styleClass="row-even" GridPane.columnIndex="0" GridPane.columnSpan="4" GridPane.rowIndex="2">
-            <children>
-          
-          <Label layoutX="14.0" layoutY="31.0" text="Contenuto" />
-            </children></Pane>
-    <Label text="Valutazione sui contenuti del libro" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-    <ChoiceBox fx:id="ScoreContent" prefWidth="60" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-    <TextArea fx:id="TxtContent" prefRowCount="2" GridPane.columnIndex="3" GridPane.rowIndex="2" />
-
-   
-    <Pane styleClass="row-odd" GridPane.columnIndex="0" GridPane.columnSpan="4" GridPane.rowIndex="3">
-            <children>
-          
-          
-          <Label layoutX="14.0" layoutY="32.0" text="Gradevolezza" />
-            </children></Pane>
-    <Label text="Valutazione sul gradimento" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-    <ChoiceBox fx:id="ScorePleasentness" prefWidth="60" GridPane.columnIndex="2" GridPane.rowIndex="3" />
-    <TextArea fx:id="TxtPleasentess" prefRowCount="2" GridPane.columnIndex="3" GridPane.rowIndex="3" />
-
-    <Pane styleClass="row-even" GridPane.columnIndex="0" GridPane.columnSpan="4" GridPane.rowIndex="4">
-            <children>
-          
-         
-          <Label layoutX="14.0" layoutY="32.0" text="Originalità" />
-            </children></Pane>
-    <Label text="Valutazione sulla originalità" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-    <ChoiceBox fx:id="ScoreOriginality" prefWidth="60" GridPane.columnIndex="2" GridPane.rowIndex="4" />
-    <TextArea fx:id="TxtOriginality" prefRowCount="2" GridPane.columnIndex="3" GridPane.rowIndex="4" />
-
-    
-    <Pane styleClass="row-odd" GridPane.columnIndex="0" GridPane.columnSpan="4" GridPane.rowIndex="5">
-            <children>
-          
-         
-          <Label layoutX="14.0" layoutY="32.0" text="Edizione" />
-            </children></Pane>
-    <Label text="Valutazione sull'edizione" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-    <ChoiceBox fx:id="ScoreEdition" prefWidth="60" GridPane.columnIndex="2" GridPane.rowIndex="5" />
-    <TextArea fx:id="TxtEdition" prefRowCount="2" GridPane.columnIndex="3" GridPane.rowIndex="5" />
-
-   
-    <Pane styleClass="row-even" GridPane.columnIndex="0" GridPane.columnSpan="4" GridPane.rowIndex="6">
-            <children>
-          
-          
-          <Label layoutX="14.0" layoutY="32.0" text="Voto Finale" />
-            </children></Pane>
-    <Label text="Valutazione complessiva del libro" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-         <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="6">
-            <children>
-                 <Button fx:id="BtnRestar" layoutX="31.0" layoutY="28.0" prefWidth="120" text="Restart" />
-         
-                 <Button fx:id="BtnConfirm" layoutX="182.0" layoutY="28.0" prefWidth="120" text="Confirm" />
-            </children>
-         </Pane>
-         <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="6">
-            <children>
-               <Label fx:id="lbAverage" layoutX="9.0" layoutY="32.0" prefHeight="17.0" prefWidth="60.0" text="Media" textAlignment="CENTER" />
-            </children>
-         </Pane>
-
-</GridPane>
+        </BorderPane>
     </children>
+
 </AnchorPane>

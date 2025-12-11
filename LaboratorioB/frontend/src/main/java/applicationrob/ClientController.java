@@ -16,6 +16,8 @@ public class ClientController implements Initializable{
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		
 		Model.getIstance().getView().getSideBarSelectionItem().addListener((ObservalValue, oldValue, newValue) -> {
+
+			if(newValue!= null){
 			
 			switch(newValue) { 
 			
@@ -37,6 +39,7 @@ public class ClientController implements Initializable{
 			default: MainPage.setCenter(Model.getIstance().getView().getDashboardMain());
 			
 			}
+		}
 		
 		}); 
 

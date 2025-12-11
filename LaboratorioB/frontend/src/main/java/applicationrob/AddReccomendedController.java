@@ -2,10 +2,12 @@ package applicationrob;
 
 import java.io.IOException;
 import java.net.URL;
+import javafx.geometry.Pos;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+import javafx.event.ActionEvent;
 import java.util.ResourceBundle;
 import LaboratorioB.common.models.Libro;
 import LaboratorioB.common.models.Ricerca;
@@ -24,6 +26,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
+import javafx.scene.control.ScrollPane;
 import models.Model;
 
 public class AddReccomendedController implements Initializable {
@@ -61,6 +64,9 @@ public class AddReccomendedController implements Initializable {
     @FXML
     private GridPane containerRec;
 
+    @FXML
+    private ScrollPane ScrollBooks; 
+
     private final int LIST_SIZE = 20;
 
 	private IntegerProperty currentIndex = new SimpleIntegerProperty(0);
@@ -77,11 +83,13 @@ public class AddReccomendedController implements Initializable {
 
     private int pos;
 
+    private VBox selectedVbox = null;
+
     @FXML
     public void initialize(URL location, ResourceBundle resources)  {
 
-        pos= 0;
         init();
+        initNavButtons();
 
        try {
         reccomendedBooks = clientBR.getInstance().getConsiglioUtente(Model.getIstance().getView().getSelectedBook().getId(), TokenSession.getUserId());
@@ -94,8 +102,6 @@ public class AddReccomendedController implements Initializable {
 
        try {
 
-			//first loading books
-			Bookserver.addAll(clientBR.getInstance().cercaLibri("", 0, "", Ricerca.TITOLO));
 			putBooks(currentIndex.get());
 			
 		} catch (IOException e) {
@@ -104,7 +110,8 @@ public class AddReccomendedController implements Initializable {
 		}
 
         Model.getIstance().getView().selectedBookProperty().addListener((obs, oldLibr, newLibr) -> {
-
+        
+        if(newLibr!= null){
         pos= 0;
 
         containerRec.getChildren().clear();
@@ -118,29 +125,15 @@ public class AddReccomendedController implements Initializable {
        }
 
        initRecoemmended();
-
+}
     });
+
 
         currentIndex.addListener((obs1, oldIndex, newIndex) -> {
 			
 			try {
 
-				//lazy loading books when scrolling forward and in view mode
-				if(newIndex.intValue() > oldIndex.intValue() && MODRICERCA.equals("VISUALIZZA")){ 
-					
-					Bookserver.addAll(clientBR.getInstance().lazyLoadingLibri(null));
-				}
-
-				if((newIndex.intValue() + 2) * LIST_SIZE > Bookserver.size() && MODRICERCA.equals("RICERCA")) {
-
-				} else {
-
-					btnLeft.setText(newIndex.intValue() + 1 + "");
-					btnCenter.setText(newIndex.intValue() + 2 + "");
-					btnRight.setText(newIndex.intValue() + 3 + "");
-					
-				}
-
+				ScrollBooks.setVvalue(0.0);
 				grid.getChildren().clear();
 				putBooks(newIndex.intValue());
 
@@ -148,19 +141,20 @@ public class AddReccomendedController implements Initializable {
 				
 				e.printStackTrace();
 			}
+
 		});
     }
 
         private VBox createPlaceHolder() {
-            // VBox principale
+  
             VBox box = new VBox();
             box.setPrefWidth(120);
             box.setPrefHeight(180);
             box.setMaxWidth(Region.USE_PREF_SIZE);
             box.setMinWidth(Region.USE_PREF_SIZE);
            
+            box.setAlignment(Pos.CENTER);
 
-            // Immagine placeholder
             ImageView imageView = new ImageView(new Image(
                 getClass().getResourceAsStream("/img/noBook.png")
             ));
@@ -169,15 +163,14 @@ public class AddReccomendedController implements Initializable {
             imageView.setPreserveRatio(true);
             imageView.setPickOnBounds(true);
 
-            // Testo "Empty Space"
             Label label = new Label("Empty Space");
             label.setPrefWidth(120);
             label.setPrefHeight(36);
+            label.setAlignment(Pos.CENTER);         
+            label.setMaxWidth(Double.MAX_VALUE); 
 
-            // Aggiunta dei nodi
             box.getChildren().addAll(imageView, label);
 
-            // Mano come cursor, come nel tuo FXML
             box.setCursor(Cursor.HAND);
 
             return box;
@@ -205,35 +198,61 @@ public class AddReccomendedController implements Initializable {
             onClean();
         });
 
+        btnLeft.setOnAction(e->{
+
+			onNavButton(e);
+
+		});
+
+		btnCenter.setOnAction(e->{
+
+			onNavButton(e);
+
+		});
+
+		btnRight.setOnAction(e->{
+
+			onNavButton(e);
+
+		});
+
         btnRemove.setOnAction(e->{
 
-            System.out.println("Rimuovo il libro con id: " + BookToRemove.getTitolo());
-
-            if(BookToRemove != null){
-
-                try {
-                    
-                    clientBR.getInstance().deleteConsiglio(TokenSession.getUserId(), Model.getIstance().getView().getSelectedBook().getId(), BookToRemove.getId());
-                    reccomendedBooks.remove(BookToRemove);
-                    containerRec.getChildren().clear();
-                    pos=0;
-                    initRecoemmended();
-                } catch (RemoteException e1) {
-                   
-                    e1.printStackTrace();
-                }
-                
-            }
+            onRemove();
         });
+
+    
+        pos= 0;
     }
 
-    private void putBooks(int indice) throws RemoteException, IOException {
+    private void putBooks(int index) throws RemoteException, IOException {
+		
+
+				if(Bookserver.isEmpty()){
+
+					for(int i = 0; i<3; i++) {
+						Bookserver.addAll(clientBR.getInstance().lazyLoadingLibri(""));
+					}
+				}
+				else if((index + 1) * LIST_SIZE > Bookserver.size()) {
+            		Bookserver.addAll(clientBR.getInstance().lazyLoadingLibri(""));
+        		}
+			
+		
+		
+		if(Bookserver.isEmpty()){
+			
+			setEmptyResearch("BOOK NOT FOUND");
+
+		}else{
+
+		ScrollBooks.setContent(grid);
 
 		int col= 0;
 		int row= 1;
 		int i;
 		
-		for(i=indice* LIST_SIZE; i <= indice * LIST_SIZE + 19 ; i++) { 
+		for(i=index* LIST_SIZE; i <= index * LIST_SIZE + 19 ; i++) { 
 			
 			if(i >= Bookserver.size()) {
 				break;
@@ -246,15 +265,15 @@ public class AddReccomendedController implements Initializable {
 
 			}
 			
-			FXMLLoader loader = new FXMLLoader();
+			FXMLLoader loader = new FXMLLoader(); 
 			loader.setLocation(getClass().getResource("BookEl.fxml"));
 			VBox vbox = loader.load();
 			
 			BookController bookController= loader.getController();
 			Libro libr = Bookserver.get(i);
 			bookController.setLabels(libr.getAutore(), libr.getTitolo());
-			
-			vbox.setOnMouseClicked(e->{
+
+            vbox.setOnMouseClicked(e->{
 
                 selectedBookHandler(libr);
 			});
@@ -263,6 +282,7 @@ public class AddReccomendedController implements Initializable {
 			grid.add(vbox, col++, row);
 			
 		}
+	}
 	}
 
     private void selectedBookHandler(Libro libr) {
@@ -287,17 +307,16 @@ public class AddReccomendedController implements Initializable {
 			BookController bookController= loader.getController();
 			bookController.setLabels(libr.getAutore(), libr.getTitolo());
             
-            vbox.setOnMouseClicked(e->{
-
-                BookToRemove = libr;
-
-            });
+            removeBook(libr,vbox);
 
             Node old = getNodeByRowColumnIndex(pos, 0, containerRec);
             
             if (old != null) {
                 containerRec.getChildren().remove(old);
             }
+
+            btnCancel.setDisable(false);
+            btnConfirm.setDisable(false);
             containerRec.add(vbox, 0, pos);
         }
         
@@ -311,7 +330,7 @@ public class AddReccomendedController implements Initializable {
 			count += 1;
 
 			currentIndex.set(count); 
-
+			initNavButtons();
 		}
 	}
 
@@ -323,9 +342,25 @@ public class AddReccomendedController implements Initializable {
 			count -= 1;
 
 			currentIndex.set(count);
+			initNavButtons();
 		}
 		
 	}
+
+    public void setEmptyResearch(String text){
+
+		Label nessunLibro = new Label(text);
+		nessunLibro.setStyle("-fx-font-size: 32px; -fx-text-fill: gray;");
+
+		VBox container = new VBox(nessunLibro);
+		container.setAlignment(Pos.CENTER);
+		container.prefWidthProperty().bind(ScrollBooks.widthProperty());
+		container.prefHeightProperty().bind(ScrollBooks.heightProperty());
+
+
+		ScrollBooks.setContent(container);
+	}
+
 
     public void onConfirm() {
        
@@ -337,15 +372,42 @@ public class AddReccomendedController implements Initializable {
         }
 
         pos++;
+        btnCancel.setDisable(true);
+        btnConfirm.setDisable(true);
         reccomendedBooks.add(selectedBook);
         
     }
 
     //da rivedere
     public void onClean() {
-       
-       
+
+        // Se non avevo selezionato alcun libro dal grid → fai nulla
+    if (selectedBook == null) {
+        return;
     }
+
+    // Lo slot dove è stato posizionato il libro selezionato
+    int row = pos;
+
+    // Recupero il nodo nella posizione corrente
+    Node node = getNodeByRowColumnIndex(row, 0, containerRec);
+
+    if (node != null) {
+        containerRec.getChildren().remove(node);
+    }
+
+    // Metto il placeholder al posto del libro rimosso
+    VBox placeholder = createPlaceHolder();
+    containerRec.add(placeholder, 0, row);
+
+    // Reset variabili
+    selectedBook = null;
+    BookToRemove = null;
+
+    btnCancel.setDisable(true);
+    btnConfirm.setDisable(true);
+  
+}
 
     private Node getNodeByRowColumnIndex(int row, int column, GridPane gridPane) {
     for (Node node : gridPane.getChildren()) {
@@ -358,6 +420,26 @@ public class AddReccomendedController implements Initializable {
         }
     }
     return null;
+    }
+
+    public void onRemove(){
+        if(BookToRemove != null){
+
+                try {
+                    
+                    clientBR.getInstance().deleteConsiglio(TokenSession.getUserId(), Model.getIstance().getView().getSelectedBook().getId(), BookToRemove.getId());
+                    reccomendedBooks.remove(BookToRemove);
+                    containerRec.getChildren().clear();
+                    pos=0;
+                    btnRemove.setVisible(false);
+                    btnRemove.setDisable(true);
+                    initRecoemmended();
+                } catch (RemoteException e1) {
+                   
+                    e1.printStackTrace();
+                }
+                
+            }
     }
 
     public void initRecoemmended(){
@@ -381,12 +463,7 @@ public class AddReccomendedController implements Initializable {
 			BookController bookController= loader.getController();
 			bookController.setLabels(libr.getAutore(), libr.getTitolo());
 
-            vbox.setOnMouseClicked(e->{
-
-                System.out.println("Selezionato il libro con id: " + libr.getTitolo());
-                BookToRemove = libr;
-
-            });
+            removeBook(libr,vbox);
 
             containerRec.add(vbox,0,pos++);
 
@@ -396,5 +473,140 @@ public class AddReccomendedController implements Initializable {
             }
             
         }
+    }
+
+    public void initNavButtons(){
+
+		int index = currentIndex.get();
+		boolean update = true;
+		boolean controlIndex = (index + 1) * 20 > Bookserver.size();
+
+		btnLeft.getStyleClass().removeAll("SelectedIndex");
+		btnCenter.getStyleClass().removeAll("SelectedIndex");
+		btnRight.getStyleClass().removeAll("SelectedIndex");
+
+		
+		
+		if (controlIndex) {
+
+		btnRight.getStyleClass().add("SelectedIndex");
+		update=false;
+
+    	}
+
+		if(index == 0 || index == 1 ){
+
+			if(index == 0){
+			
+			btnRight.getStyleClass().removeAll("SelectedIndex");
+			btnLeft.getStyleClass().add("SelectedIndex");
+
+			} else {
+
+			btnRight.getStyleClass().removeAll("SelectedIndex");
+			btnCenter.getStyleClass().add("SelectedIndex");
+			
+			}
+
+			btnLeft.setText( 1 + "");
+			btnCenter.setText(2 +"");
+			btnRight.setText( 3 + "");
+
+		} else if(update){
+
+			btnCenter.getStyleClass().add("SelectedIndex");
+
+			btnLeft.setText(index + "");
+			btnCenter.setText(index + 1 +"");
+			btnRight.setText(index + 2 + "");
+			
+		}
+    }
+		
+
+	public void updateindexButton(){
+
+		int index = currentIndex.get();
+		System.out.println(index + Bookserver.size());
+
+		if ((index + 1) * 20 > Bookserver.size()) {
+		
+		btnCenter.getStyleClass().removeAll("SelectedIndex");
+		btnRight.getStyleClass().add("SelectedIndex");
+        return;
+
+		} else if(index == 0){
+
+		btnCenter.getStyleClass().removeAll("SelectedIndex");
+		btnLeft.getStyleClass().add("SelectedIndex");
+
+		return;
+
+		}else{
+
+		btnRight.getStyleClass().removeAll("SelectedIndex");
+		btnLeft.getStyleClass().removeAll("SelectedIndex");
+		btnCenter.getStyleClass().add("SelectedIndex");
+
+		btnLeft.setText(index  + "");
+		btnCenter.setText(index + 1+"");
+		btnRight.setText(index + 2 + "");
+		}
+	}
+
+    public void onNavButton(ActionEvent event){
+	
+		Button btn = (Button) event.getSource();
+    	int count = Integer.parseInt(btn.getText());
+
+
+		if((int) Math.ceil((double) Bookserver.size() / LIST_SIZE) == 1){
+			return;
+		}
+
+		currentIndex.set(count-1);
+		updateindexButton();
+
+	}
+
+    public void removeBook(Libro libr, VBox vbox){
+
+        final Libro thisBook = libr;   
+        final VBox vboxFinal = vbox;   
+
+        vboxFinal.setOnMouseClicked(e -> {
+
+            if (!reccomendedBooks.contains(thisBook)) {
+        System.out.println("Libro non confermato, non selezionabile: " + thisBook.getTitolo());
+        btnRemove.setVisible(false); 
+        btnRemove.setDisable(true);
+        return;
+    }
+
+    if (selectedVbox == vboxFinal) {
+
+        vboxFinal.getStyleClass().remove("selectedRec");
+
+        btnRemove.setVisible(false);
+        btnRemove.setDisable(true);
+
+        selectedVbox = null;
+        BookToRemove = null;
+
+        return; 
+    }
+    if (selectedVbox != null) {
+        selectedVbox.getStyleClass().remove("selectedRec");
+    }
+
+    selectedVbox = vboxFinal;
+    BookToRemove = thisBook;
+
+    vboxFinal.getStyleClass().add("selectedRec");
+
+    btnRemove.setVisible(true);
+    btnRemove.setDisable(false);
+
+        });
     }
 }

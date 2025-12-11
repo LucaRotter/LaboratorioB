@@ -27,7 +27,7 @@
         <ScrollPane fx:id="ScrollCategories" hbarPolicy="NEVER"  prefHeight="42.0" prefWidth="754.0" styleClass="ScrollPaneCategory" vbarPolicy="NEVER">
 
             <content>
-                     <HBox fx:id="ToggleContainer" alignment="CENTER" prefHeight="39.0" prefWidth="718.0">
+                     <HBox fx:id="ToggleContainer" alignment="CENTER" prefHeight="42.0" prefWidth="718.0">
                   <children>
                         <ToggleButton text="Fiction" styleClass="CategoryBtn" />
                         <ToggleButton text="Religion" styleClass="CategoryBtn" />
@@ -36,9 +36,9 @@
                         <ToggleButton text="Business &amp; economics" styleClass="CategoryBtn" />
                         <ToggleButton text="History" styleClass="CategoryBtn" />
                         <ToggleButton text="Biography &amp; Autobiography" styleClass="CategoryBtn" />
-                        <ToggleButton text="Mystery  Detective" styleClass="CategoryBtn" />
+                        <ToggleButton text="Mystery &amp; Detective" styleClass="CategoryBtn" />
                         <ToggleButton text="Thrillers" styleClass="CategoryBtn" />
-                        <ToggleButton text="Political &amp; Science" styleClass="CategoryBtn" />
+                        <ToggleButton text="Political Science" styleClass="CategoryBtn" />
                         <ToggleButton text="Literary" styleClass="CategoryBtn" />
                         <ToggleButton text="Health &amp; Fitness" styleClass="CategoryBtn" />
                   </children>
@@ -49,7 +49,8 @@
 
         <HBox fx:id="ArrowOverlay"
       alignment="CENTER"
-      pickOnBounds="false">
+      pickOnBounds="false"
+      >
 
     <Button fx:id="btnCatLeft"
             text="◀"
@@ -67,6 +68,9 @@
             text="▶"
             styleClass="ArrowScroll"/>
 
+   <padding>
+            <Insets left="5.0" right="5.0"/>
+   </padding>
 </HBox>
 
       </StackPane>

@@ -22,6 +22,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.layout.GridPane;
 import models.Model;
 
 public class VisLibroController implements Initializable{
@@ -83,11 +84,9 @@ public class VisLibroController implements Initializable{
 	
 	@FXML
 	private Label lbUserCounter;
+
 	@FXML
 	private Label lbAverage;
-
-
-	
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
@@ -145,7 +144,7 @@ public class VisLibroController implements Initializable{
 		root1.setDisable(true);
 		modalOverlay.toFront();
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/applicationrob/TableReview.fxml"));
-		VBox modalContent = loader.load();
+		GridPane modalContent = loader.load();
 		TableReviewController tableReviewController = loader.getController();
 		tableReviewController.setReview(review);
 		

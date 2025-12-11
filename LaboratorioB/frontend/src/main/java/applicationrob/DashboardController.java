@@ -89,6 +89,8 @@ public class DashboardController implements Initializable{
 
 	private final int LIST_SIZE = 20;
 
+	private final int totalPages = 4; 
+
 	private IntegerProperty currentIndex = new SimpleIntegerProperty(0);
 
 	private List<Libro> Bookserver = new ArrayList<>();
@@ -103,73 +105,14 @@ public class DashboardController implements Initializable{
 
 	private int currentPage = 0;
 	
-	private final int totalPages = 4; // oppure 3
-
-	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		
 		init();
 		initNavButtons();
-	
-	//aggiungere qui metodo per scorrere le categorie il drag non funziona bene quindi useremo un pulante 
-	 for (javafx.scene.Node node : ToggleContainer.getChildren()) {
-    if (node instanceof ToggleButton btn) {
-        btn.setToggleGroup(group);
-
-        // intercetta sempre il click, anche sullo stesso bottone
-        btn.addEventFilter(MouseEvent.MOUSE_PRESSED, e -> {
-            if (btn.equals(lastSelected[0])) {
-                // deseleziona
-                group.selectToggle(null);
-                lastSelected[0] = null;
-
-                System.out.println("Deselezionato → vista normale");
-
-                // reset books
-                try {
-                    Bookserver.clear();
-                    gridBooks.getChildren().clear();
-                    currentIndex.set(0);
-					selectedCategory = null;
-                    initNavButtons();
-                    putBooks(currentIndex.get());
-                } catch (IOException ex) {
-                    ex.printStackTrace();
-                }
-
-                e.consume(); // evita che il toggle si ri-selezioni automaticamente
-            }
-        });
-    }
-}
-
-// listener sul gruppo per nuove selezioni
-group.selectedToggleProperty().addListener((obs, oldT, newT) -> {
-    if (newT != null) {
-        lastSelected[0] = (Toggle) newT;
-        ToggleButton selected = (ToggleButton) newT;
-        selectedCategory = selected.getText();
-
-        System.out.println("Categoria selezionata: " + selectedCategory);
-
-        // aggiorna libri filtrati
-        try {
-            Bookserver.clear();
-            gridBooks.getChildren().clear();
-            currentIndex.set(0);
-            initNavButtons();
-            putBooks(currentIndex.get());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-});
-
 		
 		try {
 
-			//first loading books
 			putBooks(currentIndex.get());
 			
 		} catch (IOException e) {
@@ -279,6 +222,57 @@ group.selectedToggleProperty().addListener((obs, oldT, newT) -> {
 			Yearfield.clear();
         }
     });
+
+	 for (javafx.scene.Node node : ToggleContainer.getChildren()) {
+    if (node instanceof ToggleButton btn) {
+        btn.setToggleGroup(group);
+
+        // intercetta sempre il click, anche sullo stesso bottone
+        btn.addEventFilter(MouseEvent.MOUSE_PRESSED, e -> {
+            if (btn.equals(lastSelected[0])) {
+                // deseleziona
+                group.selectToggle(null);
+                lastSelected[0] = null;
+
+                // reset books
+                try {
+                    Bookserver.clear();
+                    gridBooks.getChildren().clear();
+                    currentIndex.set(0);
+					selectedCategory = null;
+                    initNavButtons();
+                    putBooks(currentIndex.get());
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
+
+                e.consume(); 
+            }
+        });
+    }
+}
+
+// listener sul gruppo per nuove selezioni
+group.selectedToggleProperty().addListener((obs, oldT, newT) -> {
+    if (newT != null) {
+        lastSelected[0] = (Toggle) newT;
+        ToggleButton selected = (ToggleButton) newT;
+        selectedCategory = selected.getText();
+
+        System.out.println("Categoria selezionata: " + selectedCategory);
+
+        // aggiorna libri filtrati
+        try {
+            Bookserver.clear();
+            gridBooks.getChildren().clear();
+            currentIndex.set(0);
+            initNavButtons();
+            putBooks(currentIndex.get());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+});
 		choiceBoxOrder.setValue(Ricerca.TITOLO);
 	}
 
