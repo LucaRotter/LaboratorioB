@@ -37,8 +37,8 @@
 </Pane>
       <Pane layoutX="318.0" layoutY="59.0" prefHeight="582.0" prefWidth="523.0">
          <children>
-            <Button fx:id="btnCancel" layoutX="373.0" layoutY="554.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="58.0" text="Cancel" />
-            <Button fx:id="btnConfirm" layoutX="450.0" layoutY="554.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="71.0" text="Confirm" />
+            <Button fx:id="btnCancel" layoutX="380.0" layoutY="554.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="58.0" text="Cancel" styleClass="btnRec"/>
+            <Button fx:id="btnConfirm" layoutX="450.0" layoutY="554.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="71.0" text="Confirm" styleClass="btnRec"/>
             <ScrollPane fx:id="ScrollBooks" layoutY="60.0" prefHeight="467.0" prefWidth="521.0">
              <content>
                <GridPane fx:id="grid" layoutY="60.0" prefHeight="450.0" prefWidth="498.0" hgap="5.0" vgap="10.0">
@@ -68,7 +68,7 @@
                </children>
             </HBox>
       
-            <Pane layoutX="180.0" layoutY="7.0" maxHeight="40.0" prefHeight="40.0" prefWidth="341.0" styleClass="SearchBar"> 
+            <Pane layoutX="0.0" layoutY="0.0" maxHeight="40.0" prefHeight="40.0" prefWidth="521.0" styleClass="SearchBar"> 
          <children>
             <TextField fx:id="searchBar" layoutX="49.0" prefHeight="40.0" prefWidth="292.0" promptText="Search" />
             <Button fx:id="btnSearch" layoutX="7.0" layoutY="4.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0">
@@ -82,7 +82,7 @@
             </Button>
          </children>
       </Pane>
-            <Button fx:id="btnRemove" layoutY="15.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="71.0" text="Remove" visible="false" disable="true"/>
+            <Button fx:id="btnRemove" layoutX="300" layoutY="554.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="71.0" text="Remove" visible="false" disable="true" styleClass="btnRec"/>
            
          </children>
       </Pane>

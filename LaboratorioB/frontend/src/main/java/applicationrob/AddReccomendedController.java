@@ -28,6 +28,7 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.scene.control.ScrollPane;
 import models.Model;
+import javafx.scene.input.KeyCode;
 
 public class AddReccomendedController implements Initializable {
 
@@ -61,6 +62,9 @@ public class AddReccomendedController implements Initializable {
     @FXML
     private Button btnRemove;
 
+    @FXML 
+    private Button btnSearch;
+
     @FXML
     private GridPane containerRec;
 
@@ -84,6 +88,8 @@ public class AddReccomendedController implements Initializable {
     private int pos;
 
     private VBox selectedVbox = null;
+
+    private LoadMode currentMode = LoadMode.LAZY;
 
     @FXML
     public void initialize(URL location, ResourceBundle resources)  {
@@ -221,12 +227,34 @@ public class AddReccomendedController implements Initializable {
             onRemove();
         });
 
-    
+        searchBar.setOnKeyPressed(e->{
+
+			if(e.getCode() == KeyCode.ENTER){
+
+			try {
+				OnResearch();
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
+			}
+		});
+
+		btnSearch.setOnAction(e->{
+			try {
+				OnResearch();
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
+			
+		});
+
         pos= 0;
     }
 
     private void putBooks(int index) throws RemoteException, IOException {
 		
+
+				if(currentMode == LoadMode.LAZY){	
 
 				if(Bookserver.isEmpty()){
 
@@ -238,8 +266,8 @@ public class AddReccomendedController implements Initializable {
             		Bookserver.addAll(clientBR.getInstance().lazyLoadingLibri(""));
         		}
 			
-		
-		
+		}
+			
 		if(Bookserver.isEmpty()){
 			
 			setEmptyResearch("BOOK NOT FOUND");
@@ -576,7 +604,7 @@ public class AddReccomendedController implements Initializable {
 
         vboxFinal.setOnMouseClicked(e -> {
 
-            if (!reccomendedBooks.contains(thisBook)) {
+        if (!reccomendedBooks.contains(thisBook)) {
         System.out.println("Libro non confermato, non selezionabile: " + thisBook.getTitolo());
         btnRemove.setVisible(false); 
         btnRemove.setDisable(true);
@@ -609,4 +637,32 @@ public class AddReccomendedController implements Initializable {
 
         });
     }
+
+    public void OnResearch() throws IOException {
+		
+		String writeText = searchBar.getText();
+
+		String title = writeText;
+
+		if(searchBar.getText().isEmpty()){
+            currentMode = LoadMode.LAZY;
+			grid.getChildren().clear();
+			Bookserver.clear();
+			currentIndex.set(0);
+			initNavButtons();
+			putBooks(0);
+			return;
+		}
+		
+		grid.getChildren().clear();
+		List<Libro> ricercaLibri = clientBR.getInstance().cercaLibri("",0,title, Ricerca.TITOLO);
+
+		Bookserver.clear();
+		Bookserver.addAll(ricercaLibri);
+        currentMode = LoadMode.FULL;
+		currentIndex.set(0);
+		initNavButtons();
+		putBooks(0);
+		
+	}
 }
