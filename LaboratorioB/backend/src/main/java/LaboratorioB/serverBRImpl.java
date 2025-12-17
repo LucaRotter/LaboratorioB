@@ -35,8 +35,6 @@ import LaboratorioB.db.DatabaseManager;
 public class serverBRImpl extends UnicastRemoteObject implements serverBR {
 
     private static final long serialVersionUID = 1L;
-    private Connection conn;
-
     // Costruttore
     /**
      * Costruisce un oggetto serverBRImpl e stabilisce la connessione
@@ -44,8 +42,6 @@ public class serverBRImpl extends UnicastRemoteObject implements serverBR {
      */
     protected serverBRImpl() throws RemoteException, SQLException {
         super();
-        conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/LaboratorioB", "postgres", "@Aleks13082002");
-        System.out.println("Database connected!");
     }
 
     // Implementazione dei metodi definiti nell'interfaccia serverBR
@@ -56,7 +52,7 @@ public class serverBRImpl extends UnicastRemoteObject implements serverBR {
      * @throws RemoteException In caso di errore di comunicazione remota.
      */
     @Override
-    public synchronized int registrazione(Utente user) throws RemoteException {
+    public int registrazione(Utente user) throws RemoteException {
 
         String hashPassword = user.getPassword().hashCode() + ""; // Semplice hash della password
 
@@ -569,7 +565,7 @@ public class serverBRImpl extends UnicastRemoteObject implements serverBR {
      * @throws RemoteException In caso di errore di comunicazione remota.
      */
     @Override
-    public synchronized Libreria createLibreria(String nome, int id_utente) throws RemoteException {
+    public Libreria createLibreria(String nome, int id_utente) throws RemoteException {
         // inserimento in db
         String query = "INSERT into libreria(id_utente, nome) VALUES (?, ?)";
 
@@ -753,7 +749,7 @@ public class serverBRImpl extends UnicastRemoteObject implements serverBR {
      * @throws RemoteException In caso di errore di comunicazione remota.
      */
     @Override
-    public synchronized boolean createConsiglio(int id_utente, int id_libro, int id_consiglio) throws RemoteException {
+    public boolean createConsiglio(int id_utente, int id_libro, int id_consiglio) throws RemoteException {
         int count = 0;
         // count = risultato count per utente e libro
         String query_count = "SELECT count(*) FROM Libri_consigliati WHERE id_utente = ? AND id_libro = ?"; // modificare struttura db
@@ -802,7 +798,7 @@ public class serverBRImpl extends UnicastRemoteObject implements serverBR {
      * @throws RemoteException In caso di errore di comunicazione remota.
      */
     @Override
-    public synchronized boolean createValutazione(Valutazione val) throws RemoteException {
+    public boolean createValutazione(Valutazione val) throws RemoteException {
         // query per inserimento nel db
         String query = "INSERT into Valutazioni_Libri (id_utente, id_libro, edizione, voto_edizione, stile, voto_stile, contenuto, voto_contenuto, gradevolezza, voto_gradevolezza, originalita, voto_originalita, voto_medio) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? , ?)";
 
@@ -845,7 +841,7 @@ public class serverBRImpl extends UnicastRemoteObject implements serverBR {
      * @throws RemoteException In caso di errore di comunicazione remota.
     */
     @Override
-    public synchronized boolean deleteConsiglio(int id_utente, int id_libro, int id_consiglio) throws RemoteException {
+    public boolean deleteConsiglio(int id_utente, int id_libro, int id_consiglio) throws RemoteException {
         // delete da db
         String query = "DELETE FROM Libri_consigliati WHERE id_utente = ? AND id_libro = ? AND id_libro_consigliato = ?";
         boolean deleted = false;
