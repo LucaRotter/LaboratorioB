@@ -121,6 +121,13 @@ public class clientBR{
 		return server.getValutazioniUtente(id_utente, id_libro);
 	}
 
+	public int getNumeroLibriConsigliati(int id_libro) throws RemoteException{
+		return server.getNumeroLibriConsigliati(id_libro);
+	}
+
+	public int getNumeroLibriConsigliati_libro(int id_libro, int id_libro_consigliato) throws RemoteException{
+		return server.getNumeroLibriConsigliati_libro(id_libro, id_libro_consigliato);
+	}
 
 	public static void main(String[] args) throws RemoteException, IOException, NotBoundException {
 

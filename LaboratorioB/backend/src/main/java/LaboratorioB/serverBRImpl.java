@@ -424,6 +424,7 @@ public class serverBRImpl extends UnicastRemoteObject implements serverBR {
         }
         return consigli;
     }
+
      /**
      * Recupera il numero di consigli di persone diverse su libro specifico
      * @param id_libro L'ID univoco del libro.
@@ -439,7 +440,7 @@ public class serverBRImpl extends UnicastRemoteObject implements serverBR {
             ps.setInt(1, id_libro);
             try (ResultSet rs = ps.executeQuery()) {
                 if (rs.next()) {
-                    numeroLibri = rs.getInt("numero_libri");
+                    numeroLibri = rs.getInt("numero_utenti");
                 }
             }
         } catch (SQLException e) {
