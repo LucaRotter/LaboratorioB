@@ -15,7 +15,6 @@
   </properties>
 
   <dependencies>
-    <!-- Driver PostgreSQL -->
     <dependency>
       <groupId>org.postgresql</groupId>
       <artifactId>postgresql</artifactId>
@@ -30,7 +29,7 @@
     <dependency>
       <groupId>com.zaxxer</groupId>
       <artifactId>HikariCP</artifactId>
-      <version>5.1.0</version> <!-- o l'ultima disponibile -->
+      <version>5.1.0</version>
     </dependency>
     <dependency>
     <groupId>com.laboratoriob</groupId>
@@ -41,13 +40,11 @@
 
   <build>
     <plugins>
-      <!-- Plugin per eseguire la classe con main -->
       <plugin>
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>exec-maven-plugin</artifactId>
         <version>3.1.0</version>
         <configuration>
-          <!-- Sostituisci con il tuo package e classe main -->
           <mainClass>LaboratorioB.serverBRImpl</mainClass>
         </configuration>
       </plugin>
