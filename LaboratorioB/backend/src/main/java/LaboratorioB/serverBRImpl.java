@@ -381,7 +381,7 @@ public class serverBRImpl extends UnicastRemoteObject implements serverBR {
      */
     @Override
     public List<Libro> getConsiglio(int id_libro) throws RemoteException {
-        String query = "SELECT * FROM libri_consigliati WHERE id_libro = ?";
+        String query = "SELECT DISTINCT id_libro_consigliato FROM libri_consigliati WHERE id_libro = ?";
         List<Libro> consigli = new LinkedList<Libro>();
         try (Connection conn = DatabaseManager.getConnection(); PreparedStatement ps = conn.prepareStatement(query)) {
             ps.setInt(1, id_libro);
