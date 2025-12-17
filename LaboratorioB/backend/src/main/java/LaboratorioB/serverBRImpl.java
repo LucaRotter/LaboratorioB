@@ -35,8 +35,6 @@ import LaboratorioB.db.DatabaseManager;
 public class serverBRImpl extends UnicastRemoteObject implements serverBR {
 
     private static final long serialVersionUID = 1L;
-    private Connection conn;
-
     // Costruttore
     /**
      * Costruisce un oggetto serverBRImpl e stabilisce la connessione
@@ -44,8 +42,6 @@ public class serverBRImpl extends UnicastRemoteObject implements serverBR {
      */
     protected serverBRImpl() throws RemoteException, SQLException {
         super();
-        conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/LaboratorioB", "postgres", "@Aleks13082002");
-        System.out.println("Database connected!");
     }
 
     // Implementazione dei metodi definiti nell'interfaccia serverBR
