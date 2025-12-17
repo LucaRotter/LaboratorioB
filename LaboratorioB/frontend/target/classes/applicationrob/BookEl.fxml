@@ -5,18 +5,67 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.shape.SVGPath?>
+<?import javafx.scene.layout.HBox?>
  
-<VBox fx:id="rootPane" maxHeight="-Infinity"  maxWidth="-Infinity" styleClass="bookElement" minHeight="-Infinity" minWidth="-Infinity" prefHeight="180.0" prefWidth="120.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="applicationrob.BookController">
-   <children>
-      <ImageView fitHeight="122.0" fitWidth="122.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../img/Paomedia-Small-N-Flat-Book.512.png" />
-         </image>
-      </ImageView>
+<VBox fx:id="rootPane"
+      prefHeight="120.0"
+      prefWidth="120.0"
+      maxHeight="180.0"
+      maxWidth="120.0"
+      minHeight="180.0"
+      minWidth="120.0"
+      styleClass="bookElement"
+      xmlns="http://javafx.com/javafx/22"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="applicationrob.BookController">
+
+    <children>
+
+        <StackPane prefHeight="122.0"
+           >
+
+            <ImageView fitHeight="122.0"
+                       fitWidth="122.0"
+                       preserveRatio="true">
+                <image>
+                    <Image url="@../img/Paomedia-Small-N-Flat-Book.512.png" />
+                </image>
+            </ImageView>
+
+            <StackPane fx:id="badgePane"
+           prefWidth="28"
+           prefHeight="28"
+           StackPane.alignment="TOP_RIGHT"
+           styleClass="badge">
+
+    <children>
+        <HBox spacing="10"
+              alignment="TOP_RIGHT"
+            
+              >
+
+            <SVGPath
+                content="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6m-5.784 6A2.24 2.24 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.3 6.3 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1zM4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5"
+                scaleX="1.4"
+                scaleY="1.4"/>
+
+            <Label fx:id="badgeNumber"
+                   text=""
+                   styleClass="badge-text"/>
+        </HBox>
+    </children>
+</StackPane>
+
+        </StackPane>
+
       <Label fx:id="labelName" prefHeight="36.0" prefWidth="120.0" text="" />
       <Label fx:id="labelAuthor" prefHeight="36.0" prefWidth="120.0" text="" />
-   </children>
-   <cursor>
-      <Cursor fx:constant="HAND" />
-   </cursor>
+
+    </children>
+
+    <cursor>
+        <Cursor fx:constant="HAND" />
+    </cursor>
 </VBox>

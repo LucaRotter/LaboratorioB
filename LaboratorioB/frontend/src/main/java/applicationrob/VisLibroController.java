@@ -253,6 +253,8 @@ public class VisLibroController implements Initializable{
 	lbUserCounter.setText(String.valueOf(review.size())); 
 	}
 
+
+
 	public void initRecoemmendedList(Libro selectedBook){
 
 		ScrollRec.setContent(recListBook);
@@ -282,6 +284,8 @@ public class VisLibroController implements Initializable{
 			e.printStackTrace();
 		}
 		
+
+		//inserire qua 
 		BookController book = loader.getController();
 		book.setLabels(recommendList.get(i).getAutore(), recommendList.get(i).getTitolo());
 		Libro libr = recommendList.get(i);
@@ -297,7 +301,17 @@ public class VisLibroController implements Initializable{
 		
 		}
 
-		lbUserCounterRec.setText("bho");
+		int tmp = 0;
+		
+		try {
+			tmp = clientBR.getInstance().getNumeroLibriConsigliati(selectedBook.getId());
+		} catch (RemoteException e) {
+
+			e.printStackTrace();
+		}
+
+	
+		lbUserCounterRec.setText(String.valueOf(tmp));
 		lbRecounter.setText(String.valueOf(recommendList.size()));
 
 		if(recommendList.size() == 0){

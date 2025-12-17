@@ -424,6 +424,7 @@ public class serverBRImpl extends UnicastRemoteObject implements serverBR {
         }
         return consigli;
     }
+
     @Override
     public int getNumeroLibriConsigliati(int id_libro) throws RemoteException {
         String query = "SELECT COUNT(DISTINCT id_utente) AS numero_utenti FROM libri_consigliati WHERE id_libro = ?";
@@ -432,7 +433,7 @@ public class serverBRImpl extends UnicastRemoteObject implements serverBR {
             ps.setInt(1, id_libro);
             try (ResultSet rs = ps.executeQuery()) {
                 if (rs.next()) {
-                    numeroLibri = rs.getInt("numero_libri");
+                    numeroLibri = rs.getInt("numero_utenti");
                 }
             }
         } catch (SQLException e) {

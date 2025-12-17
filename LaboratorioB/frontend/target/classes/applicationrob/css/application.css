@@ -434,3 +434,13 @@ Button:hover{
     -fx-background-color: #D0FAF1;
 }
 
+.badge {
+    -fx-padding: 4;
+}
+
+.badge-text {
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-font-size: 12px;
+    -fx-alignment: center;
+}
