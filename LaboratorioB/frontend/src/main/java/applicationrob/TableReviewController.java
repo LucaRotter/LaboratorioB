@@ -92,8 +92,6 @@ public class TableReviewController implements Initializable{
         ScorePleasentness.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newVal) -> updateMedia());
         ScoreOriginality.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newVal) -> updateMedia());
 
-        
-
         TxtStyle.setWrapText(true);
         TxtContent.setWrapText(true);
         TxtPleasentess.setWrapText(true);
@@ -116,7 +114,6 @@ public class TableReviewController implements Initializable{
 
     public void initValues(List<Valutazione> vals){
 
-
             if(vals.isEmpty()){
             
                         ScoreStyle.setValue(1);
@@ -129,6 +126,27 @@ public class TableReviewController implements Initializable{
                         BtnRestar.setVisible(true);
                         BtnConfirm.setVisible(true);
                         BtnConfirm.setDisable(false);
+
+                        TxtContent.setEditable(true);
+                        TxtEdition.setEditable(true);
+                        TxtOriginality.setEditable(true);
+                        TxtPleasentess.setEditable(true);
+                        TxtStyle.setEditable(true);
+
+                        ScoreStyle.setMouseTransparent(false);
+                        ScoreStyle.setFocusTraversable(true);
+
+                        ScoreEdition.setMouseTransparent(false);
+                        ScoreEdition.setFocusTraversable(true);
+
+                        ScoreContent.setMouseTransparent(false);
+                        ScoreContent.setFocusTraversable(true);
+
+                        ScorePleasentness.setMouseTransparent(false);
+                        ScorePleasentness.setFocusTraversable(true);
+
+                        ScoreOriginality.setMouseTransparent(false);
+                        ScoreOriginality.setFocusTraversable(true);
 
                 } else {
                     
@@ -195,30 +213,30 @@ public class TableReviewController implements Initializable{
         TxtPleasentess.setText(valutazione.getNoteGradevolezza());
         TxtOriginality.setText(valutazione.getNoteOriginalita());
 
-        ScoreStyle.setMouseTransparent(true);
-        ScoreStyle.setFocusTraversable(false);
-
-        ScoreEdition.setMouseTransparent(true);
-        ScoreEdition.setFocusTraversable(false);
-
-        ScoreContent.setMouseTransparent(true);
-        ScoreContent.setFocusTraversable(false);
-
-        ScorePleasentness.setMouseTransparent(true);
-        ScorePleasentness.setFocusTraversable(false);
-
-        ScoreOriginality.setMouseTransparent(true);
-        ScoreOriginality.setFocusTraversable(false);
-                        
         TxtContent.setEditable(false);
         TxtEdition.setEditable(false);
         TxtOriginality.setEditable(false);
         TxtPleasentess.setEditable(false);
         TxtStyle.setEditable(false);
 
+        setReadOnly(ScoreStyle);
+        setReadOnly(ScoreEdition);
+        setReadOnly(ScoreContent);
+        setReadOnly(ScorePleasentness); 
+        setReadOnly(ScoreOriginality);
+
         BtnRestar.setDisable(true);
         BtnRestar.setVisible(false);
         BtnConfirm.setVisible(false);
         BtnConfirm.setDisable(true);
     }
+
+    private void setReadOnly(ChoiceBox<?> choiceBox) {
+    choiceBox.getStyleClass().add("read-only");
+    choiceBox.setMouseTransparent(true); 
+    choiceBox.setFocusTraversable(false);
+    
 }
+}
+
+
