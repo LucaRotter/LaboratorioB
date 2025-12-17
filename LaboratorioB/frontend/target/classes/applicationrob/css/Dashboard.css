@@ -56,9 +56,9 @@ Button {
 
 .CategoryBtn{
     -fx-background-color:transparent;
-    -fx-pref-width: 80px;   /* larghezza preferita */
-    -fx-pref-height: 80px;   /* altezza preferita */
-    -fx-min-width: 120px;     /* larghezza minima */
+    -fx-pref-width: 80px;  
+    -fx-pref-height: 80px;   
+    -fx-min-width: 120px;     
     -fx-max-width: 200px; 
 }
 

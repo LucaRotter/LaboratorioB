@@ -6,7 +6,6 @@ import java.rmi.RemoteException;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.ResourceBundle;
-
 import LaboratorioB.common.models.Libreria;
 import LaboratorioB.common.models.Libro;
 import LaboratorioB.common.models.Valutazione;
@@ -24,6 +23,8 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.layout.GridPane;
 import models.Model;
+import java.util.Set;
+import java.util.HashSet;
 
 public class VisLibroController implements Initializable{
 
@@ -81,6 +82,11 @@ public class VisLibroController implements Initializable{
 	@FXML
 	private Button btnConfirm;
 
+	@FXML 
+	private Label lbUserCounterRec;
+
+	@FXML
+	private Label lbRecounter;
 	
 	@FXML
 	private Label lbUserCounter;
@@ -243,6 +249,7 @@ public class VisLibroController implements Initializable{
 	reviewContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
 
 	}	
+
 	lbUserCounter.setText(String.valueOf(review.size())); 
 	}
 
@@ -250,7 +257,6 @@ public class VisLibroController implements Initializable{
 
 		ScrollRec.setContent(recListBook);
 		List<Libro> recommendList = new LinkedList<>();
-		System.out.println("inizializzo consigli");
 
 		try {
 			recommendList = clientBR.getInstance().getConsiglio(selectedBook.getId());
@@ -291,8 +297,12 @@ public class VisLibroController implements Initializable{
 		
 		}
 
+		lbUserCounterRec.setText("bho");
+		lbRecounter.setText(String.valueOf(recommendList.size()));
+
 		if(recommendList.size() == 0){
 
+				lbRecounter.setText("0");
 				Label nessunLibro = new Label("NO BOOK RECCOMMENDED");
 				nessunLibro.setStyle("-fx-font-size: 32px; -fx-text-fill: gray;");
 
