@@ -12,6 +12,7 @@
         <BorderPane fx:id="rootBorder"
                     prefHeight="700"
                     prefWidth="880"
+                    stylesheets="@css/review.css"
                     layoutX="0"
                     layoutY="0"
                     AnchorPane.topAnchor="0.0"

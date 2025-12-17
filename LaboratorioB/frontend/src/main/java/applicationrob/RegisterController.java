@@ -51,7 +51,7 @@ public class RegisterController implements Initializable {
     void onRegisterUser(ActionEvent event) throws RemoteException {
         String nome = nameField.getText().trim();
         String cognome = surnameField.getText().trim();
-        String cf = cfField.getText().trim();
+        String cf = cfField.getText().trim().toUpperCase();
         String email = emailField.getText().trim();
         String pw = pwField.getText().trim();
 
@@ -69,6 +69,7 @@ public class RegisterController implements Initializable {
            return;
         }
         TokenSession.setUserId(id_user);
+        Model.getIstance().getView().changeToHome();
 
     }
 
@@ -119,36 +120,50 @@ public class RegisterController implements Initializable {
     }
 
     private boolean isFiscalCodeValidate(String cf) {
-        if (cf == null || cf.length() != 16)
-            return false;
+    
+    if(cf.length() != 16){
+        return false;
+    }
 
-        if (!cf.matches("^[A-Z0-9]+$"))
-            return false;
+    String firstsix = cf.substring(0,6);
+    String secondeight = cf.substring(6,8);
+    String thirdnine = cf.substring(8,9);
+    String fourtheleven = cf.substring(9,11);
+    String fifthtwelve  = cf.substring(11,12);
+    String sixthfifteen = cf.substring(12,15);
+    String last = cf.substring(15,16);
+    
+    if(!(letterVerification(firstsix) && NumberVerification(secondeight) && letterVerification(thirdnine) && NumberVerification(fourtheleven) && letterVerification(fifthtwelve)
+    && NumberVerification(sixthfifteen) && letterVerification(last))){
+    return false;
+}
 
-        final String dispari = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-        final int[] valueD = {
-                1, 0, 5, 7, 9, 13, 15, 17, 19, 21, 1, 0, 5, 7, 9, 13, 15, 17, 19, 21,
-                1, 0, 5, 7, 9, 13
-        };
-        final String pari = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-        final int[] valueP = {
-                0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9,
-                10, 11, 12, 13, 14, 15
-        };
+return true;
+    
+}
 
-        int sum = 0;
-        for (int i = 0; i < 15; i++) {
-            char c = cf.charAt(i);
-            int idx = c >= '0' && c <= '9' ? c - '0' : c - 'A' + 10;
-            if (i % 2 == 0) {
-                sum += valueD[idx];
-            } else {
-                sum += valueP[idx];
-            }
-        }
+    private boolean letterVerification(String tmp){
+        for(int i=0; i< tmp.length(); i++){
 
-        char expectedControl = (char) ('A' + (sum % 26));
-        return cf.charAt(15) == expectedControl;
+        char c = tmp.charAt(i);
+
+    if (!Character.isLetter(c)) {
+        return false; 
+    }
+    }
+        return true;
+    }
+
+    private boolean NumberVerification(String tmp){
+        for(int i=0; i< tmp.length(); i++){
+        char t = tmp.charAt(i);
+
+        
+    if (!Character.isDigit(t)) {
+        return false; 
+    }
+     }
+        return true;
     }
 
     private void showErrorMessage(String message) {

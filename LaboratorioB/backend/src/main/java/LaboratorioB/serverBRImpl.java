@@ -424,15 +424,13 @@ public class serverBRImpl extends UnicastRemoteObject implements serverBR {
         }
         return consigli;
     }
-<<<<<<< HEAD
-=======
+
      /**
      * Recupera il numero di consigli di persone diverse su libro specifico
      * @param id_libro L'ID univoco del libro.
      * @return il numero di consigli di persone diverse su libro specifico
      * @throws RemoteException In caso di errore di comunicazione remota.
      */
->>>>>>> 539076b197ea11cc4f9967ef43a7e93d8d523c19
 
     @Override
     public int getNumeroLibriConsigliati(int id_libro) throws RemoteException {

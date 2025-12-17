@@ -245,7 +245,7 @@ public class VisLibroController implements Initializable{
 				
 	} else{
 
-	lbAverage.setText(String.format("%.2f", avarege));	
+	lbAverage.setText(String.format("%.2f", avarege/review.size()));	
 	reviewContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
 
 	}	
@@ -284,10 +284,19 @@ public class VisLibroController implements Initializable{
 			e.printStackTrace();
 		}
 		
+		int tmp = 0;
+
+		try {
+			tmp = clientBR.getInstance().getNumeroLibriConsigliati_libro(selectedBook.getId(), recommendList.get(i).getId());
+		} catch (RemoteException e) {
+
+			e.printStackTrace();
+		}
 
 		//inserire qua 
 		BookController book = loader.getController();
 		book.setLabels(recommendList.get(i).getAutore(), recommendList.get(i).getTitolo());
+		book.setNumberReccomender(tmp);
 		Libro libr = recommendList.get(i);
 
 		vbox.setOnMouseClicked(e->{

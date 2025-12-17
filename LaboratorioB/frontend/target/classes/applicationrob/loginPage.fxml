@@ -13,11 +13,11 @@
             xmlns:fx="http://javafx.com/fxml/1" stylesheets="@css/loginRegisterPage.css"
             fx:controller="applicationrob.LoginController" styleClass="loginPage">
 
- <Button fx:id="backBtn" text="" layoutX="20" layoutY="20" style="-fx-font-size: 14px; -fx-background-color: transparent; -fx-text-fill: #333;"> 
+ <Button fx:id="backBtn" text="" layoutX="20" layoutY="20" style="-fx-font-size: 14px;  -fx-text-fill: #333;" styleClass="Buttonback"> 
 <graphic>
         <ImageView fitHeight="33.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../img/backBtn.png" />
+                  <Image url="@../img/pngegg.png" />
                </image>
             </ImageView>
         </graphic>
