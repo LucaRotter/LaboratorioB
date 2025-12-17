@@ -118,6 +118,8 @@ public class AddReccomendedController implements Initializable {
         Model.getIstance().getView().selectedBookProperty().addListener((obs, oldLibr, newLibr) -> {
         
         if(newLibr!= null){
+        
+        resetBookList();
         pos= 0;
 
         containerRec.getChildren().clear();
@@ -665,4 +667,20 @@ public class AddReccomendedController implements Initializable {
 		putBooks(0);
 		
 	}
+
+    public void resetBookList(){
+
+        try {
+        grid.getChildren().clear();
+        Bookserver.clear();
+        searchBar.setText("");
+        currentMode = LoadMode.LAZY;
+        currentIndex.set(0);
+        initNavButtons();
+        putBooks(0);
+        } catch (IOException ex) {
+        ex.printStackTrace();
+    }
+        
+    }
 }

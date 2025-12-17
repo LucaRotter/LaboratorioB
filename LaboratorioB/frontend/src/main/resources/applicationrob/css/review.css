@@ -84,13 +84,6 @@
 
 }
 
-.button:hover {
-    
-}
-
-.button:pressed {
-    
-}
 
 /* === Effetto tabella (righe alternate) === */
 .grid-pane > *:nth-child(even) {
@@ -104,3 +97,22 @@
 .text-area .scroll-pane {
     -fx-hbar-policy: never;   /* disattiva scrollbar orizzontale */
 }
+
+/* ChoiceBox in modalità solo visualizzazione */
+
+/* Nasconde la freccetta */
+.choice-box.read-only .open-button {
+    -fx-padding: 0;
+    -fx-opacity: 0;
+    -fx-min-width: 0;
+    -fx-max-width: 0;
+}
+
+
+/* Centra il valore */
+.choice-box.read-only .label {
+    -fx-alignment: center;
+    -fx-text-alignment: center;
+    -fx-padding: 0;
+}
+
