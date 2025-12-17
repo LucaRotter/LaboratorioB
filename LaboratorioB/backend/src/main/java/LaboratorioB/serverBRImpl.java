@@ -424,6 +424,13 @@ public class serverBRImpl extends UnicastRemoteObject implements serverBR {
         }
         return consigli;
     }
+     /**
+     * Recupera il numero di consigli di persone diverse su libro specifico
+     * @param id_libro L'ID univoco del libro.
+     * @return il numero di consigli di persone diverse su libro specifico
+     * @throws RemoteException In caso di errore di comunicazione remota.
+     */
+
     @Override
     public int getNumeroLibriConsigliati(int id_libro) throws RemoteException {
         String query = "SELECT COUNT(DISTINCT id_utente) AS numero_utenti FROM libri_consigliati WHERE id_libro = ?";
@@ -441,6 +448,33 @@ public class serverBRImpl extends UnicastRemoteObject implements serverBR {
         return numeroLibri;
 
     }
+
+     /**
+     * Recupera il numero di libri consigliati su libro specifico
+     * @param id_libro L'ID univoco del libro.
+     * @param id_libro_consigliato L'ID univoco del libro consigliato.
+     * @return Il numero di libri consigliati su libro specifico
+     * @throws RemoteException In caso di errore di comunicazione remota.
+     */
+
+    public int getNumeroLibriConsigliati_libro(int id_libro, int id_libro_consigliato) throws RemoteException {
+        String query = "SELECT COUNT(*) AS numero_consigli FROM libri_consigliati WHERE id_libro = ? AND id_libro_consigliato = ?";
+        int numeroLibri = 0;
+         try (Connection conn = DatabaseManager.getConnection(); PreparedStatement ps = conn.prepareStatement(query)) {
+            ps.setInt(1, id_libro);
+            ps.setInt(2, id_libro_consigliato);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    numeroLibri = rs.getInt("numero_consigli");
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();    
+        }
+        return numeroLibri;
+
+    }
+
 
     /**
      * Recupera il voto medio di un libro dato il suo ID.
