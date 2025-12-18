@@ -107,8 +107,8 @@
                         </HBox>
                      </graphic>
                   </Button>
-                  <Text layoutX="20.0" layoutY="135.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Don't have an account ?" />
-                  <Hyperlink fx:id="linkRegister" layoutX="49.0" layoutY="140.0" text="Register here" />
+                  <Text layoutX="31.0" layoutY="136.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Don't have an account ?" />
+                  <Hyperlink fx:id="linkRegister" layoutX="56.0" layoutY="150.0" text="Register here" />
                </children>
             </Pane>
             <Text layoutX="15.0" layoutY="63.0" strokeType="OUTSIDE" strokeWidth="0.0" text="BookRecommender">

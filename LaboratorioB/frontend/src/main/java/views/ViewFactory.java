@@ -88,6 +88,7 @@ public class ViewFactory {
 	public void changeToHome() {
 		
 		initializeStage("/applicationrob/MainPage.fxml");
+		VisLibrerie = null;
 
 	}
 
