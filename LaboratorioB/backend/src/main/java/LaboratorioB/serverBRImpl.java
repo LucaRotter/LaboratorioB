@@ -453,7 +453,7 @@ public class serverBRImpl extends UnicastRemoteObject implements serverBR {
      * @return Il numero di libri consigliati su libro specifico
      * @throws RemoteException In caso di errore di comunicazione remota.
      */
-
+    @Override
     public int getNumeroLibriConsigliati_libro(int id_libro, int id_libro_consigliato) throws RemoteException {
         String query = "SELECT COUNT(*) AS numero_consigli FROM libri_consigliati WHERE id_libro = ? AND id_libro_consigliato = ?";
         int numeroLibri = 0;
