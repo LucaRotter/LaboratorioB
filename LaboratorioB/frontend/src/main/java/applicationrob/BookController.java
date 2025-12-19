@@ -35,7 +35,6 @@ public class BookController {
 	public void setNumberReccomender(int tmp){
 
 		badgePane.setVisible(true);
-		System.out.println(tmp);
 		badgeNumber.setText(String.valueOf(tmp));
 	}
 

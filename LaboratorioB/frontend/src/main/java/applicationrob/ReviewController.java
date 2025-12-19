@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.net.URL;
 import java.rmi.RemoteException;
 import java.util.ResourceBundle;
-
 import LaboratorioB.common.models.Valutazione;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -18,6 +17,9 @@ public class ReviewController implements Initializable{
 
 	@FXML 
 	private Label lbUser;
+
+	@FXML
+	private Label overallvote;
 
 	private VisLibroController visLibro ;
 
@@ -51,6 +53,7 @@ public class ReviewController implements Initializable{
 		
 		this.Val = valutazione;
 		lbUser.setText(clientBR.getInstance().getUtente(valutazione.getIdUtente()).getNome());
+		overallvote.setText(String.valueOf(valutazione.getVotoMedio()));
 	}
 	
 }

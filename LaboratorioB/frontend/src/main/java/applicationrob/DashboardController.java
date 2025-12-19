@@ -20,7 +20,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
-import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
@@ -259,8 +258,6 @@ group.selectedToggleProperty().addListener((obs, oldT, newT) -> {
         ToggleButton selected = (ToggleButton) newT;
         selectedCategory = selected.getText();
 
-        System.out.println("Categoria selezionata: " + selectedCategory);
-
         // aggiorna libri filtrati
         try {
             Bookserver.clear();
@@ -328,7 +325,6 @@ group.selectedToggleProperty().addListener((obs, oldT, newT) -> {
 	public void updateindexButton(){
 
 		int index = currentIndex.get();
-		System.out.println(index + Bookserver.size());
 
 		if ((index + 1) * 20 > Bookserver.size()) {
 		

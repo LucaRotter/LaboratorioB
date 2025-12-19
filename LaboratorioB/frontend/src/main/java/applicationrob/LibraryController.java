@@ -7,7 +7,6 @@ import java.lang.Runnable;
 import LaboratorioB.common.models.Libreria;
 import models.Model;
 import java.rmi.RemoteException;
-import applicationrob.clientBR;
 
 
 public class LibraryController {

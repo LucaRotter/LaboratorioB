@@ -89,7 +89,7 @@ public class VisLibrerieController {
     
     //Metodo che permetta l'apertura del Modal
     private void showModal() {
-        if(librerie.size () >= 50) {
+        if(librerie.size () >= 20) {
             modalOverlay.setVisible(false); 
             views.ViewAlert.showAlert("info", "Maximum Libraries", "You have reached the maximum limit of libraries.", extraBtn, "info");
             return;

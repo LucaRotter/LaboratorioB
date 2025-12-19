@@ -4,9 +4,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Button; 
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import java.io.IOException;
 import javafx.fxml.FXML;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.Node;
@@ -71,7 +69,7 @@ public class AlertController {
 		case "info":
 			imageText = "/img/info.png";
 			break;
-		default : System.out.print("not found");
+		default :
 		    break;
 		
 		}

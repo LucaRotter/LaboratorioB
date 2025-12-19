@@ -53,7 +53,6 @@ public class LoginController implements Initializable {
         }   
 
         TokenSession.setUserId(id_user);
-        System.out.println(TokenSession.checkTkSession());
         Model.getIstance().getView().changeToHome();
     } 
 

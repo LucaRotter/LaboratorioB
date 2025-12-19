@@ -4,24 +4,19 @@ import javafx.scene.control.Label;
 import LaboratorioB.common.models.Libreria;
 import LaboratorioB.common.models.Libro;
 import javafx.fxml.FXML;
-import java.util.List;
 import models.Model;
-import views.ViewFactory;
 import javafx.event.ActionEvent;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.StackPane;
-import javafx.scene.layout.AnchorPane;
 import java.io.IOException;
 import java.rmi.RemoteException;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.VBox;
 import javafx.geometry.Insets;
 import javafx.scene.text.Text;
-import javafx.scene.text.Font; 
 
 public class VisLibreriaController {
 

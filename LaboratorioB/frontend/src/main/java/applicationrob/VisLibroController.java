@@ -23,8 +23,6 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.layout.GridPane;
 import models.Model;
-import java.util.Set;
-import java.util.HashSet;
 
 public class VisLibroController implements Initializable{
 
@@ -94,25 +92,39 @@ public class VisLibroController implements Initializable{
 	@FXML
 	private Label lbAverage;
 
+	Libro book;
+
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 
-		Libro book = Model.getIstance().getView().getSelectedBook();
-		
 		init();
 
-		if (book != null) {
-    		setLibro(book);
-		}		
+		Model.getIstance().getView().getRecommenderRefresh().addListener((obs, oldVal, newVal) -> {
+
+			if (newVal) {
+				
+				initRecoemmendedList(book);
+				Model.getIstance().getView().getRecommenderRefresh().set(false); 
+			}
+});	
+		
+		Model.getIstance().getView().getReviewRefresh().addListener((obs, oldVal, newVal) -> {
+
+			if (newVal) {
+				
+				initReviewList(book);
+				Model.getIstance().getView().getReviewRefresh().set(false); 
+			}
+});
 
 		Model.getIstance().getView().selectedBookProperty().addListener((obs, oldLibr, newLibr) -> {
 
 		if(newLibr != null){
-
+			
+			book = newLibr;
 			root1.setVvalue(0.0);
 
         	setLibro(newLibr);
-			System.out.println(newLibr.getTitolo());
 		}
 
 		});
@@ -120,6 +132,12 @@ public class VisLibroController implements Initializable{
 	}
 	
 	public void init(){
+
+		book = Model.getIstance().getView().getSelectedBook();
+
+		if (book != null) {
+    		setLibro(book);
+		}
 
 		btnComments.setOnAction(e->{
 			onComments();
@@ -226,7 +244,6 @@ public class VisLibroController implements Initializable{
 		reviewc.setVislibroController(this);
 
 		avarege += review.get(i).getVotoMedio(); 
-
 		reviewContainer.getChildren().add(hBox);
 	}
 
@@ -268,7 +285,6 @@ public class VisLibroController implements Initializable{
 		}
 
 		recListBook.getChildren().clear();  
-		System.out.println(recommendList.size());
 
 		for(int i=0; i<recommendList.size(); i++) {
 		
@@ -343,19 +359,51 @@ public class VisLibroController implements Initializable{
 	//function to go to the add reviews section
 	public void onComments(){
 
+		List<Libreria> libraries = new LinkedList<>();
+
+		try {
+			libraries = clientBR.getInstance().getLibrerie(TokenSession.getUserId());
+		} catch (RemoteException e) {
+			
+			e.printStackTrace();
+		}
+
 		if(!TokenSession.checkTkSession()){
-		views.ViewAlert.showAlert("error", "Library error", "Server error, try again.", btnComments, "error");
+
+			views.ViewAlert.showAlert("error", "Library error", "Server error, try again.", btnComments, "error");
 		}else{
+
+		if(ControlIfPresent(libraries)){
 		Model.getIstance().getView().getSideBarSelectionItem().set("AddReview");
+		}else{
+			views.ViewAlert.showAlert("error", "Library error", "Server error, try again.", btnComments, "error");
+		}
+		}
 	}
-}
+
 
 	public void onReccomended(){
+
+		List<Libreria> libraries = new LinkedList<>();
+
+		try {
+			libraries = clientBR.getInstance().getLibrerie(TokenSession.getUserId());
+		} catch (RemoteException e) {
+			
+			e.printStackTrace();
+		}
+
 		if(!TokenSession.checkTkSession()){
+
 		views.ViewAlert.showAlert("error", "Library error", "Server error, try again.", btnComments, "error");
 		}else{
+
+		if(ControlIfPresent(libraries)){
 		Model.getIstance().getView().getSideBarSelectionItem().set("AddReccomended");
-	}	
+		}else{
+			views.ViewAlert.showAlert("error", "Library error", "Server error, try again.", btnComments, "error");
+		}
+		}
 }
 
 	//function to open/close the modal to add the book to libraries
@@ -400,11 +448,10 @@ public class VisLibroController implements Initializable{
 				e.printStackTrace();
 			}
 
-			boolean found = libraries.get(i).getLibreria().stream().anyMatch(libro -> 
-			libro.getId() == Model.getIstance().getView().getSelectedBook().getId());
+			
 
 			LibraryItemController libraryItemController = loader.getController();
-			libraryItemController.initLibrary(libraries.get(i).getNomeLibreria(), libraries.get(i).getIdLibreria(),found);
+			libraryItemController.initLibrary(libraries.get(i).getNomeLibreria(), libraries.get(i).getIdLibreria(),ControlIfPresent(libraries));
 
 			//setting user data to retrieve the controller later
 			hbox.setUserData(libraryItemController);
@@ -457,6 +504,20 @@ public class VisLibroController implements Initializable{
 		} 
 	}  
 
+	}
+
+	private boolean ControlIfPresent(List<Libreria> libraries){
+
+		boolean found = false;
+
+		for(int i= 0; i< libraries.size();i++){
+
+		
+			found = libraries.get(i).getLibreria().stream().anyMatch(libro -> 
+			libro.getId() == Model.getIstance().getView().getSelectedBook().getId());
+
+			}
+			return found;
 	}
 
 	public void closeModal() {

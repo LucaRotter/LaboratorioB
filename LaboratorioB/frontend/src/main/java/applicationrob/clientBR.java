@@ -1,11 +1,11 @@
 package applicationrob;
+
 import java.io.IOException;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry; 
 import java.util.List;
-
 import LaboratorioB.common.interfacce.serverBR;
 import LaboratorioB.common.models.Libreria;
 import LaboratorioB.common.models.Libro;
@@ -24,7 +24,7 @@ public class clientBR{
 	public clientBR()  throws RemoteException{
 
 		try {
-			Registry reg = LocateRegistry.getRegistry("localhost", 1099);
+			Registry reg = LocateRegistry.getRegistry("localhost", 6969);
 			server = (serverBR)reg.lookup("serverBR");
 			System.out.println("Connessione RMI riuscita");
 		}catch(RemoteException | NotBoundException e) {

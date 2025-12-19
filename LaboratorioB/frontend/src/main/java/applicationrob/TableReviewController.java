@@ -132,21 +132,12 @@ public class TableReviewController implements Initializable{
                         TxtOriginality.setEditable(true);
                         TxtPleasentess.setEditable(true);
                         TxtStyle.setEditable(true);
-
-                        ScoreStyle.setMouseTransparent(false);
-                        ScoreStyle.setFocusTraversable(true);
-
-                        ScoreEdition.setMouseTransparent(false);
-                        ScoreEdition.setFocusTraversable(true);
-
-                        ScoreContent.setMouseTransparent(false);
-                        ScoreContent.setFocusTraversable(true);
-
-                        ScorePleasentness.setMouseTransparent(false);
-                        ScorePleasentness.setFocusTraversable(true);
-
-                        ScoreOriginality.setMouseTransparent(false);
-                        ScoreOriginality.setFocusTraversable(true);
+                        
+                        setEditOnly(ScoreStyle);
+                        setEditOnly(ScoreEdition);
+                        setEditOnly(ScoreContent);
+                        setEditOnly(ScorePleasentness);
+                        setEditOnly(ScoreOriginality);
 
                 } else {
                     
@@ -170,13 +161,12 @@ public class TableReviewController implements Initializable{
             TokenSession.getUserId()
         );
 
-        System.out.println("Valutazione creata: " + val.getVotoStile());
-
         if(clientBR.getInstance().createValutazione(val)){
-            System.out.println("Valutazione inserita con successo");
-            Model.getIstance().getView().getSideBarSelectionItem().set("VisLibro");
+            setNotEditable();
+            Model.getIstance().getView().getReviewRefresh().set(true); 
+            Model.getIstance().getView().getSideBarSelectionItem().set("VisLibro");  
         } else {
-            System.out.println("Errore nell'inserimento della valutazione");
+            
         }
 
     }
@@ -213,6 +203,10 @@ public class TableReviewController implements Initializable{
         TxtPleasentess.setText(valutazione.getNoteGradevolezza());
         TxtOriginality.setText(valutazione.getNoteOriginalita());
 
+        setNotEditable();
+    }
+
+    private void setNotEditable(){
         TxtContent.setEditable(false);
         TxtEdition.setEditable(false);
         TxtOriginality.setEditable(false);
@@ -237,6 +231,12 @@ public class TableReviewController implements Initializable{
     choiceBox.setFocusTraversable(false);
     
 }
+
+    private void setEditOnly(ChoiceBox<?> choiceBox){
+    choiceBox.getStyleClass().remove("read-only");
+    choiceBox.setMouseTransparent(false); 
+    choiceBox.setFocusTraversable(true);
+    }
 }
 
 

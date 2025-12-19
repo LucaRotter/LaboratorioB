@@ -1,4 +1,5 @@
 package applicationrob;
+
 public class TokenSession {
     private static int userId = -1;
 

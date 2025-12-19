@@ -5,13 +5,9 @@ import java.net.URL;
 import java.rmi.RemoteException;
 import java.util.List;
 import java.util.ResourceBundle;
-import javafx.scene.control.Label;
 import LaboratorioB.common.models.Valutazione;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.TextArea;
 import models.Model;
 
 public class AddReviewController implements Initializable{

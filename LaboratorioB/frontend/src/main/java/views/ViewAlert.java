@@ -1,7 +1,6 @@
 package views;
 
 import applicationrob.AlertController; 
-import javafx.scene.Parent;
 import javafx.scene.Node;
 import javafx.scene.layout.Pane; 
 import javafx.scene.layout.StackPane; 
@@ -75,7 +74,7 @@ public static void showAlert(String type, String title, String message, Node nod
 				grayLayer.setMouseTransparent(true);
 				break;
 			default:
-				System.out.println("Position not found, using default center.");
+				
 				grayLayer.setMouseTransparent(false);
 				break;
         }

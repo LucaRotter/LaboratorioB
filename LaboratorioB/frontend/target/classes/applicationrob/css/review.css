@@ -98,7 +98,12 @@
     -fx-hbar-policy: never;   /* disattiva scrollbar orizzontale */
 }
 
-/* ChoiceBox in modalità solo visualizzazione */
+Text {
+    -fx-font-size: 13px;
+    -fx-fill: #333333;
+    -fx-font-family: "Segoe UI", "Roboto", "Arial";
+}
+
 
 /* Nasconde la freccetta */
 .choice-box.read-only .open-button {
@@ -114,5 +119,11 @@
     -fx-alignment: center;
     -fx-text-alignment: center;
     -fx-padding: 0;
+}
+
+.paneBox {
+    -fx-background-color: white;
+    -fx-background-radius: 6;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.12), 8, 0.2, 0, 2);
 }
 

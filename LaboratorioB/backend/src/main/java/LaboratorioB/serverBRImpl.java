@@ -862,9 +862,9 @@ public class serverBRImpl extends UnicastRemoteObject implements serverBR {
     
     public static void main(String[] args) {
         try {
-            LocateRegistry.createRegistry(1099);
+            LocateRegistry.createRegistry(6969);
             serverBRImpl server = new serverBRImpl();
-            Naming.rebind("rmi://localhost:1099/serverBR", server);
+            Naming.rebind("rmi://localhost:6969/serverBR", server);
             System.out.println("Server BR is running...");
 
             //questo server solo con l'avvio con Maven

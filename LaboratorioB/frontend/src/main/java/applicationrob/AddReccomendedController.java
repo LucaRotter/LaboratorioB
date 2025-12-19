@@ -30,6 +30,8 @@ import javafx.scene.control.ScrollPane;
 import models.Model;
 import javafx.scene.input.KeyCode;
 
+
+
 public class AddReccomendedController implements Initializable {
 
     @FXML
@@ -75,8 +77,6 @@ public class AddReccomendedController implements Initializable {
 
 	private IntegerProperty currentIndex = new SimpleIntegerProperty(0);
 
-	private String MODRICERCA = "VISUALIZZA";
-
     private Libro selectedBook;
 
     private Libro BookToRemove;
@@ -100,7 +100,7 @@ public class AddReccomendedController implements Initializable {
        try {
         reccomendedBooks = clientBR.getInstance().getConsiglioUtente(Model.getIstance().getView().getSelectedBook().getId(), TokenSession.getUserId());
        } catch (RemoteException e) {
-        
+        views.ViewAlert.showAlert("error", "Library error", "Server error, try again.", searchBar, "error");
         e.printStackTrace();
        }
 
@@ -128,7 +128,8 @@ public class AddReccomendedController implements Initializable {
         reccomendedBooks = clientBR.getInstance().getConsiglioUtente(Model.getIstance().getView().getSelectedBook().getId(), TokenSession.getUserId());
         
         } catch (RemoteException e) {
-        // TODO Auto-generated catch block
+        
+        views.ViewAlert.showAlert("error", "Library error", "Server error, try again.", searchBar, "error");
         e.printStackTrace();
        }
 
@@ -397,13 +398,14 @@ public class AddReccomendedController implements Initializable {
         try {
             clientBR.getInstance().createConsiglio(TokenSession.getUserId(), Model.getIstance().getView().getSelectedBook().getId(),selectedBook.getId());
         } catch (RemoteException e) {
-           
+           views.ViewAlert.showAlert("error", "Library error", "Server error, try again.", searchBar, "error");
             e.printStackTrace();
         }
 
         pos++;
         btnCancel.setDisable(true);
         btnConfirm.setDisable(true);
+        Model.getIstance().getView().getRecommenderRefresh().set(true); 
         reccomendedBooks.add(selectedBook);
         
     }
@@ -457,7 +459,9 @@ public class AddReccomendedController implements Initializable {
 
                 try {
                     
+                    
                     clientBR.getInstance().deleteConsiglio(TokenSession.getUserId(), Model.getIstance().getView().getSelectedBook().getId(), BookToRemove.getId());
+                    Model.getIstance().getView().getRecommenderRefresh().set(true); 
                     reccomendedBooks.remove(BookToRemove);
                     containerRec.getChildren().clear();
                     pos=0;
@@ -465,7 +469,7 @@ public class AddReccomendedController implements Initializable {
                     btnRemove.setDisable(true);
                     initRecoemmended();
                 } catch (RemoteException e1) {
-                   
+                   views.ViewAlert.showAlert("error", "Library error", "Server error, try again.", searchBar, "error");
                     e1.printStackTrace();
                 }
                 
@@ -557,7 +561,6 @@ public class AddReccomendedController implements Initializable {
 	public void updateindexButton(){
 
 		int index = currentIndex.get();
-		System.out.println(index + Bookserver.size());
 
 		if ((index + 1) * 20 > Bookserver.size()) {
 		
@@ -607,7 +610,7 @@ public class AddReccomendedController implements Initializable {
         vboxFinal.setOnMouseClicked(e -> {
 
         if (!reccomendedBooks.contains(thisBook)) {
-        System.out.println("Libro non confermato, non selezionabile: " + thisBook.getTitolo());
+       
         btnRemove.setVisible(false); 
         btnRemove.setDisable(true);
         return;

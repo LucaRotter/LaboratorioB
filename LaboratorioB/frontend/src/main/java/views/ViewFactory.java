@@ -1,12 +1,13 @@
 package views;
 
 import java.io.IOException;
-import java.util.LinkedList;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -20,7 +21,8 @@ public class ViewFactory {
 	private final StringProperty SideBarSelection;
 	private ObjectProperty<Libro> selectedLibr;
 	private ObjectProperty<Libreria> selectedLibreria;
-
+	private BooleanProperty reccommender;
+	private BooleanProperty review;
 	private AnchorPane DashboardMain;
 	private AnchorPane VisLibrerie;
 	private AnchorPane VisLibro;
@@ -37,6 +39,9 @@ public class ViewFactory {
 		this.SideBarSelection = new SimpleStringProperty("");
 		this.selectedLibr = new SimpleObjectProperty<Libro>();
 		this.selectedLibreria = new SimpleObjectProperty<Libreria>();
+		this.reccommender = new SimpleBooleanProperty(false);
+		this.review = new SimpleBooleanProperty(false);
+
 		historyPage =  FXCollections.observableArrayList();
 
 		this.Stage = new Stage();
@@ -44,6 +49,14 @@ public class ViewFactory {
 		this.Stage.getIcons().add(new Image(getClass().getResourceAsStream("/img/iconBK.png")));
 		this.Stage.setTitle("BookRecommender");
 	}
+
+	public BooleanProperty getRecommenderRefresh() {
+    return reccommender;
+}
+
+	public BooleanProperty getReviewRefresh() {
+    return review;
+}
 	
 	public StringProperty getSideBarSelectionItem() {
 		return SideBarSelection;
@@ -163,21 +176,14 @@ public class ViewFactory {
 	}
 
 	public void lastHistory() {
+
 		if (!historyPage.isEmpty()) {
 
-		for(String s :historyPage){
-			System.out.print(s + "-> ");
-		}
-
         historyPage.removeLast();
-		System.out.println("seconda stampa");
-		for(String s :historyPage){
-			 System.out.print(  s + "-> ");
-		}
 
         if (!historyPage.isEmpty()) {
 
-			System.out.print("cambio pagina");
+		
             String previous = historyPage.getLast();
             SideBarSelection.set(previous);
 
