@@ -14,12 +14,26 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.AnchorPane;
 import java.io.IOException;
 
-
+/**
+ * Classe per la visualizzazione degli alert nell'applicazione.
+ * Contiene metodi statici per mostrare diversi tipi di alert (errore, successo, informazione).
+ * Utilizza JavaFX per la gestione dell'interfaccia utente.
+ * @author Laboratorio B
+ *
+ */
 
 public class ViewAlert {
     
 
-
+/**
+	 * Metodo statico per mostrare un alert.
+	 * @param type Tipo di alert (error, success, info).
+	 * @param title Titolo dell'alert.
+	 * @param message Messaggio dell'alert.
+	 * @param node Nodo della scena da cui mostrare l'alert.
+	 * @param position Posizione dell'alert (info, success, error).
+	 * @throws IOException Se si verifica un errore di I/O durante il caricamento dell'alert.
+	 */
 public static void showAlert(String type, String title, String message, Node node, String position) {
 	    try {
 	        FXMLLoader loader = new FXMLLoader(AlertController.class.getResource("/applicationrob/AlertMsg.fxml"));
@@ -62,6 +76,13 @@ public static void showAlert(String type, String title, String message, Node nod
 	    }
 
 
+    /**
+	 * Metodo per posizionare l'alert nella scena.
+	 * @param position Posizione dell'alert (info, success, error).
+	 * @param alertRoot Root dell'alert.
+	 * @param grayLayer Layer grigio di sfondo.
+	 */
+
 	private static void positionAlert(String position, AnchorPane alertRoot, Pane grayLayer) {
 		switch (position.toLowerCase()) {
 			case "info":
@@ -80,6 +101,14 @@ public static void showAlert(String type, String title, String message, Node nod
         }
     }
 
+	/**
+	 * Metodo per impostare la durata dell'alert e la sua scomparsa automatica.
+	 * @param overlayGroup Gruppo di overlay contenente l'alert.
+	 * @param rootPane BorderPane principale della scena.
+	 * @param delaySeconds Secondi di ritardo prima dell'inizio della dissolvenza.
+	 * @param fadeSeconds Secondi di durata della dissolvenza.
+	 */
+	
 	public static void setDurationAlert(Node overlayGroup, BorderPane rootPane, double delaySeconds, double fadeSeconds) {
         FadeTransition fade = new FadeTransition(Duration.seconds(fadeSeconds), overlayGroup);
         fade.setFromValue(1.0);

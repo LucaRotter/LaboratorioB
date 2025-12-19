@@ -12,31 +12,57 @@ import javafx.scene.Group;
 import javafx.scene.layout.VBox;
 
 
-
+/**
+ * Classe controller per la gestione degli alert dell'applicazione.
+ * Contiene metodi per visualizzare diversi tipi di alert (errore, successo, informazione).
+ * Utilizza JavaFX per la gestione dell'interfaccia utente.
+ * @author Laboratorio B
+ * @param closeButton Bottone per chiudere l'alert.
+ * @param rootPane AnchorPane principale dell'alert.
+ * @param titleLabel Label che mostra il titolo dell'alert.
+ * @param messageLabel Label che mostra il messaggio dell'alert.
+ * @param iconImage ImageView che mostra l'icona dell'alert.
+ * @param containerElement VBox che contiene gli elementi dell'alert.
+ * @param imageText Percorso dell'immagine dell'icona.
+ * @param parentContainer BorderPane genitore per la gestione della visualizzazione dell'alert nelle varie pagine.
+ */
 
 public class AlertController { 
 
-	@FXML
-	private AnchorPane rootPane;
-	@FXML 
-	private Label titleLabel;
-	@FXML 
-	private Label messageLabel;
 	@FXML 
 	private Button closeButton;
+
+	@FXML
+	private AnchorPane rootPane;
+
+	@FXML 
+	private Label titleLabel;
+
+	@FXML 
+	private Label messageLabel;
+	
 	@FXML 
 	private ImageView iconImage;
+
 	@FXML
 	private VBox containerElement;
 
 	
 	private String imageText;
+
 	private BorderPane parentContainer;
 
+	/**
+	 * Metodo di inizializzazione del controller.
+	 */
 	@FXML
     public void initialize() {
     }
 	
+	/**
+	 * Metodo per chiudere l'alert.
+	 * Rimuove l'alert dal container genitore.
+	 */
 	@FXML 
 	private void closeModal() {
 		 Node current = rootPane;
@@ -49,10 +75,21 @@ public class AlertController {
     }
 	}
 
+	/**
+	 * Metodo per impostare il container genitore.
+	 * @param parent BorderPane genitore.
+	 */
 	public void setParentContainer(BorderPane parent) {
         this.parentContainer = parent;
     }
 	
+	/**
+	 * Metodo per impostare l'alert.
+	 * @param type Tipo di alert (error, success, info).
+	 * @param title Titolo dell'alert.	
+	 * @param message Messaggio dell'alert.
+	 */
+
 	public void setAlert(String type, String title, String message) {
 		titleLabel.setText(title);
 		messageLabel.setText(message);
@@ -79,6 +116,10 @@ public class AlertController {
 		
 	}
 
+	/**
+	 * Metodo per impostare le dimensioni dell'alert e la visibilità del bottone di chiusura.
+	 * @param type Tipo di alert (error, success, info).
+	 */
 	private void setDimensionAndButton(String type) {
 	 if (type.equalsIgnoreCase("success") || type.equalsIgnoreCase("error")) {
         closeButton.setVisible(false);  

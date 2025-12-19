@@ -18,6 +18,23 @@ import javafx.scene.layout.VBox;
 import javafx.geometry.Insets;
 import javafx.scene.text.Text;
 
+/**
+ * Classe controller per la visualizzazione della libreria e dei suoi libri.
+ * Contiene metodi per aggiungere, cercare e visualizzare i libri all'interno della libreria selezionata.
+ * Utilizza JavaFX per la gestione dell'interfaccia utente.
+ * @author Laboratorio B
+ * @param btnSearch Bottone per la ricerca dei libri nella libreria.
+ * @param booksContainer GridPane che contiene i libri della libreria.
+ * @param searchBar TextField per l'inserimento del testo di ricerca.
+ * @param bookNameLabel Text che mostra il nome della libreria selezionata.
+ * @param emptyText Label che mostra messaggi quando non ci sono libri da visualizzare.
+ * @param selectedLibrary Libreria selezionata dall'utente.
+ * @param library Libreria corrente.
+ * @param booksLibrary Lista osservabile dei libri presenti nella libreria.
+ * @param currentBooks Lista osservabile dei libri attualmente visualizzati.
+ * @param filteredBooks Lista osservabile dei libri filtrati in base alla ricerca.
+ */
+
 public class VisLibreriaController {
 
     @FXML
@@ -37,10 +54,18 @@ public class VisLibreriaController {
     
     private Libreria selectedLibrary;
     private Libreria library;
+
     private ObservableList<Libro> booksLibrary; 
     private ObservableList<Libro> currentBooks;
     private ObservableList<Libro> filteredBooks;
 
+
+    /**
+     * Metodo di inizializzazione del controller.
+     * Inizializza le liste osservabili e imposta i listener per la libreria selezionata.
+     * Aggiorna la visualizzazione dei libri quando la libreria selezionata cambia.
+     * @throws RemoteException Se si verifica un errore di comunicazione remota.
+     */
     @FXML
     public void initialize() { 
         booksLibrary = FXCollections.observableArrayList(); 
@@ -87,6 +112,13 @@ public class VisLibreriaController {
 
     }
 
+    /**
+     * Metodo per cercare libri nella libreria selezionata in base al testo inserito nella barra di ricerca.
+     * Filtra i libri e aggiorna la visualizzazione.
+     * @param event Evento di azione del bottone di ricerca.
+     * @throws RemoteException Se si verifica un errore di comunicazione remota.
+     * @throws IOException Se si verifica un errore di I/O durante la ricerca.
+     */
     @FXML
     public void SeachBooksInLibrary(ActionEvent event) throws RemoteException, IOException {
         String textSlib = searchBar.getText().trim().toLowerCase();
@@ -113,13 +145,21 @@ public class VisLibreriaController {
         InsertingElements(currentBooks); 
     }
 
-    //Metodo per mostrare tutti i libri della libreria selezionata
+    /**
+     * Metodo che si occupa di mostrare tutti i libri della libreria senza filtri.
+     */
     private void InsertingElements() {
         InsertingElements(booksLibrary); 
     }
     
     
-    //Metodo che si occupa di mostrare il filtraggio dei libri libreria selezionata
+    /**
+     * Metodo che si occupa di mostrare i libri forniti in input.
+     * Mostra i libri in una griglia.
+     * @param listBooksToShow Lista dei libri da mostrare.
+     * @throws IOException Se si verifica un errore di I/O durante il caricamento dei libri.
+     * @throws RemoteException Se si verifica un errore di comunicazione remota.
+     */
     private void InsertingElements(ObservableList<Libro> listBooksToShow)  {
     booksContainer.getChildren().clear();
      if (listBooksToShow == null || listBooksToShow.isEmpty()) {

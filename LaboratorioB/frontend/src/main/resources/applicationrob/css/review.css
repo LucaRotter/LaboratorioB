@@ -1,17 +1,17 @@
-/* === Stile generale della pagina === */
+/* Stile generale della pagina */
 .anchor-pane {
     -fx-background-color: #f9f9fb;
     -fx-font-family: "Segoe UI", Calibri, sans-serif;
     -fx-font-size: 14px;
 }
 
-/* === Titolo === */
+/* Titolo */
 .text {
     -fx-fill: #333;
     -fx-font-weight: bold;
 }
 
-/* === Tabella delle recensioni === */
+/* Tabella delle recensioni */
 .TableReview {
     -fx-background-color: #ffffff;
     -fx-border-color: #d1d1d1;
@@ -24,7 +24,7 @@
 
 
 
-/* === Intestazioni delle colonne === */
+/* Intestazioni delle colonne */
 .header {
     -fx-font-weight: bold;
     -fx-font-size: 15px;
@@ -34,12 +34,12 @@
     -fx-border-width: 0 0 1 0;
 }
 
-/* === Celle della tabella === */
+/* Celle della tabella */
 .label {
     -fx-text-fill: #333333;
 }
 
-/* === ChoiceBox (punteggio) === */
+/* ChoiceBox (punteggio) */
 .choice-box {
     -fx-background-color: white;
     -fx-border-color: #cccccc;
@@ -58,7 +58,7 @@
     -fx-text-fill: #333;
 }
 
-/* === TextArea (note) === */
+/* TextArea (note) */
 .text-area {
     -fx-background-color: white;
     -fx-border-color: #cccccc;
@@ -76,7 +76,7 @@
     -fx-effect: dropshadow(gaussian, rgba(74,144,226,0.2), 4, 0, 0, 0);
 }
 
-/* === Pulsanti === */
+/* Pulsanti */
 .button {
     
 	-fx-background-color: #FFFF;
@@ -85,7 +85,7 @@
 }
 
 
-/* === Effetto tabella (righe alternate) === */
+/* Effetto tabella (righe alternate) */
 .grid-pane > *:nth-child(even) {
     -fx-background-color: #fafafa;
 }
@@ -95,7 +95,7 @@
 }
 
 .text-area .scroll-pane {
-    -fx-hbar-policy: never;   /* disattiva scrollbar orizzontale */
+    -fx-hbar-policy: never;   
 }
 
 Text {

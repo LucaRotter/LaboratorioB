@@ -12,29 +12,56 @@ import models.Model;
 import javafx.scene.layout.AnchorPane;
 
 
-
+/**
+ * Classe controller per la registrazione di un nuovo utente.
+ * Contiene metodi per gestire l'interfaccia di registrazione e validare i campi di input.
+ * Utilizza JavaFX per la gestione dell'interfaccia utente.
+ * @author Laboratorio B
+ * @param backBtn Bottone per tornare alla schermata principale.
+ * @param rootPane AnchorPane principale della schermata di registrazione.
+ * @param nameField TextField per l'inserimento del nome dell'utente.
+ * @param surnameField TextField per l'inserimento del cognome dell'utente.
+ * @param cfField TextField per l'inserimento del codice fiscale dell'utente.
+ * @param emailField TextField per l'inserimento dell'email dell'utente.
+ * @param pwField PasswordField per l'inserimento della password dell'utente.
+ * @param errorLabel Label per la visualizzazione dei messaggi di errore durante la registrazione.
+ * @param id_user ID dell'utente registrato.
+ */
 
 public class RegisterController implements Initializable {
 
     @FXML
-    private AnchorPane rootPane;
-    @FXML
     private Button backBtn;
+
+    @FXML
+    private AnchorPane rootPane;
+    
     @FXML
     private TextField nameField;
+
     @FXML
     private TextField surnameField;
+
     @FXML
     private TextField cfField;
+
     @FXML
     private TextField emailField;
+
     @FXML
     private PasswordField pwField;
+
     @FXML
     private Label errorLabel;
 
     private int id_user;
 
+    /**
+     * Metodo di inizializzazione del controller.
+     * Si occupa di configurare il bottone di ritorno alla schermata principale.
+     * @param location URL della risorsa FXML.
+     * @param resources Risorse localizzate per l'interfaccia utente.
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         
@@ -44,6 +71,14 @@ public class RegisterController implements Initializable {
 		});
     }
 
+    /**
+     * Metodo per gestire la registrazione di un nuovo utente.
+     * Valida i campi di input e, se validi, registra l'utente tramite il clientBR.
+     * In caso di successo, imposta l'ID dell'utente nella sessione e cambia alla schermata principale.
+     * In caso di errore, mostra un messaggio di errore appropriato.
+     * @param event Evento di azione del bottone di registrazione.
+     * @throws RemoteException Se si verifica un errore di comunicazione remota.
+     */
     @FXML
     void onRegisterUser(ActionEvent event) throws RemoteException {
         String nome = nameField.getText().trim();
@@ -70,11 +105,25 @@ public class RegisterController implements Initializable {
 
     }
 
+    /**
+     * Metodo per cambiare alla schermata di login.
+     * @param event Evento di azione del bottone di cambio schermata.
+     */
     @FXML
     void changeToLogin(ActionEvent event) {
         Model.getIstance().getView().changeToLogin();
     }
 
+    /**
+     * Metodo per validare i campi di input della registrazione.
+     * Controlla che tutti i campi siano compilati correttamente e restituisce un messaggio di errore se necessario.
+     * @param nome Nome dell'utente.
+     * @param cognome Cognome dell'utente.
+     * @param cf Codice fiscale dell'utente.
+     * @param email Email dell'utente.
+     * @param pw Password dell'utente.
+     * @return Messaggio di errore se la validazione fallisce, altrimenti null.
+     */
     private String validateField(String nome, String cognome, String cf, String email, String pw) {
 
         if (nome.isEmpty() && cognome.isEmpty() && cf.isEmpty() && email.isEmpty() && pw.isEmpty()) {
@@ -116,8 +165,14 @@ public class RegisterController implements Initializable {
         return null;
     }
 
+    /**
+     * Metodo per validare il formato del codice fiscale.
+     * Controlla che il codice fiscale sia lungo 16 caratteri e segua il formato corretto.
+     * @param cf Codice fiscale da validare.
+     * @return true se il codice fiscale è valido, false altrimenti.
+     */
     private boolean isFiscalCodeValidate(String cf) {
-    
+
     if(cf.length() != 16){
         return false;
     }
@@ -139,6 +194,11 @@ return true;
     
 }
 
+/**
+ * Metodo di supporto per verificare se una stringa contiene solo lettere.
+ * @param tmp Stringa da verificare.
+ * @return true se la stringa contiene solo lettere, false altrimenti.
+ */
     private boolean letterVerification(String tmp){
         for(int i=0; i< tmp.length(); i++){
 
@@ -151,6 +211,11 @@ return true;
         return true;
     }
 
+    /**
+     * Metodo di supporto per verificare se una stringa contiene solo numeri.
+     * @param tmp Stringa da verificare.
+     * @return true se la stringa contiene solo numeri, false altrimenti.
+     */
     private boolean NumberVerification(String tmp){
         for(int i=0; i< tmp.length(); i++){
         char t = tmp.charAt(i);
@@ -163,6 +228,11 @@ return true;
         return true;
     }
 
+
+    /**
+     * Metodo per mostrare un messaggio di errore nella label dedicata.
+     * @param message Messaggio di errore da visualizzare.
+     */
     private void showErrorMessage(String message) {
         errorLabel.setText(message);
         errorLabel.setVisible(true);
