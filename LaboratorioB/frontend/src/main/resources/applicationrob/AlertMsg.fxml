@@ -17,13 +17,13 @@
          <Pane prefHeight="131.0" prefWidth="400.0">
             <children>
                   
-                  <Label fx:id="titleLabel" layoutX="200.0" layoutY="20.0" styleClass="alert-title" text="Error" />
+                  <Label fx:id="titleLabel"  layoutX="0"  layoutY="20"  prefWidth="400" alignment="CENTER" styleClass="alert-title" text="" />
             </children>
          </Pane>
             <Label fx:id="messageLabel" styleClass="alert-message" text="" wrapText="true" />
          <Pane prefHeight="103.0" prefWidth="400.0">
             <children>
-                  <Button fx:id="closeButton" layoutX="175.0" layoutY="21.0" onAction="#closeModal" styleClass="alert-button" text="CLOSE" />
+                  <Button fx:id="closeButton" layoutX="160.0" layoutY="21.0" onAction="#closeModal" styleClass="alert-button" text="CLOSE" />
             </children>
          </Pane>
         </VBox>
