@@ -39,10 +39,10 @@ ScrollPane:focused {
 .scroll-bar {
     -fx-pref-width: 14px;   
     -fx-pref-height: 14px;  
-	-fx-background-color: transparent; /* niente colore */
-    -fx-background-insets: 0;          /* rimuove margini interni */
-    -fx-background-radius: 0;          /* rimuove eventuali angoli arrotondati */
-    -fx-border-color: transparent;     /* elimina il bordo */
+	-fx-background-color: transparent; 
+    -fx-background-insets: 0;         
+    -fx-background-radius: 0;          
+    -fx-border-color: transparent;     
     -fx-border-width: 0; 
 }
 
@@ -59,7 +59,7 @@ ScrollPane:focused {
 }
 
  .scroll-bar .track {
-    -fx-background-color: transparent; /* niente colore */
+    -fx-background-color: transparent; 
    
 }
 
@@ -93,10 +93,10 @@ ScrollPane:focused {
 }
 
 .ScrollPaneBooks > .viewport {
-    -fx-background-color: #ffffff; /* sfondo del viewport */
+    -fx-background-color: #ffffff; 
 }
 
-/*da spostare*/
+
 .reviewContainer{
     -fx-border-color: transparent;
 	-fx-border-style: none;
@@ -371,11 +371,7 @@ Button:hover{
 .PaneDetail{
     fx-background-color: #ffffff;
     -fx-background-radius: 12;
-
-    /* Ombra interna per effetto incavo */
     -fx-effect: innershadow(gaussian, rgba(0,0,0,0.18), 6, 0.1, 2, 2);
-                
-    
     -fx-padding: 10;
 }
 
@@ -386,7 +382,6 @@ Button:hover{
 
 .NavigationBox{
 	-fx-spacing: 1em;
-
 }
 
 .NavigationBox Button {
