@@ -95,7 +95,7 @@ Button {
     -fx-background-color: #ffffff;
     -fx-background-radius: 8 0 8 0;
     -fx-border-radius: 8;
-    -fx-clip: true; /* forza il clipping sugli angoli */
+    -fx-clip: true; 
 }
 
 .ScrollPaneCategory .content {
