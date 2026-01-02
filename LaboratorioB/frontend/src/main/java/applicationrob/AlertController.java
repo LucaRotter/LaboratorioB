@@ -112,7 +112,7 @@ public class AlertController {
 		}
 	
 		iconImage.setImage(new Image(getClass().getResourceAsStream(imageText)));
-		//setDimensionAndButton(type);
+		setDimensionAndButton(type);
 		
 	}
 
@@ -120,20 +120,17 @@ public class AlertController {
 	 * Metodo per impostare le dimensioni dell'alert e la visibilità del bottone di chiusura.
 	 * @param type Tipo di alert (error, success, info).
 	 */
-	/*private void setDimensionAndButton(String type) {
+	private void setDimensionAndButton(String type) {
 	 if (type.equalsIgnoreCase("success") || type.equalsIgnoreCase("error")) {
         closeButton.setVisible(false);  
-        rootPane.setPrefSize(250, 100);
+        
     } else if (type.equalsIgnoreCase("info")) {
         closeButton.setVisible(true);
-        rootPane.setPrefSize(400, 200);
+        
     }
 
-	containerElement.setPrefWidth(rootPane.getPrefWidth());
-	containerElement.setPrefHeight(rootPane.getPrefHeight());
-
 		
-	}*/
+	}
 
  
 }

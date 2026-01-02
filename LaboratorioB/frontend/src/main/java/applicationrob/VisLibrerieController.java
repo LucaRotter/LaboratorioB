@@ -199,7 +199,7 @@ public class VisLibrerieController {
         if (textSlib.isEmpty()) {
             emptyText.setVisible(false);
             //filteredLibr = null;              
-            //InsertingElements(librerie);       
+            InsertingElements(librerie);       
             return;
         } 
             filteredLibr = librerie.stream()
