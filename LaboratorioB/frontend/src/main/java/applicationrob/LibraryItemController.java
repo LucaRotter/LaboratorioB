@@ -12,7 +12,7 @@ public class LibraryItemController {
     @FXML
     private Text txtName;
 
-    int id_library;
+    private int id_library;
     private boolean initialSelected;
 
     public void initLibrary(String name,int id_library,boolean selected) {

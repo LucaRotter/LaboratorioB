@@ -32,7 +32,6 @@ public class ViewAlert {
 	 * @param message Messaggio dell'alert.
 	 * @param node Nodo della scena da cui mostrare l'alert.
 	 * @param position Posizione dell'alert (info, success, error).
-	 * @throws IOException Se si verifica un errore di I/O durante il caricamento dell'alert.
 	 */
 public static void showAlert(String type, String title, String message, Node node, String position) {
 	    try {

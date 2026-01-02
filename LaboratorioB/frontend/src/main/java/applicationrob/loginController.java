@@ -14,11 +14,6 @@ import javafx.scene.layout.AnchorPane;
  * Contiene metodi per gestire l'interfaccia di login e validare i campi di input.
  * Utilizza JavaFX per la gestione dell'interfaccia utente.
  * @author Laboratorio B
- * @param backBtn Bottone per tornare alla schermata principale.
- * @param rootPane AnchorPane principale della schermata di login.
- * @param emailField TextField per l'inserimento dell'email dell'utente.
- * @param pwField PasswordField per l'inserimento della password dell'utente.
- * @param errorLabel Label per la visualizzazione dei messaggi di errore durante il login.
  * @param id_user ID dell'utente loggato.
  */
 public class LoginController implements Initializable {
@@ -60,7 +55,6 @@ public class LoginController implements Initializable {
      * Valida i campi di input e, se validi, effettua il login tramite il clientBR.
      * In caso di successo, imposta l'ID dell'utente nella sessione e cambia alla schermata principale.
      * In caso di errore, mostra un messaggio di errore appropriato.
-     * @throws RemoteException Se si verifica un errore di comunicazione remota.
      */
     @FXML
     public void onUserLogin()throws RemoteException {
@@ -97,7 +91,6 @@ public class LoginController implements Initializable {
      * Controlla che tutti i campi siano compilati correttamente e restituisce un messaggio di errore se necessario.
      * @param email Email dell'utente.
      * @param pw Password dell'utente.
-     * @return Messaggio di errore se la validazione fallisce, altrimenti null.
      */
     private String validateField(String email, String pw) {
 
