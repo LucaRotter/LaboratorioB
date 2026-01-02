@@ -17,12 +17,6 @@ import javafx.scene.layout.VBox;
  * Contiene metodi per visualizzare diversi tipi di alert (errore, successo, informazione).
  * Utilizza JavaFX per la gestione dell'interfaccia utente.
  * @author Laboratorio B
- * @param closeButton Bottone per chiudere l'alert.
- * @param rootPane AnchorPane principale dell'alert.
- * @param titleLabel Label che mostra il titolo dell'alert.
- * @param messageLabel Label che mostra il messaggio dell'alert.
- * @param iconImage ImageView che mostra l'icona dell'alert.
- * @param containerElement VBox che contiene gli elementi dell'alert.
  * @param imageText Percorso dell'immagine dell'icona.
  * @param parentContainer BorderPane genitore per la gestione della visualizzazione dell'alert nelle varie pagine.
  */
@@ -122,11 +116,17 @@ public class AlertController {
 	 */
 	private void setDimensionAndButton(String type) {
 	 if (type.equalsIgnoreCase("success") || type.equalsIgnoreCase("error")) {
+<<<<<<< HEAD
         closeButton.setVisible(false);  
         
     } else if (type.equalsIgnoreCase("info")) {
         closeButton.setVisible(true);
         
+=======
+        closeButton.setVisible(false);
+    } else if (type.equalsIgnoreCase("info")) {
+        closeButton.setVisible(true);
+>>>>>>> 98a7d237443db613fd8bcc502eeb2a992b53c342
     }
 
 		

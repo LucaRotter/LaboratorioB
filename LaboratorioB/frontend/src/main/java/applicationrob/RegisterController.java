@@ -17,14 +17,6 @@ import javafx.scene.layout.AnchorPane;
  * Contiene metodi per gestire l'interfaccia di registrazione e validare i campi di input.
  * Utilizza JavaFX per la gestione dell'interfaccia utente.
  * @author Laboratorio B
- * @param backBtn Bottone per tornare alla schermata principale.
- * @param rootPane AnchorPane principale della schermata di registrazione.
- * @param nameField TextField per l'inserimento del nome dell'utente.
- * @param surnameField TextField per l'inserimento del cognome dell'utente.
- * @param cfField TextField per l'inserimento del codice fiscale dell'utente.
- * @param emailField TextField per l'inserimento dell'email dell'utente.
- * @param pwField PasswordField per l'inserimento della password dell'utente.
- * @param errorLabel Label per la visualizzazione dei messaggi di errore durante la registrazione.
  * @param id_user ID dell'utente registrato.
  */
 
@@ -76,8 +68,6 @@ public class RegisterController implements Initializable {
      * Valida i campi di input e, se validi, registra l'utente tramite il clientBR.
      * In caso di successo, imposta l'ID dell'utente nella sessione e cambia alla schermata principale.
      * In caso di errore, mostra un messaggio di errore appropriato.
-     * @param event Evento di azione del bottone di registrazione.
-     * @throws RemoteException Se si verifica un errore di comunicazione remota.
      */
     @FXML
     void onRegisterUser(ActionEvent event) throws RemoteException {
@@ -107,7 +97,6 @@ public class RegisterController implements Initializable {
 
     /**
      * Metodo per cambiare alla schermata di login.
-     * @param event Evento di azione del bottone di cambio schermata.
      */
     @FXML
     void changeToLogin(ActionEvent event) {
@@ -122,7 +111,6 @@ public class RegisterController implements Initializable {
      * @param cf Codice fiscale dell'utente.
      * @param email Email dell'utente.
      * @param pw Password dell'utente.
-     * @return Messaggio di errore se la validazione fallisce, altrimenti null.
      */
     private String validateField(String nome, String cognome, String cf, String email, String pw) {
 
@@ -169,7 +157,6 @@ public class RegisterController implements Initializable {
      * Metodo per validare il formato del codice fiscale.
      * Controlla che il codice fiscale sia lungo 16 caratteri e segua il formato corretto.
      * @param cf Codice fiscale da validare.
-     * @return true se il codice fiscale è valido, false altrimenti.
      */
     private boolean isFiscalCodeValidate(String cf) {
 
@@ -197,7 +184,6 @@ return true;
 /**
  * Metodo di supporto per verificare se una stringa contiene solo lettere.
  * @param tmp Stringa da verificare.
- * @return true se la stringa contiene solo lettere, false altrimenti.
  */
     private boolean letterVerification(String tmp){
         for(int i=0; i< tmp.length(); i++){
@@ -214,7 +200,6 @@ return true;
     /**
      * Metodo di supporto per verificare se una stringa contiene solo numeri.
      * @param tmp Stringa da verificare.
-     * @return true se la stringa contiene solo numeri, false altrimenti.
      */
     private boolean NumberVerification(String tmp){
         for(int i=0; i< tmp.length(); i++){

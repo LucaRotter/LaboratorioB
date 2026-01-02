@@ -23,11 +23,6 @@ import javafx.scene.text.Text;
  * Contiene metodi per aggiungere, cercare e visualizzare i libri all'interno della libreria selezionata.
  * Utilizza JavaFX per la gestione dell'interfaccia utente.
  * @author Laboratorio B
- * @param btnSearch Bottone per la ricerca dei libri nella libreria.
- * @param booksContainer GridPane che contiene i libri della libreria.
- * @param searchBar TextField per l'inserimento del testo di ricerca.
- * @param bookNameLabel Text che mostra il nome della libreria selezionata.
- * @param emptyText Label che mostra messaggi quando non ci sono libri da visualizzare.
  * @param selectedLibrary Libreria selezionata dall'utente.
  * @param library Libreria corrente.
  * @param booksLibrary Lista osservabile dei libri presenti nella libreria.
@@ -64,7 +59,6 @@ public class VisLibreriaController {
      * Metodo di inizializzazione del controller.
      * Inizializza le liste osservabili e imposta i listener per la libreria selezionata.
      * Aggiorna la visualizzazione dei libri quando la libreria selezionata cambia.
-     * @throws RemoteException Se si verifica un errore di comunicazione remota.
      */
     @FXML
     public void initialize() { 
@@ -115,9 +109,6 @@ public class VisLibreriaController {
     /**
      * Metodo per cercare libri nella libreria selezionata in base al testo inserito nella barra di ricerca.
      * Filtra i libri e aggiorna la visualizzazione.
-     * @param event Evento di azione del bottone di ricerca.
-     * @throws RemoteException Se si verifica un errore di comunicazione remota.
-     * @throws IOException Se si verifica un errore di I/O durante la ricerca.
      */
     @FXML
     public void SeachBooksInLibrary(ActionEvent event) throws RemoteException, IOException {
@@ -157,8 +148,6 @@ public class VisLibreriaController {
      * Metodo che si occupa di mostrare i libri forniti in input.
      * Mostra i libri in una griglia.
      * @param listBooksToShow Lista dei libri da mostrare.
-     * @throws IOException Se si verifica un errore di I/O durante il caricamento dei libri.
-     * @throws RemoteException Se si verifica un errore di comunicazione remota.
      */
     private void InsertingElements(ObservableList<Libro> listBooksToShow)  {
     booksContainer.getChildren().clear();

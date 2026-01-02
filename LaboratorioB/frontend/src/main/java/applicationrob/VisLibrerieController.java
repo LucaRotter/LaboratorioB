@@ -24,18 +24,6 @@ import javafx.scene.Node;
  * Contiene metodi per aggiungere, cercare e modificare librerie.
  * Utilizza JavaFX per la gestione dell'interfaccia utente.
  * @author Laboratorio B
- * @param btnSearch Bottone per la ricerca delle librerie.
- * @param edit Bottone per attivare/disattivare la modalità di modifica.
- * @param emptyLbtn Bottone per aggiungere una libreria quando non ce ne sono.
- * @param extraBtn Bottone per aggiungere una nuova libreria in modalità di modifica (max 20 librerie).
- * @param modalSendButton Bottone per inviare i dati inseriti nel modal.
- * @param modalOverlay Overlay per il modal di aggiunta libreria.
- * @param scrollLibraries ScrollPane che contiene le librerie.
- * @param librariesContainer GridPane che contiene gli elementi delle librerie.
- * @param modalTextField TextField per inserire il nome della nuova libreria nel modal.
- * @param searchBar TextField per la ricerca delle librerie.
- * @param modalContent Contenuto del modal.
- * @param emptyText Label per mostrare messaggi quando non ci sono librerie o non ne sono state trovate.
  * @param textSlib Testo inserito nella barra di ricerca.
  * @param editMode Flag per indicare se la modalità di modifica è attiva.
  * @param filteredLibr Lista delle librerie filtrate in base alla ricerca.
@@ -129,8 +117,6 @@ public class VisLibrerieController {
     /**
      * Metodo per inviare i dati del modal e creare una nuova libreria.
      * Controlla se il nome della libreria esiste già e aggiorna la lista delle librerie.
-     * @param event Evento di azione del bottone di invio.
-     * @throws RemoteException Se si verifica un errore di comunicazione remota.
      */
     @FXML
     void sendModal(ActionEvent event) {
@@ -168,8 +154,6 @@ public class VisLibrerieController {
 
     /**
      * Metodo per aprire il modal di aggiunta libreria quando non ce ne sono.
-     * @param event Evento di azione del bottone di invio.
-     * @throws RemoteException Se si verifica un errore di comunicazione remota.
      */
     @FXML 
     void addLibraryEmpty(ActionEvent event) {
@@ -178,7 +162,6 @@ public class VisLibrerieController {
     
      /**
      * Metodo per aprire il modal di aggiunta libreria se ne esiste gia almeno una libreria.
-     * @param event Evento di azione del bottone di invio.
      */
     @FXML
     void addLibrary(ActionEvent event) {
@@ -188,8 +171,6 @@ public class VisLibrerieController {
     /**
      * Metodo per cercare librerie in base al testo inserito nella barra di ricerca.
      * Filtra le librerie e aggiorna la visualizzazione.
-     * @param event Evento di azione del bottone di ricerca.
-     * @throws RemoteException Se si verifica un errore di comunicazione remota.
      */
     @FXML
     void searchLibraries(ActionEvent event) throws RemoteException {
@@ -218,7 +199,6 @@ public class VisLibrerieController {
    
     /**
      * Metodo per aggiornare il testo della barra di ricerca.
-     * @param event Evento di azione del bottone di ricerca.
      */
     @FXML
     void writeText(ActionEvent event) {
@@ -232,8 +212,6 @@ public class VisLibrerieController {
     /**
      * Metodo per attivare/disattivare la modalità di modifica delle librerie.
      * Aggiorna la visualizzazione delle librerie in base alla modalità.
-     * @param event Evento di azione del bottone di modifica.
-     * @throws RemoteException Se si verifica un errore di comunicazione remota.
      */ 
     @FXML
     void useEdit(ActionEvent event) throws RemoteException {
@@ -280,8 +258,6 @@ public class VisLibrerieController {
      * Mostra le librerie in una griglia, gestendo la modalità di modifica e l'aggiunta di nuove librerie.
      * Permette di rimuovere librerie in modalità di modifica tramite un callback.
      * @param listToShow Lista delle librerie da mostrare.
-     * @throws IOException Se si verifica un errore di I/O durante il caricamento delle librerie.
-     * @throws RemoteException Se si verifica un errore di comunicazione remota.
      */
     private void InsertingElements(ObservableList<Libreria> listToShow) {
     librariesContainer.getChildren().clear();

@@ -13,8 +13,6 @@ import java.rmi.RemoteException;
  * Contiene metodi per visualizzare e rimuovere le librerie.
  * Utilizza JavaFX per la gestione dell'interfaccia utente.
  * @author Laboratorio B
- * @param removeBtn Bottone per rimuovere la libreria.
- * @param libraryLabel Label che mostra il nome della libreria.
  * @param libreria Libreria corrente.
  * @param editMode Modalità di modifica della libreria.
  * @param onRemove Runnable da eseguire al momento della rimozione della libreria.
@@ -68,7 +66,6 @@ public class LibraryController {
     * Metodo per rimuovere la libreria.
     * Effettua la chiamata al clientBR per eliminare la libreria dal backend.
     * Esegue il Runnable onRemove al termine dell'operazione.
-    * @throws RemoteException Se si verifica un errore di comunicazione remota.
     */
     @FXML
     public void removeLibrary() {

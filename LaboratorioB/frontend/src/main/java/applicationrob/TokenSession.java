@@ -12,7 +12,6 @@ public class TokenSession {
 
     /**
      * Metodo per ottenere l'ID dell'utente della sessione corrente.
-     * @return ID dell'utente.
      */
     public static int getUserId() {
         return userId;
@@ -20,7 +19,6 @@ public class TokenSession {
 
     /**
      * Metodo per impostare l'ID dell'utente della sessione corrente.
-     * @param id ID dell'utente da impostare.
      */
     public static void setUserId(int id) {
         userId = id;
@@ -28,7 +26,6 @@ public class TokenSession {
 
     /**
      * Metodo per verificare se esiste una sessione utente attiva.
-     * @return true se l'utente è loggato, false altrimenti.
      */
     public static boolean checkTkSession() {
         if (userId == -1) {
