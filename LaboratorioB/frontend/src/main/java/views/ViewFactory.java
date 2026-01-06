@@ -16,6 +16,14 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import LaboratorioB.common.models.*;
 
+/** Classe ViewFactory che gestisce la creazione e la navigazione tra le diverse viste dell'applicazione.
+ * Fornisce metodi per ottenere le varie schermate (Dashboard, Visualizzazione Librerie, Visualizzazione Libro, ecc.)
+ * e mantiene lo stato della selezione corrente nella barra laterale.
+ * Gestisce inoltre la cronologia delle pagine visitate per abilitare la funzionalità "Back".
+ * 
+ * @author Laboratorio B
+ */
+
 public class ViewFactory {
 	
 	private final StringProperty SideBarSelection;

@@ -1,5 +1,12 @@
 package models;
 
+/**
+ * Classe singleton che rappresenta il modello dell'applicazione.
+ * Fornisce l'accesso alla ViewFactory per la gestione delle viste.
+ * 
+ * @author ProgettoLabA
+ */
+
 import views.ViewFactory;
 
 public class Model {
