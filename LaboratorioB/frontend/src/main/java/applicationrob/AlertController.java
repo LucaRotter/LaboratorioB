@@ -116,17 +116,11 @@ public class AlertController {
 	 */
 	private void setDimensionAndButton(String type) {
 	 if (type.equalsIgnoreCase("success") || type.equalsIgnoreCase("error")) {
-<<<<<<< HEAD
         closeButton.setVisible(false);  
-        
+      
     } else if (type.equalsIgnoreCase("info")) {
         closeButton.setVisible(true);
         
-=======
-        closeButton.setVisible(false);
-    } else if (type.equalsIgnoreCase("info")) {
-        closeButton.setVisible(true);
->>>>>>> 98a7d237443db613fd8bcc502eeb2a992b53c342
     }
 
 		

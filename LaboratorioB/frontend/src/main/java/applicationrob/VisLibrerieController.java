@@ -308,7 +308,7 @@ public class VisLibrerieController {
                 }
             } catch (IOException e) {
                 e.printStackTrace();
-                views.ViewAlert.showAlert("error", "Library error", "Server error, try again.", librariesContainer, "error");
+                views.ViewAlert.showAlert("error", "Libraray error", "Server error, try again.", librariesContainer, "error");
             }
         }
     }

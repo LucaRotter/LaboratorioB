@@ -10,6 +10,11 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 
+/** Controller JavaFX per la visualizzazione di una singola recensione (valutazione) di un libro.
+ * Gestisce l'interazione con il pulsante "Mostra di più" per aprire una finestra modale
+ * con i dettagli completi della recensione.
+ * @author ProgettoLabA
+ */
 public class ReviewController implements Initializable{
 	
 	@FXML
@@ -43,6 +48,9 @@ public class ReviewController implements Initializable{
 		
 	}
 
+	/**
+	 * Metodo per impostare il controller VisLibroController.
+	 */
 	public void setVislibroController(VisLibroController visLibroController) {
 	
 		this.visLibro = visLibroController;

@@ -24,7 +24,15 @@ import javafx.scene.layout.VBox;
 import javafx.scene.layout.GridPane;
 import models.Model;
 
-public class VisLibroController implements Initializable{
+/**
+ * Controller JavaFX per la schermata di visualizzazione del libro selezionato.
+ * La classe si occupa di mostrare i dettagli del libro (titolo, autore, editore, genere, anno),
+ * gestire la lista delle recensioni e la lista dei libri consigliati.
+ * 
+ * @author ProgettoLabA
+ */
+
+ public class VisLibroController implements Initializable{
 
 	@FXML
     private Button btnCancel;
@@ -161,7 +169,6 @@ public class VisLibroController implements Initializable{
 		});
 	}
 
-	//function to open the review modal
 	public void openModal(Valutazione review) throws IOException {
 		
 		modalOverlay.setVisible(true);
@@ -205,6 +212,9 @@ public class VisLibroController implements Initializable{
 		
 	}
 
+	/**
+	 * metodo per inizializzare la lista delle recensioni
+	 */
 	public void initReviewList(Libro selectedBook){
 		int i ;
 		List<Valutazione> review = new LinkedList<>();
@@ -271,7 +281,9 @@ public class VisLibroController implements Initializable{
 	}
 
 
-
+	/**
+	 * metodo per inizializzare la lista dei libri consigliati
+	 */
 	public void initRecoemmendedList(Libro selectedBook){
 
 		ScrollRec.setContent(recListBook);
@@ -309,7 +321,7 @@ public class VisLibroController implements Initializable{
 			e.printStackTrace();
 		}
 
-		//inserire qua 
+		
 		BookController book = loader.getController();
 		book.setLabels(recommendList.get(i).getAutore(), recommendList.get(i).getTitolo());
 		book.setNumberReccomender(tmp);
@@ -370,13 +382,13 @@ public class VisLibroController implements Initializable{
 
 		if(!TokenSession.checkTkSession()){
 
-			views.ViewAlert.showAlert("error", "Library error", "Server error, try again.", btnComments, "error");
+			views.ViewAlert.showAlert("error", "MUST BE LOGGED", "login to see reviews", btnComments, "error");
 		}else{
 
 		if(ControlIfPresent(libraries)){
 		Model.getIstance().getView().getSideBarSelectionItem().set("AddReview");
 		}else{
-			views.ViewAlert.showAlert("error", "Library error", "Server error, try again.", btnComments, "error");
+			views.ViewAlert.showAlert("error", "BOOK NOT PRESENT", "Add this book to your libraries", btnComments, "error");
 		}
 		}
 	}
@@ -395,13 +407,13 @@ public class VisLibroController implements Initializable{
 
 		if(!TokenSession.checkTkSession()){
 
-		views.ViewAlert.showAlert("error", "Library error", "Server error, try again.", btnComments, "error");
+		views.ViewAlert.showAlert("error", "MUST BE LOGGED", "login to see comments", btnComments, "error");
 		}else{
 
 		if(ControlIfPresent(libraries)){
 		Model.getIstance().getView().getSideBarSelectionItem().set("AddReccomended");
 		}else{
-			views.ViewAlert.showAlert("error", "Library error", "Server error, try again.", btnComments, "error");
+			views.ViewAlert.showAlert("error", "BOOK NOT PRESENT", "Add this book to your libraries", btnComments, "error");
 		}
 		}
 }
@@ -410,7 +422,7 @@ public class VisLibroController implements Initializable{
 	public void OpenModalLibraries() {
 	
 	if(!TokenSession.checkTkSession()){
-		views.ViewAlert.showAlert("error", "Library error", "Server error, try again.", btnComments, "error");
+		views.ViewAlert.showAlert("error", "MUST BE LOGGED", "login to see your libraries", btnComments, "error");
 		return;
 		}
 
@@ -506,6 +518,9 @@ public class VisLibroController implements Initializable{
 
 	}
 
+	/**
+	 * metodo per controllare se il libro è presente in una delle librerie dell'utente
+	 */
 	private boolean ControlIfPresent(List<Libreria> libraries){
 
 		boolean found = false;

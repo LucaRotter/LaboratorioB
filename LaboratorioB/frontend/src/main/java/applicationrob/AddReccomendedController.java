@@ -30,7 +30,12 @@ import javafx.scene.control.ScrollPane;
 import models.Model;
 import javafx.scene.input.KeyCode;
 
-
+/** Controller JavaFX della schermata per aggiungere libri consigliati ad un libro selezionato.
+ * Gestisce la visualizzazione dei libri consigliati, la navigazione tra le pagine di libri,
+ * la ricerca di libri e la selezione dei libri da consigliare o rimuovere dai consigliati.
+ * 
+ * @author ProgettoLabA
+ */
 
 public class AddReccomendedController implements Initializable {
 
@@ -316,6 +321,10 @@ public class AddReccomendedController implements Initializable {
 	}
 	}
 
+    /**
+     * Metodo per gestire la selezione di un libro dalla griglia
+     * 
+     */
     private void selectedBookHandler(Libro libr) {
 
         if(pos < 3){

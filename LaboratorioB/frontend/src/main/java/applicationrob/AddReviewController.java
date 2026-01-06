@@ -10,6 +10,14 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import models.Model;
 
+/** Controller JavaFX della schermata per inserire o visualizzare una recensione (valutazione) di un libro.
+ * Gestisce i campi di testo e i punteggi (ChoiceBox) relativi alle diverse categorie di valutazione
+ * e calcola la media finale mostrata nella label.
+ * Permette di creare una nuova valutazione e, se una valutazione esiste già, mostra i dati in sola lettura.
+ * 
+ * @author ProgettoLabA
+ */
+
 public class AddReviewController implements Initializable{
 
     @FXML

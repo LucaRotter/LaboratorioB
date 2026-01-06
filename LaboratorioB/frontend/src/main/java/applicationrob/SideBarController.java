@@ -13,6 +13,17 @@ import javafx.scene.layout.Pane;
 
 public class SideBarController implements Initializable{ 
 
+
+	 /**
+	 * Controller JavaFX della barra laterale dell'applicazione.
+	 * Gestisce la navigazione tra le principali sezioni (Home, Librerie, Login, Registrazione)
+	 * e l'azione di logout. Inoltre controlla la visibilità dei componenti in base allo stato
+	 * di login dell'utente e abilita/disabilita il pulsante "Back" in base alla cronologia delle pagine.
+	 * 
+	 * @author ProgettoLabA
+	 */
+
+
 	@FXML
 	private Button btnBack;
 
@@ -92,7 +103,9 @@ public class SideBarController implements Initializable{
 		Model.getIstance().getView().changeToHome();
 	}
 
-
+	/**
+	 * metodo per controllare lo stato di login e aggiornare la visibilità dei componenti
+	 */
 	public void checkLogin() {
 		id_user = TokenSession.getUserId();
 		if(id_user != -1) {

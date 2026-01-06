@@ -13,6 +13,14 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextArea;
 import models.Model;
 
+
+/** Controller JavaFX della schermata per inserire o visualizzare una recensione (valutazione) di un libro.
+ * Gestisce i campi di testo e i punteggi (ChoiceBox) relativi alle diverse categorie di valutazione
+ * e calcola la media finale mostrata nella label.
+ * Permette di creare una nuova valutazione e, se una valutazione esiste già, mostra i dati in sola lettura.
+ * @author ProgettoLabA
+ */
+ 
 public class TableReviewController implements Initializable{
 
 	@FXML
@@ -188,7 +196,9 @@ public class TableReviewController implements Initializable{
         lbAverage.setText("--");
     }
 }
-
+    /**
+     * metodo per impostare i campi con i valori di una valutazione esistente
+     */
     public void setReview(Valutazione valutazione) {
 
         ScoreStyle.setValue(valutazione.getVotoStile());
@@ -206,6 +216,9 @@ public class TableReviewController implements Initializable{
         setNotEditable();
     }
 
+    /**
+     * metodo per impostare i campi in sola lettura
+     */
     private void setNotEditable(){
         TxtContent.setEditable(false);
         TxtEdition.setEditable(false);
@@ -225,13 +238,19 @@ public class TableReviewController implements Initializable{
         BtnConfirm.setDisable(true);
     }
 
+
+    /**
+     * Metodo per impostare una ChoiceBox in sola lettura.
+     */
     private void setReadOnly(ChoiceBox<?> choiceBox) {
     choiceBox.getStyleClass().add("read-only");
     choiceBox.setMouseTransparent(true); 
     choiceBox.setFocusTraversable(false);
     
 }
-
+    /**
+     * Metodo per impostare una ChoiceBox in modalità di modifica.
+     */
     private void setEditOnly(ChoiceBox<?> choiceBox){
     choiceBox.getStyleClass().remove("read-only");
     choiceBox.setMouseTransparent(false); 

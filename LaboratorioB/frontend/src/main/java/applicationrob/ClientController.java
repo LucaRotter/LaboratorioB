@@ -7,6 +7,14 @@ import javafx.fxml.Initializable;
 import javafx.scene.layout.BorderPane;
 import models.Model;
 
+/**
+ * Controller JavaFX della pagina principale del client.
+ * Gestisce il cambio della schermata centrale in base alla selezione effettuata
+ * nella sidebar o ad altre azioni dell'utente. 
+ *
+ * @author ProgettoLabA
+ */
+
 public class ClientController implements Initializable{
 	
 	@FXML

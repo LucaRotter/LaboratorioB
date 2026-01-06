@@ -4,6 +4,14 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
 
+/**
+ * Controller JavaFX per la visualizzazione delle informazioni di un libro.
+ * Gestisce l'impostazione delle etichette per autore e titolo,
+ * nonché la visualizzazione del badge con il numero di raccomandazioni.
+ * 
+ * @author ProgettoLabA
+ */
+
 public class BookController {
 	
 	@FXML

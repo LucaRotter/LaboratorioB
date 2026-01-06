@@ -36,7 +36,12 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import models.Model;
 
-
+/** Controller JavaFX per la dashboard principale dell'applicazione.
+ * Gestisce la visualizzazione e la navigazione tra i libri, inclusi
+ * la ricerca, il filtraggio per categoria e la paginazione.
+ * 
+ * @author ProgettoLabA
+ */
 public class DashboardController implements Initializable{
 
 	@FXML
