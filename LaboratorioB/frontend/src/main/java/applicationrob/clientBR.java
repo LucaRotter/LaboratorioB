@@ -19,7 +19,10 @@ import javafx.application.Application;
  * Classe client per la comunicazione con il server RMI.
  * Classe main per l'avvio dell'applicazione.
  * Utilizza RMI per la comunicazione remota con il server.
- * @author Laboratorio B
+ * @author Grassi, Alessandro, 757784, VA
+ * @author Kastratovic, Aleksandar, 752468, VA
+ * @author Rotter, Luca Giorgio, 757780, VA
+ * @author Davide, Bilora, 757011, VA
  * @param serverBR Interfaccia del server RMI.
  * @param instance Istanza del clientBR usata nelle classi controller.
  */
@@ -273,8 +276,6 @@ public class clientBR{
 	 * @param args Argomenti della riga di comando.
 	 */
 	public static void main(String[] args) throws RemoteException, IOException, NotBoundException {
-
-			TokenSession.setUserId(1); 
 
 		Application.launch(startApp.class, args); 	
 	}

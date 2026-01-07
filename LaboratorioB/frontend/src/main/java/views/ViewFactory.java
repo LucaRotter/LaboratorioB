@@ -119,7 +119,7 @@ public class ViewFactory {
 
 	public void changeToLogin() {
 		
-		initializeStage("/applicationrob/LoginPage.fxml");
+		initializeStage("/applicationrob/loginPage.fxml");
 	
 	}
 

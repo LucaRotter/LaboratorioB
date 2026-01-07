@@ -4,6 +4,9 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Button; 
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+
+import java.util.Objects;
+
 import javafx.fxml.FXML;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
@@ -103,11 +106,18 @@ public class AlertController {
 			imageText = "/img/info.png";
 			break;
 		default :
+			imageText = null;
 		    break;
 		
 		}
 	
-		iconImage.setImage(new Image(getClass().getResourceAsStream(imageText)));
+		 if (imageText != null) {
+        Image img = new Image(Objects.requireNonNull(
+                getClass().getResourceAsStream(imageText),
+                "Immagine non trovata nel classpath: " + imageText
+        ));
+        iconImage.setImage(img); 
+    }
 		setDimensionAndButton(type);
 		
 	}
