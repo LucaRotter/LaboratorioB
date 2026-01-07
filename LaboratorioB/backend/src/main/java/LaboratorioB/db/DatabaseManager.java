@@ -11,9 +11,12 @@ import com.zaxxer.hikari.HikariDataSource;
 /**
  * Classe per la gestione del pool di connessioni al database utilizzando HikariCP.
  * Fornisce metodi per ottenere connessioni e chiudere il pool.
+ * 
+ * @author Grassi, Alessandro, 757784, VA
+ * @author Kastratovic, Aleksandar, 752468, VA
+ * @author Rotter, Luca Giorgio, 757780, VA
+ * @author Davide, Bilora, 757011, VA
  * @version 1.0
- * @since 2024-06-10
- * @author Laboratorio B
  */
 public class DatabaseManager {
 

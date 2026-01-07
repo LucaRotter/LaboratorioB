@@ -18,7 +18,11 @@ import java.io.IOException;
  * Classe per la visualizzazione degli alert nell'applicazione.
  * Contiene metodi statici per mostrare diversi tipi di alert (errore, successo, informazione).
  * Utilizza JavaFX per la gestione dell'interfaccia utente.
- * @author Laboratorio B
+ * @author Grassi, Alessandro, 757784, VA
+ * @author Kastratovic, Aleksandar, 752468, VA
+ * @author Rotter, Luca Giorgio, 757780, VA
+ * @author Davide, Bilora, 757011, VA
+ * @version 1.0
  *
  */
 

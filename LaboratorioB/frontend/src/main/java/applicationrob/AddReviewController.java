@@ -15,7 +15,11 @@ import models.Model;
  * e calcola la media finale mostrata nella label.
  * Permette di creare una nuova valutazione e, se una valutazione esiste già, mostra i dati in sola lettura.
  * 
- * @author ProgettoLabA
+ * @author Grassi, Alessandro, 757784, VA
+ * @author Kastratovic, Aleksandar, 752468, VA
+ * @author Rotter, Luca Giorgio, 757780, VA
+ * @author Davide, Bilora, 757011, VA
+ * @version 1.0
  */
 
 public class AddReviewController implements Initializable{

@@ -4,7 +4,11 @@ package applicationrob;
  * LAZY: Caricamento parziale dei dati.
  * FULL: Caricamento completo dei dati.
  * 
- * @author ProgettoLabA
+ * @author Grassi, Alessandro, 757784, VA
+ * @author Kastratovic, Aleksandar, 752468, VA
+ * @author Rotter, Luca Giorgio, 757780, VA
+ * @author Davide, Bilora, 757011, VA
+ * @version 1.0
  */
 
 public enum LoadMode {

@@ -8,7 +8,11 @@ import java.io.Serializable;
  * aggiunta alla collezione, quindi alla lista di librerie
  * personali
  * 
- * @author ProgettoLabA
+ * @author Grassi, Alessandro, 757784, VA
+ * @author Kastratovic, Aleksandar, 752468, VA
+ * @author Rotter, Luca Giorgio, 757780, VA
+ * @author Davide, Bilora, 757011, VA
+ * @version 1.0
  */
 
 public class Utente implements Serializable {

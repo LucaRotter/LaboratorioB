@@ -8,7 +8,11 @@ import java.io.Serializable;
  * Possiede inoltre un elenco di libri consigliati e un
  * elenco di valutazioni associate al Libro stesso
  * 
- * @author ProgettoLabB
+ * @author Grassi, Alessandro, 757784, VA
+ * @author Kastratovic, Aleksandar, 752468, VA
+ * @author Rotter, Luca Giorgio, 757780, VA
+ * @author Davide, Bilora, 757011, VA
+ * @version 1.0
  */
 
 //classe Libro

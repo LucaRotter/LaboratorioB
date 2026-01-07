@@ -20,7 +20,11 @@ public class SideBarController implements Initializable{
 	 * e l'azione di logout. Inoltre controlla la visibilità dei componenti in base allo stato
 	 * di login dell'utente e abilita/disabilita il pulsante "Back" in base alla cronologia delle pagine.
 	 * 
-	 * @author ProgettoLabA
+	 * @author Grassi, Alessandro, 757784, VA
+	* @author Kastratovic, Aleksandar, 752468, VA
+	* @author Rotter, Luca Giorgio, 757780, VA
+	* @author Davide, Bilora, 757011, VA
+	* @version 1.0
 	 */
 
 

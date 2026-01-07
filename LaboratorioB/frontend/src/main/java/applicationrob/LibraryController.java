@@ -12,10 +12,12 @@ import java.rmi.RemoteException;
  * Classe controller per la gestione delle librerie.
  * Contiene metodi per visualizzare e rimuovere le librerie.
  * Utilizza JavaFX per la gestione dell'interfaccia utente.
- * @author Laboratorio B
- * @param libreria Libreria corrente.
- * @param editMode Modalità di modifica della libreria.
- * @param onRemove Runnable da eseguire al momento della rimozione della libreria.
+ * 
+ * @author Grassi, Alessandro, 757784, VA
+ * @author Kastratovic, Aleksandar, 752468, VA
+ * @author Rotter, Luca Giorgio, 757780, VA
+ * @author Davide, Bilora, 757011, VA
+ * @version 1.0
  */
 
 public class LibraryController {

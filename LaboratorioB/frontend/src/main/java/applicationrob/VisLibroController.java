@@ -29,7 +29,11 @@ import models.Model;
  * La classe si occupa di mostrare i dettagli del libro (titolo, autore, editore, genere, anno),
  * gestire la lista delle recensioni e la lista dei libri consigliati.
  * 
- * @author ProgettoLabA
+ * @author Grassi, Alessandro, 757784, VA
+ * @author Kastratovic, Aleksandar, 752468, VA
+ * @author Rotter, Luca Giorgio, 757780, VA
+ * @author Davide, Bilora, 757011, VA
+ * @version 1.0
  */
 
  public class VisLibroController implements Initializable{

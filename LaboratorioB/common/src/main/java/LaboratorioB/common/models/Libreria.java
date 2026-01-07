@@ -9,7 +9,11 @@ import java.util.List;
  * I libri contenuti in questa classe possono essere recensiti 
  * attraverso valutazioni o libri consigliati assocati
  * 
- * @author ProgettoLabA
+ * @author Grassi, Alessandro, 757784, VA
+ * @author Kastratovic, Aleksandar, 752468, VA
+ * @author Rotter, Luca Giorgio, 757780, VA
+ * @author Davide, Bilora, 757011, VA
+ * @version 1.0
  */
 
 //classe Libreria

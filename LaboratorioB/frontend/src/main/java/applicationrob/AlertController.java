@@ -16,9 +16,11 @@ import javafx.scene.layout.VBox;
  * Classe controller per la gestione degli alert dell'applicazione.
  * Contiene metodi per visualizzare diversi tipi di alert (errore, successo, informazione).
  * Utilizza JavaFX per la gestione dell'interfaccia utente.
- * @author Laboratorio B
- * @param imageText Percorso dell'immagine dell'icona.
- * @param parentContainer BorderPane genitore per la gestione della visualizzazione dell'alert nelle varie pagine.
+ * @author Grassi, Alessandro, 757784, VA
+ * @author Kastratovic, Aleksandar, 752468, VA
+ * @author Rotter, Luca Giorgio, 757780, VA
+ * @author Davide, Bilora, 757011, VA
+ * @version 1.0
  */
 
 public class AlertController { 

@@ -34,7 +34,11 @@ import javafx.scene.input.KeyCode;
  * Gestisce la visualizzazione dei libri consigliati, la navigazione tra le pagine di libri,
  * la ricerca di libri e la selezione dei libri da consigliare o rimuovere dai consigliati.
  * 
- * @author ProgettoLabA
+ * @author Grassi, Alessandro, 757784, VA
+ * @author Kastratovic, Aleksandar, 752468, VA
+ * @author Rotter, Luca Giorgio, 757780, VA
+ * @author Davide, Bilora, 757011, VA
+ * @version 1.0
  */
 
 public class AddReccomendedController implements Initializable {

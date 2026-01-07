@@ -23,7 +23,11 @@ import javafx.scene.Node;
  * Classe controller per la visualizzazione e gestione delle librerie utente.
  * Contiene metodi per aggiungere, cercare e modificare librerie.
  * Utilizza JavaFX per la gestione dell'interfaccia utente.
- * @author Laboratorio B
+ * @author Grassi, Alessandro, 757784, VA
+ * @author Kastratovic, Aleksandar, 752468, VA
+ * @author Rotter, Luca Giorgio, 757780, VA
+ * @author Davide, Bilora, 757011, VA
+ * @version 1.0
  * @param textSlib Testo inserito nella barra di ricerca.
  * @param editMode Flag per indicare se la modalità di modifica è attiva.
  * @param filteredLibr Lista delle librerie filtrate in base alla ricerca.

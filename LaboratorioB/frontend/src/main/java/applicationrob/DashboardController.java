@@ -40,7 +40,11 @@ import models.Model;
  * Gestisce la visualizzazione e la navigazione tra i libri, inclusi
  * la ricerca, il filtraggio per categoria e la paginazione.
  * 
- * @author ProgettoLabA
+ * @author Grassi, Alessandro, 757784, VA
+ * @author Kastratovic, Aleksandar, 752468, VA
+ * @author Rotter, Luca Giorgio, 757780, VA
+ * @author Davide, Bilora, 757011, VA
+ * @version 1.0
  */
 public class DashboardController implements Initializable{
 

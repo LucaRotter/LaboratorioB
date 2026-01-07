@@ -18,7 +18,11 @@ import models.Model;
  * Gestisce i campi di testo e i punteggi (ChoiceBox) relativi alle diverse categorie di valutazione
  * e calcola la media finale mostrata nella label.
  * Permette di creare una nuova valutazione e, se una valutazione esiste già, mostra i dati in sola lettura.
- * @author ProgettoLabA
+ * @author Grassi, Alessandro, 757784, VA
+ * @author Kastratovic, Aleksandar, 752468, VA
+ * @author Rotter, Luca Giorgio, 757780, VA
+ * @author Davide, Bilora, 757011, VA
+ * @version 1.0
  */
  
 public class TableReviewController implements Initializable{

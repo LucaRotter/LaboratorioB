@@ -13,7 +13,11 @@ import javafx.scene.control.Label;
 /** Controller JavaFX per la visualizzazione di una singola recensione (valutazione) di un libro.
  * Gestisce l'interazione con il pulsante "Mostra di più" per aprire una finestra modale
  * con i dettagli completi della recensione.
- * @author ProgettoLabA
+ * @author Grassi, Alessandro, 757784, VA
+ * @author Kastratovic, Aleksandar, 752468, VA
+ * @author Rotter, Luca Giorgio, 757780, VA
+ * @author Davide, Bilora, 757011, VA
+ * @version 1.0
  */
 public class ReviewController implements Initializable{
 	

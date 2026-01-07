@@ -22,7 +22,11 @@ import javafx.scene.text.Text;
  * Classe controller per la visualizzazione della libreria e dei suoi libri.
  * Contiene metodi per aggiungere, cercare e visualizzare i libri all'interno della libreria selezionata.
  * Utilizza JavaFX per la gestione dell'interfaccia utente.
- * @author Laboratorio B
+ * @author Grassi, Alessandro, 757784, VA
+ * @author Kastratovic, Aleksandar, 752468, VA
+ * @author Rotter, Luca Giorgio, 757780, VA
+ * @author Davide, Bilora, 757011, VA
+ * @version 1.0
  * @param selectedLibrary Libreria selezionata dall'utente.
  * @param library Libreria corrente.
  * @param booksLibrary Lista osservabile dei libri presenti nella libreria.

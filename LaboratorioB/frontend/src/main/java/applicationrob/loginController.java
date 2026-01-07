@@ -13,8 +13,12 @@ import javafx.scene.layout.AnchorPane;
  * Classe controller per la gestione del login degli utenti.
  * Contiene metodi per gestire l'interfaccia di login e validare i campi di input.
  * Utilizza JavaFX per la gestione dell'interfaccia utente.
- * @author Laboratorio B
- * @param id_user ID dell'utente loggato.
+ * 
+ * @author Grassi, Alessandro, 757784, VA
+ * @author Kastratovic, Aleksandar, 752468, VA
+ * @author Rotter, Luca Giorgio, 757780, VA
+ * @author Davide, Bilora, 757011, VA
+ * @version 1.0
  */
 public class LoginController implements Initializable {
 

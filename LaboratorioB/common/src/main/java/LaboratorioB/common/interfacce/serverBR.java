@@ -14,7 +14,11 @@ import LaboratorioB.common.models.Valutazione;
 /**
  * Interfaccia remota per il server BR.
  * Definisce i metodi che possono essere invocati dai client remoti.
- * @author Laboratorio B
+ * @author Grassi, Alessandro, 757784, VA
+ * @author Kastratovic, Aleksandar, 752468, VA
+ * @author Rotter, Luca Giorgio, 757780, VA
+ * @author Davide, Bilora, 757011, VA
+ * @version 1.0
  */
 public interface serverBR extends Remote {
     /* elenco dei metodi che il server deve implementare */

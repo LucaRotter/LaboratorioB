@@ -4,7 +4,11 @@ import java.io.Serializable;
 /**
  * Modello per rappresentare un consiglio dato da un utente per un libro.
  * Contiene gli ID del libro originale, dell'utente che consiglia e del libro consigliato.
- * @author Laboratorio B
+ * @author Grassi, Alessandro, 757784, VA
+ * @author Kastratovic, Aleksandar, 752468, VA
+ * @author Rotter, Luca Giorgio, 757780, VA
+ * @author Davide, Bilora, 757011, VA
+ * @version 1.0
  */
 public class Consiglio implements Serializable {
     private static final long serialVersionUID = 1L;
