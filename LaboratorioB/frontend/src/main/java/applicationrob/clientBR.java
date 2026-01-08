@@ -35,17 +35,18 @@ public class clientBR{
 	 * Costruttore del clientBR.
 	 * Inizializza la connessione RMI con il server.
 	 */
-	public clientBR()  throws RemoteException{
+	public clientBR() throws RemoteException {
+    try {
+       	String SERVER_IP = "10.13.193.207"; // <-- metti qui l'IPv4 del PC server (ipconfig)
 
-		try {
-			Registry reg = LocateRegistry.getRegistry("localhost", 6969);
-			server = (serverBR)reg.lookup("serverBR");
-			System.out.println("Connessione RMI riuscita");
-		}catch(RemoteException | NotBoundException e) {
-			e.printStackTrace();
-		} 
+        Registry reg = LocateRegistry.getRegistry(SERVER_IP, 7969);
+        server = (serverBR) reg.lookup("serverBR");
 
-	} 
+        System.out.println("Connessione RMI riuscita");
+    } catch (RemoteException | NotBoundException e) {
+        e.printStackTrace();
+    }
+}
 
 	/**
 	 * Metodo per ottenere l'istanza del clientBR.

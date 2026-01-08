@@ -865,25 +865,26 @@ public class serverBRImpl extends UnicastRemoteObject implements serverBR {
     }
     
     public static void main(String[] args) {
-        try {
-            LocateRegistry.createRegistry(6969);
-            serverBRImpl server = new serverBRImpl();
-            Naming.rebind("rmi://localhost:6969/serverBR", server);
-            System.out.println("Server BR is running...");
+    String SERVER_IP = "10.13.193.207"; // <-- metti qui l'IPv4 del PC server (ipconfig)
 
-            //questo server solo con l'avvio con Maven
-            try {
-                Thread.sleep(Long.MAX_VALUE);
-            } catch (InterruptedException e) {
-                System.err.println("Server interrupted: " + e.getMessage());
-                e.printStackTrace();
-            }
+    try {
+        // IMPORTANTISSIMO: evita che RMI ritorni "localhost" ai client
+        System.setProperty("java.rmi.server.hostname", SERVER_IP);
 
-        } catch (RemoteException | MalformedURLException | SQLException e) {
-            System.err.println("Server exception: " + e.toString());
-            e.printStackTrace();
-        }
+        LocateRegistry.createRegistry(7969);
+
+        serverBRImpl server = new serverBRImpl();
+
+        // bind sull'IP del server (non localhost)
+        Naming.rebind("rmi://" + SERVER_IP + ":7969/serverBR", server);
+
+        System.out.println("Server BR is running on " + SERVER_IP + ":7969...");
+
+        Thread.sleep(Long.MAX_VALUE);
+
+    } catch (Exception e) {
+        System.err.println("Server exception: " + e);
+        e.printStackTrace();
     }
-
-    
+    }
 }
