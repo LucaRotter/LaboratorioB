@@ -168,7 +168,7 @@ public class VisLibreriaController {
    
     for (Libro books : listBooksToShow) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("BookEL.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("BookEl.fxml"));
             VBox booksPane = loader.load();
 			
 			BookController bookController= loader.getController();

@@ -249,13 +249,6 @@ public class VisLibrerieController {
         }
     }
     
-    /**
-     * Metodo che si occupa di mostrare tutte le librerie senza filtri.
-     */
-    private void InsertingElements() {
-        InsertingElements(librerie); 
-    }
-    
     
     /**
      * Metodo che si occupa di mostrare le librerie fornite in input.
@@ -281,7 +274,8 @@ public class VisLibrerieController {
 
     for (Libreria lib : listToShow) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/applicationrob/LibraryEL.fxml"));
+            FXMLLoader loader = new FXMLLoader(); 
+			loader.setLocation(getClass().getResource("LibraryEl.fxml"));
             StackPane libPane = loader.load();
 
             LibraryController controller = loader.getController();
