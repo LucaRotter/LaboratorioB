@@ -6,6 +6,7 @@ import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry; 
 import java.util.List;
+
 import LaboratorioB.common.interfacce.serverBR;
 import LaboratorioB.common.models.Libreria;
 import LaboratorioB.common.models.Libro;
@@ -39,7 +40,8 @@ public class clientBR{
 	public clientBR() throws RemoteException {
     try {
        	String SERVER_IP = "10.13.193.207"; // <-- metti qui l'IPv4 del PC server (ipconfig)
-
+		//luca "10.24.140.223"
+		//aleks "10.13.193.207"
         Registry reg = LocateRegistry.getRegistry(SERVER_IP, 7969);
         server = (serverBR) reg.lookup("serverBR");
 

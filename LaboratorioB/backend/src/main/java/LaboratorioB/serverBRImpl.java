@@ -866,6 +866,8 @@ public class serverBRImpl extends UnicastRemoteObject implements serverBR {
     
     public static void main(String[] args) {
     String SERVER_IP = "10.13.193.207"; // <-- metti qui l'IPv4 del PC server (ipconfig)
+    //luca "10.24.140.223"
+	//aleks "10.13.193.207"
 
     try {
         // IMPORTANTISSIMO: evita che RMI ritorni "localhost" ai client
