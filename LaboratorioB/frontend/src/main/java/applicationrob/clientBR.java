@@ -38,7 +38,7 @@ public class clientBR{
 	 */
 	public clientBR() throws RemoteException {
     try {
-       	String SERVER_IP = "10.24.140.223"; // <-- metti qui l'IPv4 del PC server (ipconfig)
+       	String SERVER_IP = "10.13.193.207"; // <-- metti qui l'IPv4 del PC server (ipconfig)
 		//luca "10.24.140.223"
 		//aleks "10.13.193.207"
         Registry reg = LocateRegistry.getRegistry(SERVER_IP, 7969);
