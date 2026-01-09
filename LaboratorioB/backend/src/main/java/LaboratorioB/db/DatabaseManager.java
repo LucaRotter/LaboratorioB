@@ -22,19 +22,23 @@ import com.zaxxer.hikari.HikariDataSource;
 public class DatabaseManager {
 
     private static HikariDataSource dataSource;
-    //private static Scanner in = new Scanner(System.in);
+    
+    /**
+     * Ottiene una connessione dal pool di connessioni.
+     * @return Una connessione al database.
+     * @throws SQLException Se si verifica un errore durante l'ottenimento della connessione.
+     */
+    public static Connection getConnection() throws SQLException {
+        return dataSource.getConnection();
+    }
 
-    static {
-        try {
+    public static void autenticazione(String username, String password){
+         try {
             // Configurazione di HikariCP per PostgreSQL
             HikariConfig config = new HikariConfig();
             config.setJdbcUrl("jdbc:postgresql://localhost:5432/LaboratorioB");
-            System.out.println("Inserisci username e password del database:");
-            Scanner in = new Scanner(System.in);
-            String username = in.nextLine();
             config.setUsername(username);
-            String pwd = in.nextLine();
-            config.setPassword(pwd); 
+            config.setPassword(password); 
             config.setDriverClassName("org.postgresql.Driver");
 
             dataSource = new HikariDataSource(config);
@@ -45,15 +49,7 @@ public class DatabaseManager {
             System.err.println("Errore durante l'inizializzazione del pool HikariCP:");
             e.printStackTrace();
         }
-    }
 
-    /**
-     * Ottiene una connessione dal pool di connessioni.
-     * @return Una connessione al database.
-     * @throws SQLException Se si verifica un errore durante l'ottenimento della connessione.
-     */
-    public static Connection getConnection() throws SQLException {
-        return dataSource.getConnection();
     }
 
     /**

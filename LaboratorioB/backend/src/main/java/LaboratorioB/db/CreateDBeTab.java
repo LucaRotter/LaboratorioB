@@ -111,7 +111,7 @@ public class CreateDBeTab {
         String password = in.nextLine();
 
         createDatabase(user, password); // il database
-        createTables(); // Crea le tabelle
+        createTables(user, password); // Crea le tabelle
     }
 
     /**
@@ -149,9 +149,10 @@ public class CreateDBeTab {
     /**
      * Crea le tabelle del database.
      */
-    public static void createTables() {
+    public static void createTables(String username, String password) {
         Connection conn = null;
         try {
+            DatabaseManager.autenticazione(username, password);
             conn = DatabaseManager.getConnection();
         } catch (SQLException e) {
             System.out.println("Errore nella connessione al database specifico: " + e.getMessage());
