@@ -35,13 +35,6 @@ public class DatabaseManager {
             config.setPassword("@Aleks13082002"); 
             config.setDriverClassName("org.postgresql.Driver");
 
-            // Parametri opzionali del pool
-            /*config.setMaximumPoolSize(10);
-            config.setMinimumIdle(2);
-            config.setIdleTimeout(30000);
-            config.setConnectionTimeout(30000);
-            config.setLeakDetectionThreshold(60000);*/
-
             dataSource = new HikariDataSource(config);
 
             System.out.println("Pool HikariCP inizializzato con successo!");
