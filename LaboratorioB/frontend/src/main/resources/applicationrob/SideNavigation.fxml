@@ -124,7 +124,7 @@
                            <children>
                               <ImageView fitHeight="33.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@../img/logOut.png" />
+                                    <Image url="@../img/LogOutPng.png" />
                                  </image>
                               </ImageView>
                               <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Log out" textAlignment="CENTER" wrappingWidth="68.5367431640625" />

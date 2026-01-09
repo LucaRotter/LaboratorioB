@@ -109,7 +109,7 @@ public class AddReccomendedController implements Initializable {
        try {
         reccomendedBooks = clientBR.getInstance().getConsiglioUtente(Model.getIstance().getView().getSelectedBook().getId(), TokenSession.getUserId());
        } catch (RemoteException e) {
-        views.ViewAlert.showAlert("error", "Library error", "Server error, try again.", searchBar, "error");
+        views.ViewAlert.showAlert("error", "LIBRARY ERROR", "Server error, try again", searchBar, "error");
         e.printStackTrace();
        }
 
@@ -138,7 +138,7 @@ public class AddReccomendedController implements Initializable {
         
         } catch (RemoteException e) {
         
-        views.ViewAlert.showAlert("error", "Library error", "Server error, try again.", searchBar, "error");
+        views.ViewAlert.showAlert("error", "LIBRARY ERROR", "Server error, try again", searchBar, "error");
         e.printStackTrace();
        }
 
@@ -411,7 +411,7 @@ public class AddReccomendedController implements Initializable {
         try {
             clientBR.getInstance().createConsiglio(TokenSession.getUserId(), Model.getIstance().getView().getSelectedBook().getId(),selectedBook.getId());
         } catch (RemoteException e) {
-           views.ViewAlert.showAlert("error", "Library error", "Server error, try again.", searchBar, "error");
+           views.ViewAlert.showAlert("error", "LIBRARY ERROR", "Server error, try again.", searchBar, "error");
             e.printStackTrace();
         }
 
@@ -482,7 +482,7 @@ public class AddReccomendedController implements Initializable {
                     btnRemove.setDisable(true);
                     initRecoemmended();
                 } catch (RemoteException e1) {
-                   views.ViewAlert.showAlert("error", "Library error", "Server error, try again.", searchBar, "error");
+                   views.ViewAlert.showAlert("error", "LIBRARY ERROR", "Server error, try again.", searchBar, "error");
                     e1.printStackTrace();
                 }
                 

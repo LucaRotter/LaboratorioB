@@ -265,7 +265,7 @@ import models.Model;
 	if( review.size() == 0){
 
 		lbAverage.setText("0.0");
-		Label nessunLibro = new Label("NO BOOK REVIEW");
+		Label nessunLibro = new Label("NO REVIEW FOR THIS BOOK");
 		nessunLibro.setStyle("-fx-font-size: 32px; -fx-text-fill: white;");
 
 		
@@ -386,18 +386,18 @@ import models.Model;
 
 		if(!TokenSession.checkTkSession()){
 
-			views.ViewAlert.showAlert("error", "MUST BE LOGGED", "login to see reviews", btnComments, "error");
+			views.ViewAlert.showAlert("info", "MUST BE LOGGED", "Login to post a comment", btnComments, "error");
 		}else{
 
 		if(ControlIfPresent(libraries)){
 		Model.getIstance().getView().getSideBarSelectionItem().set("AddReview");
 		}else{
-			views.ViewAlert.showAlert("error", "BOOK NOT PRESENT", "Add this book to your libraries", btnComments, "error");
+			views.ViewAlert.showAlert("info", "BOOK NOT PRESENT", "Add this book to your libraries", btnComments, "error");
 		}
 		}
 	}
 
-
+ 
 	public void onReccomended(){
 
 		List<Libreria> libraries = new LinkedList<>();
@@ -411,13 +411,13 @@ import models.Model;
 
 		if(!TokenSession.checkTkSession()){
 
-		views.ViewAlert.showAlert("error", "MUST BE LOGGED", "login to see comments", btnComments, "error");
+		views.ViewAlert.showAlert("info", "MUST BE LOGGED", "Login to recommend books", btnComments, "error");
 		}else{
 
 		if(ControlIfPresent(libraries)){
 		Model.getIstance().getView().getSideBarSelectionItem().set("AddReccomended");
 		}else{
-			views.ViewAlert.showAlert("error", "BOOK NOT PRESENT", "Add this book to your libraries", btnComments, "error");
+			views.ViewAlert.showAlert("info", "BOOK NOT PRESENT", "Add this book to your libraries", btnComments, "error");
 		}
 		}
 }
@@ -426,7 +426,7 @@ import models.Model;
 	public void OpenModalLibraries() {
 	
 	if(!TokenSession.checkTkSession()){
-		views.ViewAlert.showAlert("error", "MUST BE LOGGED", "login to see your libraries", btnComments, "error");
+		views.ViewAlert.showAlert("info", "MUST BE LOGGED", "Login to see your libraries", btnComments, "error");
 		return;
 		}
 

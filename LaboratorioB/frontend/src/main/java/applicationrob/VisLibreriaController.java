@@ -50,6 +50,9 @@ public class VisLibreriaController {
 
     @FXML
     private Label emptyText;
+
+    @FXML
+    private Label noBookText;
     
     private Libreria selectedLibrary;
     private Libreria library;
@@ -116,27 +119,40 @@ public class VisLibreriaController {
      */
     @FXML
     public void SeachBooksInLibrary(ActionEvent event) throws RemoteException, IOException {
+        
         String textSlib = searchBar.getText().trim().toLowerCase();
         booksLibrary.setAll(clientBR.getInstance().getLibreria(selectedLibrary.getIdLibreria()).getLibreria());
         filteredBooks.clear();
-         if (textSlib.isEmpty()) {
+
+        emptyText.setVisible(false);
+        noBookText.setVisible(false);
+
+        if (booksLibrary.isEmpty()) {
+            booksContainer.getChildren().clear();
             emptyText.setVisible(true);
+            return;
+        }
+
+        if (textSlib.isEmpty()) {
+            emptyText.setVisible(false);
             currentBooks.setAll(booksLibrary);
-        } else {
-              for (Libro lib : booksLibrary) {
-                        if (lib.getTitolo().toLowerCase().contains(textSlib)) {
-                            filteredBooks.add(lib);
-                        }
-                    }
-                currentBooks.setAll(filteredBooks); 
-        }  
+            InsertingElements(currentBooks);
+            return;
+        } 
+        
+        for (Libro lib : booksLibrary) {
+            if (lib.getTitolo().toLowerCase().contains(textSlib)) {
+                filteredBooks.add(lib);
+                }
+        }
 
        if (filteredBooks.isEmpty()) {
         booksContainer.getChildren().clear();
-        emptyText.setText("BOOKS NOT FOUND");
-        emptyText.setVisible(true);
+        noBookText.setVisible(true);
         return;
     }
+        
+        currentBooks.setAll(filteredBooks);
         InsertingElements(currentBooks); 
     }
 
@@ -193,7 +209,7 @@ public class VisLibreriaController {
 
         } catch (RemoteException e ) {
             e.printStackTrace();
-             views.ViewAlert.showAlert("error", "Book error", "Server error, try again.", booksContainer, "error");
+             views.ViewAlert.showAlert("error", "BOOK ERROR", "Server error, try again", booksContainer, "error");
 		} catch (IOException e) {
                 e.printStackTrace();
             }
