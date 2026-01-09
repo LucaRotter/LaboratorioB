@@ -866,10 +866,7 @@ public class serverBRImpl extends UnicastRemoteObject implements serverBR {
     }
     
     public static void main(String[] args) {
-    String SERVER_IP = "192.168.1.14"; // <-- metti qui l'IPv4 del PC server (ipconfig)
-    //luca "10.24.140.223"
-	//aleks "10.13.193.207"
-    //davide "172.25.32.1"
+    String SERVER_IP = "192.168.1.14";
     Scanner in = new Scanner(System.in);
     System.out.println("Inserisci username:");
     String username = in.nextLine();
@@ -878,14 +875,14 @@ public class serverBRImpl extends UnicastRemoteObject implements serverBR {
     DatabaseManager.autenticazione(username, password);
 
     try {
-        // IMPORTANTISSIMO: evita che RMI ritorni "localhost" ai client
+        
         System.setProperty("java.rmi.server.hostname", SERVER_IP);
 
         LocateRegistry.createRegistry(7969);
 
         serverBRImpl server = new serverBRImpl();
 
-        // bind sull'IP del server (non localhost)
+       
         Naming.rebind("rmi://" + SERVER_IP + ":7969/serverBR", server);
 
         System.out.println("Server BR is running on " + SERVER_IP + ":7969...");
