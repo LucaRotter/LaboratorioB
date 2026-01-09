@@ -1,0 +1,129 @@
+/* Stile generale della pagina */
+.anchor-pane {
+    -fx-background-color: #f9f9fb;
+    -fx-font-family: "Segoe UI", Calibri, sans-serif;
+    -fx-font-size: 14px;
+}
+
+/* Titolo */
+.text {
+    -fx-fill: #333;
+    -fx-font-weight: bold;
+}
+
+/* Tabella delle recensioni */
+.TableReview {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #d1d1d1;
+    -fx-border-width: 1;
+    -fx-border-radius: 8;
+    -fx-background-radius: 8;
+    
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 8, 0, 2, 2);
+}
+
+
+
+/* Intestazioni delle colonne */
+.header {
+    -fx-font-weight: bold;
+    -fx-font-size: 15px;
+    -fx-text-fill: #2d2d2d;
+    -fx-padding: 5 0 5 0;
+    -fx-border-color: #dddddd;
+    -fx-border-width: 0 0 1 0;
+}
+
+/* Celle della tabella */
+.label {
+    -fx-text-fill: #333333;
+}
+
+/* ChoiceBox (punteggio) */
+.choice-box {
+    -fx-background-color: white;
+    -fx-border-color: #cccccc;
+    -fx-border-radius: 4;
+    -fx-background-radius: 4;
+    -fx-padding: 2 5 2 5;
+    -fx-font-size: 13px;
+    -fx-pref-width: 70;
+}
+
+.choice-box:hover {
+    -fx-border-color: #4a90e2;
+}
+
+.choice-box .label {
+    -fx-text-fill: #333;
+}
+
+/* TextArea (note) */
+.text-area {
+    -fx-background-color: white;
+    -fx-border-color: #cccccc;
+    -fx-border-radius: 6;
+    -fx-background-radius: 6;
+    
+}
+
+.text-area:hover {
+    -fx-border-color: #4a90e2;
+}
+
+.text-area:focused {
+    -fx-border-color: #4a90e2;
+    -fx-effect: dropshadow(gaussian, rgba(74,144,226,0.2), 4, 0, 0, 0);
+}
+
+/* Pulsanti */
+.button {
+    
+	-fx-background-color: #FFFF;
+	-fx-cursor: hand;
+
+}
+
+
+/* Effetto tabella (righe alternate) */
+.grid-pane > *:nth-child(even) {
+    -fx-background-color: #fafafa;
+}
+
+.text-area .scroll-pane .viewport {
+    -fx-fit-to-width: true;
+}
+
+.text-area .scroll-pane {
+    -fx-hbar-policy: never;   
+}
+
+Text {
+    -fx-font-size: 13px;
+    -fx-fill: #333333;
+    -fx-font-family: "Segoe UI", "Roboto", "Arial";
+}
+
+
+/* Nasconde la freccetta */
+.choice-box.read-only .open-button {
+    -fx-padding: 0;
+    -fx-opacity: 0;
+    -fx-min-width: 0;
+    -fx-max-width: 0;
+}
+
+
+/* Centra il valore */
+.choice-box.read-only .label {
+    -fx-alignment: center;
+    -fx-text-alignment: center;
+    -fx-padding: 0;
+}
+
+.paneBox {
+    -fx-background-color: white;
+    -fx-background-radius: 6;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.12), 8, 0.2, 0, 2);
+}
+

@@ -1,0 +1,567 @@
+package applicationrob;
+
+import java.io.IOException;
+import java.net.URL;
+import java.rmi.RemoteException;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.ResourceBundle;
+import LaboratorioB.common.models.Libreria;
+import LaboratorioB.common.models.Libro;
+import LaboratorioB.common.models.Valutazione;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.Region;
+import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
+import javafx.scene.layout.GridPane;
+import models.Model;
+
+/**
+ * Controller JavaFX per la schermata di visualizzazione del libro selezionato.
+ * La classe si occupa di mostrare i dettagli del libro (titolo, autore, editore, genere, anno),
+ * gestire la lista delle recensioni e la lista dei libri consigliati.
+ * 
+ * @author Grassi, Alessandro, 757784, VA
+ * @author Kastratovic, Aleksandar, 752468, VA
+ * @author Rotter, Luca Giorgio, 757780, VA
+ * @author Davide, Bilora, 757011, VA
+ * @version 1.0
+ */
+
+ public class VisLibroController implements Initializable{
+
+	@FXML
+    private Button btnCancel;
+
+    @FXML
+    private Label LBAuthor;
+
+	@FXML
+	private ScrollPane ScrollRec;
+
+    @FXML
+    private Label LBGenre;
+
+    @FXML
+    private Label LBHouse;
+
+    @FXML
+    private Label LBTitle;
+
+    @FXML
+    private Label LBYear;
+
+    @FXML
+    private Pane ModalLibraries;
+
+    @FXML
+    private ScrollPane ScrollLibraries;
+
+    @FXML
+    private VBox VBoxLibraries;
+
+    @FXML
+    private Button btnComments;
+
+    @FXML
+    private Button btnRelated;
+
+    @FXML
+    private Button btnSave;
+
+    @FXML
+    private StackPane modalOverlay;
+
+    @FXML
+    private HBox recListBook;
+
+    @FXML
+    private VBox reviewContainer;
+
+    @FXML
+    private ScrollPane root1;
+
+	@FXML
+	private Button btnConfirm;
+
+	@FXML 
+	private Label lbUserCounterRec;
+
+	@FXML
+	private Label lbRecounter;
+	
+	@FXML
+	private Label lbUserCounter;
+
+	@FXML
+	private Label lbAverage;
+
+	Libro book;
+
+	@Override
+	public void initialize(URL arg0, ResourceBundle arg1) {
+
+		init();
+
+		Model.getIstance().getView().getRecommenderRefresh().addListener((obs, oldVal, newVal) -> {
+
+			if (newVal) {
+				
+				initRecoemmendedList(book);
+				Model.getIstance().getView().getRecommenderRefresh().set(false); 
+			}
+});	
+		
+		Model.getIstance().getView().getReviewRefresh().addListener((obs, oldVal, newVal) -> {
+
+			if (newVal) {
+				
+				initReviewList(book);
+				Model.getIstance().getView().getReviewRefresh().set(false); 
+			}
+});
+
+		Model.getIstance().getView().selectedBookProperty().addListener((obs, oldLibr, newLibr) -> {
+
+		if(newLibr != null){
+			
+			book = newLibr;
+			root1.setVvalue(0.0);
+
+        	setLibro(newLibr);
+		}
+
+		});
+	
+	}
+	
+	public void init(){
+
+		book = Model.getIstance().getView().getSelectedBook();
+
+		if (book != null) {
+    		setLibro(book);
+		}
+
+		btnComments.setOnAction(e->{
+			onComments();
+		});	
+
+		btnRelated.setOnAction(e->{
+			onReccomended();
+		});
+
+		btnSave.setOnAction(e->{
+			OpenModalLibraries();
+
+		});
+
+		btnConfirm.setOnAction(e->{
+			onConfirm();
+		});
+
+		btnCancel.setOnAction(e->{
+			closeModal();
+		});
+	}
+
+	public void openModal(Valutazione review) throws IOException {
+		
+		modalOverlay.setVisible(true);
+		root1.setDisable(true);
+		modalOverlay.toFront();
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/applicationrob/TableReview.fxml"));
+		GridPane modalContent = loader.load();
+		TableReviewController tableReviewController = loader.getController();
+		tableReviewController.setReview(review);
+		
+		modalOverlay.getChildren().add(modalContent);
+
+		 modalOverlay.setOnMouseClicked(event -> {
+        if (event.getTarget() == modalOverlay) {
+            closeModalReview();
+        }
+    	});
+		 	
+	}
+
+	public void closeModalReview(){
+		modalOverlay.getChildren().clear();
+		modalOverlay.setVisible(false);
+		root1.setDisable(false);
+	}
+
+	//metodo per settare i dettagli del libro nella view
+	public void setLibro(Libro selectedBook) {
+
+		LBTitle.setText(selectedBook.getTitolo());	
+		LBAuthor.setText(selectedBook.getAutore());
+		LBHouse.setText(selectedBook.getEditore());
+		LBGenre.setText(selectedBook.getGenere());
+		LBYear.setText(String.valueOf(selectedBook.getAnno()));
+
+		
+	initRecoemmendedList(selectedBook);
+
+	initReviewList(selectedBook);
+
+		
+	}
+
+	/**
+	 * metodo per inizializzare la lista delle recensioni
+	 */
+	public void initReviewList(Libro selectedBook){
+		int i ;
+		List<Valutazione> review = new LinkedList<>();
+
+		try {
+			review = clientBR.getInstance().getValutazione(selectedBook.getId());
+		} catch (RemoteException e) {
+
+			e.printStackTrace();
+		}
+
+
+		reviewContainer.getChildren().clear();
+
+		double avarege = 0;
+
+		for(i= 0;i<review.size();i++){
+		FXMLLoader loader1 = new FXMLLoader(getClass().getResource("/applicationrob/Review.fxml"));
+		
+		HBox hBox = null;
+
+		try {
+			hBox = loader1.load();
+		} catch (IOException e) {
+			
+			e.printStackTrace();
+		}
+
+		ReviewController reviewc =  loader1.getController();
+		try {
+			reviewc.setReview(review.get(i));
+		} catch (RemoteException e) {
+			
+			e.printStackTrace();
+		}
+		reviewc.setVislibroController(this);
+
+		avarege += review.get(i).getVotoMedio(); 
+		reviewContainer.getChildren().add(hBox);
+	}
+
+	
+	if( review.size() == 0){
+
+		lbAverage.setText("0.0");
+		Label nessunLibro = new Label("NO REVIEW FOR THIS BOOK");
+		nessunLibro.setStyle("-fx-font-size: 32px; -fx-text-fill: white;");
+
+		
+			reviewContainer.setAlignment(Pos.CENTER);
+			reviewContainer.prefHeightProperty().set(200.0);
+				
+			reviewContainer.getChildren().add(nessunLibro);
+				
+	} else{
+
+	lbAverage.setText(String.format("%.2f", avarege/review.size()));	
+	reviewContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
+
+	}	
+
+	lbUserCounter.setText(String.valueOf(review.size())); 
+	}
+
+
+	/**
+	 * metodo per inizializzare la lista dei libri consigliati
+	 */
+	public void initRecoemmendedList(Libro selectedBook){
+
+		ScrollRec.setContent(recListBook);
+		List<Libro> recommendList = new LinkedList<>();
+
+		try {
+			recommendList = clientBR.getInstance().getConsiglio(selectedBook.getId());
+		} catch (RemoteException e) {
+
+			e.printStackTrace();
+		}
+
+		recListBook.getChildren().clear();  
+
+		for(int i=0; i<recommendList.size(); i++) {
+		
+		VBox vbox = null;
+
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/applicationrob/BookEl.fxml"));
+
+		try {
+			vbox = loader.load();
+			
+		} catch (IOException e) {
+			
+			e.printStackTrace();
+		}
+		
+		int tmp = 0;
+
+		try {
+			tmp = clientBR.getInstance().getNumeroLibriConsigliati_libro(selectedBook.getId(), recommendList.get(i).getId());
+		} catch (RemoteException e) {
+
+			e.printStackTrace();
+		}
+
+		
+		BookController book = loader.getController();
+		book.setLabels(recommendList.get(i).getAutore(), recommendList.get(i).getTitolo());
+		book.setNumberReccomender(tmp);
+		Libro libr = recommendList.get(i);
+
+		vbox.setOnMouseClicked(e->{
+
+				Model.getIstance().getView().setSelectedBook(libr);
+				Model.getIstance().getView().getSideBarSelectionItem().set("VisLibro");
+				
+			});
+		
+		recListBook.getChildren().add(vbox);
+		
+		}
+
+		int tmp = 0;
+		
+		try {
+			tmp = clientBR.getInstance().getNumeroLibriConsigliati(selectedBook.getId());
+		} catch (RemoteException e) {
+
+			e.printStackTrace();
+		}
+
+	
+		lbUserCounterRec.setText(String.valueOf(tmp));
+		lbRecounter.setText(String.valueOf(recommendList.size()));
+
+		if(recommendList.size() == 0){
+
+				lbRecounter.setText("0");
+				Label nessunLibro = new Label("NO BOOK RECCOMMENDED");
+				nessunLibro.setStyle("-fx-font-size: 32px; -fx-text-fill: gray;");
+
+				VBox container = new VBox(nessunLibro);
+				container.setAlignment(Pos.CENTER);
+				container.prefWidthProperty().bind(ScrollRec.widthProperty());
+				container.prefHeightProperty().set(200.0);
+				
+				ScrollRec.setContent(container);
+
+		}
+	}
+
+
+	//metodo per gestire il click sul bottone dei commenti
+	public void onComments(){
+
+		List<Libreria> libraries = new LinkedList<>();
+
+		try {
+			libraries = clientBR.getInstance().getLibrerie(TokenSession.getUserId());
+		} catch (RemoteException e) {
+			
+			e.printStackTrace();
+		}
+
+		if(!TokenSession.checkTkSession()){
+
+			views.ViewAlert.showAlert("info", "MUST BE LOGGED", "Login to post a comment", btnComments, "error");
+		}else{
+
+		if(ControlIfPresent(libraries)){
+		Model.getIstance().getView().getSideBarSelectionItem().set("AddReview");
+		}else{
+			views.ViewAlert.showAlert("info", "BOOK NOT PRESENT", "Add this book to your libraries", btnComments, "error");
+		}
+		}
+	}
+
+ 
+	public void onReccomended(){
+
+		List<Libreria> libraries = new LinkedList<>();
+
+		try {
+			libraries = clientBR.getInstance().getLibrerie(TokenSession.getUserId());
+		} catch (RemoteException e) {
+			
+			e.printStackTrace();
+		}
+
+		if(!TokenSession.checkTkSession()){
+
+		views.ViewAlert.showAlert("info", "MUST BE LOGGED", "Login to recommend books", btnComments, "error");
+		}else{
+
+		if(ControlIfPresent(libraries)){
+		Model.getIstance().getView().getSideBarSelectionItem().set("AddReccomended");
+		}else{
+			views.ViewAlert.showAlert("info", "BOOK NOT PRESENT", "Add this book to your libraries", btnComments, "error");
+		}
+		}
+}
+	//metodo per aprire la modal delle librerie
+	public void OpenModalLibraries() {
+	
+	if(!TokenSession.checkTkSession()){
+		views.ViewAlert.showAlert("info", "MUST BE LOGGED", "Login to see your libraries", btnComments, "error");
+		return;
+		}
+
+		if(ModalLibraries.isVisible()){
+			ModalLibraries.setVisible(false);
+			ModalLibraries.setDisable(true);
+			return;
+		}
+
+		ModalLibraries.setVisible(true);
+		ModalLibraries.setDisable(false);
+		ModalLibraries.toFront();
+	
+		//initialization of the libraries list
+		VBoxLibraries.getChildren().clear();
+		List<Libreria> libraries = new LinkedList<>();
+
+		try {
+			libraries = clientBR.getInstance().getLibrerie(TokenSession.getUserId());
+		} catch (RemoteException e) {
+			
+			e.printStackTrace();
+		}
+
+		for(int i= 0; i<libraries.size(); i++){
+
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("/applicationrob/LibraryItem.fxml"));
+			HBox hbox = null;
+
+			try {
+				hbox = loader.load();
+
+			} catch (IOException e) {
+				
+				e.printStackTrace();
+			}
+
+			
+
+			LibraryItemController libraryItemController = loader.getController();
+			libraryItemController.initLibrary(libraries.get(i).getNomeLibreria(), libraries.get(i).getIdLibreria(),ControlIfPresentSingle(libraries, i));
+
+			//setting user data to retrieve the controller later
+			hbox.setUserData(libraryItemController);
+
+			VBoxLibraries.getChildren().add(hbox);
+		}
+
+	}
+
+	public void onConfirm(){
+
+	
+		VBoxLibraries.getChildren().size();
+		
+		for(int i=0; i<VBoxLibraries.getChildren().size(); i++){
+
+			//retrieving the controller
+			HBox hbox = (HBox) VBoxLibraries.getChildren().get(i);
+			LibraryItemController libraryItemController = (LibraryItemController)hbox.getUserData();
+			
+
+			if(libraryItemController.hasStateChanged()){
+				
+				if(libraryItemController.isSelected()) {
+					
+					try {
+						clientBR.getInstance().addLibroLibreria(
+							Model.getIstance().getView().getSelectedBook().getId(),
+							libraryItemController.getId_library()
+						);
+
+					Model.getIstance().getView().getListLibraryRefresh().set(true);
+					System.out.println("Aggiunto alla libreria: " + (Model.getIstance().getView().getListLibraryRefresh().get()));
+					} catch (RemoteException e) {
+						
+						e.printStackTrace();
+					}
+
+					
+				} else {
+					
+					try {
+						clientBR.getInstance().removeLibroLibreria(
+							Model.getIstance().getView().getSelectedBook().getId(),
+							libraryItemController.getId_library()
+						);
+
+						Model.getIstance().getView().getListLibraryRefresh().set(true);
+						System.out.println("Aggiunto alla libreria: " + (Model.getIstance().getView().getListLibraryRefresh().get()));
+					} catch (RemoteException e) {
+
+						e.printStackTrace();
+					}
+				}
+
+			hbox.setUserData(null);
+			closeModal();
+		} 
+	}  
+
+	}
+
+	/**
+	 * metodo per controllare se il libro è presente in una delle librerie dell'utente
+	 */
+	private boolean ControlIfPresent(List<Libreria> libraries){
+
+		boolean found = false;
+
+		for(int i= 0; i< libraries.size();i++){
+
+		
+			found = libraries.get(i).getLibreria().stream().anyMatch(libro -> 
+			libro.getId() == Model.getIstance().getView().getSelectedBook().getId());
+
+			if(found){
+				break;
+			}
+
+			
+			}
+			return found;
+	}
+
+	private boolean ControlIfPresentSingle(List<Libreria> libraries, int index){
+
+		boolean found = false;
+
+		
+			found = libraries.get(index).getLibreria().stream().anyMatch(libro -> 
+			libro.getId() == Model.getIstance().getView().getSelectedBook().getId());
+			return found;
+	}
+
+	public void closeModal() {
+		ModalLibraries.setVisible(false);
+		ModalLibraries.setDisable(true);
+	}
+}

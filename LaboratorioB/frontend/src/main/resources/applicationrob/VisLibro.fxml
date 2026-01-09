@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.SVGPath?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+<?import javafx.scene.Group?>
+
+
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="879.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="applicationrob.VisLibroController">
+   <children>
+      <StackPane prefHeight="700.0" prefWidth="879.0">
+         <children>
+            <StackPane fx:id="modalOverlay" prefHeight="150.0" prefWidth="200.0" visible="false" />
+            <ScrollPane fx:id="root1" hbarPolicy="NEVER" prefHeight="700.0" prefWidth="896.0" vbarPolicy="ALWAYS">
+               <content>
+                  <VBox prefWidth="865.0" spacing="40.0">
+                     <children>
+                        <Pane prefHeight="348.0" prefWidth="866.0">
+                           <children>
+                              
+                                          
+                              <HBox alignment="CENTER_RIGHT" layoutX="611.0" layoutY="23.0" prefHeight="35.0" prefWidth="241.0" spacing="15">
+                  <Button fx:id="btnRelated" prefHeight="35" prefWidth="100">
+                  <graphic>
+               <Group>
+            
+            <SVGPath
+                content="M3 0h10a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-1h1v1a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v1H1V2a2 2 0 0 1 2-2"
+                fill="#333333"
+                scaleX="1.2"
+                scaleY="1.2"/>
+
+            
+            <SVGPath
+                content="M8 5.5a.5.5 0 0 1 .5.5v1.5H10a.5.5 0 0 1 0 1H8.5V10a.5.5 0 0 1-1 0V8.5H6a.5.5 0 0 1 0-1h1.5V6a.5.5 0 0 1 .5-.5"
+                fill="black"
+                scaleX="1.2"
+                scaleY="1.2"/>
+        </Group> 
+         		    </graphic>
+         		    </Button>
+                  <Button fx:id="btnComments" prefHeight="35" prefWidth="100">
+                    <graphic>
+              <SVGPath content="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H4.414a1 1 0 0 0-.707.293L.854 15.146A.5.5 0 0 1 0 14.793zm3.5 1a.5.5 0 0 0 0 1h9a.5.5 0 0 0 0-1zm0 2.5a.5.5 0 0 0 0 1h9a.5.5 0 0 0 0-1zm0 2.5a.5.5 0 0 0 0 1h5a.5.5 0 0 0 0-1z" fill="#333333" scaleX="1.2" scaleY="1.2" /> 
+         		    </graphic>
+         		    </Button>
+                  <Button fx:id="btnSave" prefHeight="35" prefWidth="100">
+                    <graphic>
+              <SVGPath content="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 15.5zm2-1a1 1 0 0 0-1 1v12.566l4.723-2.482a.5.5 0 0 1 .554 0L13 14.566V2a1 1 0 0 0-1-1z" fill="#333333" scaleX="1.2" scaleY="1.2" /> 
+         		    </graphic>
+         		    </Button>
+              </HBox>
+                              <Label fx:id="LBTitle" layoutX="21.0" layoutY="23.0" prefHeight="35.0" prefWidth="545.0" text="nome">
+                                 <font>
+                                    <Font name="Calibri" size="24.0" />
+                                 </font>
+                              </Label>
+                              <Pane layoutX="14.0" layoutY="111.0" prefHeight="209.0" prefWidth="553.0" style="-fx-background-color: white; -fx-background-radius: 8px;" styleClass="PaneDetail">
+                                 <children>
+                                    <VBox layoutX="184.0" layoutY="14.0" prefHeight="157.0" prefWidth="371.0" spacing="10.0">
+                                       <children>
+                                          <VBox prefHeight="30.0" prefWidth="371.0" spacing="5.0" VBox.vgrow="ALWAYS">
+                                             <children>
+                                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Author :" wrappingWidth="50.99183654785156" />
+                                                <Label fx:id="LBAuthor" prefHeight="18.0" prefWidth="538.0" text="autore" VBox.vgrow="ALWAYS" />
+                                             </children>
+                                          </VBox>
+                                          <VBox prefHeight="24.0" prefWidth="371.0" spacing="5.0" VBox.vgrow="ALWAYS">
+                                             <children>
+                                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Production House :" />
+                                                <Label fx:id="LBHouse" prefHeight="18.0" prefWidth="372.0" text="casa editrice" />
+                                             </children>
+                                          </VBox>
+                                          <VBox prefHeight="29.0" prefWidth="371.0" spacing="5.0" VBox.vgrow="ALWAYS">
+                                             <children>
+                                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Genre :" />
+                                                <Label fx:id="LBGenre" prefHeight="18.0" prefWidth="387.0" text="categoria" />
+                                             </children>
+                                          </VBox>
+                                          <VBox prefHeight="36.0" prefWidth="371.0" spacing="5.0" VBox.vgrow="ALWAYS">
+                                             <children>
+                                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Year :" />
+                                                <Label fx:id="LBYear" prefHeight="18.0" prefWidth="433.0" text="anno" />
+                                             </children>
+                                          </VBox>
+                                       </children>
+                                    </VBox>
+                                    <ImageView fitHeight="152.0" fitWidth="149.0" layoutY="14.0" pickOnBounds="true">
+                                       <image>
+                                          <Image url="@../img/Paomedia-Small-N-Flat-Book.512.png" />
+                                       </image>
+                                    </ImageView>
+                                 </children>
+                              </Pane>
+                           </children>
+                        </Pane>
+                        <VBox prefWidth="846.0" spacing="10.0" VBox.vgrow="ALWAYS">
+                           <Pane prefHeight="45.0" prefWidth="826.0" styleClass="PaneDetail">
+                              <children>
+                                    <Text layoutX="14.0" layoutY="28.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Review from other users" />
+                                    <HBox layoutX="705.0" layoutY="4.0" prefHeight="40.0" prefWidth="107.0" spacing="10.0">
+                                       <children>
+                                          <HBox alignment="CENTER" prefHeight="40.0" prefWidth="58.0" spacing="10.0">
+                                             <children>
+                                             <SVGPath content="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6m-5.784 6A2.24 2.24 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.3 6.3 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1zM4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5" scaleX="1.4" scaleY="1.4" />
+                                             
+                                                <Label fx:id="lbUserCounterRec" />
+                                             </children>
+                                          </HBox>
+                                          <HBox alignment="CENTER" prefHeight="40.0" prefWidth="61.0" spacing="10.0">
+                                             <children>
+      
+                                             <SVGPath content="M1 2.828c.885-.37 2.154-.769 3.388-.893 1.33-.134 2.458.063 3.112.752v9.746c-.935-.53-2.12-.603-3.213-.493-1.18.12-2.37.461-3.287.811zm7.5-.141c.654-.689 1.782-.886 3.112-.752 1.234.124 2.503.523 3.388.893v9.923c-.918-.35-2.107-.692-3.287-.81-1.094-.111-2.278-.039-3.213.492zM8 1.783C7.015.936 5.587.81 4.287.94c-1.514.153-3.042.672-3.994 1.105A.5.5 0 0 0 0 2.5v11a.5.5 0 0 0 .707.455c.882-.4 2.303-.881 3.68-1.02 1.409-.142 2.59.087 3.223.877a.5.5 0 0 0 .78 0c.633-.79 1.814-1.019 3.222-.877 1.378.139 2.8.62 3.681 1.02A.5.5 0 0 0 16 13.5v-11a.5.5 0 0 0-.293-.455c-.952-.433-2.48-.952-3.994-1.105C10.413.809 8.985.936 8 1.783" scaleX="1.2" scaleY="1.2" />
+                                                <Label fx:id="lbRecounter" />
+                                             </children>
+                                          </HBox>
+                                       </children>
+                                    </HBox>
+                                 </children>
+                           </Pane>
+                              <ScrollPane fx:id="ScrollRec" fitToHeight="true" hbarPolicy="AS_NEEDED" prefWidth="826.0" styleClass="ScrollPaneBooks" vbarPolicy="NEVER" VBox.vgrow="ALWAYS">
+                                  <content>
+                                      <HBox fx:id="recListBook" alignment="CENTER" fillHeight="false" spacing="45.0">
+                                          <padding>
+                                              <Insets bottom="20.0" left="8.0" top="10.0" right="8.0"/>
+                                          </padding>
+                                      </HBox>
+                                  </content>
+                                  <padding>
+                                      
+                                  </padding>
+                              </ScrollPane>
+                           <VBox.margin>
+                              <Insets left="20.0" right="20.0" />
+                           </VBox.margin>
+                          </VBox>
+                        <VBox prefWidth="852.0" spacing="10" styleClass="reviewContainer">
+      				   <children>
+                              <Pane prefHeight="50.0" prefWidth="826.0" styleClass="PaneDetail" VBox.vgrow="NEVER">
+                                 <children>
+                                    <Text layoutX="14.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Review from other users" />
+                                    <HBox layoutX="705.0" layoutY="6.0" prefHeight="40.0" prefWidth="107.0" spacing="10.0">
+                                       <children>
+                                          <HBox alignment="CENTER" prefHeight="40.0" prefWidth="58.0" spacing="10.0">
+                                             <children>
+                                             <SVGPath content="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6m-5.784 6A2.24 2.24 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.3 6.3 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1zM4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5" scaleX="1.4" scaleY="1.4" />
+                                             
+                                                <Label fx:id="lbUserCounter" />
+                                             </children>
+                                          </HBox>
+                                          <HBox alignment="CENTER" prefHeight="40.0" prefWidth="61.0" spacing="10.0">
+                                             <children>
+      
+                                             <SVGPath content="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" scaleX="1.2" scaleY="1.2" />
+                                                <Label fx:id="lbAverage" />
+                                             </children>
+                                          </HBox>
+                                       </children>
+                                    </HBox>
+                                 </children>
+                              </Pane>
+      				       <VBox fx:id="reviewContainer" alignment="CENTER" spacing="10">
+                                 <VBox.margin>
+                                    <Insets top="15.0" />
+                                 </VBox.margin>
+                              </VBox>
+      				   </children>
+                           <VBox.margin>
+                              <Insets bottom="30.0" left="20.0" right="20.0" top="30.0" />
+                           </VBox.margin>
+      				</VBox>
+                     </children>
+                  </VBox>
+               </content>
+            </ScrollPane>
+         </children>
+      </StackPane>
+      
+      <Pane fx:id="ModalLibraries" disable="true" layoutX="623.0" layoutY="83.0" prefHeight="283.0" prefWidth="223.0" styleClass="PaneModal" visible="false">
+         <children>
+            <ScrollPane fx:id="ScrollLibraries" hbarPolicy="NEVER" layoutY="38.0" prefHeight="207.0" prefWidth="223.0">
+               <content>
+                  <VBox fx:id="VBoxLibraries" prefHeight="208.0" prefWidth="215.0" />
+               </content>
+               <styleClass>
+                  <String fx:value="ScrollPaneBooks" />
+                  <String fx:value="ScrollLibraries" />
+               </styleClass>
+            </ScrollPane>
+            <Button fx:id="btnCancel" layoutX="74.0" layoutY="252.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="57.0" style="-fx-background-color: transparent;" text="cancel" />
+            <Button fx:id="btnConfirm" layoutX="137.0" layoutY="252.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="72.0" text="confirm" />
+            <Pane prefHeight="38.0" prefWidth="223.0">
+               <children>
+                  <Text layoutX="14.0" layoutY="24.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Add to library" wrappingWidth="79.73675537109375" />
+               </children>
+            </Pane>
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>

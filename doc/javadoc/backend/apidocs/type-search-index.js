@@ -1,0 +1,1 @@
+typeSearchIndex = [{"l":"All Classes and Interfaces","u":"allclasses-index.html"},{"p":"LaboratorioB.db","l":"DatabaseManager"},{"p":"LaboratorioB","l":"serverBRImpl"}];updateSearchResults();

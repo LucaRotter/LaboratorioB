@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+
+<StackPane fx:id="rootPane" 
+           xmlns:fx="http://javafx.com/fxml"
+           fx:controller="applicationrob.LibraryController"
+           onMouseClicked="#clickLibrary"
+           prefHeight="170.0" prefWidth="121.0" StyleClass="libraryElement">
+
+    <children>
+        <VBox alignment="CENTER" spacing="5">
+            <StackPane>
+                <ImageView fx:id="libraryImage"
+                           fitHeight="110.0"
+                           fitWidth="110.0"
+                           pickOnBounds="true"
+                           preserveRatio="true">
+                    <image>
+                        <Image url="@../img/LibraryB.png" />
+                    </image>
+                </ImageView>
+               
+            </StackPane>
+
+            <Label fx:id="libraryLabel"
+                   text="Nome Libreria"
+                   alignment="CENTER"
+                   wrapText="true"
+                   maxWidth="110"/>
+        </VBox>
+         <Button fx:id="removeBtn"
+                        text="-"
+                        StackPane.alignment="TOP_RIGHT"
+                        onAction="#removeLibrary"/>
+    </children>
+</StackPane>

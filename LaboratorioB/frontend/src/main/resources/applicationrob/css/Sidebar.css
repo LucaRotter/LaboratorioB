@@ -1,0 +1,52 @@
+.root{
+	-fx-font-size: 14px;
+}
+
+AnchorPane{
+	-fx-background-color: #FFFFFF;
+}
+
+.LoginPane{
+	
+	-fx-background-color: #86DBC5;
+	-fx-background-radius: 5%;
+}
+
+.LoginPane Button{
+	-fx-background-color:#FFFFFF;
+}
+
+.NavigationBtn{
+    -fx-background-color: #fcfcfc;
+    -fx-text-fill: #2c3e50;
+    -fx-border-color: #e0e0e0;
+    -fx-border-width: 1 0 1 0;
+    -fx-padding: 10 15 10 15;
+    -fx-cursor: hand;
+    -fx-text-alignment: center;
+    -fx-alignment: center;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.08), 4, 0.2, 0, 1);
+    -fx-background-radius: 3;
+    -fx-border-radius: 3;
+}
+
+.NavigationBtn:hover{
+    -fx-background-color: #ffffff;
+    -fx-text-fill: #3498db;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.12), 6, 0.3, 0, 2);
+    -fx-translate-y: -1;
+}
+
+
+
+.NavigationBtn HBox{
+	-fx-spacing: 1em;
+	-fx-alignament: CENTER_LEFT;
+}
+
+
+
+
+
+
+

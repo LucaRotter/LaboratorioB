@@ -1,0 +1,6 @@
+COGNOME		NOME		MATRICOLA	SEDE
+
+Grassi		Alessandro	757784		VA
+Kastratovic	Aleksandar	752468		VA
+Rotter		Luca Giorgio	757780		VA
+Davide		Bilora		757011		VA

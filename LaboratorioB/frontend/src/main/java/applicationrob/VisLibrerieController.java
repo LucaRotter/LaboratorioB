@@ -1,0 +1,331 @@
+package applicationrob;
+
+import java.io.IOException;
+import java.rmi.RemoteException; 
+import java.util.List;
+import LaboratorioB.common.models.Libreria;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
+import javafx.scene.Node;
+
+/**
+ * Classe controller per la visualizzazione e gestione delle librerie utente.
+ * Contiene metodi per aggiungere, cercare e modificare librerie.
+ * Utilizza JavaFX per la gestione dell'interfaccia utente.
+ * @author Grassi, Alessandro, 757784, VA
+ * @author Kastratovic, Aleksandar, 752468, VA
+ * @author Rotter, Luca Giorgio, 757780, VA
+ * @author Davide, Bilora, 757011, VA
+ * @version 1.0
+ * @param textSlib Testo inserito nella barra di ricerca.
+ * @param editMode Flag per indicare se la modalità di modifica è attiva.
+ * @param filteredLibr Lista delle librerie filtrate in base alla ricerca.
+ * @param librerie Lista osservabile delle librerie dell'utente.
+ * @param id_user ID dell'utente corrente.
+ */
+
+public class VisLibrerieController {
+
+   
+    @FXML
+    private Button btnSearch;
+    
+    @FXML
+    private Button edit;
+
+    @FXML
+    private Button emptyLbtn;
+
+    @FXML
+    private Button extraBtn;
+
+    @FXML 
+    private Button modalSendButton;
+
+    @FXML
+    private StackPane modalOverlay;
+
+    @FXML
+    private ScrollPane scrollLibraries;
+
+    @FXML
+    private GridPane librariesContainer; 
+
+    @FXML
+    private TextField modalTextField;
+
+    @FXML
+    private TextField searchBar;
+
+    @FXML
+    private HBox modalContent;
+    
+    @FXML
+    private Label emptyText;
+
+    @FXML
+    private Label noLibrariesLb;
+    
+    private String textSlib;
+    private boolean editMode = false;
+
+    private List<Libreria> filteredLibr;
+    private ObservableList<Libreria> librerie;
+
+    private int id_user;
+
+    /**
+     * Metodo di inizializzazione del controller.
+     * Controlla ID utente, carica le librerie e imposta i gestori di eventi.
+     */
+    @FXML
+    public void initialize() throws RemoteException {
+        id_user = TokenSession.getUserId();
+
+        librerie = FXCollections.observableArrayList();
+
+        librerie.setAll(clientBR.getInstance().getLibrerie(id_user));
+        updateEmptyState();
+    	noLibrariesLb.setVisible(false);
+
+    	modalOverlay.setOnMouseClicked(event -> {
+    		if (!modalContent.isHover()) {
+    	        modalOverlay.setVisible(false);
+    	    }
+        });
+
+    	InsertingElements(librerie);
+    }
+    
+    /**
+     * Metodo per mostrare il modal di aggiunta libreria.
+     */
+    private void showModal() {
+        if(librerie.size () >= 20) {
+            modalOverlay.setVisible(false); 
+            views.ViewAlert.showAlert("info", "MAXIMUM LIBRARIES", "You have reached the maximum limit of libraries", extraBtn, "info");
+            return;
+        }
+
+        modalOverlay.setVisible(true);
+        modalTextField.clear();
+    }
+
+    /**
+     * Metodo per inviare i dati del modal e creare una nuova libreria.
+     * Controlla se il nome della libreria esiste già e aggiorna la lista delle librerie.
+     */
+    @FXML
+    void sendModal(ActionEvent event) {
+        textSlib = modalTextField.getText().trim();
+        boolean exists = false;
+
+        if (textSlib.isEmpty()) {
+            return; 
+        } 
+
+        for (Libreria lib : librerie) {
+        if (lib.getNomeLibreria().equalsIgnoreCase(textSlib)) {
+            exists = true;
+            views.ViewAlert.showAlert("error", "LIBRARY ARLEADY EXIST","A library with this name already exists" , modalSendButton, "error");
+            return;
+            
+
+        }
+    }
+
+        try {
+        clientBR.getInstance().createLibreria(textSlib, id_user);
+        librerie.setAll(FXCollections.observableArrayList(clientBR.getInstance().getLibrerie(id_user)));
+        InsertingElements(librerie);
+        views.ViewAlert.showAlert("success", "LIBRARY ADDED", "Form now on you can save your favorite books", modalSendButton, "success");
+        modalOverlay.setVisible(false); 
+        updateEmptyState();
+        
+         } catch (RemoteException e) {
+             e.printStackTrace();
+             views.ViewAlert.showAlert("error", "LIBRARY NOTADDED", "Server error, try again", modalSendButton, "error");
+         }
+    }
+
+
+    /**
+     * Metodo per aprire il modal di aggiunta libreria quando non ce ne sono.
+     */
+    @FXML 
+    void addLibraryEmpty(ActionEvent event) {
+    	showModal();
+    }
+    
+     /**
+     * Metodo per aprire il modal di aggiunta libreria se ne esiste gia almeno una libreria.
+     */
+    @FXML
+    void addLibrary(ActionEvent event) {
+    	showModal();
+    }
+    
+    /**
+     * Metodo per cercare librerie in base al testo inserito nella barra di ricerca.
+     * Filtra le librerie e aggiorna la visualizzazione.
+     */
+    @FXML
+    void searchLibraries(ActionEvent event) throws RemoteException {
+        textSlib = searchBar.getText().trim().toLowerCase();
+        librerie.setAll(clientBR.getInstance().getLibrerie(id_user));
+        noLibrariesLb.setVisible(false);
+ 
+        if (textSlib.isEmpty()) {
+
+            if(librerie.isEmpty()) {
+                return;
+            }
+
+            noLibrariesLb.setVisible(false);
+            //filteredLibr = null;              
+            InsertingElements(librerie);       
+            return;
+        } 
+            filteredLibr = librerie.stream()
+            .filter(lib -> lib.getNomeLibreria().toLowerCase().contains(textSlib))
+            .toList();
+
+            if (filteredLibr.isEmpty()) {
+        
+                if(librerie.isEmpty()) {
+                return;
+            }
+
+            librariesContainer.getChildren().clear();
+            noLibrariesLb.setVisible(true);
+            return;
+    }
+
+        InsertingElements(FXCollections.observableArrayList(filteredLibr));   
+    }
+   
+    /**
+     * Metodo per aggiornare il testo della barra di ricerca.
+     */
+    @FXML
+    void writeText(ActionEvent event) {
+    	textSlib = searchBar.getText().trim().toLowerCase();
+        
+    	if (!textSlib.matches("[a-zA-Z0-9 ]*")) {
+    	    return;
+    	}	     
+    }
+
+    /**
+     * Metodo per attivare/disattivare la modalità di modifica delle librerie.
+     * Aggiorna la visualizzazione delle librerie in base alla modalità.
+     */ 
+    @FXML
+void useEdit(ActionEvent event) throws RemoteException {
+  
+    editMode = !editMode;
+    extraBtn.setVisible(editMode);
+
+    searchBar.clear();
+    textSlib = "";
+    filteredLibr = null;
+    noLibrariesLb.setVisible(false);
+
+    librerie.setAll(clientBR.getInstance().getLibrerie(id_user));
+    updateEmptyState();
+
+    InsertingElements(librerie);
+}
+   
+    /**
+     * Metodo per aggiornare lo stato di visualizzazione quando non ci sono librerie.
+     * Mostra o nasconde i componenti appropriati in base alla presenza di librerie.
+     */
+    private void updateEmptyState() {
+    	boolean hasLibraries = librerie != null && !librerie.isEmpty();
+
+        emptyLbtn.setVisible(!hasLibraries);
+        emptyText.setVisible(!hasLibraries);
+        
+        edit.setVisible(hasLibraries);
+        
+        if (!hasLibraries) {
+            editMode = false;       
+            extraBtn.setVisible(false);
+        }
+    }
+    
+    
+    /**
+     * Metodo che si occupa di mostrare le librerie fornite in input.
+     * Mostra le librerie in una griglia, gestendo la modalità di modifica e l'aggiunta di nuove librerie.
+     * Permette di rimuovere librerie in modalità di modifica tramite un callback.
+     * @param listToShow Lista delle librerie da mostrare.
+     */
+    private void InsertingElements(ObservableList<Libreria> listToShow) {
+    librariesContainer.getChildren().clear();
+
+    int columns = 5;
+    int row = 0;
+    int col = 0; 
+   
+
+    if (editMode) {
+        extraBtn.setPrefSize(120, 120);
+        librariesContainer.add(extraBtn, 0, 0);
+        GridPane.setMargin(extraBtn, new Insets(15, 15, 15, 20));
+        col = 1;
+        
+    }
+
+    for (Libreria lib : listToShow) {
+        try {
+            FXMLLoader loader = new FXMLLoader(); 
+			loader.setLocation(getClass().getResource("LibraryEl.fxml"));
+            StackPane libPane = loader.load();
+
+            LibraryController controller = loader.getController();
+            controller.setData(lib, editMode, () -> {
+              try {
+                    librerie.remove(lib);              
+                    updateEmptyState();                 
+                    InsertingElements(librerie);       
+
+                    views.ViewAlert.showAlert("success", "LIBRARY REMOVED","The library has been removed successfully", librariesContainer, "success");
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    views.ViewAlert.showAlert("error", "LIBRARY NOT REMOVED","Server error, try again",librariesContainer, "error");
+                }
+            });
+
+            libPane.setPrefSize(120, 170);
+            GridPane.setMargin(libPane, new Insets(7, 10, 10, 19));
+
+            librariesContainer.add(libPane, col, row);
+      
+            col++;
+                if (col >= columns) {
+                   col = 0; 
+                   row++;
+                   if (editMode && row == 0) col = 1;
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+                views.ViewAlert.showAlert("error", "LIBRARY ERROR", "Server error, try again", librariesContainer, "error");
+            }
+        }
+    }
+
+}

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane fx:id="rootPane" prefHeight="200" prefWidth="400" styleClass="alert-pane" stylesheets="@css/alert.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="applicationrob.AlertController">
+    <children>
+    <StackPane maxHeight="150" maxWidth="150" minHeight="100" minWidth="100" style="-fx-overflow: hidden;">
+    <ImageView fx:id="iconImage" fitHeight="120" fitWidth="120" pickOnBounds="true" preserveRatio="true" />
+    </StackPane>
+        <VBox fx:id="containerElement" alignment="CENTER" spacing="10" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0">
+         <Pane prefHeight="131.0" prefWidth="400.0">
+            <children>
+                  
+                  <Label fx:id="titleLabel"  layoutX="0"  layoutY="20"  prefWidth="400" alignment="CENTER" styleClass="alert-title" text="" />
+            </children>
+         </Pane>
+            <Label fx:id="messageLabel" styleClass="alert-message" text="" wrapText="true" />
+         <Pane prefHeight="103.0" prefWidth="400.0">
+            <children>
+                  <Button fx:id="closeButton" layoutX="160.0" layoutY="21.0" onAction="#closeModal" styleClass="alert-button" text="CLOSE" />
+            </children>
+         </Pane>
+        </VBox>
+    </children> 
+</AnchorPane>

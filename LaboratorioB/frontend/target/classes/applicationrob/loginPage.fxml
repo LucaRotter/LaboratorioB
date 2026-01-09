@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.shape.SVGPath?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+
+<AnchorPane fx:id="rootPane" prefWidth="1100" prefHeight="700"
+            xmlns="http://javafx.com/javafx/22"
+            xmlns:fx="http://javafx.com/fxml/1" stylesheets="@css/loginRegisterPage.css"
+            fx:controller="applicationrob.LoginController" styleClass="loginPage">
+
+ <Button fx:id="backBtn" text="" layoutX="20" layoutY="20" style="-fx-font-size: 14px;  -fx-text-fill: #333;" styleClass="Buttonback"> 
+<graphic>
+        <ImageView fitHeight="33.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../img/pngegg.png" />
+               </image>
+            </ImageView>
+        </graphic>
+    </Button>
+    <VBox fx:id="userBox" spacing="15" alignment="CENTER"
+          layoutX="350" layoutY="150" prefWidth="400" prefHeight="400"
+          styleClass="formBox">
+        <Label text="User Login" styleClass="formTitle"/>
+
+        <TextField fx:id="emailField" promptText="Email" prefWidth="250"/>
+        <PasswordField fx:id="pwField" promptText="Password" prefWidth="250"/>
+
+        <Button text="Login" onAction="#onUserLogin" prefWidth="150"/>
+        <Label fx:id="errorLabel" text="" visible="false"/>
+        <Label text="Don't have an account?"/>
+        <Hyperlink text="Click Here" onAction="#changeToRegister"/>
+    </VBox>
+
+   
+</AnchorPane>
