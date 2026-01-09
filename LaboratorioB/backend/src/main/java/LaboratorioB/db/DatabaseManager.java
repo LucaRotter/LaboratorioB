@@ -4,6 +4,7 @@ package LaboratorioB.db;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.Scanner;
 
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
@@ -29,10 +30,11 @@ public class DatabaseManager {
             HikariConfig config = new HikariConfig();
             config.setJdbcUrl("jdbc:postgresql://localhost:5432/LaboratorioB");
             System.out.println("Inserisci username e password del database:");
-            //String username = in.nextLine();
-            config.setUsername("postgres");
-            //String pwd = in.nextLine();
-            config.setPassword("@Aleks13082002"); 
+            Scanner in = new Scanner(System.in);
+            String username = in.nextLine();
+            config.setUsername(username);
+            String pwd = in.nextLine();
+            config.setPassword(pwd); 
             config.setDriverClassName("org.postgresql.Driver");
 
             dataSource = new HikariDataSource(config);
