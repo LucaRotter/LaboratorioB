@@ -36,6 +36,7 @@ public class clientBR{
 	 * Costruttore del clientBR.
 	 * Inizializza la connessione RMI con il server.
 	 */
+	
 	public clientBR() throws RemoteException {
     try {
        	String SERVER_IP = "172.25.32.1"; // <-- metti qui l'IPv4 del PC server (ipconfig)

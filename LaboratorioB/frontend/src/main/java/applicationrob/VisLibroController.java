@@ -467,7 +467,7 @@ import models.Model;
 			
 
 			LibraryItemController libraryItemController = loader.getController();
-			libraryItemController.initLibrary(libraries.get(i).getNomeLibreria(), libraries.get(i).getIdLibreria(),ControlIfPresent(libraries));
+			libraryItemController.initLibrary(libraries.get(i).getNomeLibreria(), libraries.get(i).getIdLibreria(),ControlIfPresentSingle(libraries, i));
 
 			//setting user data to retrieve the controller later
 			hbox.setUserData(libraryItemController);
@@ -535,7 +535,18 @@ import models.Model;
 			found = libraries.get(i).getLibreria().stream().anyMatch(libro -> 
 			libro.getId() == Model.getIstance().getView().getSelectedBook().getId());
 
+
 			}
+			return found;
+	}
+
+	private boolean ControlIfPresentSingle(List<Libreria> libraries, int index){
+
+		boolean found = false;
+
+		
+			found = libraries.get(index).getLibreria().stream().anyMatch(libro -> 
+			libro.getId() == Model.getIstance().getView().getSelectedBook().getId());
 			return found;
 	}
 
