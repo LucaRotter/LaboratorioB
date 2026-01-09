@@ -41,6 +41,7 @@
             <GridPane fx:id="booksContainer" hgap="15" vgap="5" />
         </content>
     </ScrollPane>
-    <Label fx:id="emptyText" text="Start saved your books" layoutX="270" layoutY="250" style="-fx-font-size: 32px; -fx-text-fill: gray;" />
+    <Label fx:id="emptyText" text="Start saving your books" layoutX="272" layoutY="250"  visible="false" style="-fx-font-size: 32px; -fx-text-fill: gray;" />
+     <Label fx:id="noBookText" text="NO BOOKS FOUND" layoutX="314" layoutY="250"  visible="false" style="-fx-font-size: 32px; -fx-text-fill: gray;" />
 	</children>
 	</AnchorPane>

@@ -35,9 +35,9 @@ public class ViewAlert {
 	 * @param title Titolo dell'alert.
 	 * @param message Messaggio dell'alert.
 	 * @param node Nodo della scena da cui mostrare l'alert.
-	 * @param position Posizione dell'alert (info, success, error).
+	 * @param setButton Bottone da impostare nell'alert.
 	 */
-public static void showAlert(String type, String title, String message, Node node, String position) {
+public static void showAlert(String type, String title, String message, Node node, String setButton) {
 	    try {
 	        FXMLLoader loader = new FXMLLoader(AlertController.class.getResource("/applicationrob/AlertMsg.fxml"));
 	        AnchorPane alertRoot = loader.load();
@@ -62,7 +62,7 @@ public static void showAlert(String type, String title, String message, Node nod
 			overlay.setAlignment(Pos.CENTER);
 			overlay.getChildren().add(alertRoot);
 
-			positionAlert(position, alertRoot, grayLayer);
+			positionAlert(setButton, alertRoot, grayLayer);
 
 			Group overlayGroup = new Group(grayLayer, overlay);
 			rootPane.getChildren().add(overlayGroup);
@@ -81,13 +81,13 @@ public static void showAlert(String type, String title, String message, Node nod
 
     /**
 	 * Metodo per posizionare l'alert nella scena.
-	 * @param position Posizione dell'alert (info, success, error).
+	 * @param setButton Bottone da impostare nell'alert.
 	 * @param alertRoot Root dell'alert.
 	 * @param grayLayer Layer grigio di sfondo.
 	 */
 
-	private static void positionAlert(String position, AnchorPane alertRoot, Pane grayLayer) {
-		switch (position.toLowerCase()) {
+	private static void positionAlert(String setButton, AnchorPane alertRoot, Pane grayLayer) {
+		switch (setButton.toLowerCase()) {
 			case "info":
 				StackPane.setMargin(alertRoot, new Insets(15, 0, 0, 450));
 				grayLayer.setMouseTransparent(false);

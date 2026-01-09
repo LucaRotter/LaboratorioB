@@ -35,6 +35,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import models.Model;
+import javafx.util.StringConverter;
 
 /** Controller JavaFX per la dashboard principale dell'applicazione.
  * Gestisce la visualizzazione e la navigazione tra i libri, inclusi
@@ -208,7 +209,7 @@ public class DashboardController implements Initializable{
 		});
 
 
-		  // ENTER frecce
+	// ENTER frecce
     btnCatLeft.setOnMouseEntered(e -> MouseBlocker.setMouseTransparent(false));
     btnCatRight.setOnMouseEntered(e -> MouseBlocker.setMouseTransparent(false));
 
@@ -218,6 +219,23 @@ public class DashboardController implements Initializable{
 
 	
 		choiceBoxOrder.getItems().addAll(Ricerca.TITOLO, Ricerca.AUTORE, Ricerca.ANNO);
+
+		choiceBoxOrder.setConverter(new StringConverter<Ricerca>() {
+			@Override
+			public String toString(Ricerca object) {
+				if (object == null) return "";
+				return switch(object) {
+					case TITOLO -> "TITLE";
+					case AUTORE -> "AUTHOR";
+					case ANNO -> "AUTHOR & YEAR";
+				};
+			}
+
+			@Override
+			public Ricerca fromString(String string) {
+				return null;
+			}
+		});
 		
 		choiceBoxOrder.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newVal) -> {
 
