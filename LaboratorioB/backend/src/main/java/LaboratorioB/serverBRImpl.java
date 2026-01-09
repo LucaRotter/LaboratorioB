@@ -14,6 +14,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Scanner;
 
 import LaboratorioB.common.interfacce.serverBR;
 import LaboratorioB.common.models.Libreria;
@@ -869,6 +870,12 @@ public class serverBRImpl extends UnicastRemoteObject implements serverBR {
     //luca "10.24.140.223"
 	//aleks "10.105.249.207"
     //davide "172.25.32.1"
+    Scanner in = new Scanner(System.in);
+    System.out.println("Inserisci username:");
+    String username = in.nextLine();
+    System.out.println("Inserisci password:");
+    String password = in.nextLine();
+    DatabaseManager.autenticazione(username, password);
 
     try {
         // IMPORTANTISSIMO: evita che RMI ritorni "localhost" ai client
