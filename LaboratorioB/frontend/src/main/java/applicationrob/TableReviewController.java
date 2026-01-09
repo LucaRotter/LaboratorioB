@@ -134,6 +134,12 @@ public class TableReviewController implements Initializable{
                         ScorePleasentness.setValue(1);
                         ScoreOriginality.setValue(1);
 
+                        TxtContent.setText("");
+                        TxtEdition.setText("");
+                        TxtOriginality.setText("");
+                        TxtPleasentess.setText("");
+                        TxtStyle.setText("");
+
                         BtnRestar.setDisable(false);
                         BtnRestar.setVisible(true);
                         BtnConfirm.setVisible(true);
@@ -144,6 +150,7 @@ public class TableReviewController implements Initializable{
                         TxtOriginality.setEditable(true);
                         TxtPleasentess.setEditable(true);
                         TxtStyle.setEditable(true);
+
                         
                         setEditOnly(ScoreStyle);
                         setEditOnly(ScoreEdition);

@@ -73,6 +73,9 @@ public class VisLibrerieController {
     
     @FXML
     private Label emptyText;
+
+    @FXML
+    private Label noLibrariesLb;
     
     private String textSlib;
     private boolean editMode = false;
@@ -94,7 +97,8 @@ public class VisLibrerieController {
 
         librerie.setAll(clientBR.getInstance().getLibrerie(id_user));
         updateEmptyState();
-    	
+    	noLibrariesLb.setVisible(false);
+
     	modalOverlay.setOnMouseClicked(event -> {
     		if (!modalContent.isHover()) {
     	        modalOverlay.setVisible(false);
@@ -180,9 +184,15 @@ public class VisLibrerieController {
     void searchLibraries(ActionEvent event) throws RemoteException {
         textSlib = searchBar.getText().trim().toLowerCase();
         librerie.setAll(clientBR.getInstance().getLibrerie(id_user));
+        noLibrariesLb.setVisible(false);
  
         if (textSlib.isEmpty()) {
-            emptyText.setVisible(false);
+
+            if(librerie.isEmpty()) {
+                return;
+            }
+
+            noLibrariesLb.setVisible(false);
             //filteredLibr = null;              
             InsertingElements(librerie);       
             return;
@@ -192,10 +202,14 @@ public class VisLibrerieController {
             .toList();
 
             if (filteredLibr.isEmpty()) {
-        librariesContainer.getChildren().clear();
-        emptyText.setText("LIBRARIES NOT FOUND");
-        emptyText.setVisible(true);
-        return;
+        
+                if(librerie.isEmpty()) {
+                return;
+            }
+
+            librariesContainer.getChildren().clear();
+            noLibrariesLb.setVisible(true);
+            return;
     }
 
         InsertingElements(FXCollections.observableArrayList(filteredLibr));   
@@ -218,18 +232,21 @@ public class VisLibrerieController {
      * Aggiorna la visualizzazione delle librerie in base alla modalità.
      */ 
     @FXML
-    void useEdit(ActionEvent event) throws RemoteException {
-        editMode = !editMode;
-        extraBtn.setVisible(editMode);
+void useEdit(ActionEvent event) throws RemoteException {
+  
+    editMode = !editMode;
+    extraBtn.setVisible(editMode);
 
-        textSlib = searchBar.getText().trim().toLowerCase();
+    searchBar.clear();
+    textSlib = "";
+    filteredLibr = null;
+    noLibrariesLb.setVisible(false);
 
-        if (!textSlib.isEmpty() && filteredLibr != null) {
-            InsertingElements(FXCollections.observableArrayList(filteredLibr));
-        } else {
-            InsertingElements(librerie);
-        }
-    }
+    librerie.setAll(clientBR.getInstance().getLibrerie(id_user));
+    updateEmptyState();
+
+    InsertingElements(librerie);
+}
    
     /**
      * Metodo per aggiornare lo stato di visualizzazione quando non ci sono librerie.

@@ -39,7 +39,7 @@ public class clientBR{
 	
 	public clientBR() throws RemoteException {
     try {
-       	String SERVER_IP = "172.25.32.1"; // <-- metti qui l'IPv4 del PC server (ipconfig)
+       	String SERVER_IP = "10.105.249.207"; // <-- metti qui l'IPv4 del PC server (ipconfig)
 		//luca "10.24.140.223"
 		//aleks "10.13.193.207"
 		//davide "172.25.32.1"

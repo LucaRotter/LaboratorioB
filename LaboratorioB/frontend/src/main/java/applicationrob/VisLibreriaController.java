@@ -73,8 +73,25 @@ public class VisLibreriaController {
         currentBooks = FXCollections.observableArrayList(); 
         filteredBooks = FXCollections.observableArrayList();
 
+        Model.getIstance().getView().getListLibraryRefresh().addListener((obs, wasRefresh, needRefresh) -> {
+            if (needRefresh) {
+                try {
+                    booksLibrary.clear();
+                    booksLibrary.addAll(clientBR.getInstance().getLibreria(selectedLibrary.getIdLibreria()).getLibreria());
+                    InsertingElements(booksLibrary);
+                } catch (RemoteException e) {
+                    e.printStackTrace();
+                } finally {
+                    Model.getIstance().getView().getListLibraryRefresh().set(false);
+                }
+            }
+        });
+
         Model.getIstance().getView().selectedLibraryProperty().addListener((obs, oldLibrary, newLibrary) -> {
             if (newLibrary != null) {
+
+            selectedLibrary =  newLibrary;
+
             try {
             booksLibrary.clear();
             booksLibrary.addAll(clientBR.getInstance().getLibreria(newLibrary.getIdLibreria()).getLibreria());
@@ -83,6 +100,8 @@ public class VisLibreriaController {
             } 
 
             bookNameLabel.setText(newLibrary.getNomeLibreria());
+            noBookText.setVisible(false);
+            emptyText.setVisible(false);
 
             // Imposto currentLibr con tutti i libri fittizi
             currentBooks.setAll(booksLibrary); 

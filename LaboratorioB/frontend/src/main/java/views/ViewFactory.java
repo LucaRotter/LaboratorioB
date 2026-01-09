@@ -33,6 +33,7 @@ public class ViewFactory {
 	private final StringProperty SideBarSelection;
 	private ObjectProperty<Libro> selectedLibr;
 	private ObjectProperty<Libreria> selectedLibreria;
+	private BooleanProperty listLibrary;
 	private BooleanProperty reccommender;
 	private BooleanProperty review;
 	private AnchorPane DashboardMain;
@@ -41,6 +42,7 @@ public class ViewFactory {
 	private AnchorPane VisLibreria;
 	private AnchorPane AddReview;
 	private AnchorPane AddReccomended;
+
 
 	private ObservableList<String> historyPage;
 
@@ -53,6 +55,7 @@ public class ViewFactory {
 		this.selectedLibreria = new SimpleObjectProperty<Libreria>();
 		this.reccommender = new SimpleBooleanProperty(false);
 		this.review = new SimpleBooleanProperty(false);
+		this.listLibrary = new SimpleBooleanProperty(false);
 
 		historyPage =  FXCollections.observableArrayList();
 
@@ -69,6 +72,10 @@ public class ViewFactory {
 	public BooleanProperty getReviewRefresh() {
     return review;
 }
+
+	public BooleanProperty getListLibraryRefresh() {
+	return listLibrary;
+	}
 	
 	public StringProperty getSideBarSelectionItem() {
 		return SideBarSelection;

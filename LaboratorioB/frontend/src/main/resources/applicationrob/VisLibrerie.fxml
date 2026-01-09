@@ -85,5 +85,7 @@
     </VBox>
 </StackPane>
 
+
+<Label fx:id="noLibrariesLb" text="LIBRARIES NOT FOUND" layoutX="250" layoutY="250" style="-fx-font-size: 32px; -fx-text-fill: gray;" />
    </children>
 </AnchorPane>

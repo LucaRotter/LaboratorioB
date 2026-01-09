@@ -498,10 +498,15 @@ import models.Model;
 							Model.getIstance().getView().getSelectedBook().getId(),
 							libraryItemController.getId_library()
 						);
+
+					Model.getIstance().getView().getListLibraryRefresh().set(true);
+					System.out.println("Aggiunto alla libreria: " + (Model.getIstance().getView().getListLibraryRefresh().get()));
 					} catch (RemoteException e) {
 						
 						e.printStackTrace();
 					}
+
+					
 				} else {
 					
 					try {
@@ -509,8 +514,11 @@ import models.Model;
 							Model.getIstance().getView().getSelectedBook().getId(),
 							libraryItemController.getId_library()
 						);
+
+						Model.getIstance().getView().getListLibraryRefresh().set(true);
+						System.out.println("Aggiunto alla libreria: " + (Model.getIstance().getView().getListLibraryRefresh().get()));
 					} catch (RemoteException e) {
-						
+
 						e.printStackTrace();
 					}
 				}
@@ -535,7 +543,11 @@ import models.Model;
 			found = libraries.get(i).getLibreria().stream().anyMatch(libro -> 
 			libro.getId() == Model.getIstance().getView().getSelectedBook().getId());
 
+			if(found){
+				break;
+			}
 
+			
 			}
 			return found;
 	}
