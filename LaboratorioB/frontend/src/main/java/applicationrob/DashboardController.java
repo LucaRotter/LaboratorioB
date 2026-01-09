@@ -129,7 +129,7 @@ public class DashboardController implements Initializable{
 			e.printStackTrace();
 		}
 
-		//listener for scroll buttons that load more books or go to previous books when index change
+	
 		currentIndex.addListener((obs, oldIndex, newIndex) -> {
 			
 			try {
@@ -382,7 +382,7 @@ group.selectedToggleProperty().addListener((obs, oldT, newT) -> {
 	//metodo utilizzato per aggiungere i libri al gridPane e inizializzarne il contenuto
 	private void putBooks(int index) throws RemoteException, IOException {
 
-		// if current mode is lazy load more books when needed else the books are just loaded once
+		
 		if(currentMode == LoadMode.LAZY){	
 
 				if(Bookserver.isEmpty()){
@@ -541,7 +541,6 @@ group.selectedToggleProperty().addListener((obs, oldT, newT) -> {
 		container.setAlignment(Pos.CENTER);
 		container.prefWidthProperty().bind(ScrollBooks.widthProperty());
 		container.prefHeightProperty().bind(ScrollBooks.heightProperty());
-
 
 		ScrollBooks.setContent(container);
 	}

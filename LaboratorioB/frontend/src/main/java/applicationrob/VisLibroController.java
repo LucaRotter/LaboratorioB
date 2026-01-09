@@ -199,7 +199,7 @@ import models.Model;
 		root1.setDisable(false);
 	}
 
-	//function to set the book details 
+	//metodo per settare i dettagli del libro nella view
 	public void setLibro(Libro selectedBook) {
 
 		LBTitle.setText(selectedBook.getTitolo());	
@@ -230,7 +230,6 @@ import models.Model;
 			e.printStackTrace();
 		}
 
-		//review initialization
 
 		reviewContainer.getChildren().clear();
 
@@ -372,7 +371,7 @@ import models.Model;
 	}
 
 
-	//function to go to the add reviews section
+	//metodo per gestire il click sul bottone dei commenti
 	public void onComments(){
 
 		List<Libreria> libraries = new LinkedList<>();
@@ -421,8 +420,7 @@ import models.Model;
 		}
 		}
 }
-
-	//function to open/close the modal to add the book to libraries
+	//metodo per aprire la modal delle librerie
 	public void OpenModalLibraries() {
 	
 	if(!TokenSession.checkTkSession()){
@@ -479,7 +477,7 @@ import models.Model;
 
 	public void onConfirm(){
 
-		//adding the book to the selected libraries
+	
 		VBoxLibraries.getChildren().size();
 		
 		for(int i=0; i<VBoxLibraries.getChildren().size(); i++){
